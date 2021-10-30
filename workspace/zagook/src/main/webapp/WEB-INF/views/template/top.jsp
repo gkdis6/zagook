@@ -59,8 +59,8 @@
 </head>
 <body>
 	<!--상단메뉴-->
-	<div class="container-fluid">
-		<nav class="navbar navbar-inverse">
+	<div class="container-fluid" style="height:52px; padding:0;">
+		<nav class="navbar navbar-inverse" style="border-radius:0;">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="${root}/">Shop</a>
