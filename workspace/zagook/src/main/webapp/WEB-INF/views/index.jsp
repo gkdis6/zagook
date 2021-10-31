@@ -61,7 +61,9 @@
 			// 마커에 마우스오버 이벤트를 등록합니다
 			kakao.maps.event.addListener(marker, 'mouseover', function() {
 				// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-				infowindow.open(map, marker);
+				if(overlay.getMap() == null){
+					infowindow.open(map, marker);	
+				}
 			});
 
 			// 마커에 마우스아웃 이벤트를 등록합니다
@@ -93,7 +95,6 @@
 			// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
 			var overlay = new kakao.maps.CustomOverlay({
 				content : content,
-				map : map,
 				position : marker.getPosition()
 			});
 
