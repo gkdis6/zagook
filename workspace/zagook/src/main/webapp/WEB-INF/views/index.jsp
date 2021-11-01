@@ -33,80 +33,160 @@
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
 				center : new kakao.maps.LatLng(37.52423, 127.06319), // 지도의 중심좌표
-				level : 3
+				level : 10
 			// 지도의 확대 레벨
 			};
 
 			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			
+			var positions = [
+			    {
+			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5857.JPG" width="200" height="150"></div>', 
+			        latlng: new kakao.maps.LatLng(37.52423, 127.06319),
+			        content: `<div class="wrap">
+								<div class="info">
+							        <div class="title">
+						            7호선
+						            <div class="close" onclick="closeOverlay()" title="닫기"></div>
+						        </div>
+						        <div class="body">
+						            <div class="img">
+						                <img src="./images/IMG_5857.JPG" width="73" height="70">
+						            </div>
+						            <div class="desc">
+						                <div class="ellipsis">서울특별시 강남구 청담동 347</div>
+						                <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>
+						                <div><a href="/update" target="_blank" class="link">수정</a></div>
+						            </div> 
+						        </div> 
+						    </div>
+						</div>`
+						
+			    },
+			    {
+			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_6184.JPG" width="200" height="150"></div>', 
+			        latlng: new kakao.maps.LatLng(37.37128, 126.72612),
+			    	content: `<div class="wrap">
+						    <div class="info">
+						        <div class="title">
+						            7호선
+						            <div class="close" onclick="closeOverlay()" title="닫기"></div>
+						        </div>
+						        <div class="body">
+						            <div class="img">
+						                <img src="./images/IMG_6184.JPG" width="73" height="70">
+						            </div>
+						            <div class="desc">
+						                <div class="ellipsis">서울특별시 강남구 청담동 347</div>
+						                <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>
+						                <div><a href="/update" target="_blank" class="link">수정</a></div>
+						            </div> 
+						        </div> 
+						    </div>
+						</div>`
+			    },
+			    {
+			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_4079.JPG" width="200" height="150"></div>', 
+			        latlng: new kakao.maps.LatLng(37.85255, 126.79097),
+				    content: `<div class="wrap">
+						    <div class="info">
+						        <div class="title">
+						            7호선
+						            <div class="close" onclick="closeOverlay()" title="닫기"></div>
+						        </div>
+						        <div class="body">
+						            <div class="img">
+						                <img src="./images/IMG_4079.JPG" width="73" height="70">
+						            </div>
+						            <div class="desc">
+						                <div class="ellipsis">서울특별시 강남구 청담동 347</div>
+						                <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>
+						                <div><a href="/update" target="_blank" class="link">수정</a></div>
+						            </div> 
+						        </div> 
+						    </div>
+						</div>`
+			    },
+			    {
+			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5947.JPG" width="200" height="150"></div',
+			        latlng: new kakao.maps.LatLng(37.74449, 127.71479),
+				    content: `<div class="wrap">
+						    <div class="info">
+						        <div class="title">
+						            7호선
+						            <div class="close" onclick="closeOverlay()" title="닫기"></div>
+						        </div>
+						        <div class="body">
+						            <div class="img">
+						                <img src="./images/IMG_5947.JPG" width="73" height="70">
+						            </div>
+						            <div class="desc">
+						                <div class="ellipsis">서울특별시 강남구 청담동 347</div>
+						                <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>
+						                <div><a href="/update" target="_blank" class="link">수정</a></div>
+						            </div> 
+						        </div> 
+						    </div>
+						</div>`
+			    }
+			];
 
-			// 마커를 표시할 위치입니다 
-			var position = new kakao.maps.LatLng(37.52423, 127.06319);
+			for (var i = 0; i < positions.length; i ++) {
+			    // 마커를 생성합니다
+			    var marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: positions[i].latlng // 마커의 위치
+			    });
 
-			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
-				position : position
-			});
+			    // 마커에 표시할 인포윈도우를 생성합니다 
+			    var infowindow = new kakao.maps.InfoWindow({
+			        content: positions[i].iwcontent // 인포윈도우에 표시할 내용
+			    });
+			    
+			 	// 마커 위에 커스텀오버레이를 표시합니다
+				// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+				var overlay = new kakao.maps.CustomOverlay({
+					clickable : true,
+					content : positions[i].content,
+					position : marker.getPosition()
+				});
 
-			// 마커를 지도에 표시합니다.
-			marker.setMap(map);
+			    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+			    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+			    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+			    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+			    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+			    kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow, overlay));
+			    
+			}
 
-			// 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
-			var iwContent = '<div style="padding :5px" class="img"><img src="./images/IMG_5857.JPG" width="230" height="160"></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+			function makeOverListener(map, marker, infowindow) {
+			    return function() {
+			    	if(overlay.getMap() == null){
+			        	infowindow.open(map, marker);
+			    	}
+			    };
+			}
 
-			// 인포윈도우를 생성합니다
-			var infowindow = new kakao.maps.InfoWindow({
-				content : iwContent
-			});
-
-			// 마커에 마우스오버 이벤트를 등록합니다
-			kakao.maps.event.addListener(marker, 'mouseover', function() {
-				// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-				if(overlay.getMap() == null){
-					infowindow.open(map, marker);	
+			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+			function makeOutListener(infowindow) {
+			    return function() {
+			        infowindow.close();
+			    };
+			}
+			
+			function makeClickListener(map, marker, infowindow, overlay) {
+				return function(){
+					infowindow.close();
+					overlay.setMap(map);
 				}
-			});
-
-			// 마커에 마우스아웃 이벤트를 등록합니다
-			kakao.maps.event.addListener(marker, 'mouseout', function() {
-				// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-				infowindow.close();
-			});
-
-			var content = '<div class="wrap">'
-					+ '    <div class="info">'
-					+ '        <div class="title">'
-					+ '            7호선'
-					+ '            <div class="close" onclick="closeOverlay()" title="닫기"></div>'
-					+ '        </div>'
-					+ '        <div class="body">'
-					+ '            <div class="img">'
-					+ '                <img src="./images/IMG_5857.JPG" width="73" height="70">'
-					+ '            </div>'
-					+ '            <div class="desc">'
-					+ '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>'
-					+ '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>'
-					+ '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>'
-					+ '            </div>' 
-					+ '        </div>' 
-					+ '    </div>'
-					+ '</div>';
-
-			// 마커 위에 커스텀오버레이를 표시합니다
-			// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-			var overlay = new kakao.maps.CustomOverlay({
-				content : content,
-				position : marker.getPosition()
-			});
-
-			// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-			kakao.maps.event.addListener(marker, 'click', function() {
-				infowindow.close();
-				overlay.setMap(map);
-			});
+			}
 
 			// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 			function closeOverlay() {
-				overlay.setMap(null);
+				return function(){
+					overlay.setMap(null);
+				}
 			}
 		</script>
 
