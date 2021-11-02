@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.project.member.MemberMapper">
+
+
+
+<select id="read" parameterType="String" resultType="com.project.member.MemberDTO">
+	select *
+	from member
+	where id = #{id}
+</select>
+<select id="loginCheck" parameterType="Map" resultType="int">
+	select
+    count(*) from member
+     where id = #{id}
+     and passwd = #{passwd}
+</select>
+
+</mapper>
