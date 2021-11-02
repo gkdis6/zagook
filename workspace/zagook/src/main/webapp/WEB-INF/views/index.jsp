@@ -46,7 +46,6 @@
 			        content: `<div class="wrap">
 								<div class="info">
 							        <div class="title">
-						            7호선
 						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
@@ -69,7 +68,6 @@
 			    	content: `<div class="wrap">
 						    <div class="info">
 						        <div class="title">
-						            7호선
 						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
@@ -91,7 +89,6 @@
 				    content: `<div class="wrap">
 						    <div class="info">
 						        <div class="title">
-						            7호선
 						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
@@ -113,7 +110,6 @@
 				    content: `<div class="wrap">
 						    <div class="info">
 						        <div class="title">
-						            7호선
 						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
@@ -150,9 +146,24 @@
 					content : positions[i].content,
 					position : marker.getPosition()
 				});
-			 	
-			 	
-				var header = document.createElement('h2'); //h2 태그를 생성해주는 것
+
+				var div = document.createElement('div');
+				div.className = 'wrap';
+				var div2 = document.createElement('div');
+				div2.className = 'info';
+				var div3 = document.createElement('div');
+				div3.className = 'title';
+				var div4 = document.createElement('div');
+				div4.className = 'body';
+				div4.innerHTML
+				
+				let text = document.createTextNode('Test');
+				div.appendChild(text);
+				document.body.appendChild(div)
+				var content = positions[i].content;
+					content.wrap.info.title.close.onclick = function(){
+						overlay.setMap(null);
+					}
 			       var textNode = document.createTextNode('Hello DOM');
 
 			       //2. 노드(요소/텍스트)를 연결.
@@ -162,8 +173,6 @@
 			       document.body.appendChild(header);
 
 			 	
-			       
-			   	var content = document.createElement('div');
 			 	
 			    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 			    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
