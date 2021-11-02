@@ -21,19 +21,19 @@
 		<form class="form-horizontal" action="/contents/update" method="post"
 			onsubmit="return checkIn(this)">
 			<input type="hidden" name="contentsno" value="${contentsno}">
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="title">제목</label>
-				<div class="col-sm-8">
-					<input type="text" name="title" id="title" class="form-control"
-						value="${dto.title}">
-				</div>
-			</div>
 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="content">내용</label>
-					<div class="col-sm-8">
+				<div class="col-sm-8">
 					<input type="text" name="content" id="content" class="form-control"
 						value="${dto.content}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="tag">태그</label>
+				<div class="col-sm-8">
+					<input type="text" name="tag" id="tag" class="form-control"
+						value="${dto.tag}">
 				</div>
 			</div>
 
