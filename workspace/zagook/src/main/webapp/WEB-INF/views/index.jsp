@@ -30,6 +30,7 @@
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
 		<script>
+		window.onload = function(){
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
 				center : new kakao.maps.LatLng(37.52423, 127.06319), // 지도의 중심좌표
@@ -46,7 +47,6 @@
 			        content: `<div class="wrap">
 								<div class="info">
 							        <div class="title">
-						            7호선
 						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
@@ -59,8 +59,7 @@
 						                <div><a href="/update" target="_blank" class="link">수정</a></div>
 						            </div> 
 						        </div> 
-						    </div>
-						</div>`
+						    </div>`
 						
 			    },
 			    {
@@ -69,7 +68,6 @@
 			    	content: `<div class="wrap">
 						    <div class="info">
 						        <div class="title">
-						            7호선
 						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
@@ -91,7 +89,6 @@
 				    content: `<div class="wrap">
 						    <div class="info">
 						        <div class="title">
-						            7호선
 						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
@@ -113,7 +110,6 @@
 				    content: `<div class="wrap">
 						    <div class="info">
 						        <div class="title">
-						            7호선
 						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
@@ -147,23 +143,40 @@
 				// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
 				var overlay = new kakao.maps.CustomOverlay({
 					clickable : true,
-					content : positions[i].content,
-					position : marker.getPosition()
+					position : marker.getPosition(),
+					yAnchor : 3
 				});
-			 	
-			 	
-				var header = document.createElement('h2'); //h2 태그를 생성해주는 것
-			       var textNode = document.createTextNode('Hello DOM');
-
-			       //2. 노드(요소/텍스트)를 연결.
-			       header.appendChild(textNode);
-
-			       //3. body 문서 객체에 header 문서 객체를 추가.
-			       document.body.appendChild(header);
-
-			 	
-			       
-			   	var content = document.createElement('div');
+				
+				var div1 = document.createElement('div');
+				div1.className = 'wrap';
+				var div2 = document.createElement('div');
+				div2.className = 'info';
+				var div3 = document.createElement('div');
+				div3.className = 'title';
+				div3.innerHTML = '아니';
+				var closeBtn = document.createElement('button');
+				closeBtn.className = 'close';
+			    closeBtn.onclick = function () {
+			        overlay.setMap(null);
+			    };
+			    div2.appendChild(div3);
+			    div2.appendChild(closeBtn);
+				var div4 = document.createElement('div');
+				div4.className = 'body';
+				div4.innerHTML = '<div class="img">'
+	                +'<img src="./images/IMG_5857.JPG" width="73" height="70">'
+		            +'</div>'
+		            +'<div class="desc">'
+		            +'    <div class="ellipsis">서울특별시 강남구 청담동 347</div>'
+		            +'    <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>'
+		            +'    <div><a href="/update" target="_blank" class="link">수정</a></div>'
+		            +'</div>';
+				
+		        div1.appendChild(div2);
+		        div1.appendChild(div4);
+				
+		        overlay.setContent(div1);
+				
 			 	
 			    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 			    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
@@ -202,6 +215,7 @@
 					this.overlay.setMap(null);
 				}
 			}
+		}
 		</script>
 
 	</div>
