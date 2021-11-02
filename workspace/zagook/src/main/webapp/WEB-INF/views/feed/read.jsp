@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>기본페이지</title>
+<title>피드 페이지</title>
 <meta charset="utf-8">
 <style>
 body {
