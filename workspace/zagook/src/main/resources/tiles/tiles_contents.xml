@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="/contents/create" extends="main">
+		<put-attribute name="title" value="글 등록"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/contents/createForm.jsp" />
+	</definition>
+	<definition name="/contents/update" extends="main">
+		<put-attribute name="title" value="글 수정"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/contents/updateForm.jsp" />
+	</definition>
+	<definition name="/contents/updateFile" extends="main">
+		<put-attribute name="title" value="사진수정"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/contents/updateFileForm.jsp" />
+	</definition>
+	<definition name="/contents/detail" extends="main">
+		<put-attribute name="title" value="글 상세내용"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/contents/detail.jsp" />
+	</definition>
+	<definition name="/contents/delete" extends="main">
+		<put-attribute name="title" value="글 삭제"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/contents/deleteForm.jsp" />
+	</definition>
+</tiles-definitions>
