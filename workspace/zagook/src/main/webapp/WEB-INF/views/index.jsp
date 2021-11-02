@@ -47,7 +47,7 @@
 								<div class="info">
 							        <div class="title">
 						            7호선
-						            <div class="close" onclick="closeOverlay()" title="닫기"></div>
+						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
 						            <div class="img">
@@ -70,7 +70,7 @@
 						    <div class="info">
 						        <div class="title">
 						            7호선
-						            <div class="close" onclick="closeOverlay()" title="닫기"></div>
+						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
 						            <div class="img">
@@ -92,7 +92,7 @@
 						    <div class="info">
 						        <div class="title">
 						            7호선
-						            <div class="close" onclick="closeOverlay()" title="닫기"></div>
+						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
 						            <div class="img">
@@ -114,7 +114,7 @@
 						    <div class="info">
 						        <div class="title">
 						            7호선
-						            <div class="close" onclick="closeOverlay()" title="닫기"></div>
+						            <div class="close" title="닫기"></div>
 						        </div>
 						        <div class="body">
 						            <div class="img">
@@ -150,7 +150,21 @@
 					content : positions[i].content,
 					position : marker.getPosition()
 				});
+			 	
+			 	
+				var header = document.createElement('h2'); //h2 태그를 생성해주는 것
+			       var textNode = document.createTextNode('Hello DOM');
 
+			       //2. 노드(요소/텍스트)를 연결.
+			       header.appendChild(textNode);
+
+			       //3. body 문서 객체에 header 문서 객체를 추가.
+			       document.body.appendChild(header);
+
+			 	
+			       
+			   	var content = document.createElement('div');
+			 	
 			    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 			    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
 			    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
@@ -185,7 +199,7 @@
 			// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 			function closeOverlay() {
 				return function(){
-					overlay.setMap(null);
+					this.overlay.setMap(null);
 				}
 			}
 		</script>
