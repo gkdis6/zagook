@@ -5,22 +5,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class NoticeController {
-	@GetMapping("/create")
+	@GetMapping("/admin/notice/create")
 	public String create() {
 
 		return "/notice/create";
 	}
-	@GetMapping("/update")
+	@GetMapping("/admin/notice/update")
 	public String update() {
 
 		return "/notice/update";
 	}
-	@GetMapping("/delete")
+	@GetMapping("/admin/notice/delete")
 	public String delete() {
 
 		return "/notice/delete";
 	}
-	@GetMapping("/detail")
+	@GetMapping("/notice/detail")
 	public String detail() {
 
 		return "/notice/detail";
