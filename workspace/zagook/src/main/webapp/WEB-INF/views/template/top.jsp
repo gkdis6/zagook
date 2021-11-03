@@ -27,7 +27,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	
-<script type="text/javascript">
+<!-- <script type="text/javascript">
    $(function(){
            $.ajax({
                url: "/contents/getCategory",
@@ -50,7 +50,7 @@
            });//ajax end
    });//페이지로딩
        
- </script>
+ </script> -->
 <style type="text/css">
 #grade {
 	color: white;
