@@ -27,30 +27,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	
-<script type="text/javascript">
-   $(function(){
-           $.ajax({
-               url: "/contents/getCategory",
-               type: "GET",
-               //data: JSON.stringify(),
-               //contentType: "application/json; charset=utf-8;",
-               dataType: "json",
-               success: function(data){
-                  // alert("success:"+data.length);
-                  // alert(data[0].CATENO);
-                  // alert(data[0].CATENAME)
-                  for(var i=0;i<data.length;i++){
-                   $('#pmenu').append("<li><a href='/contents/mainlist/"+data[i].CATENO+"'>"+data[i].CATENAME+"</a></li>");
-                   }
-                                    
-               },
-               error: function(request,status,error){
-                  alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-               }                
-           });//ajax end
-   });//페이지로딩
-       
- </script>
 <style type="text/css">
 #grade {
 	color: white;
@@ -81,6 +57,7 @@
 						</ul></li>
 					<li><a id="grade"><span class="glyphicon glyphicon-grain"></span>
 							${str}</a></li>
+							<li><a onclick="getLocation()">위치정보 가져오기</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<c:choose>
@@ -109,5 +86,22 @@
 		</nav>
 
 	</div>
+	<script>
+	function getLocation() {
+		if (navigator.geolocation) { // GPS를 지원하면
+	    	navigator.geolocation.getCurrentPosition(function(position) {
+	      		alert(position.coords.latitude + ' ' + position.coords.longitude);
+	    	}, function(error) {
+	      		console.error(error);
+	    	}, {
+	      		enableHighAccuracy: false,
+	      		maximumAge: 0,
+	      		timeout: Infinity
+	    	});
+	  	} else {
+	    	alert('GPS를 지원하지 않습니다');
+	  	}
+	}
+	</script>
 </body>
 </html>
