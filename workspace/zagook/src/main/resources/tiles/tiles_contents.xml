@@ -29,4 +29,9 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/contents/deleteForm.jsp" />
 	</definition>
+	<definition name="/contents/list" extends="main">
+		<put-attribute name="title" value="글 목록" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/contents/list.jsp" />
+	</definition>
 </tiles-definitions>
