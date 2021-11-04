@@ -248,8 +248,12 @@
 		
 		
 	</div>
-	<div style="position: fixed; right: 20px; bottom:20px; z-index: 8">
+	<div style="position: fixed; right: 20px; bottom:20px; z-index: 8" onclick="if(create.style.display=='none'){create.style.display=''}else{create.style.display='none'}">
 	<img src="./images/261370-200.png" width="73" height="70">
+	</div>
+	
+	<div style="position: fixed; right: 20px; bottom:100px; z-index: 8; display: none;" id="create" class="create">
+	createform
 	</div>
 	
 </body>
