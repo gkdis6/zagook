@@ -1,5 +1,7 @@
 package com.project.member;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -14,6 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.project.Utility.Utility;
 
 @Controller
 public class MemberController {
@@ -112,4 +117,63 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/member/agree")
+	public String agree() {
+		return "/member/agree";
+	}
+	
+	@PostMapping("/member/createForm")
+	public String create() {
+		return "/member/create";
+	}
+	
+	@PostMapping("/member/create")
+	public String crate(MemberDTO dto) throws IOException{
+//		String upDir = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
+		String upDir = Member.getUploadDir();
+		String fname = Utility.saveFileSpring(dto.getFnameMF(), upDir);
+		int size = (int)dto.getFnameMF().getSize();
+		if(size>0) {
+			dto.setFname(fname);
+		}else{
+			dto.setFname("member.jpg");
+		}
+		
+		if(service.create(dto)>0) {
+			return "redirect:/";
+		}else{
+			return "error";
+		}
+		
+	}
+	
+	@GetMapping(value="/member/emailcheck",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public Map<String,String> emailCheck(String email){
+		
+		int cnt = service.duplicatedEmail(email); 
+		Map<String,String> map = new HashMap<String,String>();
+		if(cnt>0) {
+			//map에 들어갈 data
+			map.put("str", email+"는 중복되어서 사용할 수 없습니다.");
+		}else {
+			map.put("str", email+"는 중복아님, 사용가능 합니다.");
+		}
+		return map;
+	}
+	//id 중복확인
+	@GetMapping(value="/member/idcheck",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public Map<String,String> idcheck(String id){
+		int cnt = service.duplicatedId(id);
+		
+		Map<String,String> map = new HashMap<String,String>();
+		if(cnt>0) {
+			//map에 들어갈 data
+			map.put("str", id+"는 중복되어서 사용할 수 없습니다.");
+		}else {
+			map.put("str", id+"는 중복아님, 사용가능 합니다.");
+		}
+		return map;
+	}
 }

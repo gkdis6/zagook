@@ -119,7 +119,7 @@
 													<button type="submit" style="width:250px; background-color:black; color:white; padding-top:10px">
 													로 그 인</button>
 													<div class="join">
-													회원이 아니신가요? <a href="#">회원가입</a>
+													회원이 아니신가요? <a href="${root}/member/agree">회원가입</a>
 <!-- 													<button type="button" class="btn btn-secondary">회원가입</button> -->
 													</div>
 													</div>
@@ -133,7 +133,7 @@
 								</div>
 							</li>
 							<li><a href="${root}/member/agree"><span
-									class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+									class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a></li>
 							
 						</c:when>
 						<c:when
