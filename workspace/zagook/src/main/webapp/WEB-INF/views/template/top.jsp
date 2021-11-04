@@ -57,7 +57,6 @@
 						</ul></li>
 					<li><a id="grade"><span class="glyphicon glyphicon-grain"></span>
 							${str}</a></li>
-							<li><a onclick="getLocation()">위치정보 가져오기</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<c:choose>
@@ -86,22 +85,5 @@
 		</nav>
 
 	</div>
-	<script>
-	function getLocation() {
-		if (navigator.geolocation) { // GPS를 지원하면
-	    	navigator.geolocation.getCurrentPosition(function(position) {
-	      		alert(position.coords.latitude + ' ' + position.coords.longitude);
-	    	}, function(error) {
-	      		console.error(error);
-	    	}, {
-	      		enableHighAccuracy: false,
-	      		maximumAge: 0,
-	      		timeout: Infinity
-	    	});
-	  	} else {
-	    	alert('GPS를 지원하지 않습니다');
-	  	}
-	}
-	</script>
 </body>
 </html>

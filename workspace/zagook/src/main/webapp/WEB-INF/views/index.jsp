@@ -105,7 +105,7 @@
 						</div>`
 			    },
 			    {
-			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5947.JPG" width="200" height="150"></div',
+			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5947.JPG" width="200" height="150"></div>',
 			        latlng: new kakao.maps.LatLng(37.74449, 127.71479),
 				    content: `<div class="wrap">
 						    <div class="info">
@@ -127,6 +127,27 @@
 			    }
 			];
 
+			if(navigator.geolocation){
+				navigator.geolocation.getCurrentPosition(function(position) {
+					alert(position.coords.latitude + ' ' + position.coords.longitude);
+					var marker = new kakao.maps.Marker({
+				        map: map,
+				        position: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude)
+				    });
+					var infowindow = new kakao.maps.InfoWindow({
+				        content: '<div style="padding :5px">내 위치</div>'
+				    });
+					
+					var markerImage = new kakao.maps.MarkerImage(
+					    './images/736653.png',
+					    new kakao.maps.Size(50, 53));
+					marker.setImage(markerImage);
+					
+					kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+				    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+				});
+			}
+			
 			for (var i = 0; i < positions.length; i ++) {
 				var data = positions[i];
 				displayMarker(data);
@@ -158,7 +179,6 @@
 				div2.className = 'info';
 				var div3 = document.createElement('div');
 				div3.className = 'title';
-				div3.innerHTML = '아니';
 				var closeBtn = document.createElement('button');
 				closeBtn.className = 'close';
 			    closeBtn.onclick = function () {
@@ -200,6 +220,12 @@
 			    	}
 			    };
 			}
+			
+			function makeOverListener(map, marker, infowindow){
+				return function() {
+			        infowindow.open(map, marker);
+			    };
+			}
 
 			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
 			function makeOutListener(infowindow) {
@@ -214,11 +240,16 @@
 					overlay.setMap(map);
 				}
 			}
+			
+			
 		}
 		</script>
 		
 		
 		
+	</div>
+	<div style="position: fixed; right: 20px; bottom:20px; z-index: 8">
+	<img src="./images/261370-200.png" width="73" height="70">
 	</div>
 	
 </body>
