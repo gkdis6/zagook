@@ -22,18 +22,35 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 @Controller
 public class FeedController {
+	@Autowired
+	@Qualifier("com.project.feed.FeedServiceImpl")
+	private FeedService service;
 
 	@GetMapping("/feed/read")
 	public String home() {
 
 		return "/feed/read";
 	}
-
+	
+	@PostMapping(value = "/feed/contents", produces = "application/json;charset=UTF-8")
+	public FeedDTO postFeedList_ajax(@RequestBody FeedDTO dto) {
+		List<FeedDTO> results;
+		
+//		call DB function
+		results = service.list(dto);
+		
+//		logic 처리
+		
+//		페이징 처리
+		
+//		return 일부?
+		return (results.get(0));
+	}
 }

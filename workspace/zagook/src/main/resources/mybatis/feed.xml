@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.feed.FeedMapper">
+	<select id="list" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.DTO">
+		SELECT id, mname, tel, email, zipcode, address1, address2,
+		fname, r
+		from(
+		SELECT id, mname, tel, email, zipcode, address1, address2,
+		fname, rownum r
+		from(
+		SELECT id, mname, tel, email, zipcode, address1,
+		address2, fname
+		FROM member
+		<where>
+			<choose>
+				<when test="col=='mname'">
+					mname like '%'||#{word}||'%'
+				</when>
+				<when test="col=='id'">
+					id like '%'||#{word}||'%'
+				</when>
+				<when test="col=='email'">
+					email like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+		ORDER BY mdate DESC
+		)
+        <![CDATA[       
+                )where r >= #{sno} and r <= #{eno}
+        ]]>
+	</select>
+</mapper>
