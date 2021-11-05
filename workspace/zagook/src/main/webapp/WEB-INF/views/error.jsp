@@ -52,7 +52,7 @@ $(document).ready(function(){
           <p>This is a small modal.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='list'">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="history.back()">Close</button>
         </div>
       </div>
     </div>

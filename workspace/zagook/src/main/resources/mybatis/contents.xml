@@ -37,65 +37,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="list" parameterType="Map"
 		resultType="com.project.contents.ContentsDTO">
-		select contentsno, cateno, pname, price, filename, stock, rdate, r
-		from (
-		select contentsno, cateno, pname, price, filename, stock, rdate,
-		rownum r
-		from(
-		select contentsno, cateno, pname, price, filename,
-		stock, rdate
-		from contents
-		<where>
-			<choose>
-				<when test="col=='pname'">
-					pname like '%'||#{word}||'%'
-				</when>
-				<when test="col=='price'">
-					price like '%'||#{word}||'%'
-				</when>
-				<when test="col=='cateno'">
-					cateno like '%'||#{word}||'%'
-				</when>
-			</choose>
-		</where>
-		order by contentsno desc
-		)
-        <![CDATA[       
-                )where r >= #{sno} and r <= #{eno}
-        ]]><!-- 오라클에서는 이렇게 나눠서 해줘야함 -->
+		select c.contentsno, m.mname, t.tag, c.rdate, c.likecnt
+		from zagook_contents c, zagook_tag t, zagook_posttag p, zagook_member m
+		where m.id=c.id
+		and c.contentsno=p.contentsno
+		and t.tag_id=p.tag_id
 	</select>
 
 	<update id="update"
 		parameterType="com.project.contents.ContentsDTO">
-		update contents
-		set pname =#{pname},
-		price = #{price},
-		detail = #{detail}
-		where contentsno =#{contentsno}
+		update zagook_contents
+		set contents=#{contents},
+		privacy=#{privacy}
+		where contentsno = #{contentsno};
+		
+		update zagook_tag
+		set tag=#{tag}
+		where tag_id=#{tag_id};
 	</update>
 
 	<insert id="create"
 		parameterType="com.project.contents.ContentsDTO">
-		insert into contents(contentsno, cateno, pname, price,
-		filename, detail,
-		rdate, stock)
+		insert	into zagook_contents(contentsno, ID, FILENAME, contents,
+		rdate, privacy)
 		values((select nvl(max(contentsno),0)+1
-		from contents),
-		#{cateno},#{pname}, #{price}, #{filename}, #{detail},
-		sysdate, #{stock})
+		from zagook_contents),
+		#{id}, #{filename}, #{contents}, sysdate, #{privacy});
+		
+		insert into zagook_tag(tag_id, tag)
+		values ((select nvl(max(tag_id),0)+1
+		from zagook_tag), #{tag});
+		
+		insert into zagook_posttag(contentsno, tag_id)
+		values ((select max(contentsno)
+		from zagook_contents), (select max(tag_id)
+		from zagook_tag));
 	</insert>
-	<!-- 관리자 패스워드 검사 -->
-	<select id="passcheck" resultType="int" parameterType="String">
-		SELECT
-		COUNT(*)
-		FROM member
-		WHERE id= 'admin' AND
-		passwd=#{passwd}
-	</select>
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="int">
-		DELETE FROM contents
-		WHERE
-		contentsno=#{contentsno}
+		delete from zagook_posttag
+		where contentsno=#{contentsno};
+		
+		delete from zagook_tag
+		where tag_id=#{tag_id};
+		
+		delete from zagook_contents
+		where contentsno=#{contentsno};
 	</delete>
 </mapper>

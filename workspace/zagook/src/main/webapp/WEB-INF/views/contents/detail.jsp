@@ -29,7 +29,7 @@
 			<div class="panel-body">${dto.wname}</div>
 
 			<div class="panel-heading">내용</div>
-			<div class="panel-body">${dto.content}</div>
+			<div class="panel-body">${dto.contents}</div>
 			
 			<div class="panel-heading">태그</div>
 			<div class="panel-body">${dto.tag}</div>

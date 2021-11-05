@@ -26,7 +26,7 @@ public class ContentsController {
 	@Qualifier("com.project.contents.ContentsServiceImpl")
 	private ContentsService service;
 
-	@GetMapping("/create")
+	@GetMapping("/contents/create")
 	public String create() {
 
 		return "/contents/create";
@@ -35,8 +35,8 @@ public class ContentsController {
 	@PostMapping("/contents/create")
 	public String create(ContentsDTO dto, HttpServletRequest request) throws IOException {// exception 지우기
 		String upDir = new ClassPathResource("/static/images").getFile().getAbsolutePath();
-
 		String fname = Utility.saveFileSpring(dto.getFilenameMF(), upDir);
+		
 		int size = (int) dto.getFilenameMF().getSize();
 
 		if (size > 0) {
@@ -52,7 +52,7 @@ public class ContentsController {
 		}
 	}
 
-	@GetMapping("/update/{contentsno}")
+	@GetMapping("/contents/update/{contentsno}")
 	public String update(@PathVariable("contentsno") int contentsno, Model model) {
 		ContentsDTO dto = service.detail(contentsno);
 		model.addAttribute("dto", dto);
@@ -70,7 +70,7 @@ public class ContentsController {
 		}
 	}
 
-	@GetMapping("/delete/{contentsno}")
+	@GetMapping("/contents/delete/{contentsno}")
 	public String delete(@PathVariable("contentsno") int contentsno) {
 
 		return "/contents/delete";
@@ -89,7 +89,7 @@ public class ContentsController {
 		}
 	}
 
-	@GetMapping("/updateFile/{contentsno}/{oldfile}")
+	@GetMapping("/contents/updateFile/{contentsno}/{oldfile}")
 	public String updateFile(@PathVariable("contentsno") int contentsno, @PathVariable("oldfile") String oldfile,
 			Model model) {
 		model.addAttribute("contentsno", contentsno);
@@ -121,13 +121,13 @@ public class ContentsController {
 		}
 	}
 
-	@GetMapping("/detail/{contentsno}")
+	@GetMapping("/contents/detail/{contentsno}")
 	public String detail(@PathVariable("contentsno") int contentsno, Model model) {
 		model.addAttribute("dto", service.detail(contentsno));
 		return "/contents/detail";
 	}
 
-	@RequestMapping("/list")
+	@RequestMapping("/contents/list")
 	public String list(HttpServletRequest request) {
 		// 검색관련------------------------
 		String col = Utility.checkNull(request.getParameter("col"));
