@@ -24,9 +24,9 @@
 </style>
 </head>
 <body>
-	
+
 	<div class="container" id="map" style="width: 100vw; height: 100vh;">
-		
+		<div></div>
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
 		<script>
@@ -128,20 +128,15 @@
 			];
 
 			for (var i = 0; i < positions.length; i ++) {
-				var data = positions[i];
-				displayMarker(data);
-			}
-			
-			function displayMarker(data){
 			    // 마커를 생성합니다
 			    var marker = new kakao.maps.Marker({
 			        map: map, // 마커를 표시할 지도
-			        position: data.latlng // 마커의 위치
+			        position: positions[i].latlng // 마커의 위치
 			    });
 
 			    // 마커에 표시할 인포윈도우를 생성합니다 
 			    var infowindow = new kakao.maps.InfoWindow({
-			        content: data.iwcontent // 인포윈도우에 표시할 내용
+			        content: positions[i].iwcontent // 인포윈도우에 표시할 내용
 			    });
 			    
 			 	// 마커 위에 커스텀오버레이를 표시합니다
@@ -149,51 +144,21 @@
 				var overlay = new kakao.maps.CustomOverlay({
 					clickable : true,
 					position : marker.getPosition(),
-					yAnchor : 3
+					content : positions[i].content
 				});
 				
-				var div1 = document.createElement('div');
-				div1.className = 'wrap';
-				var div2 = document.createElement('div');
-				div2.className = 'info';
-				var div3 = document.createElement('div');
-				div3.className = 'title';
-				div3.innerHTML = '아니';
-				var closeBtn = document.createElement('button');
-				closeBtn.className = 'close';
-			    closeBtn.onclick = function () {
-			        overlay.setMap(null);
-			    };
-			    div3.appendChild(closeBtn);
-			    div2.appendChild(div3);
-				var div4 = document.createElement('div');
-				div4.className = 'body';
-				div4.innerHTML = '<div class="img">'
-	                +'<img src="./images/IMG_5857.JPG" width="73" height="70">'
-		            +'</div>'
-		            +'<div class="desc">'
-		            +'    <div class="ellipsis">서울특별시 강남구 청담동 347</div>'
-		            +'    <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>'
-		            +'    <div><a href="/update" target="_blank" class="link">수정</a></div>'
-		            +'</div>';
-		        
-		        div2.appendChild(div4);
-		        div1.appendChild(div2);
-		        
-				
-		        overlay.setContent(div1);
 				
 			 	
 			    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 			    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
 			    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-			    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow, overlay));
+			    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 			    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 			    kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow, overlay));
 			    
 			}
 
-			function makeOverListener(map, marker, infowindow, overlay) {
+			function makeOverListener(map, marker, infowindow) {
 			    return function() {
 			    	if(overlay.getMap() == null){
 			        	infowindow.open(map, marker);
@@ -214,12 +179,16 @@
 					overlay.setMap(map);
 				}
 			}
+
+			// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+			function closeOverlay() {
+				return function(){
+					this.overlay.setMap(null);
+				}
+			}
 		}
 		</script>
-		
-		
-		
+
 	</div>
-	
 </body>
 </html>
