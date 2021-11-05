@@ -18,6 +18,9 @@
 	background:red;
 	border-radius:0.5em;
 }
+.chat_main{
+	padding-top:50px;
+}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -37,7 +40,8 @@
           
 </head>
 <body>
-<div id="main-content" class="container">
+<div class="chat_main">
+<div id="main-content" class="container" style="margin-left:10px">
     <H3>무엇을 도와드릴까요?</H3>
             <form class="form-inline">
                 <div class="form-group">
@@ -49,7 +53,7 @@
             </form>
             <form class="form-inline">
                 <div class="form-group" style="width: 90%;">
-                    <input type="text" id="msg" class="form-control" placeholder="문의사항을 입력하세요."; style="width:80%;">
+                    <input type="text" id="msg" class="form-control" placeholder="문의사항을 입력하세요."  style="width:80%;">
  	                <button id="send" class="btn btn-default" disabled type="submit">문의하기</button>
                 </div>
             </form>
@@ -68,6 +72,7 @@
             </table>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
