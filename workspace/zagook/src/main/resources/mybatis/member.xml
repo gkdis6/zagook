@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
+<?xml version="1.0" encoding="UTF-8"?> 
  
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -10,33 +10,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="read" parameterType="String" resultType="com.project.member.MemberDTO">
 	select *
-	from za_member
+	from zagook_member
 	where id = #{id}
 </select>
 <select id="loginCheck" parameterType="Map" resultType="int">
 	select
-    count(*) from za_member
+    count(*) from zagook_member
      where id = #{id}
-     and passwd = #{passwd}
+     and password = #{password}
 </select>
 
 <select id="duplicatedId" parameterType="String" resultType="int">
 	SELECT COUNT(id)
-	FROM za_member
+	FROM zagook_member
 	WHERE id=#{id}
 </select>
 
 <select id="duplicatedEmail" parameterType="String" resultType="int">
 	SELECT COUNT(email)
-	FROM za_member
+	FROM zagook_member
 	WHERE email=#{email}
 </select>
 
 <insert id="create" parameterType="com.project.member.MemberDTO">
-	 INSERT INTO za_member(id, passwd,
+	 INSERT INTO zagook_member(id, password,
      mname, tel, email, job, mdate, fname,
      grade)
-     VALUES(#{id}, #{passwd},#{mname}, #{tel}, #{email}, #{job}, sysdate, #{fname}, 'H')
+     VALUES(#{id}, #{password},#{mname}, #{tel}, #{email}, #{job}, sysdate, #{fname}, 'H')
 </insert>
 
 </mapper>

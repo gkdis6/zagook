@@ -90,7 +90,7 @@
 													<div class="form-group">
 														<label for="userPw">비밀번호 </label> <input type="password"
 															class="form-control"  style="width:250px;height:40px;" id="userPw"
-															placeholder="Enter Password" name="passwd" required="required">
+															placeholder="Enter Password" name="password" required="required">
 													</div>
 													<div class="form=group">
 													<button type="submit" style="width:250px; background-color:black; color:white; padding-top:10px">
@@ -122,7 +122,7 @@
 						</c:when>
 						<c:otherwise>
 							<li><a href="${root }/cartlist"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-							<li><a href="${root}/member/update"><span class="glyphicon glyphicon-edit"></span> 회원수정</a></li>
+							<li><a href="${root}/member/update"><span class="glyphicon glyphicon-edit"></span> 마이페이지 </a></li>
 							<li><a href="${root}/member/logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 						</c:otherwise>
 					</c:choose>

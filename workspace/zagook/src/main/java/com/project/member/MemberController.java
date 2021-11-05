@@ -33,13 +33,12 @@ public class MemberController {
 		return "/home";
 	}
 
-	
 	@GetMapping("/member/login")
 	public String login(HttpServletRequest request) {
-		
-		 /*----荑좏궎�꽕�젙 �궡�슜�떆�옉----------------------------*/
-        String c_id = "";     // ID ���옣 �뿬遺�瑜� ���옣�븯�뒗 蹂��닔, Y
-        String c_id_val = ""; // ID 媛�
+
+		/*쿠키설정*/
+        String c_id = "";     // ID 저장여부를 저장하는 변수, Y
+        String c_id_val = ""; // ID 값
          
         Cookie[] cookies = request.getCookies(); 
         Cookie cookie=null; 
@@ -55,7 +54,7 @@ public class MemberController {
            } 
          } 
         } 
-        /*----荑좏궎�꽕�젙 �궡�슜 �걹----------------------------*/
+        /*---쿠키 설정 끝----------------------------*/
         request.setAttribute("c_id", c_id);
         request.setAttribute("c_id_val", c_id_val);
         
@@ -69,30 +68,30 @@ public class MemberController {
 			Model model) {
 		
 		int cnt = service.loginCheck(map);
-		//cnt>0 logincheck媛� �꽦怨듭씠硫�, 
-		if(cnt>0) { //�쉶�썝�씠�떎.
+		//cnt>0 logincheck가 성공
+		if(cnt>0) { //회원
 			 
 //			grade>> String grade = service.getGrade(map.get("id"));
              session.setAttribute("id", map.get("id"));
 //          grade >>   session.setAttribute("grade", grade);
-             //Cookie ���옣,id���옣 �뿬遺� 諛� id
+             //Cookie 저장, id 저장 여부 및 id
              Cookie cookie = null;
              String c_id = map.get("c_id");
-            //if荑좏궎媛� ���옣 --
+            //if 쿠키값 저장--
              if(c_id != null) {
                  cookie = new Cookie("c_id",c_id ); //c_id=> Y
-                 cookie.setMaxAge(60 * 60 * 24 * 365);//1�뀈
-                 response.addCookie(cookie);//�슂泥�吏�(client:釉뚮씪�슦�� 而�) 荑좏궎 ���옣
+                 cookie.setMaxAge(60 * 60 * 24 * 365);//1년
+                 response.addCookie(cookie);
                  
                  cookie = new Cookie("c_id_val",map.get("id"));
-                 cookie.setMaxAge(60 * 60 * 24 * 365);//1�뀈
-                 response.addCookie(cookie);//�슂泥�吏�(client:釉뚮씪�슦�� 而�) 荑좏궎 ���옣
-             }else { //泥댄겕 �븞�븯硫� "" �꽔�뼱�꽌 吏��슦湲�
-                 cookie = new Cookie("c_id",""); //荑좏궎 �궘�젣
+                 cookie.setMaxAge(60 * 60 * 24 * 365);//1년
+                 response.addCookie(cookie);
+             }else { //체크 안하면 "" 넣어 지우기
+                 cookie = new Cookie("c_id",""); //쿠키 삭제
                  cookie.setMaxAge(0);
                  response.addCookie(cookie);
                  
-                 cookie = new Cookie("c_id_val","");//荑좏궎 �궘�젣
+                 cookie = new Cookie("c_id_val","");//쿠키 삭제
                  cookie.setMaxAge(0);
                  response.addCookie(cookie);             
              }
@@ -104,7 +103,7 @@ public class MemberController {
 				return "redirect:/";
 			
 		}else {
-			model.addAttribute("msg","�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇瑜� �옒紐� �엯�젰 �뻽嫄곕굹 <br>�쉶�썝�씠 �븘�떃�땲�떎. �쉶�썝媛��엯 �븯�꽭�슂");
+			model.addAttribute("msg","아이디 또는 비밀번호를 잘못 입력 했거나 <br>회원이 아닙니다. 회원가입 하세요");
 			return "/member/errorMsg";
 		}
 		
@@ -112,8 +111,7 @@ public class MemberController {
 	
 	@GetMapping("/member/logout")
 	public String logout(HttpSession session) {
-		//�꽭�뀡 吏��썙�빞�븿
-		session.invalidate(); //�꽭�뀡 吏��슦怨� 濡쒓렇�븘�썐 泥섎━
+		session.invalidate(); //세션 지우고 로그아웃 처리
 		return "redirect:/";
 	}
 	
@@ -127,7 +125,7 @@ public class MemberController {
 		return "/member/create";
 	}
 	
-	@PostMapping("/member/create")
+	@PostMapping(value="/member/create",produces="application/json;charset=utf-8")
 	public String crate(MemberDTO dto) throws IOException{
 //		String upDir = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
 		String upDir = Member.getUploadDir();
@@ -175,5 +173,17 @@ public class MemberController {
 			map.put("str", id+"는 중복아님, 사용가능 합니다.");
 		}
 		return map;
+	}
+	//마이페이지
+	@GetMapping("/member/read")
+	public String read(String id,HttpSession session, Model model) {
+		if(id == null) {
+			id = (String) session.getAttribute("id");
+		}
+		MemberDTO dto = service.read(id);
+		
+		model.addAttribute("dto",dto);
+		
+		return "/member/read";
 	}
 }
