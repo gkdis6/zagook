@@ -98,6 +98,7 @@ body {
 </style>
 <script src="/js/feed/top_nav.js"></script>
 <script src="/js/feed/scroll_feed_ajax.js"></script>
+<script src="/js/feed/fetch_feed.js"></script>
 </head>
 <body>
 	<div class="body_container">
