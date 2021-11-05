@@ -7,18 +7,18 @@
 <title>기본페이지</title>
 <meta charset="utf-8">
 <style type="text/css">
-	.wrap {position: absolute;left: 0;bottom: 40px;width: 500px;height: 550px;margin-left: -250px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-    .wrap * {padding: 0;margin: 0; white-space:normal;}
+	.wrap {position: absolute;left: 2;bottom: 51px;width: 500px;height: 500px;margin-left: -250px;text-align: left;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;white-space: normal;height: auto;}
+    .wrap * {padding: 0;margin: 0; white-space:normal;height: auto;}
     .wrap .info {width: 500px;height: auto;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;background: #fff;}
-    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 1px #888;}
     .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
     .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
-    .info .body {position: relative; overflow: hidden;width: 500px;height: 600px;}
-    .info .body .img .desc {position: relative; height: auto;}
+    .info .body {position: relative; overflow: hidden;width: 500px;height: 500px;}
+    .info .desc {position: relative; height: auto;}
     .desc .ellipsis {overflow: hidden;height: auto;}
-    .info .body .img {position: absolute;margin: 5px;width: 490px;height: auto;border: 1px solid #ddd;color: #888;}
-    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info .img {position: absolute;margin: 5px;width: 490px;height: auto;color: #888;}
+    .info:after {content: '';position: absolute;margin-left: -11px;left: 50%;bottom: -12;width: 24px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 </style>
 </head>
 <body>
@@ -41,87 +41,19 @@
 			var positions = [
 			    {
 			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5857.JPG" width="auto" height="150"></div>', 
-			        latlng: new kakao.maps.LatLng(37.52423, 127.06319),
-			        content: `<div class="wrap">
-								<div class="info">
-							        <div class="title">
-						            <div class="close" title="닫기"></div>
-						        </div>
-						        <div class="body">
-						            <div class="img">
-						                <img src="./images/IMG_5857.JPG" width="73" height="70">
-						            </div>
-						            <div class="desc">
-						                <div class="ellipsis">서울특별시 강남구 청담동 347</div>
-						                <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>
-						                <div><a href="/update" target="_blank" class="link">수정</a></div>
-						            </div> 
-						        </div> 
-						    </div>`
-						
+			        latlng: new kakao.maps.LatLng(37.52423, 127.06319)
 			    },
 			    {
 			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_6184.JPG" width="auto" height="150"></div>', 
-			        latlng: new kakao.maps.LatLng(37.37128, 126.72612),
-			    	content: `<div class="wrap">
-						    <div class="info">
-						        <div class="title">
-						            <div class="close" title="닫기"></div>
-						        </div>
-						        <div class="body">
-						            <div class="img">
-						                <img src="./images/IMG_6184.JPG" width="73" height="70">
-						            </div>
-						            <div class="desc">
-						                <div class="ellipsis">서울특별시 강남구 청담동 347</div>
-						                <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>
-						                <div><a href="/update" target="_blank" class="link">수정</a></div>
-						            </div> 
-						        </div> 
-						    </div>
-						</div>`
+			        latlng: new kakao.maps.LatLng(37.37128, 126.72612)
 			    },
 			    {
 			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_4079.JPG" width="auto" height="150"></div>', 
-			        latlng: new kakao.maps.LatLng(37.85255, 126.79097),
-				    content: `<div class="wrap">
-						    <div class="info">
-						        <div class="title">
-						            <div class="close" title="닫기"></div>
-						        </div>
-						        <div class="body">
-						            <div class="img">
-						                <img src="./images/IMG_4079.JPG" width="73" height="70">
-						            </div>
-						            <div class="desc">
-						                <div class="ellipsis">서울특별시 강남구 청담동 347</div>
-						                <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>
-						                <div><a href="/update" target="_blank" class="link">수정</a></div>
-						            </div> 
-						        </div> 
-						    </div>
-						</div>`
+			        latlng: new kakao.maps.LatLng(37.85255, 126.79097)
 			    },
 			    {
 			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5947.JPG" width="auto" height="150"></div>',
-			        latlng: new kakao.maps.LatLng(37.74449, 127.71479),
-				    content: `<div class="wrap">
-						    <div class="info">
-						        <div class="title">
-						            <div class="close" title="닫기"></div>
-						        </div>
-						        <div class="body">
-						            <div class="img">
-						                <img src="./images/IMG_5947.JPG" width="73" height="70">
-						            </div>
-						            <div class="desc">
-						                <div class="ellipsis">서울특별시 강남구 청담동 347</div>
-						                <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>
-						                <div><a href="/update" target="_blank" class="link">수정</a></div>
-						            </div> 
-						        </div> 
-						    </div>
-						</div>`
+			        latlng: new kakao.maps.LatLng(37.74449, 127.71479)
 			    }
 			];
 
@@ -203,7 +135,7 @@
 							<div class="ellipsis">좋아요</div>
 							<div class="ellipsis">${dto.likecnt}</div>
 		
-							<div class="ellipsis">댓글</div>
+							<div class="ellipsis">댓글</div> 
 			                <c:if test="${not empty sessionScope.id}">
 							<button type="button" class="btn"
 								onclick="location.href='/contents/update/${contentsno}'">
