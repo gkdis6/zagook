@@ -7,20 +7,18 @@
 <title>기본페이지</title>
 <meta charset="utf-8">
 <style type="text/css">
-	.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-    .wrap * {padding: 0;margin: 0;}
-    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+	.wrap {position: absolute;left: 0;bottom: 40px;width: 500px;height: 550px;margin-left: -250px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap * {padding: 0;margin: 0; white-space:normal;}
+    .wrap .info {width: 500px;height: auto;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
     .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
     .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
-    .info .body {position: relative;overflow: hidden;}
-    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
-    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info .body {position: relative; overflow: hidden;width: 500px;height: 600px;}
+    .info .body .img .desc {position: relative; height: auto;}
+    .desc .ellipsis {overflow: hidden;height: auto;}
+    .info .body .img {position: absolute;margin: 5px;width: 490px;height: auto;border: 1px solid #ddd;color: #888;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-    .info .link {color: #5085BB;}
 </style>
 </head>
 <body>
@@ -42,7 +40,7 @@
 			
 			var positions = [
 			    {
-			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5857.JPG" width="200" height="150"></div>', 
+			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5857.JPG" width="auto" height="150"></div>', 
 			        latlng: new kakao.maps.LatLng(37.52423, 127.06319),
 			        content: `<div class="wrap">
 								<div class="info">
@@ -63,7 +61,7 @@
 						
 			    },
 			    {
-			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_6184.JPG" width="200" height="150"></div>', 
+			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_6184.JPG" width="auto" height="150"></div>', 
 			        latlng: new kakao.maps.LatLng(37.37128, 126.72612),
 			    	content: `<div class="wrap">
 						    <div class="info">
@@ -84,7 +82,7 @@
 						</div>`
 			    },
 			    {
-			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_4079.JPG" width="200" height="150"></div>', 
+			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_4079.JPG" width="auto" height="150"></div>', 
 			        latlng: new kakao.maps.LatLng(37.85255, 126.79097),
 				    content: `<div class="wrap">
 						    <div class="info">
@@ -105,7 +103,7 @@
 						</div>`
 			    },
 			    {
-			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5947.JPG" width="200" height="150"></div>',
+			        iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5947.JPG" width="auto" height="150"></div>',
 			        latlng: new kakao.maps.LatLng(37.74449, 127.71479),
 				    content: `<div class="wrap">
 						    <div class="info">
@@ -143,7 +141,7 @@
 					    new kakao.maps.Size(50, 53));
 					marker.setImage(markerImage);
 					
-					kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+					kakao.maps.event.addListener(marker, 'mouseover', makeOverListener2(map, marker, infowindow));
 				    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 				});
 			}
@@ -170,7 +168,7 @@
 				var overlay = new kakao.maps.CustomOverlay({
 					clickable : true,
 					position : marker.getPosition(),
-					yAnchor : 3
+					xAnchor : 1 
 				});
 				
 				var div1 = document.createElement('div');
@@ -188,14 +186,34 @@
 			    div2.appendChild(div3);
 				var div4 = document.createElement('div');
 				div4.className = 'body';
-				div4.innerHTML = '<div class="img">'
-	                +'<img src="./images/IMG_5857.JPG" width="73" height="70">'
-		            +'</div>'
-		            +'<div class="desc">'
-		            +'    <div class="ellipsis">서울특별시 강남구 청담동 347</div>'
-		            +'    <div class="jibun ellipsis">(우) 135-100 (지번) 청담동 347</div>'
-		            +'    <div><a href="/update" target="_blank" class="link">수정</a></div>'
-		            +'</div>';
+				div4.innerHTML = `<div class="img">
+					<img src="./images/IMG_5947.JPG" style="width: 100%;">
+			            <div class="desc">
+				            <div class="ellipsis">작성자</div>
+							<div class="ellipsis">${dto.id}</div>
+		
+							<div class="ellipsis">내용</div>
+							<div class="ellipsis">${dto.contents}</div>
+							
+							<div class="ellipsis">태그</div>
+							
+							<div class="ellipsis">등록일</div>
+							<div class="ellipsis">${dto.rdate}</div>
+		
+							<div class="ellipsis">좋아요</div>
+							<div class="ellipsis">${dto.likecnt}</div>
+		
+							<div class="ellipsis">댓글</div>
+			                <c:if test="${not empty sessionScope.id}">
+							<button type="button" class="btn"
+								onclick="location.href='/contents/update/${contentsno}'">
+								수정</button>
+							<button type="button" class="btn"
+								onclick="location.href='/contents/delete/${contentsno}'">
+								삭제</button>
+							</c:if>
+			            </div>
+			        </div>`;
 		        
 		        div2.appendChild(div4);
 		        div1.appendChild(div2);
@@ -221,7 +239,7 @@
 			    };
 			}
 			
-			function makeOverListener(map, marker, infowindow){
+			function makeOverListener2(map, marker, infowindow){
 				return function() {
 			        infowindow.open(map, marker);
 			    };
