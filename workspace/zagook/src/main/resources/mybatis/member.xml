@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.project.member.MemberMapper">
+
+
+
+<select id="read" parameterType="String" resultType="com.project.member.MemberDTO">
+	select *
+	from zagook_member
+	where id = #{id}
+</select>
+<select id="loginCheck" parameterType="Map" resultType="int">
+	select
+    count(*) from zagook_member
+     where id = #{id}
+     and password = #{password}
+</select>
+
+<select id="duplicatedId" parameterType="String" resultType="int">
+	SELECT COUNT(id)
+	FROM zagook_member
+	WHERE id=#{id}
+</select>
+
+<select id="duplicatedEmail" parameterType="String" resultType="int">
+	SELECT COUNT(email)
+	FROM zagook_member
+	WHERE email=#{email}
+</select>
+
+<insert id="create" parameterType="com.project.member.MemberDTO">
+	 INSERT INTO zagook_member(id, password,
+     mname, tel, email, job, mdate, fname,
+     grade)
+     VALUES(#{id}, #{password},#{mname}, #{tel}, #{email}, #{job}, sysdate, #{fname}, 'H')
+</insert>
+
+</mapper>
