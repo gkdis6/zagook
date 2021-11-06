@@ -18,22 +18,20 @@
 <body> 
 
 <div class="container">
-<h1 class="col-sm-offset-2 col-sm-10">공지 등록</h1>
+<h2 class="col-sm-offset-2 col-sm-10">새 공지사항</h2>
 <form class="form-horizontal" 
       action="/notice/create"
       method="post"
       enctype="multipart/form-data"
       onsubmit="return checkIn(this)">
   <div class="form-group">
-    <label class="control-label col-sm-2" for="title">제목</label>
-    <div class="col-sm-8">
-      <input type="text" name="title" id="title" class="form-control">
+    <div class="col-sm-offset-2 col-sm-6">
+      <input type="text" name="title" id="title" class="form-control" placeholder="제목">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="content">내용</label>
-    <div class="col-sm-8">
-      <input type="text" name="content" id="content" class="form-control">
+    <div class="col-sm-offset-2 col-xs-6">
+      <textarea name="contents" id="contents" class="form-control" style="height:100px;resize:none;" placeholder="내용"></textarea>
     </div>
   </div>
   <div class="form-group">

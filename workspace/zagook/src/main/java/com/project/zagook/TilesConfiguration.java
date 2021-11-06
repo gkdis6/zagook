@@ -15,7 +15,9 @@ public class TilesConfiguration {
 
       configurer.setDefinitions(new String[]{"classpath:/tiles/tiles.xml",
 		  									 "classpath:/tiles/tiles_member.xml",
-		  									 "classpath:/tiles/tiles_chat.xml"});
+		  									 "classpath:/tiles/tiles_chat.xml",
+		  									"classpath:/tiles/tiles_contents.xml",
+		  									"classpath:/tiles/tiles_notice.xml"});
 
       configurer.setCheckRefresh(true);
       return configurer;

@@ -17,28 +17,29 @@
 </head>
 <body>
 	<div class="container">
-		<h1 class="col-sm-offset-2 col-sm-10">게시글 수정</h1>
+		<h2 class="col-sm-offset-2 col-sm-10">게시글 수정</h2>
 		<form class="form-horizontal" action="/contents/update" method="post"
 			onsubmit="return checkIn(this)">
+			<div class="form-group">
+			 <label class="control-label col-sm-2" for="updateFile">사진수정</label>
+			  <div class="col-sm-6">
+			   <img src="/images/${dto.filename}" style="width:500px">
+				<br><button type="button" class="btn btn-default"
+					onclick="/contents/updateFile">수정</button>
+			  </div>
+			</div>
 			<input type="hidden" name="contentsno" value="${contentsno}">
 			<div class="form-group">
 			   <div class="col-sm-offset-2 col-xs-6">
-			      <textarea name="contents" id="contents" class="form-control" style="height:100px;resize:none;" value="${dto.contents}"></textarea>
+			      <textarea name="contents" id="contents" class="form-control" style="height:100px;resize:none;">${dto.contents}</textarea>
 			   </div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="tag">태그</label>
-				<div class="col-sm-8">
+				<div class="col-sm-6">
 					<input type="text" name="tag" id="tag" class="form-control"
 						value="${dto.tag}">
 				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="updateFile">사진수정</label>
-				<img src="/images/${dto.filename}">
-				<button type="button" class="btn btn-default"
-					onclick="/contents/updateFile">수정</button>
 			</div>
 			<div class="form-group">
 			  <div class="col-sm-offset-2 col-xs-6">
@@ -58,4 +59,7 @@
 		</form>
 	</div>
 </body>
+<script>
+	contents = $("textarea#contents").val();
+</script>
 </html>

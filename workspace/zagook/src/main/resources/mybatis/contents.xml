@@ -7,9 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.project.contents.ContentsMapper">
 	<select id="detail" parameterType="int"
 		resultType="com.project.contents.ContentsDTO">
-		select contentsno, cateno, pname, price, filename, stock, detail, rdate
-		from contents
-		where contentsno = #{conentsno}
+		select c.contentsno, c.contents, c.privacy, m.mname, c.filename, t.tag, c.rdate, c.likecnt
+		from zagook_contents c, zagook_tag t, zagook_posttag p, zagook_member m
+		where m.id=c.id
+		and c.contentsno=p.contentsno
+		and t.tag_id=p.tag_id
+		and c.contentsno=#{contentsno}
 	</select>
 
 	<update id="updateFile" parameterType="Map">
@@ -58,20 +61,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="create"
 		parameterType="com.project.contents.ContentsDTO">
-		insert	into zagook_contents(contentsno, ID, FILENAME, contents,
-		rdate, privacy)
-		values((select nvl(max(contentsno),0)+1
-		from zagook_contents),
-		#{id}, #{filename}, #{contents}, sysdate, #{privacy});
-		
-		insert into zagook_tag(tag_id, tag)
-		values ((select nvl(max(tag_id),0)+1
-		from zagook_tag), #{tag});
-		
-		insert into zagook_posttag(contentsno, tag_id)
-		values ((select max(contentsno)
-		from zagook_contents), (select max(tag_id)
-		from zagook_tag));
+		{call
+		declare
+		begin
+			insert	into zagook_contents(contentsno, id, filename, contents,
+			rdate, privacy)
+			values((select nvl(max(contentsno),0)+1
+			from zagook_contents),
+			#{id}, #{filename}, #{contents}, sysdate, #{privacy});
+			
+			insert into zagook_tag(tag_id, tag)
+			values ((select nvl(max(tag_id),0)+1
+			from zagook_tag), #{tag});
+			
+			insert into zagook_posttag(contentsno, tag_id)
+			values ((select max(contentsno)
+			from zagook_contents), (select max(tag_id)
+			from zagook_tag));
+		end
+		}
 	</insert>
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="int">

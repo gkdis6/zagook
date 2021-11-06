@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class NoticeController {
-	@GetMapping("/admin/notice/create")
+	@GetMapping("/notice/create")
 	public String create() {
 
 		return "/notice/create";

@@ -283,6 +283,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       "
       id="create"
       class="create"
+      onclick="/contents/create"
     >
       createform
     </div>
