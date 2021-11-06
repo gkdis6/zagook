@@ -15,7 +15,7 @@
     .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
     .info .body {position: relative; overflow: hidden;width: 500px;height: 500px;}
-    .info .desc {position: relative; height: auto;}
+    .info .desc {position: relative; height: auto;overflow: auto;}
     .desc .ellipsis {overflow: hidden;height: auto;}
     .info .img {position: absolute;margin: 5px;width: 490px;height: auto;color: #888;}
     .info:after {content: '';position: absolute;margin-left: -11px;left: 50%;bottom: -12;width: 24px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
@@ -202,9 +202,70 @@
 	<img src="./images/261370-200.png" width="73" height="70">
 	</div>
 	
-	<div style="position: fixed; right: 20px; bottom:100px; z-index: 8; display: none;" id="create" class="create">
-	createform
+	<div style="position: fixed; right: 20px; bottom:100px; z-index: 8; display: none; background: white;" id="create" class="create">
+        <h2 class="col-sm-offset-2 col-sm-10">게시물 등록</h2>
+        <form class="form-horizontal" action="/contents/create" method="post" enctype="multipart/form-data"
+            onsubmit="return checkIn(this)">
+
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <img style="width: 300px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+                    <input style="display: block;" type="file" id="filenameMF" name="filenameMF" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-xs-6">
+                    <textarea name="contents" id="contents" class="form-control" style="height:auto;resize:none; width: 100%;"
+                        placeholder="내용"></textarea>
+                </div>
+            </div>
+            <input type="hidden" name="id" value="${id}">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="tag">태그</label>
+                <div class="col-sm-6">
+                    <input type="text" name="tag" id="tag" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="privacy">공개설정</label>
+                <div class="col-sm-offset-2 col-xs-6">
+                    <select class="form-control" name="privacy" id="privacy">
+                        <option value=0>나만 보기</option>
+                        <option value=1>친구 공개</option>
+                        <option value=2>모두 공개</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <button class="btn">등록</button>
+                    <button type="reset" class="btn" onclick="history.back()">취소</button>
+                </div>
+            </div>
+        </form>
 	</div>
-	
+	<script>
+    function readImage(input) {
+        // 인풋 태그에 파일이 있는 경우
+        if (input.files && input.files[0]) {
+            // 이미지 파일인지 검사 (생략)
+            // FileReader 인스턴스 생성
+            const reader = new FileReader()
+            // 이미지가 로드가 된 경우
+            reader.onload = e => {
+                const previewImage = document.getElementById("preview-image")
+                previewImage.src = e.target.result
+            }
+            // reader가 이미지 읽도록 하기
+            reader.readAsDataURL(input.files[0])
+        }
+    }
+    // input file에 change 이벤트 부여
+    const inputImage = document.getElementById("filenameMF")
+    inputImage.addEventListener("change", e => {
+        readImage(e.target)
+    })
+</script>
 </body>
 </html>
