@@ -7,24 +7,209 @@
 <title>기본페이지</title>
 <meta charset="utf-8">
 <style type="text/css">
-	.wrap {position: absolute;left: 2;bottom: 51px;width: 500px;height: 500px;margin-left: -250px;text-align: left;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;white-space: normal;height: auto;}
-    .wrap * {padding: 0;margin: 0; white-space:normal;height: auto;}
-    .wrap .info {width: 500px;height: auto;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;background: #fff;}
-    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 1px #888;}
-    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
-    .info .close:hover {cursor: pointer;}
-    .info .body {position: relative; overflow: hidden;width: 500px;height: 500px;}
-    .info .desc {position: relative; height: auto;overflow: auto;}
-    .desc .ellipsis {overflow: hidden;height: auto;}
-    .info .img {position: absolute;margin: 5px;width: 490px;height: auto;color: #888;}
-    .info:after {content: '';position: absolute;margin-left: -11px;left: 50%;bottom: -12;width: 24px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+	.wrap {
+		position: absolute;
+		left: 2;
+		bottom: 51px;
+		width: 500px;
+		height: 500px;
+		margin-left: -250px;
+		text-align: left;
+		font-size: 12px;
+		font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+		line-height: 1.5;
+		white-space: normal;
+		height: auto;
+	}
+	
+	.wrap * {
+		padding: 0;
+		margin: 0;
+		white-space: normal;
+		height: auto;
+	}
+	
+	.wrap .info {
+		width: 500px;
+		height: auto;
+		border-radius: 5px;
+		border-bottom: 2px solid #ccc;
+		border-right: 1px solid #ccc;
+		background: #fff;
+	}
+	
+	.wrap .info:nth-child(1) {
+		border: 0;
+		box-shadow: 0px 1px 1px #888;
+	}
+	
+	.info .title {
+		padding: 5px 0 0 10px;
+		height: 30px;
+		background: #eee;
+		border-bottom: 1px solid #ddd;
+		font-size: 18px;
+		font-weight: bold;
+	}
+	
+	.info .close {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		color: #888;
+		width: 17px;
+		height: 17px;
+		background:
+			url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+	}
+	
+	.info .close:hover {
+		cursor: pointer;
+	}
+	
+	.info .body {
+		position: relative;
+		overflow: hidden;
+		width: 500px;
+		height: 500px;
+	}
+	
+	.info .desc {
+		position: relative;
+		height: auto;
+		overflow: auto;
+	}
+	
+	.desc .ellipsis {
+		overflow: hidden;
+		height: auto;
+	}
+	
+	.info .img {
+		position: absolute;
+		margin: 5px;
+		width: 490px;
+		height: auto;
+		color: #888;
+	}
+	
+	.info:after {
+		content: '';
+		position: absolute;
+		margin-leÏft: -11px;
+		left: 50%;
+		bottom: -12;
+		width: 24px;
+		height: 12px;
+		background:
+			url('https://t1.d aumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+	}
+	.upload_imgbox{
+		width:300px;
+		height:300px;
+		position:relative;
+		overflow:hidden;
+	}
+	.upload_imgbox > #preview-image{
+		position:absolute;
+		left:50%;
+		top:50%;
+		transform:translate(-50%,-50%);
+		width: 300px; 
+		height: 300px;
+		background-image: url('https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image'); 
+		background-repeat: no-repeat; 
+		background-size: contain; 
+		background-position: center;
+	}
+	
+	/* 게시글 등록 팝업 */
+	
+
+    select{
+    	-webkit-appearance: none;
+		-moz-appearance: none; 
+		appearance: none;
+    }
+    .create{
+        width: 300px;
+        min-height:625px;
+        height:auto;
+        padding-bottom:10px;
+        border-radius:20px;
+        background-color:#fff;
+    }
+    .form-horizontal{
+        width:89.33%;
+        margin:auto;
+        display:flex;
+        flex-wrap:wrap;
+    }
+    input[type=file]{
+        width:100%;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    .form-horizontal div{
+        width:100%;
+        margin-bottom: 5px;
+    }
+    .form-horizontal div >input{
+        width: 100%;
+    }
+    .control-label + div{
+        margin-top: 5px;
+    }
+    .form-group .btn_box{
+        display:flex;
+        justify-content:space-evenly;
+        width: 65%;
+        margin:auto;
+    }
+    .form-group{
+        width: 100%;
+        display:flex;
+        justify-content:flex-start;
+        align-items:center;
+    }
+    .form-group >label{
+        width: 28%;
+    }
+    .form-group >div >select{
+        width:100%;
+    }
+    .btn_box button{
+        width: 70px;
+        height: 50px;
+        outline:none;
+        border:none;
+        background-color:#fff;
+        color:gray;
+        font-weight: 500;
+        border:2px solid #ccc;
+        font-size:13px;
+        border-radius:5px;
+    }
+    .btn_box button:hover{
+        background-color:#666;
+        color:#fff;
+        font-weight:bold;
+    }
+    .form-horizontal .form-group{
+    	margin:0;
+    }
+    #createBtn.rotate{
+    	transform:rotate(45deg);
+    	transition:all 0.4s;
+    }
+        /* 게시글팝업 end */
+	
 </style>
 </head>
 <body>
-	
+
 	<div class="container" id="map" style="width: 100vw; height: 100vh;">
-		
+
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
 		<script>
@@ -194,58 +379,77 @@
 			
 		}
 		</script>
-		
-		
-		
-	</div>
-	<div style="position: fixed; right: 20px; bottom:20px; z-index: 8" onclick="if(create.style.display=='none'){create.style.display=''}else{create.style.display='none'}">
-	<img src="./images/261370-200.png" width="73" height="70">
-	</div>
-	
-	<div style="position: fixed; right: 20px; bottom:100px; z-index: 8; display: none; background: white;" id="create" class="create">
-        <h2 class="col-sm-offset-2 col-sm-10">게시물 등록</h2>
-        <form class="form-horizontal" action="/contents/create" method="post" enctype="multipart/form-data"
-            onsubmit="return checkIn(this)">
 
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <img style="width: 300px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-                    <input style="display: block;" type="file" id="filenameMF" name="filenameMF" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-xs-6">
-                    <textarea name="contents" id="contents" class="form-control" style="height:auto;resize:none; width: 100%;"
-                        placeholder="내용"></textarea>
-                </div>
-            </div>
-            <input type="hidden" name="id" value="${id}">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="tag">태그</label>
-                <div class="col-sm-6">
-                    <input type="text" name="tag" id="tag" class="form-control">
-                </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="privacy">공개설정</label>
-                <div class="col-sm-offset-2 col-xs-6">
-                    <select class="form-control" name="privacy" id="privacy">
-                        <option value=0>나만 보기</option>
-                        <option value=1>친구 공개</option>
-                        <option value=2>모두 공개</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-5">
-                    <button class="btn">등록</button>
-                    <button type="reset" class="btn" onclick="history.back()">취소</button>
-                </div>
-            </div>
-        </form>
+
 	</div>
+	<div id="createBtn"style="position: fixed; right: 20px; bottom: 20px; z-index: 8"
+		onclick="if(create.style.display=='none'){create.style.display=''}else{create.style.display='none'}">
+		<img src="./images/261370-200.png" width="73" height="70">
+	</div>
+
+	<!-- 게시글 등록 팝업 -->
+    <div style="position: fixed; right: 20px; bottom: 100px; z-index: 8; background: white;"id="create" class="create">
+      
+        <h2 style="font-size:20px; text-align:center; line-height:2;">게시물 등록</h2>
+      
+        <!-- file Upload시 이미지 preview -->
+        <figure class="upload_imgbox">
+        	<a id="preview-image"></a>
+        </figure>
+        <!-- //file Upload시 이미지 preview END -->
+
+        <!-- form태그 부분 -->
+        <form class="form-horizontal" action="/contents/create" method="post" enctype="multipart/form-data" onsubmit="return checkIn(this)" >
+
+         <div class="form-group">
+            <div>
+               <input style="display: block; cursor:pointer;" type="file" id="filenameMF"
+                  name="filenameMF" class="form-control">
+            </div>
+         </div>
+
+         <div>
+            <div>
+               <textarea name="contents" id="contents" class="form-control"
+                  style="min-height:100px; height: auto; resize: none; width: 100%;" placeholder="내용"></textarea>
+            </div>
+         </div>
+
+         <input type="hidden" name="id" value="${id}">
+
+         <div>
+            <div>
+               <input type="text" id="tag" class="form-control" placeholder="태그" style="margin-bottom:5px;"> 
+            </div>
+         </div>
+
+         <div class="form-group">
+            <label class="control-label" for="privacy" style="text-align:left;">공개설정</label>
+            <div>
+               <select class="form-control" name="privacy" id="privacy">
+                  <option value=0>나만 보기</option>
+                  <option value=1>친구 공개</option>
+                  <option value=2>모두 공개</option>
+               </select>
+            </div>
+         </div>
+
+         <div class="form-group">
+            <div class="btn_box">
+               <button class="btn">등록</button>
+               <button type="reset" class="btn" onclick="reset()">취소</button>
+            </div>
+         </div>
+
+      </form>
+        <!-- //폼태그부분 END -->
+   </div>
+    <!-- //게시글 등록 팝업 END -->
 	<script>
+	$(document).ready(function(){
+		$("#create").hide();
+	});
     function readImage(input) {
         // 인풋 태그에 파일이 있는 경우
         if (input.files && input.files[0]) {
@@ -254,8 +458,7 @@
             const reader = new FileReader()
             // 이미지가 로드가 된 경우
             reader.onload = e => {
-                const previewImage = document.getElementById("preview-image")
-                previewImage.src = e.target.result
+            	$("#preview-image").css('background-image', 'url(\"' + e.target.result + '\")');
             }
             // reader가 이미지 읽도록 하기
             reader.readAsDataURL(input.files[0])
@@ -266,6 +469,11 @@
     inputImage.addEventListener("change", e => {
         readImage(e.target)
     })
+    $("#createBtn").on("click",function(e){
+    	if(e.target != 0){
+    		$("#createBtn").toggleClass("rotate");
+    	}
+    });
 </script>
 </body>
 </html>
