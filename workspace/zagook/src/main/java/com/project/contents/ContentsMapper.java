@@ -1,5 +1,4 @@
 package com.project.contents;
-<<<<<<< HEAD
  
 import java.util.List;
 import java.util.Map;
@@ -33,9 +32,5 @@ public interface ContentsMapper {
 		int delete3(int contentsno);
 
 		int update2(ContentsDTO dto);
-=======
-
-public interface ContentsMapper {
->>>>>>> map
 
 }
