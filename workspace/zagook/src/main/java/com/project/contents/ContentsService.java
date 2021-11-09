@@ -1,5 +1,6 @@
 package com.project.contents;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
 
@@ -35,3 +36,8 @@ public interface ContentsService {//요청할 수 있는 인터페이스 선언�
 
 }
  
+=======
+public interface ContentsService {
+
+}
+>>>>>>> map

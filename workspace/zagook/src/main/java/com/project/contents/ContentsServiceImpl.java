@@ -1,5 +1,6 @@
 package com.project.contents;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
 
@@ -94,5 +95,8 @@ public class ContentsServiceImpl implements ContentsService {
 		// TODO Auto-generated method stub
 		return mapper.update2(dto);
 	}
+=======
+public class ContentsServiceImpl implements ContentsService {
+>>>>>>> map
 
 }

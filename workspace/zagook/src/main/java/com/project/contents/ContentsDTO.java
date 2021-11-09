@@ -1,5 +1,6 @@
 package com.project.contents;
 
+<<<<<<< HEAD
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -16,4 +17,8 @@ public class ContentsDTO {
 	  private int privacy;
 	  private int tag_id;
 	  private String tag;
+=======
+public class ContentsDTO {
+
+>>>>>>> map
 }
