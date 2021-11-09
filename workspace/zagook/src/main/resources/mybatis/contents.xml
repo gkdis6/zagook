@@ -52,11 +52,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update zagook_contents
 		set contents=#{contents},
 		privacy=#{privacy}
-		where contentsno = #{contentsno};
-		
+		where contentsno = #{contentsno}
+	</update>
+	<update id="update2"
+		parameterType="com.project.contents.ContentsDTO">
 		update zagook_tag
 		set tag=#{tag}
-		where tag_id=#{tag_id};
+		where tag_id=#{tag_id}
 	</update>
 
 	<insert id="create"
@@ -84,12 +86,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="int">
 		delete from zagook_posttag
-		where contentsno=#{contentsno};
-		
+		where contentsno=#{contentsno}
+	</delete>
+	<delete id="delete2" parameterType="int">	
 		delete from zagook_tag
-		where tag_id=#{tag_id};
-		
+		where tag_id=#{tag_id}
+	</delete>
+	<delete id="delete3" parameterType="int">	
 		delete from zagook_contents
-		where contentsno=#{contentsno};
+		where contentsno=#{contentsno}
 	</delete>
 </mapper>

@@ -70,8 +70,8 @@ public class ContentsController {
 	@PostMapping("/contents/update")
 	public String update(ContentsDTO dto) {
 		int cnt = service.update(dto);
-
-		if (cnt == 1) {
+		int cnt2 = service.update2(dto);
+		if (cnt>0 & cnt2>0) {
 			return "redirect:/";
 		} else {
 			return "error";
@@ -87,10 +87,10 @@ public class ContentsController {
 	@PostMapping("/contents/delete")
 	public String delete(HttpServletRequest request, int contentsno) {
 
-		int cnt = 0;
-			cnt = service.delete(contentsno);
-
-		if (cnt == 1) {
+		int cnt = service.delete(contentsno);
+		int cnt2 = service.delete2(contentsno);
+		int cnt3 = service.delete3(contentsno);
+		if (cnt>0 & cnt2>0 & cnt3>0) {
 			return "redirect:/list";
 		} else {
 			return "/error";

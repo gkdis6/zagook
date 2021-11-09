@@ -76,4 +76,23 @@ public class ContentsServiceImpl implements ContentsService {
 		// TODO Auto-generated method stub
 		return mapper.create3(dto);
 	}
+
+	@Override
+	public int delete2(int contentsno) {
+		// TODO Auto-generated method stub
+		return mapper.delete2(contentsno);
+	}
+
+	@Override
+	public int delete3(int contentsno) {
+		// TODO Auto-generated method stub
+		return mapper.delete3(contentsno);
+	}
+
+	@Override
+	public int update2(ContentsDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.update2(dto);
+	}
+
 }

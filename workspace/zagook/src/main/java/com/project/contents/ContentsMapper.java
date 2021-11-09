@@ -26,4 +26,11 @@ public interface ContentsMapper {
 		int create2(ContentsDTO dto);
 
 		int create3(ContentsDTO dto);
+
+		int delete2(int contentsno);
+
+		int delete3(int contentsno);
+
+		int update2(ContentsDTO dto);
+
 }
