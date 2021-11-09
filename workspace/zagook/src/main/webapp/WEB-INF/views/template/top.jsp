@@ -65,14 +65,10 @@
 							<li><a href="${root}/chat">문의하기</a></li>
 						</ul>
 					</li>
-					<li><a id="grade"><span class="glyphicon glyphicon-grain"></span>${str}</a>
-					</li>
-					<c:choose>
-						<c:when test="${not empty sessionScope.id }">
 					<li><a id="feed" href="${root}/feed/read">내 주변</a>
 					</li>
-						</c:when>
-					</c:choose>
+					<li><a id="grade"><span class="glyphicon glyphicon-grain"></span>${str}</a>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<c:choose>
