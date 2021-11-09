@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.feed.FeedMapper">
+	<select id="list" parameterType="String"
+		resultType="com.project.feed.FeedDTO">
+		select * 
+		from zagook_contents 
+		where id 
+			in (
+				select id2 
+				from zagook_friend 
+				where id=#{id} and status=3
+				) 
+			and privacy!=3
+	</select>
+	<select id="like" parameterType="Map"
+		resultType="int">
+		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
+	</select>
+	<select id="tag" parameterType="int"
+		resultType="com.project.feed.FeedDTO">
+		select tag from zagook_tag where tag_id
+		in (select tag_id from zagook_posttag where contentsno=#{contentsno})
+	</select>
+</mapper>

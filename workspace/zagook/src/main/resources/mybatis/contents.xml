@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.contents.ContentsMapper">
+	<select id="detail" parameterType="int"
+		resultType="com.project.contents.ContentsDTO">
+		select c.contentsno, c.contents, c.privacy, m.mname, c.filename, t.tag, c.rdate, c.likecnt
+		from zagook_contents c, zagook_tag t, zagook_posttag p, zagook_member m
+		where m.id=c.id
+		and c.contentsno=p.contentsno
+		and t.tag_id=p.tag_id
+		and c.contentsno=#{contentsno}
+	</select>
+
+	<update id="updateFile" parameterType="Map">
+		update contents
+		set
+		filename = #{fname}
+		where contentsno = #{contentsno}
+	</update>
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) from contents
+		<where>
+			<choose>
+				<when test="col=='pname'">
+					pname like '%'||#{word}||'%'
+				</when>
+				<when test="col=='price'">
+					price like '%'||#{word}||'%'
+				</when>
+				<when test="col=='cateno'">
+					cateno like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+	</select>
+
+	<select id="list" parameterType="Map"
+		resultType="com.project.contents.ContentsDTO">
+		select c.contentsno, m.mname, t.tag, c.rdate, c.likecnt
+		from zagook_contents c, zagook_tag t, zagook_posttag p, zagook_member m
+		where m.id=c.id
+		and c.contentsno=p.contentsno
+		and t.tag_id=p.tag_id
+	</select>
+
+	<update id="update"
+		parameterType="com.project.contents.ContentsDTO">
+		update zagook_contents
+		set contents=#{contents},
+		privacy=#{privacy}
+		where contentsno = #{contentsno}
+	</update>
+	<update id="update2"
+		parameterType="com.project.contents.ContentsDTO">
+		update zagook_tag
+		set tag=#{tag}
+		where tag_id=#{tag_id}
+	</update>
+
+	<insert id="create"
+		parameterType="com.project.contents.ContentsDTO">
+			insert	into zagook_contents(contentsno, id, filename, contents,
+			rdate, privacy)
+			values((select nvl(max(contentsno),0)+1
+			from zagook_contents),
+			#{id}, #{filename}, #{contents}, sysdate, #{privacy})
+	</insert>
+	<insert id="create2"
+		parameterType="com.project.contents.ContentsDTO">
+			insert into zagook_tag(tag_id, tag)
+			values ((select nvl(max(tag_id),0)+1
+			from zagook_tag), #{tag})
+	</insert>
+	<insert id="create3"
+		parameterType="com.project.contents.ContentsDTO">	
+			insert into zagook_posttag(contentsno, tag_id)
+			values ((select max(contentsno)
+			from zagook_contents), (select max(tag_id)
+			from zagook_tag))
+	</insert>
+	
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from zagook_posttag
+		where contentsno=#{contentsno}
+	</delete>
+	<delete id="delete2" parameterType="int">	
+		delete from zagook_tag
+		where tag_id=#{tag_id}
+	</delete>
+	<delete id="delete3" parameterType="int">	
+		delete from zagook_contents
+		where contentsno=#{contentsno}
+	</delete>
+</mapper>
