@@ -27,13 +27,6 @@ public class MemberController {
 	@Qualifier("com.project.member.MemberServiceImpl")
 	private MemberService service;
 	
-	@GetMapping("/")
-	public String home() {
-
-		return "/home";
-	}
-
-	
 	@GetMapping("/member/login")
 	public String login(HttpServletRequest request) {
 		

@@ -36,6 +36,7 @@
 		border-bottom: 2px solid #ccc;
 		border-right: 1px solid #ccc;
 		background: #fff;
+		border-radius: 15px;
 	}
 	
 	.wrap .info:nth-child(1) {
@@ -44,12 +45,13 @@
 	}
 	
 	.info .title {
-		padding: 5px 0 0 10px;
-		height: 30px;
+		padding: 1px 0 0 0;
+		height: 70px;
 		background: #eee;
 		border-bottom: 1px solid #ddd;
 		font-size: 18px;
 		font-weight: bold;
+		border-radius: 15px 15px 0px 0px;
 	}
 	
 	.info .close {
@@ -70,8 +72,9 @@
 	.info .body {
 		position: relative;
 		overflow: hidden;
-		width: 500px;
-		height: 500px;
+		width: 490px;
+		height: 470px;
+		margin: 5px;
 	}
 	
 	.info .desc {
@@ -85,15 +88,14 @@
 		height: auto;
 	}
 	
-	.info .img {
-		position: absolute;
-		margin: 5px;
+	.body .img {
+		position: relative;
 		width: 490px;
 		height: auto;
 		color: #888;
 	}
 	
-	.info:after {
+	.body:after {
 		content: '';
 		position: absolute;
 		margin-leÏft: -11px;
@@ -203,6 +205,19 @@
     	transition:all 0.4s;
     }
         /* 게시글팝업 end */
+        
+	.profile_img{
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+	}
+	.profile{
+		margin: 10px;
+		
+	}
+	.ellipsis{
+		width: 490px;
+	}
 	
 </style>
 </head>
@@ -294,6 +309,11 @@
 				div2.className = 'info';
 				var div3 = document.createElement('div');
 				div3.className = 'title';
+				var div_profile = document.createElement('div');
+				div_profile.className = 'profile';
+				div_profile.innerHTML = `<img src="./images/feed/profile/profile_example.jpeg" class="profile_img" alt="profile_img">
+		            <a class="name feed_padding">leewoo</a>`;
+		        div3.appendChild(div_profile);
 				var closeBtn = document.createElement('button');
 				closeBtn.className = 'close';
 			    closeBtn.onclick = function () {
@@ -304,21 +324,20 @@
 				var div4 = document.createElement('div');
 				div4.className = 'body';
 				div4.innerHTML = `<div class="img">
-					<img src="./images/IMG_5947.JPG" style="width: 100%;">
+							<img src="./images/IMG_5947.JPG" style="width: 100%;">
+						</div
 			            <div class="desc">
-				            <div class="ellipsis">작성자</div>
-							<div class="ellipsis">${dto.id}</div>
 		
+							<div class="ellipsis">날짜${dto.rdate}</div>
+							
+							<div class="ellipsis" style="color: blue;">태그</div>
+							
 							<div class="ellipsis">내용</div>
 							<div class="ellipsis">${dto.contents}</div>
-							
-							<div class="ellipsis">태그</div>
-							
-							<div class="ellipsis">등록일</div>
-							<div class="ellipsis">${dto.rdate}</div>
 		
-							<div class="ellipsis">좋아요</div>
 							<div class="ellipsis">${dto.likecnt}</div>
+							<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>
+							
 		
 							<div class="ellipsis">댓글</div> 
 			                <c:if test="${not empty sessionScope.id}">
@@ -329,8 +348,7 @@
 								onclick="location.href='/contents/delete/${contentsno}'">
 								삭제</button>
 							</c:if>
-			            </div>
-			        </div>`;
+			            </div>`;
 		        
 		        div2.appendChild(div4);
 		        div1.appendChild(div2);
@@ -438,7 +456,7 @@
          <div class="form-group">
             <div class="btn_box">
                <button class="btn">등록</button>
-               <button type="reset" class="btn" onclick="reset()">취소</button>
+               <button type="reset" class="btn" onclick="reset(); $('#preview-image').css('background-image', url('https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image'))">취소</button>
             </div>
          </div>
 
