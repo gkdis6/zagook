@@ -12,9 +12,17 @@ public class TilesConfiguration {
   public TilesConfigurer tilesConfigurer() {
       final TilesConfigurer configurer = new TilesConfigurer();
       //해당 경로에 tiles.xml 파일을 넣음
+<<<<<<< HEAD
       configurer.setDefinitions(new String[]{"classpath:/tiles/tiles.xml",
     		                                 "classpath:/tiles/tiles_friend.xml"
       });
+=======
+
+
+      configurer.setDefinitions(new String[]{"classpath:/tiles/tiles.xml",
+		  									 "classpath:/tiles/tiles_member.xml",
+		  									 "classpath:/tiles/tiles_chat.xml"});
+>>>>>>> e638b8a2bf4c08cbb46d6772d85a407325657a51
       configurer.setCheckRefresh(true);
       return configurer;
   }
