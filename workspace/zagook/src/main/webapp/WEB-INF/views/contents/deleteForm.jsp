@@ -17,16 +17,7 @@
 		<h2 class="col-sm-offset-2 col-sm-10">삭제</h2>
 		<form class="form-horizontal" action="/contents/delete" method="post">
 			<input type="hidden" name="contentsno" value="${contentsno}">
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="passwd">비밀번호</label>
-				<div class="col-sm-6">
-					<input type="password" name="passwd" id="passwd"
-						class="form-control">
-				</div>
-			</div>
-
 			<p id="red" class="col-sm-offset-2 col-sm-6">삭제하면 복구할 수 없습니다</p>
-
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-5">
 					<button class="btn">삭제</button>
