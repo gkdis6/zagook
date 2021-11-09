@@ -65,19 +65,18 @@
 							<li><a href="${root}/chat">문의하기</a></li>
 						</ul>
 					</li>
-					<li><a id="grade"><span class="glyphicon glyphicon-grain"></span>
-							${str}</a></li>
+					<li><a id="grade"><span class="glyphicon glyphicon-grain"></span>${str}</a>
+					</li>
+					<c:choose>
+						<c:when test="${not empty sessionScope.id }">
+					<li><a id="feed" href="${root}/feed/read">내 주변</a>
+					</li>
+						</c:when>
+					</c:choose>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<c:choose>
 						<c:when test="${empty sessionScope.id }">
-							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">🙄 <span
-										class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="${root}/friend">친구신청</a></li>
-									<li><a href="#">친구목록</a></li>
-								</ul>
-							</li>
 							<li><a class="nav-link" href="#" data-toggle="modal" data-target="#login">로그인</a>
 								<div class="modal" id="login">
 									<div class="modal-dialog modal-sm">
@@ -135,8 +134,12 @@
 									로그아웃</a></li>
 						</c:when>
 						<c:otherwise>
-								<li><a href="${root }/cartlist"><span class="glyphicon glyphicon-shopping-cart"></span>
-										Cart</a></li>
+								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">🙄 <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="${root}/friend">친구신청</a></li>
+										<li><a href="#">친구목록</a></li>
+									</ul>
+								</li>
 								<li><a href="${root}/member/update"><span class="glyphicon glyphicon-edit"></span> 마이페이지
 									</a></li>
 								<li><a href="${root}/member/logout"><span class="glyphicon glyphicon-log-out"></span>
