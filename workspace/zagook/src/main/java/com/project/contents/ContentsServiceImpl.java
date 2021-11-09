@@ -64,4 +64,16 @@ public class ContentsServiceImpl implements ContentsService {
 		// TODO Auto-generated method stub
 		return mapper.passcheck(passwd);
 	}
+
+	@Override
+	public int create2(ContentsDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.create2(dto);
+	}
+
+	@Override
+	public int create3(ContentsDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.create3(dto);
+	}
 }

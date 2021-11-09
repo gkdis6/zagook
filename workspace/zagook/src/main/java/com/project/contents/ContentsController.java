@@ -44,9 +44,17 @@ public class ContentsController {
 		} else {
 			dto.setFilename("default.jpg");
 		}
-
-		if (service.create(dto) > 0) {
-			return "redirect:/list";
+		int cnt = service.create(dto);
+		int cnt2 = service.create2(dto);
+		int cnt3 = service.create3(dto);
+		
+		if (cnt>0 & cnt2>0 & cnt3>0) {
+//			response.setContentType("text/html; charset=UTF-8");
+//			 
+//			PrintWriter out = response.getWriter();
+//			 
+//			out.println("<script>alert('계정이 등록 되었습니다');</script>");
+			return "redirect:/";
 		} else {
 			return "error";
 		}
@@ -64,7 +72,7 @@ public class ContentsController {
 		int cnt = service.update(dto);
 
 		if (cnt == 1) {
-			return "redirect:/list";
+			return "redirect:/";
 		} else {
 			return "error";
 		}

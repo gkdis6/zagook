@@ -22,4 +22,8 @@ public interface ContentsMapper {
 		int passcheck(String passwd);
 
 		int delete(int contentsno);
+
+		int create2(ContentsDTO dto);
+
+		int create3(ContentsDTO dto);
 }

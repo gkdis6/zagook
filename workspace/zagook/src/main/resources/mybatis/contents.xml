@@ -61,26 +61,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="create"
 		parameterType="com.project.contents.ContentsDTO">
-		{call
-		declare
-		begin
 			insert	into zagook_contents(contentsno, id, filename, contents,
 			rdate, privacy)
 			values((select nvl(max(contentsno),0)+1
 			from zagook_contents),
-			#{id}, #{filename}, #{contents}, sysdate, #{privacy});
-			
+			#{id}, #{filename}, #{contents}, sysdate, #{privacy})
+	</insert>
+	<insert id="create2"
+		parameterType="com.project.contents.ContentsDTO">
 			insert into zagook_tag(tag_id, tag)
 			values ((select nvl(max(tag_id),0)+1
-			from zagook_tag), #{tag});
-			
+			from zagook_tag), #{tag})
+	</insert>
+	<insert id="create3"
+		parameterType="com.project.contents.ContentsDTO">	
 			insert into zagook_posttag(contentsno, tag_id)
 			values ((select max(contentsno)
 			from zagook_contents), (select max(tag_id)
-			from zagook_tag));
-		end
-		}
+			from zagook_tag))
 	</insert>
+	
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="int">
 		delete from zagook_posttag
