@@ -470,8 +470,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 			<div class="form-group">
 				<div class="btn_box">
 					<button class="btn">등록</button>
-					<button type="reset" class="btn"
-						onclick="reset(); $('#preview-image').css('background-image', url('https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image'))">취소</button>
+					<button type="reset" class="btn" id="reset">취소</button>
 				</div>
 			</div>
 
@@ -480,6 +479,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 	</div>
 	<!-- //게시글 등록 팝업 END -->
 	<script>
+		$(document).on("click", "#reset", function() {
+			$('#preview-image').css('background-image', "url('https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image')");
+		});
+		
 		$(document).ready(function () {
 			$("#create").hide();
 		});
