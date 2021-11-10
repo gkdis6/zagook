@@ -16,4 +16,6 @@ public class ContentsDTO {
 	  private int privacy;
 	  private int tag_id;
 	  private String tag;
+	  private double x_site;
+	  private double y_site;
 }
