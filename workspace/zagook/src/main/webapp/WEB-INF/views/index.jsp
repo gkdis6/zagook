@@ -452,7 +452,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
 			<div>
 				<div>
-					<input type="text" id="tag" class="form-control" placeholder="태그" style="margin-bottom:5px;">
+					<input type="text" id="tag" name="tag" class="form-control" placeholder="태그" style="margin-bottom:5px;">
 				</div>
 			</div>
 
