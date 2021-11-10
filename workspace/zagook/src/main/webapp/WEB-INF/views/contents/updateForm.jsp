@@ -13,6 +13,11 @@
 			return false;
 		}
 	}
+	//contents = $("textarea#contents").val();
+	function updatefile(filename){
+    	$('#updatebtn').hide(); 
+		$('#selectimg').show();
+      }
 </script>
 </head>
 <body>
@@ -21,11 +26,16 @@
 		<form class="form-horizontal" action="/contents/update" method="post"
 			onsubmit="return checkIn(this)">
 			<div class="form-group">
-			 <label class="control-label col-sm-2" for="updateFile">사진수정</label>
+			 <label class="control-label col-sm-2">사진</label>
 			  <div class="col-sm-6">
-			   <img src="/images/${dto.filename}" style="width:500px">
-				<br><button type="button" class="btn btn-default"
-					onclick="/contents/updateFile">수정</button>
+			   <input type="hidden" name="oldfile" value="${oldfile}">    
+			   <img src="/images/${dto.filename}" style="width:500px"><br><br>
+				<button type="button" class="btn btn-default" id="updatebtn"
+					onclick="javascript:updatefile('${dto.filename}')">수정</button>
+			      <div class="col-sm-14" id="selectimg" style="display:none">          
+			        <input type="file" class="form-control" id="filenameMF" 
+			        name="filenameMF" accept=".jpg,.png,.gif" required="required">
+			      </div>
 			  </div>
 			</div>
 			<input type="hidden" name="contentsno" value="${contentsno}">
@@ -59,7 +69,4 @@
 		</form>
 	</div>
 </body>
-<script>
-	contents = $("textarea#contents").val();
-</script>
 </html>
