@@ -21,31 +21,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		filename = #{fname}
 		where contentsno = #{contentsno}
 	</update>
-	<select id="total" parameterType="Map" resultType="int">
-		select count(*) from contents
-		<where>
-			<choose>
-				<when test="col=='pname'">
-					pname like '%'||#{word}||'%'
-				</when>
-				<when test="col=='price'">
-					price like '%'||#{word}||'%'
-				</when>
-				<when test="col=='cateno'">
-					cateno like '%'||#{word}||'%'
-				</when>
-			</choose>
-		</where>
-	</select>
-
-	<select id="list" parameterType="Map"
-		resultType="com.project.contents.ContentsDTO">
-		select c.contentsno, m.mname, t.tag, c.rdate, c.likecnt
-		from zagook_contents c, zagook_tag t, zagook_posttag p, zagook_member m
-		where m.id=c.id
-		and c.contentsno=p.contentsno
-		and t.tag_id=p.tag_id
-	</select>
 
 	<update id="update"
 		parameterType="com.project.contents.ContentsDTO">
