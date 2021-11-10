@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -135,11 +135,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
 		.create {
 			width: 300px;
-			min-height: 625px;
+			min-height: 300px;
 			height: auto;
-			padding-bottom: 10px;
 			border-radius: 20px;
 			background-color: #fff;
+		}
+
+		.create > .modal-content{
+			border-radius: 20px;
+		}
+		
+		.form-group .btn_box{
+			padding-bottom: 10px;
 		}
 
 		.form-horizontal {
@@ -234,6 +241,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 		.ellipsis {
 			width: 490px;
 		}
+		
+		#heading{
+			margin-top: 10px;
+		}
 	</style>
 </head>
 
@@ -241,8 +252,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
 	<div class="container" id="map" style="width: 100vw; height: 100vh;">
 
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2">
-		</script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+		
 		<script>
 			window.onload = function () {
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -416,67 +428,109 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 	</div>
 	<div id="createBtn" style="position: fixed; right: 20px; bottom: 20px; z-index: 8"
 		onclick="if(create.style.display=='none'){create.style.display=''}else{create.style.display='none'}">
-		<img src="./images/261370-200.png" width="73" height="70">
+		<img src="./images/261370-200.png" width="70" height="70">
 	</div>
 
 	<!-- 게시글 등록 팝업 -->
 	<div style="position: fixed; right: 20px; bottom: 100px; z-index: 8; background: white;" id="create" class="create">
-
-		<h2 style="font-size:20px; text-align:center; line-height:2;">게시물 등록</h2>
-
-		<!-- file Upload시 이미지 preview -->
-		<figure class="upload_imgbox">
-			<a id="preview-image"></a>
-		</figure>
-		<!-- //file Upload시 이미지 preview END -->
-
-		<!-- form태그 부분 -->
-		<form class="form-horizontal" action="/contents/create" method="post" enctype="multipart/form-data"
-			onsubmit="return checkIn(this)">
-
-			<div class="form-group">
-				<div>
-					<input style="display: block; cursor:pointer;" type="file" id="filenameMF" name="filenameMF"
-						class="form-control">
+		
+		<c:choose>
+			<c:when test="${empty sessionScope.id }">
+				<div class="modal-content">
+					<div class="modal-header">
+						<img src="../images/zagook_logo.jpg"
+							style="width:60px; height:60px; padding-bottom:10px">
+						<h4 class="modal-title">발자국 로그인</h4>
+					</div>
+					<div class="modal-body">
+						<form action="/member/login" class="was-validated" method="post">
+							<div class="form-group">
+								<label for="id" align="left">아이디 </label> <input type="text"
+									class="form-control" style="width:250px;height:40px;"
+									id="userId" placeholder="Enter ID" name="id"
+									required="required" value='${c_id_val}'>
+							</div>
+							<div class="form-group">
+								<label for="userPw">비밀번호 </label> <input type="password"
+									class="form-control" style="width:250px;height:40px;"
+									id="userPw" placeholder="Enter Password" name="password"
+									required="required">
+							</div>
+							<div class="form=group">
+								<button type="submit"
+									style="width:250px; background-color:black; color:white; padding-top:10px">
+									로 그 인</button>
+								<div class="join">
+									회원이 아니신가요? <a href="${root}/member/agree">회원가입</a>
+									<!-- 													<button type="button" class="btn btn-secondary">회원가입</button> -->
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
-			</div>
-
-			<div>
-				<div>
-					<textarea name="contents" id="contents" class="form-control"
-						style="min-height:100px; height: auto; resize: none; width: 100%;" placeholder="내용"></textarea>
-				</div>
-			</div>
-
-			<input type="hidden" name="id" value="${id}">
-
-			<div>
-				<div>
-					<input type="text" id="tag" class="form-control" placeholder="태그" style="margin-bottom:5px;">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="control-label" for="privacy" style="text-align:left;">공개설정</label>
-				<div>
-					<select class="form-control" name="privacy" id="privacy">
-						<option value=0>나만 보기</option>
-						<option value=1>친구 공개</option>
-						<option value=2>모두 공개</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="btn_box">
-					<button class="btn">등록</button>
-					<button type="reset" class="btn" id="reset">취소</button>
-				</div>
-			</div>
-
-		</form>
-		<!-- //폼태그부분 END -->
+	
+			</c:when>
+			<c:otherwise>
+				<h2 id="heading" style="font-size:20px; text-align:center; line-height:2;">게시물 등록</h2>
+		
+				<!-- file Upload시 이미지 preview -->
+				<figure class="upload_imgbox">
+					<a id="preview-image"></a>
+				</figure>
+				<!-- //file Upload시 이미지 preview END -->
+		
+				<!-- form태그 부분 -->
+				<form class="form-horizontal" action="/contents/create" method="post" enctype="multipart/form-data"
+					onsubmit="return checkIn(this)">
+		
+					<div class="form-group">
+						<div>
+							<input style="display: block; cursor:pointer;" type="file" id="filenameMF" name="filenameMF"
+								class="form-control">
+						</div>
+					</div>
+		
+					<div>
+						<div>
+							<textarea name="contents" id="contents" class="form-control"
+								style="min-height:100px; height: auto; resize: none; width: 100%;" placeholder="내용"></textarea>
+						</div>
+					</div>
+		
+					<input type="hidden" name="id" id="id" value="${id}">
+					<input type="hidden" name="x_site" id="x_site">
+					<input type="hidden" name="y_site" id="y_site">
+		
+					<div>
+						<div>
+							<input type="text" id="tag" class="form-control" placeholder="태그" style="margin-bottom:5px;">
+						</div>
+					</div>
+		
+					<div class="form-group">
+						<label class="control-label" for="privacy" style="text-align:left;">공개설정</label>
+						<div>
+							<select class="form-control" name="privacy" id="privacy">
+								<option value=0>나만 보기</option>
+								<option value=1>친구 공개</option>
+								<option value=2>모두 공개</option>
+							</select>
+						</div>
+					</div>
+		
+					<div class="form-group">
+						<div class="btn_box">
+							<button class="btn" id="ok" disabled>등록</button>
+							<button type="reset" class="btn" id="reset">취소</button>
+						</div>
+					</div>
+		
+				</form>
+				<!-- //폼태그부분 END -->
+			</c:otherwise>
+		</c:choose>
 	</div>
+	
 	<!-- //게시글 등록 팝업 END -->
 	<script>
 		$(document).on("click", "#reset", function() {
@@ -486,13 +540,20 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 		$(document).ready(function () {
 			$("#create").hide();
 		});
-
+		
+		$("#createBtn").on("click", function (e) {
+			if (e.target != 0) {
+				$("#createBtn").toggleClass("rotate");
+			}
+		});
+		
 		function readImage(input) {
 			// 인풋 태그에 파일이 있는 경우
 			if (input.files && input.files[0]) {
 				// 이미지 파일인지 검사 (생략)
 				// FileReader 인스턴스 생성
-				const reader = new FileReader()
+				
+				const reader = new FileReader();
 				// 이미지가 로드가 된 경우
 				reader.onload = e => {
 					$("#preview-image").css('background-image', 'url(\"' + e.target.result + '\")');
@@ -505,12 +566,30 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 		const inputImage = document.getElementById("filenameMF")
 		inputImage.addEventListener("change", e => {
 			readImage(e.target)
+			
+			inputImage.files[0].exifdata = null;
+			EXIF.getData(inputImage.files[0], function() {
+				var latitude = EXIF.getTag(this, "GPSLatitude");
+			    var longitude = EXIF.getTag(this, "GPSLongitude");
+			    
+			    if(longitude === undefined || latitude === undefined){
+					   document.getElementById("ok").disabled = true;
+				   }else{
+					   document.getElementById("ok").disabled = false;
+				   }
+			    
+			    latitude = latitude[0]+latitude[1]/60+latitude[2]/3600;
+			    longitude = longitude[0]+longitude[1]/60+longitude[2]/3600;
+				document.getElementById("x_site").value=latitude;
+			   	document.getElementById("y_site").value=longitude;
+			   	console.log(latitude);
+			   	console.log(longitude);
+			   	
+			   
+			});
 		})
-		$("#createBtn").on("click", function (e) {
-			if (e.target != 0) {
-				$("#createBtn").toggleClass("rotate");
-			}
-		});
+		
+		
 	</script>
 </body>
 
