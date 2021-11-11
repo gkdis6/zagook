@@ -39,10 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="create"
 		parameterType="com.project.contents.ContentsDTO">
 			insert	into zagook_contents(contentsno, id, filename, contents,
-			rdate, privacy)
+			rdate, privacy, x_site, y_site)
 			values((select nvl(max(contentsno),0)+1
 			from zagook_contents),
-			#{id}, #{filename}, #{contents}, sysdate, #{privacy})
+			#{id}, #{filename}, #{contents}, sysdate, #{privacy}, #{x_site}, #{y_site})
 	</insert>
 	<insert id="create2"
 		parameterType="com.project.contents.ContentsDTO">
@@ -71,4 +71,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from zagook_contents
 		where contentsno=#{contentsno}
 	</delete>
+	
+	<select id="list" parameterType="Map" resultType="com.project.contents.ContentsDTO">
+        select c.id, c.contentsno, c.filename, c.rdate, c.likecnt, c.privacy, c.x_site, c.y_site, c.contents, m.fname   
+        from zagook_contents c join zagook_member m
+        on c.id = m.id 
+        where c.id = #{id} 
+        order by rdate desc
+    </select>
+    
+    <select id="like" parameterType="Map"
+		resultType="int">
+		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
+	</select>
+	
+	<select id="getTag" parameterType="int"
+		resultType="String">
+		select tag from zagook_tag where tag_id 
+		in (select tag_id from zagook_posttag where contentsno=#{contentsno})
+	</select>
 </mapper>

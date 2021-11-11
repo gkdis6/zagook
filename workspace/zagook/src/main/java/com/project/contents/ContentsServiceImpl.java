@@ -95,4 +95,16 @@ public class ContentsServiceImpl implements ContentsService {
 		return mapper.update2(dto);
 	}
 
+	@Override
+	public int like(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.like(map);
+	}
+
+	@Override
+	public List<String> getTag(int contentsno) {
+		// TODO Auto-generated method stub
+		return mapper.getTag(contentsno);
+	}
+
 }

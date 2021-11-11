@@ -1,5 +1,7 @@
 package com.project.contents;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -18,4 +20,7 @@ public class ContentsDTO {
 	  private String tag;
 	  private double x_site;
 	  private double y_site;
+	  private String fname;
+	  private int like_clicked;
+	  private List<String> tag_list;
 }

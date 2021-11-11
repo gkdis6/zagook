@@ -33,4 +33,8 @@ public interface ContentsMapper {
 
 		int update2(ContentsDTO dto);
 
+		int like(Map map);
+
+		List<String> getTag(int contentsno);
+
 }
