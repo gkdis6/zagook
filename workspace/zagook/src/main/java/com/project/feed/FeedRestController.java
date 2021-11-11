@@ -38,17 +38,6 @@ public class FeedRestController {
 //		조회된 친구 id값으로 contents 테이블의 각 row를 FeedDTO에 담아옴
 			feed_list = service.list(dto.getId());
 
-//		@@feed_list test code
-//		int i = 0;
-//		while (i < feed_list.size()) {
-//			System.out.println(String.valueOf(feed_list.size()));
-//			FeedDTO tmp = feed_list.get(i);
-//			if (tmp != null) {
-//				System.out.println(tmp.getContents());
-//			}
-//			i++;
-//		}
-
 //		list 내의 정보를 x, y 좌표에 따라 재정렬
 			Collections.sort(feed_list, new Comparator<FeedDTO>() {
 				@Override
@@ -64,34 +53,18 @@ public class FeedRestController {
 					return (dst1 - dst2) > 0 ? 1 : -1;
 				}
 			});
-
-//		@@ sort test code
-//		int i = 0;
-//		while (i < feed_list.size()) {
-//			System.out.println(String.valueOf(feed_list.size()));
-//			FeedDTO tmp = feed_list.get(i);
-//			if (tmp != null) {
-//				System.out.println(tmp.getContents());
-//				System.out.println(tmp.getX_site());
-//				System.out.println(tmp.getY_site());
-//			}
-//			i++;
-//		}
-
-//		while문으로 list 내의 contentsno를 받아 DB에서 좋아요 여부 counting
+			
+//			profile image, name 처리
 			int k = 0;
 			while (k < feed_list.size()) {
-				int cnt = 0;
-				FeedDTO tmp = feed_list.get(k);
-				Map map = new HashMap();
-				map.put("id", dto.getId());
-				map.put("contentsno", tmp.getContentsno());
-				cnt = service.like(map);
-				dto.setLike_clicked(cnt);
+				FeedDTO dst = feed_list.get(k);
+				FeedDTO src = service.profile(dst.getId());
+				dst.setMname(src.getMname());
+				dst.setFname(src.getFname());		
 				k++;
 			}
-
-//		Post tag 처리
+			
+//			Post tag 처리
 			List<String> tag_list;
 			k = 0;
 			while (k < feed_list.size()) {
@@ -99,10 +72,23 @@ public class FeedRestController {
 				System.out.println("feed contentsno: " + tmp.getContentsno());
 				tag_list = service.tag(tmp.getContentsno());
 				//tag_list mapper xml test
-//				if (tag_list != null && !tag_list.isEmpty()) {
-//					System.out.println("tag_list " + tag_list.get(0));
-//				}
+//					if (tag_list != null && !tag_list.isEmpty()) {
+//						System.out.println("tag_list " + tag_list.get(0));
+//					}
 				tmp.setTag_list(tag_list);
+				k++;
+			}
+
+//		while문으로 list 내의 contentsno를 받아 DB에서 좋아요 여부 counting
+			k = 0;
+			while (k < feed_list.size()) {
+				int cnt = 0;
+				FeedDTO tmp = feed_list.get(k);
+				Map map = new HashMap();
+				map.put("id", dto.getId());
+				map.put("contentsno", tmp.getContentsno());
+				cnt = service.like(map);
+				tmp.setLike_clicked(cnt);
 				k++;
 			}
 

@@ -13,6 +13,9 @@ public class FeedDTO {
 	private double x_site;
 	private double y_site;
 	
+	private String mname;
+	private String fname;
+	
 	private int like_clicked;
 	private List<String> tag_list;
 	
@@ -22,7 +25,7 @@ public class FeedDTO {
 	}
 
 	public FeedDTO(int contentsno, String id, String filename, String contents, String rdate, int privacy,
-			double x_site, double y_site, int like_clicked, List<String> tag_list) {
+			double x_site, double y_site, String mname, String fname, int like_clicked, List<String> tag_list) {
 		super();
 		this.contentsno = contentsno;
 		this.id = id;
@@ -32,6 +35,8 @@ public class FeedDTO {
 		this.privacy = privacy;
 		this.x_site = x_site;
 		this.y_site = y_site;
+		this.mname = mname;
+		this.fname = fname;
 		this.like_clicked = like_clicked;
 		this.tag_list = tag_list;
 	}
@@ -39,8 +44,8 @@ public class FeedDTO {
 	@Override
 	public String toString() {
 		return "FeedDTO [contentsno=" + contentsno + ", id=" + id + ", filename=" + filename + ", contents=" + contents
-				+ ", rdate=" + rdate + ", privacy=" + privacy + ", x_site=" + x_site + ", y_site=" + y_site
-				+ ", like_clicked=" + like_clicked + ", tag_list=" + tag_list + "]";
+				+ ", rdate=" + rdate + ", privacy=" + privacy + ", x_site=" + x_site + ", y_site=" + y_site + ", mname="
+				+ mname + ", fname=" + fname + ", like_clicked=" + like_clicked + ", tag_list=" + tag_list + "]";
 	}
 
 	public int getContentsno() {
@@ -102,5 +107,21 @@ public class FeedDTO {
 	}
 	public void setTag_list(List<String> tag_list) {
 		this.tag_list = tag_list;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
 }

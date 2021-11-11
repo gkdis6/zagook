@@ -7,4 +7,5 @@ public interface FeedService {
 	List<FeedDTO> list(String id);
 	int like(Map map);
 	List<String> tag(int contentsno);
+	FeedDTO profile(String id);
 }
