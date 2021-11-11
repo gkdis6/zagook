@@ -13,7 +13,7 @@
 			return false;
 		}
 	}
-	//contents = $("textarea#contents").val();
+	contents = $("textarea#contents").val();
 	function updatefile(filename){
     	$('#updatebtn').hide(); 
 		$('#selectimg').show();

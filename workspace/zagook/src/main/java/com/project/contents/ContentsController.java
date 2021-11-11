@@ -48,7 +48,7 @@ public class ContentsController {
 		int cnt2 = service.create2(dto);
 		int cnt3 = service.create3(dto);
 		
-		if (cnt>0 & cnt2>0 & cnt3>0) {
+		if (cnt3>0) {
 //			response.setContentType("text/html; charset=UTF-8");
 //			 
 //			PrintWriter out = response.getWriter();
@@ -89,9 +89,8 @@ public class ContentsController {
 
 		int cnt = service.delete(contentsno);
 		int cnt2 = service.delete2(contentsno);
-		int cnt3 = service.delete3(contentsno);
-		if (cnt>0 & cnt2>0 & cnt3>0) {
-			return "redirect:/list";
+		if (cnt2>0) {
+			return "redirect:/";
 		} else {
 			return "/error";
 		}
