@@ -7,12 +7,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.project.contents.ContentsMapper">
 	<select id="detail" parameterType="int"
 		resultType="com.project.contents.ContentsDTO">
-		select c.contentsno, c.contents, c.privacy, m.mname, c.filename, t.tag, c.rdate, c.likecnt
-		from zagook_contents c, zagook_tag t, zagook_posttag p, zagook_member m
+		select c.contentsno, c.contents, c.privacy, m.mname,
+		c.filename, p.tag_id, t.tag, c.rdate, c.likecnt
+		from zagook_contents c,
+		zagook_tag t, zagook_posttag p, zagook_member m
 		where m.id=c.id
-		and c.contentsno=p.contentsno
+		and
+		c.contentsno=p.contentsno
 		and t.tag_id=p.tag_id
-		and c.contentsno=#{contentsno}
+		and
+		c.contentsno=#{contentsno}
 	</select>
 
 	<update id="updateFile" parameterType="Map">
@@ -31,42 +35,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<update id="update2"
 		parameterType="com.project.contents.ContentsDTO">
-		update zagook_tag
-		set tag=#{tag}
-		where tag_id=#{tag_id}
+		insert into zagook_posttag(contentsno, tag_id)
+		values (#{contentsno}, (select tag_id from zagook_tag where tag=#{tag}))
 	</update>
 
 	<insert id="create"
 		parameterType="com.project.contents.ContentsDTO">
-			insert	into zagook_contents(contentsno, id, filename, contents,
-			rdate, privacy)
-			values((select nvl(max(contentsno),0)+1
-			from zagook_contents),
-			#{id}, #{filename}, #{contents}, sysdate, #{privacy})
+		insert into zagook_contents(contentsno, id, filename, contents,
+		rdate, privacy)
+		values((select nvl(max(contentsno),0)+1
+		from zagook_contents),
+		#{id}, #{filename}, #{contents}, sysdate, #{privacy})
 	</insert>
 	<insert id="create2"
 		parameterType="com.project.contents.ContentsDTO">
-			merge into zagook_tag
-			using dual
-			on (tag=#{tag})
-			when not matched then
-			insert (tag_id, tag)
-			values ((select nvl(max(tag_id),0)+1
-			from zagook_tag), #{tag})
+		merge into zagook_tag
+		using dual
+		on (tag=#{tag})
+		when not matched then
+		insert (tag_id, tag)
+		values ((select nvl(max(tag_id),0)+1
+		from zagook_tag), #{tag})
 	</insert>
 	<insert id="create3"
-		parameterType="com.project.contents.ContentsDTO">	
-			insert into zagook_posttag(contentsno, tag_id)
-			values ((select max(contentsno)
-			from zagook_contents), (select tag_id from zagook_tag where tag=#{tag}))
+		parameterType="com.project.contents.ContentsDTO">
+		insert into zagook_posttag(contentsno, tag_id)
+		values ((select max(contentsno)
+		from zagook_contents), (select tag_id from zagook_tag where tag=#{tag}))
 	</insert>
-	
+
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="int">
 		delete from zagook_posttag
 		where contentsno=#{contentsno}
 	</delete>
-	<delete id="delete2" parameterType="int">	
+	<delete id="delete2" parameterType="int">
 		delete from zagook_contents
 		where contentsno=#{contentsno}
 	</delete>

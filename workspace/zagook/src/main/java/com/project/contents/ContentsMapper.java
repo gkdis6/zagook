@@ -31,4 +31,6 @@ public interface ContentsMapper {
 
 		int update2(ContentsDTO dto);
 
+		int update3(ContentsDTO dto);
+
 }

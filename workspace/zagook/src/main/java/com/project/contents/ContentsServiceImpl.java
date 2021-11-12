@@ -89,4 +89,10 @@ public class ContentsServiceImpl implements ContentsService {
 		return mapper.update2(dto);
 	}
 
+	@Override
+	public int update3(ContentsDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.update3(dto);
+	}
+
 }

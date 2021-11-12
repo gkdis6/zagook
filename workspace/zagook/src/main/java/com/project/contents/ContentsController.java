@@ -36,7 +36,7 @@ public class ContentsController {
 	public String create(ContentsDTO dto, HttpServletRequest request) throws IOException {// exception 지우기
 		String upDir = new ClassPathResource("/static/images").getFile().getAbsolutePath();
 		String fname = Utility.saveFileSpring(dto.getFilenameMF(), upDir);
-		
+
 		int size = (int) dto.getFilenameMF().getSize();
 
 		if (size > 0) {
@@ -47,8 +47,8 @@ public class ContentsController {
 		int cnt = service.create(dto);
 		int cnt2 = service.create2(dto);
 		int cnt3 = service.create3(dto);
-		
-		if (cnt3>0) {
+
+		if (cnt3 > 0) {
 //			response.setContentType("text/html; charset=UTF-8");
 //			 
 //			PrintWriter out = response.getWriter();
@@ -68,11 +68,23 @@ public class ContentsController {
 	}
 
 	@PostMapping("/contents/update")
-	public String update(ContentsDTO dto) {
+	public String update(ContentsDTO dto, String tag, int contentsno) {
 		int cnt = service.update(dto);
-		int cnt2 = service.update2(dto);
-		if (cnt>0 & cnt2>0) {
-			return "redirect:/";
+		int cnt4 = service.delete(contentsno);
+		if (tag != null) {
+			int cnt2 = service.create2(dto);
+			int cnt3 = service.update2(dto);
+			if (cnt > 0 & cnt3 > 0) {
+				return "redirect:/";
+			} else {
+				return "error";
+			}
+		} else if (tag == null) {
+			if (cnt > 0 & cnt4 > 0) {
+				return "redirect:/";
+			} else {
+				return "error";
+			}
 		} else {
 			return "error";
 		}
@@ -89,7 +101,7 @@ public class ContentsController {
 
 		int cnt = service.delete(contentsno);
 		int cnt2 = service.delete2(contentsno);
-		if (cnt2>0) {
+		if (cnt2 > 0) {
 			return "redirect:/";
 		} else {
 			return "/error";

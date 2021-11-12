@@ -31,5 +31,7 @@ public interface ContentsService {//요청할 수 있는 인터페이스 선언�
 
 	int update2(ContentsDTO dto);
 
+	int update3(ContentsDTO dto);
+
 }
 

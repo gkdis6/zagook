@@ -13,7 +13,7 @@
 			return false;
 		}
 	}
-	contents = $("textarea#contents").val();
+	//contents = $("textarea#contents").val();
 	function updatefile(filename){
     	$('#updatebtn').hide(); 
 		$('#selectimg').show();
@@ -25,20 +25,21 @@
 		<h2 class="col-sm-offset-2 col-sm-10">게시글 수정</h2>
 		<form class="form-horizontal" action="/contents/update" method="post"
 			onsubmit="return checkIn(this)">
+			<input type="hidden" name="oldfile" value="${oldfile}">
+			<input type="hidden" name="contentsno" value="${contentsno}">
 			<div class="form-group">
 			 <label class="control-label col-sm-2">사진</label>
 			  <div class="col-sm-6">
-			   <input type="hidden" name="oldfile" value="${oldfile}">    
 			   <img src="/images/${dto.filename}" style="width:500px"><br><br>
-				<button type="button" class="btn btn-default" id="updatebtn"
+				<button class="btn" id="updatebtn"
 					onclick="javascript:updatefile('${dto.filename}')">수정</button>
+					
 			      <div class="col-sm-14" id="selectimg" style="display:none">          
 			        <input type="file" class="form-control" id="filenameMF" 
 			        name="filenameMF" accept=".jpg,.png,.gif" required="required">
 			      </div>
 			  </div>
 			</div>
-			<input type="hidden" name="contentsno" value="${contentsno}">
 			<div class="form-group">
 			   <div class="col-sm-offset-2 col-xs-6">
 			      <textarea name="contents" id="contents" class="form-control" style="height:100px;resize:none;">${dto.contents}</textarea>
