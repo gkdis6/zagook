@@ -3,23 +3,24 @@ $(function () {
     process_feed_list(param);
 });
 
+function scrollEventHandler(event){
+    let doc_height = this.document.scrollingElement.scrollHeight;
+	let top_height = this.document.scrollingElement.scrollTop;
+    let client_height = this.document.scrollingElement.clientHeight;
+	//console.log(top_height);
+    //console.log(doc_height);
+    // let param = {"id": $(id), "x_site" : $(x_site), "y_site" : $(y_site)};
+    let param = {"id": "user_1", "x_site" : "37.5535462", "y_site" : "126.964296"};
+	if (top_height + client_height >= doc_height) {
+		process_feed_list(param);
+	}
+}
+
 $(document).ready(function () {
-	window.addEventListener("scroll", function(event){
-        let doc_height = this.document.scrollingElement.scrollHeight;
-		let top_height = this.document.scrollingElement.scrollTop;
-        let client_height = this.document.scrollingElement.clientHeight;
-		console.log(top_height);
-        console.log(doc_height);
-        // let param = {"id": $(id), "x_site" : $(x_site), "y_site" : $(y_site)};
-        let param = {"id": "user_1", "x_site" : "37.5535462", "y_site" : "126.964296"};
-		if (top_height + client_height >= doc_height) {
-			process_feed_list(param);
-		}
-    });
+	window.addEventListener("scroll", scrollEventHandler);
 });
 
 const feedService = new getFeedService();
-//let center_box = $(".center_container");
 let center_box = document.getElementsByClassName("center_container")[0];
 
 function process_feed_list(param) {
@@ -27,8 +28,9 @@ function process_feed_list(param) {
         .get_feed_list(param)
         .then(obj => {
 			const map = new Map(Object.entries(obj));
-			let list = map.get("feed_list");
+			let list = map.get("sub_list");
 			let base_distance = map.get("base_distance");
+			let end_flag = map.get("end_flag");
             let html_str = "";
 
             console.log("[map type] : " + typeof(map));
@@ -68,8 +70,13 @@ function process_feed_list(param) {
                 html_str += '</div>';
                 html_str += '</div>';
             }
+            if (end_flag == true) {
+				html_str += '<span><strong>Page End: 반경 ';
+				html_str += base_distance * 100 * 2 + 'km 안에 게시물이 더 이상 없습니다.';
+				html_str += '</strong></span>';
+				window.removeEventListener("scroll", scrollEventHandler);
+			}
             center_box.innerHTML += html_str;
-            console.log(html_str);
         })
         .catch(err => {
             console.log("Error Msg: " + err);
