@@ -1,11 +1,13 @@
 package com.project.contents;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +28,36 @@ public class ContentsController {
 	@Qualifier("com.project.contents.ContentsServiceImpl")
 	private ContentsService service;
 
+	@GetMapping("/")
+	public String home(HttpServletRequest request, HttpSession session) {
+		if(session.getAttribute("id") != null) {
+			Map map = new HashMap();
+			String id = (String) session.getAttribute("id");
+			
+			map.put("id", id);
+			
+			List<ContentsDTO> list = service.list(map);
+			List<String> tag_list = new ArrayList();
+			
+			request.setAttribute("list", list);
+			
+			int k = 0;
+			while (k < list.size()) {
+				int cnt = 0;
+				ContentsDTO dto = list.get(k);
+				map.put("contentsno", dto.getContentsno());
+				cnt = service.like(map);
+				dto.setLike_clicked(cnt);
+				
+				tag_list = service.getTag(dto.getContentsno());
+				dto.setTag_list(tag_list);
+				k++;
+			}
+			
+		}
+		return "/home";
+	}
+	
 	@GetMapping("/contents/create")
 	public String create() {
 

@@ -38,6 +38,19 @@
 		.join {
 			margin: 15px 0px 0px 0px;
 		}
+		.container-fluid{
+			background-color: #191a45;
+		}
+		.navbar-inverse .navbar-brand:hover {
+			cursor: pointer;
+			color: #f5f2b8;
+		}
+		.navbar-inverse .navbar-brand{
+			color: #ffffff;
+			font-size: 25px; 
+			padding: 12px;
+			font-weight: bold;
+		}
 	</style>
 </head>
 
@@ -47,15 +60,9 @@
 		<nav class="navbar navbar-inverse" style="border-radius: 0;">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="${root}/">Shop</a>
+					<a class="navbar-brand" href="${root}/">Zagook</a>
 				</div>
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="${root}/">Home</a></li>
-					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Product <span
-								class="caret"></span></a>
-						<ul class="dropdown-menu" id="pmenu">
-						</ul>
-					</li>
 					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">community <span
 								class="caret"></span></a>
 						<ul class="dropdown-menu">

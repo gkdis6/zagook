@@ -68,28 +68,32 @@
 
 	.info .body {
 		position: relative;
-		overflow: hidden;
+		overflow: auto;
 		width: 490px;
-		height: 470px;
-		margin: 5px;
+		height: max-content;
+		min-height: 182px;
+		max-height: 600px;
 	}
-
+	
 	.info .desc {
 		position: relative;
 		height: auto;
 		overflow: auto;
 	}
 
-	.desc .ellipsis {
+	.desc > .ellipsis {
 		overflow: hidden;
 		height: auto;
+		margin-left: 5px;
+		width: 465px;
 	}
 
 	.body .img {
 		position: relative;
-		width: 490px;
+		width: 465px;
 		height: auto;
 		color: #888;
+		margin: 5px;
 	}
 
 	.body:after {
@@ -215,6 +219,24 @@
 		color: #fff;
 		font-weight: bold;
 	}
+	
+	.btn_box1 button {
+		outline: none;
+		border: none;
+		background-color: #fff;
+		color: gray;
+		font-weight: 500;
+		border: 2px solid #ccc;
+		font-size: 13px;
+		border-radius: 5px;
+		float: right;
+	}
+	
+	.btn_box1 button:hover {
+		background-color: #666;
+		color: #fff;
+		font-weight: bold;
+	}
 
 	.form-horizontal .form-group {
 		margin: 0;
@@ -238,14 +260,21 @@
 
 	}
 
-	.ellipsis {
-		width: 490px;
-	}
-
 	#heading {
 		margin-top: 10px;
 	}
+	
+	.infowindow{
+		width: 150px;
+		height: auto;
+	}
 </style>
+
+<script>
+jQuery(document).ready(function(){
+	jQuery('.infowindow').parent().css('width', 'auto');
+});
+</script>
 </head>
 
 <body>
@@ -266,24 +295,32 @@
 					};
 
 				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-				var positions = [{
-						iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5857.JPG" width="auto" height="150"></div>',
-						latlng: new kakao.maps.LatLng(37.52423, 127.06319)
-					},
-					{
-						iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_6184.JPG" width="auto" height="150"></div>',
-						latlng: new kakao.maps.LatLng(37.37128, 126.72612)
-					},
-					{
-						iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_4079.JPG" width="auto" height="150"></div>',
-						latlng: new kakao.maps.LatLng(37.85255, 126.79097)
-					},
-					{
-						iwcontent: '<div style="padding :5px" class="img"><img src="./images/IMG_5947.JPG" width="auto" height="150"></div>',
-						latlng: new kakao.maps.LatLng(37.74449, 127.71479)
-					}
+				  
+				var positions = [
+					<c:choose>   
+					<c:when test="${empty list}">
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="dto" items="${list}" varStatus="i"> 
+							{
+								iwcontent: '<div class="infowindow" style="width: 140px; height: auto; padding: 5px;" class="img"><img src="/contents/storage/${dto.filename}" width="138px" height="auto"></div>',
+								latlng: new kakao.maps.LatLng('${dto.x_site}', '${dto.y_site}'),
+								content: "${dto.contents}",
+								likecnt: "${dto.likecnt}",
+								rdate: "${dto.rdate}",
+								filename: "${dto.filename}",
+								privacy: "${dto.privacy}",
+								id: "${dto.id}",
+								contentsno: "${dto.contentsno}",
+								fname: "${dto.fname}",
+								tag_list: "${dto.tag_list}"
+							}
+							<c:if test="${!i.last}">,</c:if>
+						</c:forEach>
+					</c:otherwise>
+					</c:choose>
 				];
+					
 
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function (position) {
@@ -294,7 +331,7 @@
 								.longitude)
 						});
 						var infowindow = new kakao.maps.InfoWindow({
-							content: '<div style="padding :5px">내 위치</div>'
+							content: '<div class="infowindow" id="myloca" style="text-align: center;">내 위치</div>'
 						});
 
 						var markerImage = new kakao.maps.MarkerImage(
@@ -341,8 +378,8 @@
 					div3.className = 'title';
 					var div_profile = document.createElement('div');
 					div_profile.className = 'profile';
-					div_profile.innerHTML = `<img src="./images/feed/profile/profile_example.jpeg" class="profile_img" alt="profile_img">
-		            <a class="name feed_padding">leewoo</a>`;
+					div_profile.innerHTML = `<img src="/member/storage/profile/`+data.fname+`" class="profile_img" alt="profile_img">
+		            <a class="name feed_padding">`+data.id+`</a>`;
 					div3.appendChild(div_profile);
 					var closeBtn = document.createElement('button');
 					closeBtn.className = 'close';
@@ -351,28 +388,32 @@
 					};
 					div3.appendChild(closeBtn);
 					div2.appendChild(div3);
+					
 					var div4 = document.createElement('div');
 					div4.className = 'body';
+					var tag_list = data.tag_list.substring(1,data.tag_list.length-1);
+					var list = tag_list.split(", ");
+					
 					div4.innerHTML = `<div class="img">
-							<img src="./images/IMG_5947.JPG" style="width: 100%;">
-						</div
+							<img src="/contents/storage/`+data.filename+`" style="width: 100%;">
+						</div>
 			            <div class="desc">
 		
-							<div class="ellipsis">날짜${dto.rdate}</div>
+							<div class="ellipsis">`+data.rdate.substring(0,16)+`</div>
 							
-							<div class="ellipsis" style="color: blue;">태그</div>
+							<div class="ellipsis" style="color: blue;">`+list+`</div>
 							
-							<div class="ellipsis">내용</div>
-							<div class="ellipsis">${dto.contents}</div>
+							<div class="ellipsis">`+data.content+`</div>
 		
-							<div class="ellipsis">${dto.likecnt}</div>
-							<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>
+							<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">`+data.likecnt+`</span>
 							
 		
 							<div class="ellipsis">댓글</div> 
 			                <c:if test="${not empty sessionScope.id}">
-							<button type="button" class="btn" onclick="location.href='/contents/update/${contentsno}'">수정</button>
-							<button type="button" class="btn" onclick="location.href='/contents/delete/${contentsno}'">삭제</button>
+				                <div class="btn_box1">
+									<button type="button" class="btn" onclick="location.href='/contents/update/${contentsno}'">수정</button>
+									<button type="button" class="btn" onclick="location.href='/contents/delete/${contentsno}'">삭제</button>
+								</div>
 							</c:if>
 			            </div>`;
 
