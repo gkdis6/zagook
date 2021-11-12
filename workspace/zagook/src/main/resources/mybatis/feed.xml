@@ -22,8 +22,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
 	</select>
 	<select id="tag" parameterType="int"
-		resultType="com.project.feed.FeedDTO">
+		resultType="String">
 		select tag from zagook_tag where tag_id
 		in (select tag_id from zagook_posttag where contentsno=#{contentsno})
+	</select>
+	<select id="profile" parameterType="String" resultType="com.project.feed.FeedDTO">
+		select mname, fname from zagook_member where id=#{id}
 	</select>
 </mapper>

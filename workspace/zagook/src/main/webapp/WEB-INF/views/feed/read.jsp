@@ -97,8 +97,6 @@ body {
 }
 </style>
 <script src="/js/feed/top_nav.js"></script>
-<script src="/js/feed/scroll_feed_ajax.js"></script>
-<script src="/js/feed/fetch_feed.js"></script>
 </head>
 <body>
 	<div class="body_container">
@@ -106,138 +104,13 @@ body {
 			left_container
 		</div>
 		<div class="center_container">
-			<div class="feed_container">
-				<div class="profile_container feed_padding">
-					<img src="../images/feed/profile/profile_example.jpg" class="profile_img" alt="profile_img">
-					<h3 class="name feed_padding">leewoo</h3>
-				</div>
-				<div class="img_box_container">
-					<img src="../images/feed/img_box/eiffel_tower.jpg" class="img_box" alt="img_box">
-				</div>
-				<a class="title feed_padding">#태그</a>
-				<p class="content feed_padding">글 내용</p>
-				<div class="date feed_padding">날짜</div>
-				<div class="accessory feed_padding">
-					<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>
-					<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>
-				</div>
-			</div>
-			<div class="feed_container">
-				<div class="profile_container feed_padding">
-					<img src="../images/feed/profile/profile_example.jpg" class="profile_img" alt="profile_img">
-					<h3 class="name feed_padding">leewoo</h3>
-				</div>
-				<div class="img_box_container">
-					<img src="../images/feed/img_box/eiffel_tower.jpg" class="img_box" alt="img_box">
-				</div>
-				<a class="title feed_padding">#태그</a>
-				<p class="content feed_padding">글 내용</p>
-				<div class="date feed_padding">날짜</div>
-				<div class="accessory feed_padding">
-					<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>
-					<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>
-				</div>
-			</div>
-			<div class="feed_container">
-				<div class="profile_container feed_padding">
-					<img src="../images/feed/profile/profile_example.jpg" class="profile_img" alt="profile_img">
-					<h3 class="name feed_padding">leewoo</h3>
-				</div>
-				<div class="img_box_container">
-					<img src="../images/feed/img_box/eiffel_tower.jpg" class="img_box" alt="img_box">
-				</div>
-				<a class="title feed_padding">#태그</a>
-				<p class="content feed_padding">글 내용</p>
-				<div class="date feed_padding">날짜</div>
-				<div class="accessory feed_padding">
-					<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>
-					<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>
-				</div>
-			</div>
-			<div class="feed_container">
-				<div class="profile_container feed_padding">
-					<img src="../images/feed/profile/profile_example.jpg" class="profile_img" alt="profile_img">
-					<h3 class="name feed_padding">leewoo</h3>
-				</div>
-				<div class="img_box_container">
-					<img src="../images/feed/img_box/eiffel_tower.jpg" class="img_box" alt="img_box">
-				</div>
-				<a class="title feed_padding">#태그</a>
-				<p class="content feed_padding">글 내용</p>
-				<div class="date feed_padding">날짜</div>
-				<div class="accessory feed_padding">
-					<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>
-					<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>
-				</div>
-			</div>
-			<div class="feed_container">
-				<div class="profile_container feed_padding">
-					<img src="../images/feed/profile/profile_example.jpg" class="profile_img" alt="profile_img">
-					<h3 class="name feed_padding">leewoo</h3>
-				</div>
-				<div class="img_box_container">
-					<img src="../images/feed/img_box/eiffel_tower.jpg" class="img_box" alt="img_box">
-				</div>
-				<a class="title feed_padding">#태그</a>
-				<p class="content feed_padding">글 내용</p>
-				<div class="date feed_padding">날짜</div>
-				<div class="accessory feed_padding">
-					<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>
-					<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>
-				</div>
-			</div>
-			<div class="feed_container">
-				<div class="profile_container feed_padding">
-					<img src="../images/feed/profile/profile_example.jpg" class="profile_img" alt="profile_img">
-					<h3 class="name feed_padding">leewoo</h3>
-				</div>
-				<div class="img_box_container">
-					<img src="../images/feed/img_box/eiffel_tower.jpg" class="img_box" alt="img_box">
-				</div>
-				<a class="title feed_padding">#태그</a>
-				<p class="content feed_padding">글 내용</p>
-				<div class="date feed_padding">날짜</div>
-				<div class="accessory feed_padding">
-					<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>
-					<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>
-				</div>
-			</div>
-			<div class="feed_container">
-				<div class="profile_container feed_padding">
-					<img src="../images/feed/profile/profile_example.jpg" class="profile_img" alt="profile_img">
-					<h3 class="name feed_padding">leewoo</h3>
-				</div>
-				<div class="img_box_container">
-					<img src="../images/feed/img_box/eiffel_tower.jpg" class="img_box" alt="img_box">
-				</div>
-				<a class="title feed_padding">#태그</a>
-				<p class="content feed_padding">글 내용</p>
-				<div class="date feed_padding">날짜</div>
-				<div class="accessory feed_padding">
-					<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>
-					<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>
-				</div>
-			</div>
-			<div class="feed_container">
-				<div class="profile_container feed_padding">
-					<img src="../images/feed/profile/profile_example.jpg" class="profile_img" alt="profile_img">
-					<h3 class="name feed_padding">leewoo</h3>
-				</div>
-				<div class="img_box_container">
-					<img src="../images/feed/img_box/eiffel_tower.jpg" class="img_box" alt="img_box">
-				</div>
-				<a class="title feed_padding">#태그</a>
-				<p class="content feed_padding">글 내용</p>
-				<div class="date feed_padding">날짜</div>
-				<div class="accessory feed_padding">
-					<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>
-					<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>
-				</div>
-			</div>
 		</div>
 		<div class="right_container">
 			right_container
 		</div>
 	</div>
+	<script src="/js/utils/date_format_util.js"></script>
+	<script src="/js/feed/fetch_feed.js"></script>
+	<script src="/js/feed/scroll_feed_ajax.js"></script>
 </body>
 </html>

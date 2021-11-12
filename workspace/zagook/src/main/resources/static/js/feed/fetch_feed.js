@@ -4,12 +4,12 @@ class getFeedService {
             $.ajax({
                 url: '/feed/contents',
                 type: 'POST',
-                data: param,
+                data: JSON.stringify(param),
                 //dataType is a aspect of client, contentType is a aspect of server that means received data type from client.
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (result, status, xhr) {
-                    resolve(data);
+                    resolve(result);
                 },
                 error: function (xhr, status, err) {
                     reject(err);

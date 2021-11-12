@@ -29,5 +29,10 @@ public class FeedServiceImpl implements FeedService {
 		// TODO Auto-generated method stub
 		return mapper.tag(contentsno);
 	}
-	
+
+	@Override
+	public FeedDTO profile(String id) {
+		// TODO Auto-generated method stub
+		return mapper.profile(id);
+	}
 }
