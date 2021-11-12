@@ -13,7 +13,7 @@
 	--feed_container_size: 740px;
 }
 body {
-	background: #f0f2f5;
+	background: #f5f2b8;
 }
 .body_container {
 	display: flex;

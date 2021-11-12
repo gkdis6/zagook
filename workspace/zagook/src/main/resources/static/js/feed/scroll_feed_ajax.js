@@ -25,9 +25,14 @@ let center_box = document.getElementsByClassName("center_container")[0];
 function process_feed_list(param) {
     feedService
         .get_feed_list(param)
-        .then(list => {
+        .then(obj => {
+			const map = new Map(Object.entries(obj));
+			let list = map.get("feed_list");
+			let base_distance = map.get("base_distance");
             let html_str = "";
 
+            console.log("[map type] : " + typeof(map));
+            console.log(map);
             console.log("[list.length] : " + list.length);
 
             for (let i = 0; i < list.length; i++) {

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface FeedMapper {
-	List<FeedDTO> list(String id);
+	List<FeedDTO> list(FeedDTO dto);
 	int like(Map map);
 	List<String> tag(int contentsno);
 	FeedDTO profile(String id);
