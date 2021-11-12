@@ -411,8 +411,8 @@ jQuery(document).ready(function(){
 							<div class="ellipsis">댓글</div> 
 			                <c:if test="${not empty sessionScope.id}">
 				                <div class="btn_box1">
-									<button type="button" class="btn" onclick="location.href='/contents/update/${contentsno}'">수정</button>
-									<button type="button" class="btn" onclick="location.href='/contents/delete/${contentsno}'">삭제</button>
+									<button type="button" class="btn" onclick="location.href='/contents/update/`+data.contentsno+`'">수정</button>
+									<button type="button" class="btn" onclick="location.href='/contents/delete/`+data.contentsno+`'">삭제</button>
 								</div>
 							</c:if>
 			            </div>`;
@@ -577,6 +577,7 @@ jQuery(document).ready(function(){
 		$(document).on("click", "#reset", function () {
 			$('#preview-image').css('background-image',
 				"url('https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image')");
+			$('#ok').attr('disabled',true);
 		});
 
 		$(document).ready(function () {

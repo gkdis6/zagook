@@ -87,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getTag" parameterType="int"
 		resultType="String">
-		select tag from zagook_tag where tag_id 
+		select tag from zagook_tag where tag_id
 		in (select tag_id from zagook_posttag where contentsno=#{contentsno})
 	</select>
 </mapper>
