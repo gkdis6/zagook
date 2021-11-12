@@ -29,4 +29,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="profile" parameterType="String" resultType="com.project.feed.FeedDTO">
 		select mname, fname from zagook_member where id=#{id}
 	</select>
+	
+	<select id="list2" parameterType="String"
+		resultType="com.project.feed.FeedDTO">
+		SELECT id, contentsno, filename, rdate, likecnt, privacy, x_site, y_site, contents, r
+		from(
+			SELECT id, contentsno, filename, rdate, likecnt, privacy, x_site, y_site, contents, rownum r
+			from(
+				SELECT id, contentsno, filename, rdate, likecnt, privacy, x_site, y_site, contents
+				FROM zagook_contents
+				where privacy = 2 
+			)
+		)
+	</select>
 </mapper>

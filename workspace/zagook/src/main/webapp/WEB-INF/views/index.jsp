@@ -74,7 +74,7 @@
 		min-height: 182px;
 		max-height: 600px;
 	}
-
+	
 	.info .desc {
 		position: relative;
 		height: auto;
