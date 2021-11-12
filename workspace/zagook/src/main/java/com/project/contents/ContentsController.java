@@ -61,26 +61,43 @@ public class ContentsController {
 	}
 
 	@GetMapping("/contents/update/{contentsno}")
-	public String update(@PathVariable("contentsno") int contentsno, Model model) {
+	public String update(@PathVariable("contentsno") int contentsno,
+			Model model) {
 		ContentsDTO dto = service.detail(contentsno);
+		model.addAttribute("contentsno", contentsno);
+		model.addAttribute("oldfile",dto.getFilename());
 		model.addAttribute("dto", dto);
 		return "/contents/update";
 	}
 
 	@PostMapping("/contents/update")
-	public String update(ContentsDTO dto, String tag, int contentsno) {
-		int cnt = service.update(dto);
-		int cnt4 = service.delete(contentsno);
+	public String update(ContentsDTO dto, String tag, int contentsno, MultipartFile filenameMF, String oldfile,
+			HttpServletRequest request) throws IOException {
+		 String basePath = new ClassPathResource("/static/pstorage").getFile().getAbsolutePath();
+		//String basePath = Contents.getUploadDir();
+		if (oldfile != null && !oldfile.equals("default.jpg")) { // 원본파일 삭제
+			Utility.deleteFile(basePath, oldfile);
+		}
+
+		// pstorage에 변경 파일 저장
+		Map map = new HashMap();
+		map.put("contentsno", contentsno);
+		map.put("fname", Utility.saveFileSpring(filenameMF, basePath));
+
+		// 디비에 파일명 변경
+		int cnt = service.updateFile(map);
+		int cnt2 = service.update(dto);
+		int cnt5 = service.delete(contentsno);
 		if (tag != null) {
-			int cnt2 = service.create2(dto);
-			int cnt3 = service.update2(dto);
-			if (cnt > 0 & cnt3 > 0) {
+			int cnt3 = service.create2(dto);
+			int cnt4 = service.update2(dto);
+			if (cnt>0 & cnt2 > 0 & cnt4 > 0) {
 				return "redirect:/";
 			} else {
 				return "error";
 			}
 		} else if (tag == null) {
-			if (cnt > 0 & cnt4 > 0) {
+			if (cnt>0 & cnt2 > 0 & cnt5 > 0) {
 				return "redirect:/";
 			} else {
 				return "error";
@@ -88,6 +105,7 @@ public class ContentsController {
 		} else {
 			return "error";
 		}
+
 	}
 
 	@GetMapping("/contents/delete/{contentsno}")

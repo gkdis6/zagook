@@ -30,9 +30,12 @@
 			<div class="form-group">
 			 <label class="control-label col-sm-2">사진</label>
 			  <div class="col-sm-6">
-			   <img src="/images/${dto.filename}" style="width:500px"><br><br>
+			   <img src="/images/${oldfile}" style="width:500px">
+			   </div>
+			   <div class="form-group">
+			   <br><br>
 				<button class="btn" id="updatebtn"
-					onclick="javascript:updatefile('${dto.filename}')">수정</button>
+					onclick="javascript:updatefile('${oldfile}')">수정</button>
 					
 			      <div class="col-sm-14" id="selectimg" style="display:none">          
 			        <input type="file" class="form-control" id="filenameMF" 
