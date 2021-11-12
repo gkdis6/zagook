@@ -40,6 +40,12 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.read(id);
 	}
 
+	@Override
+	public int kakaocreate(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.kakaocreate(dto);
+	}
+
 
 
 }

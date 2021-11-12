@@ -39,4 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      VALUES(#{id}, #{password},#{mname}, #{tel}, #{email}, #{job}, sysdate, #{fname}, 'H')
 </insert>
 
+
+<insert id="kakaocreate" parameterType="com.project.member.MemberDTO">
+	 INSERT INTO zagook_member(id, password,
+     mname, email, mdate, grade, social)
+     VALUES(#{id}, #{password},#{mname}, #{email}, sysdate, 'H', 'kakao')
+</insert>
 </mapper>

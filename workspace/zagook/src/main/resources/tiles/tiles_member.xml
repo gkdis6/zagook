@@ -21,5 +21,4 @@
     <put-attribute name="body"
       value="/WEB-INF/views/member/read.jsp"/>
   </definition>
-  
 </tiles-definitions>

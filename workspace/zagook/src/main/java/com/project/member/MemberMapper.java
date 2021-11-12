@@ -14,6 +14,8 @@ public interface MemberMapper {
 	int duplicatedEmail(String email);
 
 	int create(MemberDTO dto);
+	
+	int kakaocreate(MemberDTO dto);
 
 
 }

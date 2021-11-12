@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.Utility.Utility;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+
 @Controller
 public class MemberController {
 
@@ -29,7 +31,7 @@ public class MemberController {
 
 	@GetMapping("/member/login")
 	public String login(HttpServletRequest request) {
-
+		
 		/*쿠키설정*/
         String c_id = "";     // ID 저장여부를 저장하는 변수, Y
         String c_id_val = ""; // ID 값
@@ -51,7 +53,6 @@ public class MemberController {
         /*---쿠키 설정 끝----------------------------*/
         request.setAttribute("c_id", c_id);
         request.setAttribute("c_id_val", c_id_val);
-        
 		return "/member/login";
 	}
 	
@@ -60,14 +61,13 @@ public class MemberController {
 			HttpSession session,
 			HttpServletResponse response,
 			Model model) {
-		
 		int cnt = service.loginCheck(map);
 		//cnt>0 logincheck가 성공
 		if(cnt>0) { //회원
-			 
-//			grade>> String grade = service.getGrade(map.get("id"));
+			
+			//grade>> String grade = service.getGrade(map.get("id"));
              session.setAttribute("id", map.get("id"));
-//          grade >>   session.setAttribute("grade", grade);
+             // grade >>   session.setAttribute("grade", grade);
              //Cookie 저장, id 저장 여부 및 id
              Cookie cookie = null;
              String c_id = map.get("c_id");
@@ -147,7 +147,7 @@ public class MemberController {
 		Map<String,String> map = new HashMap<String,String>();
 		if(cnt>0) {
 			//map에 들어갈 data
-			map.put("str", email+"는 중복되어서 사용할 수 없습니다.");
+			map.put("str", email+" 로 가입한 내역이 존재합니다. 로그인 해주세요.");
 		}else {
 			map.put("str", email+"는 중복아님, 사용가능 합니다.");
 		}

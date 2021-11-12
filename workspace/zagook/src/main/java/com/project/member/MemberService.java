@@ -15,5 +15,6 @@ public interface MemberService {
 
 	int create(MemberDTO dto);
 
+	int kakaocreate(MemberDTO dto);
 
 }

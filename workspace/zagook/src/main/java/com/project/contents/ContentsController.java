@@ -50,7 +50,7 @@ public class ContentsController {
 				map.put("contentsno", dto.getContentsno());
 				cnt = service.like(map);
 				dto.setLike_clicked(cnt);
-				
+				 
 				tag_list = service.getTag(dto.getContentsno());
 				dto.setTag_list(tag_list);
 				System.out.println(tag_list);
