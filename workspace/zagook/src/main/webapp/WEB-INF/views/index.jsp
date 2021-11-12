@@ -303,7 +303,7 @@ jQuery(document).ready(function(){
 					<c:otherwise>
 						<c:forEach var="dto" items="${list}" varStatus="i"> 
 							{
-								iwcontent: '<div class="infowindow" style="width: 140px; height: auto; padding: 5px;" class="img"><img src="./images/${dto.filename}" width="138px" height="auto"></div>',
+								iwcontent: '<div class="infowindow" style="width: 140px; height: auto; padding: 5px;" class="img"><img src="/contents/storage/${dto.filename}" width="138px" height="auto"></div>',
 								latlng: new kakao.maps.LatLng('${dto.x_site}', '${dto.y_site}'),
 								content: "${dto.contents}",
 								likecnt: "${dto.likecnt}",
@@ -378,7 +378,7 @@ jQuery(document).ready(function(){
 					div3.className = 'title';
 					var div_profile = document.createElement('div');
 					div_profile.className = 'profile';
-					div_profile.innerHTML = `<img src="./images/feed/profile/`+data.fname+`" class="profile_img" alt="profile_img">
+					div_profile.innerHTML = `<img src="/member/storage/profile/`+data.fname+`" class="profile_img" alt="profile_img">
 		            <a class="name feed_padding">`+data.id+`</a>`;
 					div3.appendChild(div_profile);
 					var closeBtn = document.createElement('button');
@@ -395,7 +395,7 @@ jQuery(document).ready(function(){
 					var list = tag_list.split(", ");
 					
 					div4.innerHTML = `<div class="img">
-							<img src="./images/`+data.filename+`" style="width: 100%;">
+							<img src="/contents/storage/`+data.filename+`" style="width: 100%;">
 						</div>
 			            <div class="desc">
 		

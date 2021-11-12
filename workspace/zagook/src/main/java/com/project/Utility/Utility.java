@@ -203,8 +203,19 @@ public class Utility {
 				} else {
 					filename = originalFilename;
 				}
-				// make server full path to save
-				String serverFullPath = basePath + "/" + filename;
+				String os = System.getProperty("os.name").toLowerCase();
+                System.out.println("os: " + os);  // windows 10, linux, mac os x
+                String serverFullPath = null;
+                if (os.equals("mac os x")) { // Mac
+                    System.out.println("맥");
+                    serverFullPath = basePath + "/" + filename;
+                } else if (os.equals("windows 10")) {
+                    System.out.println("os: " + os);
+                    serverFullPath = basePath + "\\" + filename;
+                } else if (os.equals("linux")) {
+                    System.out.println("리눅스");
+                    serverFullPath = basePath + "/" + filename;
+                } 
 
 				System.out.println("fileName: " + filename);
 				System.out.println("serverFullPath: " + serverFullPath);
