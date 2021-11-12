@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.Utility.Utility;
-import com.project.feed.FeedDTO;
 
 @Controller
 public class ContentsController {
