@@ -4,12 +4,14 @@
 <!DOCTYPE html>
 <html>
 <style>
+	body{
+		overflow: hidden;
+	}
 	.wrap {
 		position: absolute;
 		left: 2;
 		bottom: 51px;
 		width: 500px;
-		height: 500px;
 		margin-left: -250px;
 		text-align: left;
 		font-size: 12px;
@@ -68,11 +70,10 @@
 
 	.info .body {
 		position: relative;
-		overflow: auto;
 		width: 490px;
-		height: max-content;
 		min-height: 182px;
 		max-height: 600px;
+		overflow: auto;
 	}
 	
 	.info .desc {
@@ -268,6 +269,7 @@
 		width: 150px;
 		height: auto;
 	}
+	
 </style>
 
 <script>
@@ -367,7 +369,8 @@ jQuery(document).ready(function(){
 					var overlay = new kakao.maps.CustomOverlay({
 						clickable: true,
 						position: marker.getPosition(),
-						xAnchor: 1
+						xAnchor: 1,
+						yAnchor: 30
 					});
 
 					var div1 = document.createElement('div');
@@ -422,7 +425,7 @@ jQuery(document).ready(function(){
 
 
 					overlay.setContent(div1);
-
+					
 
 					// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 					// 이벤트 리스너로는 클로저를 만들어 등록합니다 
@@ -430,7 +433,13 @@ jQuery(document).ready(function(){
 					kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow, overlay));
 					kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 					kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow, overlay));
-
+					
+					div1.addEventListener('mouseenter', function(){
+						map.setZoomable(false);
+					});
+					div1.addEventListener('mouseleave', function(){
+						map.setZoomable(true);
+					});
 				}
 
 				function makeOverListener(map, marker, infowindow, overlay) {
@@ -460,8 +469,13 @@ jQuery(document).ready(function(){
 						overlay.setMap(map);
 					}
 				}
-
-
+				
+				function overlayOverListener(map){
+					return function(){
+						map.setZoomable(false);
+					}
+				}
+				
 			}
 		</script>
 
@@ -634,4 +648,4 @@ jQuery(document).ready(function(){
 	</script>
 </body>
 
-</html>
+</html

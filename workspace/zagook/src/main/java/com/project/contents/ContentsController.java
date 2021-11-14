@@ -51,7 +51,6 @@ public class ContentsController {
 				dto.setLike_clicked(cnt);
 				
 				tag_list = service.getTag(dto.getContentsno());
-				System.out.println(tag_list);
 				dto.setTag_list(tag_list);
 				k++;
 			}
