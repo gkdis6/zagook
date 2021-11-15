@@ -72,7 +72,7 @@
 		position: relative;
 		width: 490px;
 		min-height: 182px;
-		max-height: 600px;
+		max-height: 450px;
 		overflow: auto;
 	}
 	
@@ -467,12 +467,6 @@ jQuery(document).ready(function(){
 					return function () {
 						infowindow.close();
 						overlay.setMap(map);
-					}
-				}
-				
-				function overlayOverListener(map){
-					return function(){
-						map.setZoomable(false);
 					}
 				}
 				
