@@ -18,7 +18,7 @@
 				$.ajax({
 					type: "get",
 					url: "/searchInput",
-					data: { type: "json", value: request.term },
+					data: { type: "json", searchInput: request.term },
 					contentType : "application/json; charset=utf-8;",
 					dataType: "json",
 		            success: function(data) {
