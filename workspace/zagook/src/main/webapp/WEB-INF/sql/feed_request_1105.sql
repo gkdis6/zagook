@@ -15,3 +15,4 @@ select tag from zagook_tag where tag_id in (select tag_id from zagook_posttag wh
 
 --예시 tag 생성
 Insert into zagook_tag values(0, 'family');
+

@@ -13,9 +13,9 @@ public class FeedServiceImpl implements FeedService {
 	  private FeedMapper mapper;
 
 	@Override
-	public List<FeedDTO> list(String id) {
+	public List<FeedDTO> list(FeedDTO dto) {
 		// TODO Auto-generated method stub
-		return mapper.list(id);
+		return mapper.list(dto);
 	}
 
 	@Override

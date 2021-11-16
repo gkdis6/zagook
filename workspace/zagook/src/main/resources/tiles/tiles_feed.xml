@@ -9,5 +9,5 @@
     <put-attribute name="body"
       value="/WEB-INF/views/feed/read.jsp" />
   </definition>
-  
+   
 </tiles-definitions>
