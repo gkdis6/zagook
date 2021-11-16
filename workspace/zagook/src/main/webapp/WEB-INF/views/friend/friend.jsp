@@ -143,8 +143,7 @@ fieldset {
 
 				<div class="panel-heading">
 					<i class="fa fa-comments fa-fw"></i> Comments
-					<button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New
-						Reply</button>
+					<button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button>
 				</div>
 
 
