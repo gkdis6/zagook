@@ -10,5 +10,4 @@ public class FriendController {
 	public String newFriendForm() {
 		return "/friend";
 	}
-
 }

@@ -15,5 +15,4 @@ public interface MemberService {
 
 	int create(MemberDTO dto);
 
-
 }
