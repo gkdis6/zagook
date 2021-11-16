@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:100px;
+	right:140px;
+	background-color:#191A45;
+	color:#FFF;
+	border-radius:50px;
+	box-shadow: 2px 2px 3px #999;
+	font-size:38px;
+	text-align:center;
+}

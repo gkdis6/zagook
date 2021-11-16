@@ -1,18 +1,42 @@
+
 $(function () {
-    let param = { "id": "user_1", "x_site": "37.5535462", "y_site": "126.964296"};
-    process_feed_list(param);
+	//param is not allocated in navigator.geolocation.getCurrentPosition, so put the code repeatedly
+	let param = null;
+	if (navigator.geolocation) {
+	    //위치 정보를 얻기
+	    navigator.geolocation.getCurrentPosition (function(pos) {
+		    param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude)};
+		    process_feed_list(param);
+	    });
+	} else {
+		// 서울역 기준 위치 정보
+	    param = {"x_site" : "37.5535462", "y_site" : "126.964296"};
+	    process_feed_list(param);
+	}
 });
 
 function scrollEventHandler(event){
-    let doc_height = this.document.scrollingElement.scrollHeight;
-	let top_height = this.document.scrollingElement.scrollTop;
-    let client_height = this.document.scrollingElement.clientHeight;
-	//console.log(top_height);
-    //console.log(doc_height);
-    // let param = {"id": $(id), "x_site" : $(x_site), "y_site" : $(y_site)};
-    let param = {"id": "user_1", "x_site" : "37.5535462", "y_site" : "126.964296"};
-	if (top_height + client_height >= doc_height) {
-		process_feed_list(param);
+	let param = null;
+	if (navigator.geolocation) {
+	    //위치 정보를 얻기
+	    navigator.geolocation.getCurrentPosition (function(pos) {
+		    param = {"x_site": pos.coords.latitude, "y_site": pos.coords.longitude};
+		    let doc_height = this.document.scrollingElement.scrollHeight;
+			let top_height = this.document.scrollingElement.scrollTop;
+		    let client_height = this.document.scrollingElement.clientHeight;
+			if (top_height + client_height >= doc_height) {
+				process_feed_list(param);
+			}
+	    });
+	} else {
+		// 서울역 기준 위치 정보
+	    param = {"x_site" : "37.5535462", "y_site" : "126.964296"};
+	    let doc_height = this.document.scrollingElement.scrollHeight;
+		let top_height = this.document.scrollingElement.scrollTop;
+	    let client_height = this.document.scrollingElement.clientHeight;
+		if (top_height + client_height >= doc_height) {
+			process_feed_list(param);
+		}
 	}
 }
 
@@ -43,7 +67,7 @@ function process_feed_list(param) {
                 html_str += '<div class="feed_container">';
                 html_str += '<div class="profile_container feed_padding">';
                 html_str += '<img src="../images/feed/profile/' + list[i].fname + '" class="profile_img" alt="profile_img">';
-                html_str += '<h3 class="name feed_padding">' + list[i].mname + '</h3>';
+                html_str += '<h3 class="name feed_padding">' + list[i].id + '</h3>';
                 html_str += '</div>';
                 html_str += '<div class="img_box_container">';
                 html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box">';
@@ -65,7 +89,8 @@ function process_feed_list(param) {
 				} else {
 					html_str += 'like_outline.png"';
 				}
-				html_str += ' alt="like_img" width="28px"> <span class="feed_widget_text">Like</span>';
+				html_str += ' alt="like_img" width="28px"> <span class="feed_widget_text">';
+				html_str += numberFormatting(list[i].likecnt) + '</span>';
                 html_str += '<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>';
                 html_str += '</div>';
                 html_str += '</div>';

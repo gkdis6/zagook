@@ -9,6 +9,7 @@ public class FeedDTO {
 	private String filename;
 	private String contents;
 	private String rdate;
+	private int likecnt;
 	private int privacy;
 	private double x_site;
 	private double y_site;
@@ -26,7 +27,7 @@ public class FeedDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FeedDTO(int contentsno, String id, String filename, String contents, String rdate, int privacy,
+	public FeedDTO(int contentsno, String id, String filename, String contents, String rdate, int likecnt, int privacy,
 			double x_site, double y_site, String mname, String fname, int like_clicked, List<String> tag_list,
 			double base_distance) {
 		super();
@@ -35,6 +36,7 @@ public class FeedDTO {
 		this.filename = filename;
 		this.contents = contents;
 		this.rdate = rdate;
+		this.likecnt = likecnt;
 		this.privacy = privacy;
 		this.x_site = x_site;
 		this.y_site = y_site;
@@ -44,14 +46,15 @@ public class FeedDTO {
 		this.tag_list = tag_list;
 		this.base_distance = base_distance;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "FeedDTO [contentsno=" + contentsno + ", id=" + id + ", filename=" + filename + ", contents=" + contents
-				+ ", rdate=" + rdate + ", privacy=" + privacy + ", x_site=" + x_site + ", y_site=" + y_site + ", mname="
-				+ mname + ", fname=" + fname + ", like_clicked=" + like_clicked + ", tag_list=" + tag_list
-				+ ", base_distance=" + base_distance + "]";
+				+ ", rdate=" + rdate + ", likecnt=" + likecnt + ", privacy=" + privacy + ", x_site=" + x_site
+				+ ", y_site=" + y_site + ", mname=" + mname + ", fname=" + fname + ", like_clicked=" + like_clicked
+				+ ", tag_list=" + tag_list + ", base_distance=" + base_distance + "]";
 	}
+
 
 	public int getContentsno() {
 		return contentsno;
@@ -113,28 +116,28 @@ public class FeedDTO {
 	public void setTag_list(List<String> tag_list) {
 		this.tag_list = tag_list;
 	}
-
 	public String getMname() {
 		return mname;
 	}
-
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
-
 	public String getFname() {
 		return fname;
 	}
-
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
-
 	public double getBase_distance() {
 		return base_distance;
 	}
-	
 	public void setBase_distance(double base_distance) {
 		this.base_distance = base_distance;
+	}
+	public int getLikecnt() {
+		return likecnt;
+	}
+	public void setLikecnt(int likecnt) {
+		this.likecnt = likecnt;
 	}
 }

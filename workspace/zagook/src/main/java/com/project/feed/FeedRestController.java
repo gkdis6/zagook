@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -34,7 +36,7 @@ public class FeedRestController {
     FeedCachingService feedCachingService;
 
 	@PostMapping(value = "/feed/contents", produces = "application/json;charset=UTF-8")
-	public ResponseEntity<Map> postFeedList_ajax(@RequestBody FeedDTO dto) {
+	public ResponseEntity<Map> postFeedList_ajax(@RequestBody FeedDTO dto, HttpSession session) {
 		List<FeedDTO> sub_list = null;
 		boolean end_flag = false;
 		
@@ -44,6 +46,7 @@ public class FeedRestController {
 	//		id값으로 Friends 테이블의 친구id 조회
 	//		조회된 친구 id값으로 contents 테이블의 각 row를 FeedDTO에 담아옴
 	//		**추가: base_distance를 기준으로 받아온 list의 size가 minimum_feed_cnt 이상일 경우 정렬 단계로 이동
+			dto.setId((String) session.getAttribute("id"));
 			for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
 				dto.setBase_distance(base_distance[base_idx]);
 				result_base_idx = base_idx;
