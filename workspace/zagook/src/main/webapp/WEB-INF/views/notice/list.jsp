@@ -21,7 +21,7 @@
   <script>
   $.ajax({ // 컨트롤러와 통신
 	  type: 'POST',
-	  url: "/admin/notice/create",
+	  url: "/notice/create",
 	  data: JSON.stringify(data),
 	  //contentType: "application/json; charset=UTF-8",
 	  dataType:"json",
@@ -47,9 +47,6 @@
   <form class="form-inline" action="./list">
     <div class="form-group">
       <select class="form-control" name="col">
-        <option value="wname"
-        <c:if test= "${col=='wname'}"> selected </c:if>
-        >작성자</option>
         <option value="title"
         <c:if test= "${col=='title'}"> selected </c:if>
         >제목</option>
@@ -71,7 +68,7 @@
     <button type="submit" class="btn btn-default" >검색</button>
     <c:if test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
     <button type="button" class="btn btn-default"
-    onclick="location.href='/admin/notice/create'">등록</button>
+    onclick="location.href='/notice/create'">등록</button>
     </c:if>
   </form>
   
@@ -80,7 +77,6 @@
     <tr>
     <th>번호</th>
     <th>제목</th>
-    <th>작성자</th>
     <th>등록날짜</th>
     <th>조회수</th>
     </tr>
@@ -96,14 +92,13 @@
    <tr>
     <td>${dto.noticeno}</td>
     <td>
-    <a href="javascript:read('${dto.noticeno}')">${dto.title}</a>
-	<c:if test="${util:newImg(fn:substring(dto.ndate,0,10)) }">
+    <a href="javascript:detail('${dto.noticeno}')">${dto.title}</a>
+	<c:if test="${util:newImg(fn:substring(dto.rdate,0,10)) }">
          <img src="/images/new.gif"> 
     </c:if> 
     </td>
-    <td>${dto.wname}</td>
-    <td>${dto.ndate}</td>
-    <td>${dto.viewcnt}</td>
+    <td>${dto.rdate}</td>
+    <td>${dto.cnt}</td>
    </tr>
    </c:forEach>
    </c:otherwise>

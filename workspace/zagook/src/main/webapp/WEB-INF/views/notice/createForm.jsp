@@ -34,12 +34,6 @@
       <textarea name="contents" id="contents" class="form-control" style="height:100px;resize:none;" placeholder="내용"></textarea>
     </div>
   </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="filenameMF">이미지</label>
-    <div class="col-sm-6">
-      <input type="file" name="filenameMF" id="filenameMF" class="form-control">
-    </div>
-  </div>
    <div class="form-group">
    <div class="col-sm-offset-2 col-sm-5">
     <button class="btn">등록</button>
