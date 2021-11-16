@@ -90,4 +90,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select tag from zagook_tag where tag_id
 		in (select tag_id from zagook_posttag where contentsno=#{contentsno})
 	</select>
+	
+	<select id="searchInput" parameterType="String" resultType="Map">
+		select tag from zagook_tag
+		where tag like '%'||#{searchInput}||'%'
+	</select>
 </mapper>

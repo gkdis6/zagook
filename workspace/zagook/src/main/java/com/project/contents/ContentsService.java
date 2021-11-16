@@ -37,5 +37,6 @@ public interface ContentsService {//요청할 수 있는 인터페이스 선언�
 
 	List<String> getTag(int contentsno);
 
+	List<Map> searchInput(String searchInput);
 }
 
