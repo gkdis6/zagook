@@ -13,8 +13,7 @@
 			return false;
 		}
 	}
-	//contents = $("textarea#contents").val();
-	function updatefile(filename) {
+	function updatefile() {
 		$('#updatebtn').hide();
 		$('#selectimg').show();
 		return false;
@@ -44,7 +43,7 @@
 				</div>
 				<div class="col-sm-6 col-sm-offset-2">
 					<input type="button" id="updatebtn"
-						onclick="javascript:updatefile('${oldfile}')" value="사진수정">
+						onclick="updatefile();" value="사진수정">
 				</div>
 				<div class="col-sm-6 col-sm-offset-2" id="selectimg"
 					style="display: none">
