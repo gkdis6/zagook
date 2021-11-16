@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.project.contents.ContentsMapper">
 	<select id="detail" parameterType="int"
 		resultType="com.project.contents.ContentsDTO">
-		select c.contentsno, c.contents, c.privacy, m.mname,
+		select c.contentsno, c.contents, c.privacy,
 		c.filename, p.tag_id, t.tag, c.rdate, c.likecnt
 		from zagook_contents c,
 		zagook_tag t, zagook_posttag p, zagook_member m
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<update id="updateFile" parameterType="Map">
-		update contents
+		update zagook_contents
 		set
 		filename = #{fname}
 		where contentsno = #{contentsno}

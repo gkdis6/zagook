@@ -407,12 +407,12 @@ jQuery(document).ready(function(){
 		
 							<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">`+data.likecnt+`</span>
 							
-		
+							
 							<div class="ellipsis">댓글</div> 
 			                <c:if test="${not empty sessionScope.id}">
 				                <div class="btn_box1">
-									<button type="button" class="btn" onclick="location.href='/contents/update/${contentsno}'">수정</button>
-									<button type="button" class="btn" onclick="location.href='/contents/delete/${contentsno}'">삭제</button>
+									<button type="button" class="btn" onclick="location.href='/contents/update/`+data.contentsno+`'">수정</button>
+									<button type="button" class="btn" onclick="location.href='/contents/delete/`+data.contentsno+`">삭제</button>
 								</div>
 							</c:if>
 			            </div>`;

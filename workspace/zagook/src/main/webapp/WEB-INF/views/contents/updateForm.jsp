@@ -14,39 +14,49 @@
 		}
 	}
 	//contents = $("textarea#contents").val();
-	function updatefile(filename){
-    	$('#updatebtn').hide(); 
+	function updatefile(filename) {
+		$('#updatebtn').hide();
 		$('#selectimg').show();
-      }
+		return false;
+	}
+	 function PreviewImage() {
+		 // 파일리더 생성
+	        var preview = new FileReader();
+	        preview.onload = function (e) {
+	        // img id 값 
+	        document.getElementById("img").src = e.target.result;
+	    };
+	    // input id 값 
+	    preview.readAsDataURL(document.getElementById("filenameMF").files[0]);
+	 };
 </script>
 </head>
 <body>
 	<div class="container">
 		<h2 class="col-sm-offset-2 col-sm-10">게시글 수정</h2>
 		<form class="form-horizontal" action="/contents/update" method="post"
-			onsubmit="return checkIn(this)">
+			onsubmit="return checkIn(this)" enctype="multipart/form-data">
 			<input type="hidden" name="oldfile" value="${oldfile}">
 			<input type="hidden" name="contentsno" value="${contentsno}">
 			<div class="form-group">
-			 <label class="control-label col-sm-2">사진</label>
-			  <div class="col-sm-6">
-			   <img src="/images/${oldfile}" style="width:500px">
-			   </div>
-			   <div class="form-group">
-			   <br><br>
-				<button class="btn" id="updatebtn"
-					onclick="javascript:updatefile('${oldfile}')">수정</button>
-					
-			      <div class="col-sm-14" id="selectimg" style="display:none">          
-			        <input type="file" class="form-control" id="filenameMF" 
-			        name="filenameMF" accept=".jpg,.png,.gif" required="required">
-			      </div>
-			  </div>
+				<div class="col-sm-6 col-sm-offset-2">
+					<img id="img" src="/images/${oldfile}" style="width: 500px">
+				</div>
+				<div class="col-sm-6 col-sm-offset-2">
+					<input type="button" id="updatebtn"
+						onclick="javascript:updatefile('${oldfile}')" value="사진수정">
+				</div>
+				<div class="col-sm-6 col-sm-offset-2" id="selectimg"
+					style="display: none">
+					<input type="file" class="form-control" id="filenameMF"
+						name="filenameMF" accept=".jpg,.png,.gif" onchange="PreviewImage();" required="required">
+				</div>
 			</div>
 			<div class="form-group">
-			   <div class="col-sm-offset-2 col-xs-6">
-			      <textarea name="contents" id="contents" class="form-control" style="height:100px;resize:none;">${dto.contents}</textarea>
-			   </div>
+				<div class="col-sm-offset-2 col-xs-6">
+					<textarea name="contents" id="contents" class="form-control"
+						style="height: 100px; resize: none;">${dto.contents}</textarea>
+				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="tag">태그</label>
@@ -56,13 +66,16 @@
 				</div>
 			</div>
 			<div class="form-group">
-			  <div class="col-sm-offset-2 col-xs-6">
-			  	<select class="form-control" name="privacy" id="privacy">
-			    	<option value=0 <c:if test= "${dto.privacy==0}">selected</c:if> >나만 보기</option>
-			    	<option value=1 <c:if test= "${dto.privacy==1}">selected</c:if> >친구 공개</option>
-			    	<option value=2 <c:if test= "${dto.privacy==2}">selected</c:if> >모두 공개</option>
-			  	</select>
-			  </div>
+				<div class="col-sm-offset-2 col-xs-6">
+					<select class="form-control" name="privacy" id="privacy">
+						<option value=0 <c:if test= "${dto.privacy==0}">selected</c:if>>나만
+							보기</option>
+						<option value=1 <c:if test= "${dto.privacy==1}">selected</c:if>>친구
+							공개</option>
+						<option value=2 <c:if test= "${dto.privacy==2}">selected</c:if>>모두
+							공개</option>
+					</select>
+				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-5">

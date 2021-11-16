@@ -97,7 +97,7 @@ public class ContentsController {
 			Model model) {
 		ContentsDTO dto = service.detail(contentsno);
 		model.addAttribute("contentsno", contentsno);
-		model.addAttribute("oldfile",dto.getFilename());
+		model.addAttribute("oldfile", dto.getFilename());
 		model.addAttribute("dto", dto);
 		return "/contents/update";
 	}
@@ -105,7 +105,7 @@ public class ContentsController {
 	@PostMapping("/contents/update")
 	public String update(ContentsDTO dto, String tag, int contentsno, MultipartFile filenameMF, String oldfile,
 			HttpServletRequest request) throws IOException {
-		 String basePath = new ClassPathResource("/static/pstorage").getFile().getAbsolutePath();
+		 String basePath = new ClassPathResource("/static/images").getFile().getAbsolutePath();
 		//String basePath = Contents.getUploadDir();
 		if (oldfile != null && !oldfile.equals("default.jpg")) { // 원본파일 삭제
 			Utility.deleteFile(basePath, oldfile);
@@ -155,38 +155,6 @@ public class ContentsController {
 			return "redirect:/";
 		} else {
 			return "/error";
-		}
-	}
-
-	@GetMapping("/contents/updateFile/{contentsno}/{oldfile}")
-	public String updateFile(@PathVariable("contentsno") int contentsno, @PathVariable("oldfile") String oldfile,
-			Model model) {
-		model.addAttribute("contentsno", contentsno);
-		model.addAttribute("oldfile", oldfile);
-		return "/contents/updateFile";
-	}
-
-	@PostMapping("/contents/updateFile")
-	public String updateFile(MultipartFile filenameMF, String oldfile, int contentsno, HttpServletRequest request)
-			throws IOException {
-		String basePath = new ClassPathResource("/static/images").getFile().getAbsolutePath();
-
-		if (oldfile != null && !oldfile.equals("default.jpg")) { // 원본파일 삭제
-			Utility.deleteFile(basePath, oldfile);
-		}
-
-		// images에 변경 파일 저장
-		Map map = new HashMap();
-		map.put("contentsno", contentsno);
-		map.put("fname", Utility.saveFileSpring(filenameMF, basePath));
-
-		// 디비에 파일명 변경
-		int cnt = service.updateFile(map);
-
-		if (cnt == 1) {
-			return "redirect:/list";
-		} else {
-			return "./error";
 		}
 	}
 
