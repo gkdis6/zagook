@@ -17,6 +17,12 @@ public class FeedServiceImpl implements FeedService {
 		// TODO Auto-generated method stub
 		return mapper.list(dto);
 	}
+	
+	@Override
+	public List<FeedDTO> mylist(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.mylist(dto);
+	}
 
 	@Override
 	public int like(Map map) {

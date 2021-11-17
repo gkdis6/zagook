@@ -5,6 +5,7 @@ import java.util.Map;
 
 public interface FeedService {
 	List<FeedDTO> list(FeedDTO dto);
+	List<FeedDTO> mylist(FeedDTO dto);
 	int like(Map map);
 	List<String> tag(int contentsno);
 	FeedDTO profile(String id);
