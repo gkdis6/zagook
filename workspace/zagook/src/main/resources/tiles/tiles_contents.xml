@@ -39,4 +39,9 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/contents/search.jsp" />
 	</definition>
+	<definition name="/search/friend" extends="main">
+		<put-attribute name="title" value="친구검색" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/contents/search_friend.jsp" />
+	</definition>
 </tiles-definitions>

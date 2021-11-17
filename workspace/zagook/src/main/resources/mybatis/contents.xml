@@ -95,4 +95,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select tag from zagook_tag
 		where tag like '%'||#{searchInput}||'%'
 	</select>
+	<select id="searchInput_friend" parameterType="String" resultType="Map">
+		select id,fname from zagook_member
+		where id like '%'||#{searchInput}||'%'
+	</select>
 </mapper>
