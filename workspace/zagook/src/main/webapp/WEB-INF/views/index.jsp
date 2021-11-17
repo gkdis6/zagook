@@ -4,12 +4,14 @@
 <!DOCTYPE html>
 <html>
 <style>
+	body{
+		overflow: hidden;
+	}
 	.wrap {
 		position: absolute;
 		left: 2;
 		bottom: 51px;
 		width: 500px;
-		height: 500px;
 		margin-left: -250px;
 		text-align: left;
 		font-size: 12px;
@@ -45,6 +47,7 @@
 		padding: 1px 0 0 0;
 		height: 70px;
 		background: #eee;
+		/* background-color: #191a45; */
 		border-bottom: 1px solid #ddd;
 		font-size: 18px;
 		font-weight: bold;
@@ -68,11 +71,10 @@
 
 	.info .body {
 		position: relative;
-		overflow: auto;
 		width: 490px;
-		height: max-content;
 		min-height: 182px;
-		max-height: 600px;
+		max-height: 450px;
+		overflow: auto;
 	}
 	
 	.info .desc {
@@ -94,6 +96,10 @@
 		height: auto;
 		color: #888;
 		margin: 5px;
+	}
+	
+	.body .img:hover{
+		cursor: -webkit-zoom-in;
 	}
 
 	.body:after {
@@ -268,13 +274,49 @@
 		width: 150px;
 		height: auto;
 	}
+	
+	.modal_img {
+		display: none;
+	    z-index: 500;
+	    width: 100vw;
+	    height: 100vh;
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    background-color: rgba(0, 0, 0, 0.8);
+	}
+	
+	.modal_img button {
+		position: absolute;
+		top: 3rem;
+		right: 3rem;
+		background: transparent;
+		border: 0;
+		color: #ffffff;
+		font-size: 3rem;
+	}
+	
+	.modal_imgBox {
+	    max-height: 80vh;
+	    max-width: 80vw;
+	    position: fixed;
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		-moz-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		-o-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+		overflow: auto;
+	}
+	
+	.modal_imgBox img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+	
 </style>
 
-<script>
-jQuery(document).ready(function(){
-	jQuery('.infowindow').parent().css('width', 'auto');
-});
-</script>
 </head>
 
 <body>
@@ -367,7 +409,8 @@ jQuery(document).ready(function(){
 					var overlay = new kakao.maps.CustomOverlay({
 						clickable: true,
 						position: marker.getPosition(),
-						xAnchor: 1
+						xAnchor: 1,
+						yAnchor: 30
 					});
 
 					var div1 = document.createElement('div');
@@ -394,35 +437,38 @@ jQuery(document).ready(function(){
 					var tag_list = data.tag_list.substring(1,data.tag_list.length-1);
 					var list = tag_list.split(", ");
 					
-					div4.innerHTML = `<div class="img">
-							<img src="/contents/storage/`+data.filename+`" style="width: 100%;">
-						</div>
-			            <div class="desc">
-		
-							<div class="ellipsis">`+data.rdate.substring(0,16)+`</div>
-							
-							<div class="ellipsis" style="color: blue;">`+list+`</div>
-							
-							<div class="ellipsis">`+data.content+`</div>
-		
-							<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">`+data.likecnt+`</span>
-							
-		
-							<div class="ellipsis">댓글</div> 
-			                <c:if test="${not empty sessionScope.id}">
-				                <div class="btn_box1">
-									<button type="button" class="btn" onclick="location.href='/contents/update/${contentsno}'">수정</button>
-									<button type="button" class="btn" onclick="location.href='/contents/delete/${contentsno}'">삭제</button>
-								</div>
-							</c:if>
-			            </div>`;
+					var div5 = document.createElement('div');
+					div5.className = 'img';
+					div5.innerHTML = `<img src="/contents/storage/`+data.filename+`" style="width: 100%;">`;
+					
+					var div6 = document.createElement('div');
+					div6.className = 'desc';
+					div6.innerHTML = `<div class="ellipsis">`+data.rdate.substring(0,16)+`</div>
+					
+					<div class="ellipsis" style="color: blue;">`+list+`</div>
+					
+					<div class="ellipsis">`+data.content+`</div>
 
+					<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">`+data.likecnt+`</span>
+					
+
+					<div class="ellipsis">댓글</div> 
+	                <c:if test="${not empty sessionScope.id}">
+		            <div class="btn_box1">
+						<button type="button" class="btn" onclick="location.href='/contents/update/`+data.contentsno+`'">수정</button>
+						<button type="button" class="btn" onclick="location.href='/contents/delete/`+data.contentsno+`'">삭제</button>
+					</div>
+					</c:if>
+	            	</div>`;
+
+					div4.appendChild(div5);
+					div4.appendChild(div6);
 					div2.appendChild(div4);
 					div1.appendChild(div2);
 
 
 					overlay.setContent(div1);
-
+					
 
 					// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 					// 이벤트 리스너로는 클로저를 만들어 등록합니다 
@@ -430,7 +476,19 @@ jQuery(document).ready(function(){
 					kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow, overlay));
 					kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 					kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow, overlay));
-
+					
+					div1.addEventListener('mouseenter', function(){
+						map.setZoomable(false);
+					});
+					div1.addEventListener('mouseleave', function(){
+						map.setZoomable(true);
+					});
+					
+					div5.addEventListener('click', function(){
+						$(".modal_img").show();
+						var imgSrc = $(this).children("img").attr("src");
+						$(".modal_imgBox img").attr("src", imgSrc);
+					});
 				}
 
 				function makeOverListener(map, marker, infowindow, overlay) {
@@ -460,8 +518,7 @@ jQuery(document).ready(function(){
 						overlay.setMap(map);
 					}
 				}
-
-
+				
 			}
 		</script>
 
@@ -572,11 +629,19 @@ jQuery(document).ready(function(){
 		</c:choose>
 	</div>
 
+	<div class="modal_img">
+		<button>&times;</button>
+		<div class="modal_imgBox">
+			<img src="">
+		</div>
+	</div>
+	
 	<!-- //게시글 등록 팝업 END -->
 	<script>
 		$(document).on("click", "#reset", function () {
 			$('#preview-image').css('background-image',
 				"url('https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image')");
+			$('#ok').attr('disabled',true);
 		});
 
 		$(document).ready(function () {
@@ -630,6 +695,18 @@ jQuery(document).ready(function(){
 
 			});
 		})
+		
+		$(".modal_img button").click(function(){
+			$(".modal_img").hide();
+		});
+			
+		$(".modal_img").click(function (e) {
+		    if (e.target.className != "modal_img") {
+		      return false;
+		    } else {
+		      $(".modal_img").hide();
+		    }
+		});
 	</script>
 </body>
 

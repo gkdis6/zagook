@@ -107,4 +107,16 @@ public class ContentsServiceImpl implements ContentsService {
 		return mapper.getTag(contentsno);
 	}
 
+	@Override
+	public List<Map> searchInput(String searchInput) {
+		// TODO Auto-generated method stub
+		return mapper.searchInput(searchInput);
+	}
+
+	@Override
+	public List<Map> searchInput_friend(String searchInput) {
+		// TODO Auto-generated method stub
+		return mapper.searchInput_friend(searchInput);
+	}
+
 }

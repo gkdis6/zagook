@@ -20,7 +20,7 @@ public class FeedLoginInterceptor extends HandlerInterceptorAdapter {
       return true; // 요청 페이지로 계속 진행
     } else {
 // 에러 출력또는 로그인 페이지로 이동
-      response.sendRedirect("/");
+      response.sendRedirect("/alert/feed_login");
       return false;
     }
   }

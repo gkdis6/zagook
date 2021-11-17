@@ -17,11 +17,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.Utility.Utility;
 import com.project.feed.FeedDTO;
+import com.project.member.Member;
 
 @Controller
 public class ContentsController {
@@ -67,7 +71,7 @@ public class ContentsController {
 
 	@PostMapping("/contents/create")
 	public String create(ContentsDTO dto, HttpServletRequest request) throws IOException {// exception 지우기
-		String upDir = new ClassPathResource("/static/images").getFile().getAbsolutePath();
+		String upDir = Contents.getUploadDir();
 		String fname = Utility.saveFileSpring(dto.getFilenameMF(), upDir);
 		
 		int size = (int) dto.getFilenameMF().getSize();
@@ -141,7 +145,7 @@ public class ContentsController {
 	@PostMapping("/contents/updateFile")
 	public String updateFile(MultipartFile filenameMF, String oldfile, int contentsno, HttpServletRequest request)
 			throws IOException {
-		String basePath = new ClassPathResource("/static/images").getFile().getAbsolutePath();
+		String basePath = Contents.getUploadDir();
 
 		if (oldfile != null && !oldfile.equals("default.jpg")) { // 원본파일 삭제
 			Utility.deleteFile(basePath, oldfile);
@@ -212,4 +216,33 @@ public class ContentsController {
 
 	}
 
+	@GetMapping("/search")
+	public String search() {
+		return "/search";
+	}
+	
+	@GetMapping(value="/searchInput", produces = "application/json")
+	@ResponseBody
+	public List<Map> searchInput(HttpServletRequest request) throws IOException {
+		String searchInput = Utility.checkNull(request.getParameter("searchInput"));
+		List<Map> searchlist = service.searchInput(searchInput);
+		System.out.println(searchInput);
+		System.out.println(searchlist);
+		return searchlist;
+	}
+	
+	@GetMapping("/search/friend")
+	public String search_friend() {
+		return "/search/friend";
+	}
+	
+	@GetMapping(value="/searchInput_friend", produces = "application/json")
+	@ResponseBody
+	public List<Map> searchInput_friend(HttpServletRequest request) throws IOException {
+		String searchInput = Utility.checkNull(request.getParameter("searchInput_friend"));
+		List<Map> searchFriendlist = service.searchInput_friend(searchInput);
+		System.out.println(searchInput);
+		System.out.println(searchFriendlist);
+		return searchFriendlist;
+	}
 }

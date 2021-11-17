@@ -27,6 +27,7 @@ public class FeedRestController {
 	int result_base_idx = 0;
 	List<FeedDTO> feed_list = null;
 	int sublist_idx = 0;
+	int url_flag = 0;
 	
 	@Autowired
 	@Qualifier("com.project.feed.FeedServiceImpl")
@@ -40,19 +41,29 @@ public class FeedRestController {
 		List<FeedDTO> sub_list = null;
 		boolean end_flag = false;
 		
-//	#1 초기 list 생성 부분
+		if ((url_flag == 1 && dto.getUrl_id().equals("myread")) || (url_flag == 2 && dto.getUrl_id().equals("read")))
+			sublist_idx = 0;
+		
+//	#1 초기 list 생성 부분 - sublist를 활용한 paging 적용
 		if (sublist_idx == 0) {
-	//		Post 방식으로 FeedDTO에 삽입된 id를 사용
-	//		id값으로 Friends 테이블의 친구id 조회
-	//		조회된 친구 id값으로 contents 테이블의 각 row를 FeedDTO에 담아옴
-	//		**추가: base_distance를 기준으로 받아온 list의 size가 minimum_feed_cnt 이상일 경우 정렬 단계로 이동
+			//		Post 방식으로 FeedDTO에 삽입된 id를 사용
+			//		id값으로 Friends 테이블의 친구id 조회
+			//		조회된 친구 id값으로 contents 테이블의 각 row를 FeedDTO에 담아옴
+			//		**추가: base_distance를 기준으로 받아온 list의 size가 minimum_feed_cnt 이상일 경우 정렬 단계로 이동
 			dto.setId((String) session.getAttribute("id"));
-			for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
-				dto.setBase_distance(base_distance[base_idx]);
-				result_base_idx = base_idx;
-				feed_list = service.list(dto);
-				if (feed_list.size() > minimum_feed_cnt) {
-					break;
+			//		url_id에 따라 내 or 친구 피드를 검색하는 sql문 mapping
+			if (dto.getUrl_id().equals("myread")) {
+				feed_list = service.mylist(dto);
+				url_flag = 2;
+			} else if (dto.getUrl_id().equals("read")) {					
+				for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
+					dto.setBase_distance(base_distance[base_idx]);
+					result_base_idx = base_idx;
+						feed_list = service.list(dto);
+						url_flag = 1;
+					if (feed_list.size() > minimum_feed_cnt) {
+						break;
+					}
 				}
 			}
 	
@@ -129,7 +140,11 @@ public class FeedRestController {
 		
 		Map result_map = new HashMap<>();
 		result_map.put("sub_list", sub_list);
-		result_map.put("base_distance", base_distance[result_base_idx]);
+		if (dto.getUrl_id().equals("myread")) {			
+			result_map.put("base_distance", "no distance");
+		} else if (dto.getUrl_id().equals("read")) {
+			result_map.put("base_distance", base_distance[result_base_idx]);			
+		}
 		result_map.put("end_flag", end_flag);
 
 		return new ResponseEntity<Map>(result_map, HttpStatus.OK);

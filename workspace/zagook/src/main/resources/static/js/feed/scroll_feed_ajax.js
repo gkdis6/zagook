@@ -5,7 +5,11 @@ $(function () {
 	if (navigator.geolocation) {
 	    //위치 정보를 얻기
 	    navigator.geolocation.getCurrentPosition (function(pos) {
-		    param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude)};
+			if (window.location.href == "http://localhost:8005/feed/myread") {
+				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread"};	
+			} else if (window.location.href == "http://localhost:8005/feed/read"){
+				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read"};	
+			}
 		    process_feed_list(param);
 	    });
 	} else {
@@ -20,7 +24,11 @@ function scrollEventHandler(event){
 	if (navigator.geolocation) {
 	    //위치 정보를 얻기
 	    navigator.geolocation.getCurrentPosition (function(pos) {
-		    param = {"x_site": pos.coords.latitude, "y_site": pos.coords.longitude};
+		    if (window.location.href == "http://localhost:8005/feed/myread") {
+				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread"};	
+			} else if (window.location.href == "http://localhost:8005/feed/read"){
+				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read"};	
+			}
 		    let doc_height = this.document.scrollingElement.scrollHeight;
 			let top_height = this.document.scrollingElement.scrollTop;
 		    let client_height = this.document.scrollingElement.clientHeight;
@@ -96,8 +104,12 @@ function process_feed_list(param) {
                 html_str += '</div>';
             }
             if (end_flag == true) {
-				html_str += '<span><strong>Page End: 반경 ';
-				html_str += base_distance * 100 * 2 + 'km 안에 게시물이 더 이상 없습니다.';
+				html_str += '<span><strong>Page End: ';
+				if (base_distance == "no distance") {
+					html_str += '게시물이 더 이상 없습니다.';
+				} else {				
+					html_str += '반경 ' + base_distance * 100 * 2 + 'km 안에 게시물이 더 이상 없습니다.';
+				}
 				html_str += '</strong></span>';
 				window.removeEventListener("scroll", scrollEventHandler);
 			}
