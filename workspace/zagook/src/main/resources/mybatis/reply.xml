@@ -5,7 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.project.reply.ReplyMapper">
+<<<<<<< HEAD
 
+=======
+>>>>>>> friend
 <select id="list" parameterType="Map" resultType="com.project.reply.ReplyDTO">
 select rnum, content, to_char(regdate,'yyyy-mm-dd') regdate, id, contentsno, r
 FROM(
@@ -37,6 +40,7 @@ where contentsno=#{contentsno}
  where rnum = #{rnum}
 </select>
 
+<<<<<<< HEAD
 <update id="update" parameterType="com.project.reply.ReplyDTO">
 update zagook_reply
 set content = #{content}
@@ -49,5 +53,7 @@ delete from zagook_reply
 where rnum = #{rnum}
 </delete>
 
+=======
+>>>>>>> friend
 
 </mapper>

@@ -20,4 +20,8 @@ public interface MyFriendDAO {
 		
 		//탈퇴시 팔로우삭제
 		void deleteUserAllFriend(int id2);
+<<<<<<< HEAD
 	}
+=======
+	}
+>>>>>>> friend

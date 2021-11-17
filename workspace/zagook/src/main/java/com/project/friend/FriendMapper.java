@@ -7,4 +7,8 @@ public class FriendMapper {
 	FriendDTO read(int contentsno) {
 		return null;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> friend

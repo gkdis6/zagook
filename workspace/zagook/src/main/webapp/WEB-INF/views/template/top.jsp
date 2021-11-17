@@ -14,6 +14,7 @@
 </c:choose>
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 
 <head>
 	<title>memo</title>
@@ -35,6 +36,26 @@
 			align: center;
 		}
 
+=======
+
+<head>
+	<title>memo</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		#grade {
+			color: white;
+		}
+		.modal-header {
+			text-align: center;
+		}
+		.form-group {
+			align: center;
+		}
+>>>>>>> friend
 		.join {
 			margin: 15px 0px 0px 0px;
 		}
@@ -137,12 +158,22 @@
 									로그아웃</a></li>
 						</c:when>
 						<c:otherwise>
+<<<<<<< HEAD
 								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">🙄 <span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href="${root}/friend">친구신청</a></li>
 										<li><a href="#">친구목록</a></li>
 									</ul>
 								</li>
+=======
+								
+								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">🙄 <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="${root}/friend">친구신청</a></li>
+									</ul>
+								</li>
+								<a href="/friend/recommend"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+>>>>>>> friend
 								<li><a href="${root}/member/update"><span class="glyphicon glyphicon-edit"></span> 마이페이지
 									</a></li>
 								<li><a href="${root}/member/logout"><span class="glyphicon glyphicon-log-out"></span>

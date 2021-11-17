@@ -9,4 +9,8 @@ public class ReplyDTO {
 	  private String regdate;
 	  private String id;
 	  private int contentsno;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> friend
