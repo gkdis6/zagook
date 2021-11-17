@@ -37,4 +37,6 @@ public interface ContentsMapper {
 
 		List<String> getTag(int contentsno);
 
+		List<Map> searchInput(String searchInput);
+
 }
