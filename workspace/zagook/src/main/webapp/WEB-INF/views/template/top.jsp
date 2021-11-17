@@ -138,8 +138,6 @@
 								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">🙄 <span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href="${root}/friend">친구신청</a></li>
-										<li><a href="#">친구목록</a></li>
-										<li><a href="${root}/reply/read">댓글</a></li>
 									</ul>
 								</li>
 								<a href="/friend/recommend"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>

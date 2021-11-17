@@ -2,7 +2,7 @@ console.log("*****Reply Module........");
 class ReplyService {
     getList(param) {
         return new Promise((resolve, reject) => {
-            var contentsno = param.bbsno;
+            var contentsno = param.contentsno;
             var sno = param.sno;
             var eno = param.eno;
             //alert(param.bbsno);

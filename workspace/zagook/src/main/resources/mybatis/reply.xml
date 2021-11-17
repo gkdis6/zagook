@@ -27,7 +27,7 @@ where contentsno=#{contentsno}
 
 <insert id="create" parameterType="com.project.reply.ReplyDTO">
  insert into zagook_reply(rnum, content, regdate, id, contentsno)
- values((select nvl(max(rnum),0)+1 from reply),
+ values((select nvl(max(rnum),0)+1 from zagook_reply),
         #{content}, sysdate, #{id}, #{contentsno}) 
 </insert>
  

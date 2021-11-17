@@ -17,5 +17,7 @@ public interface ReplyMapper{
  
    int total(int contentsno);
 
+   void upViewcnt(int contentsno);
+
 }
 

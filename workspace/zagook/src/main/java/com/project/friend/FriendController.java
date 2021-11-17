@@ -10,11 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.project.reply.ReplyDTO;
+import com.project.reply.ReplyMapper;
+
 @Controller
 public class FriendController {
 	
 	@Autowired
-	private FriendMapper mapper;
+	private ReplyMapper mapper;
 	
 	@GetMapping("/friend")
 	public String newFriendForm() {
@@ -24,7 +27,7 @@ public class FriendController {
 	public String read(int contentsno, Model model, HttpServletRequest request) {
 
 		mapper.upViewcnt(contentsno);
-		FriendDTO dto = mapper.read(contentsno);
+		ReplyDTO dto = mapper.read(contentsno);
 
 		String content = dto.getContent().replaceAll("\r\n", "<br>");
 		dto.setContent(content);
