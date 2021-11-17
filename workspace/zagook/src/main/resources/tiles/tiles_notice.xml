@@ -4,6 +4,11 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+	<definition name="/notice/list" extends="main">
+		<put-attribute name="title" value="공지 사항"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/notice/list.jsp" />
+	</definition>
 	<definition name="/notice/create" extends="main">
 		<put-attribute name="title" value="공지 등록"></put-attribute>
 		<put-attribute name="body"
