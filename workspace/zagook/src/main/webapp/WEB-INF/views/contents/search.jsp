@@ -26,7 +26,8 @@
 		                    $.map(data, function(item) {
 		                        return {
 		                            label: item.TAG,
-		                            value: item.TAG
+		                            value: item.TAG,
+		                            cnt: item.CNT
 		                        };
 		                    })
 		                );
@@ -41,7 +42,10 @@
 			},
 			minLength: 1,// 최소 글자수
 			delay: 100,	//autocomplete 딜레이 시간(ms)
-		});
+		})
+		.autocomplete( "instance" )._renderItem = function( ul, item ) {
+	        return $( "<li><div><span>"+item.label+"</span><span style='right:10px;position:absolute;'>"+item.cnt+"</span></div></li>" ).appendTo( ul );
+	    };
 	});
 </script>
 

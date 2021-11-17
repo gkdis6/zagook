@@ -44,7 +44,7 @@
 			delay: 100,	//autocomplete 딜레이 시간(ms)
 		})
 		.autocomplete( "instance" )._renderItem = function( ul, item ) {
-	        return $( "<li><div><img style='width:40px; height:40px; border-radius:50%;' src='"+item.img+"'><span>"+item.label+"</span></div></li>" ).appendTo( ul );
+	        return $( "<li><div style='text-align:justify;'><img style='width:40px; height:40px; border-radius:50%;' src='"+item.img+"'><span style='right:10px;position:absolute;top:13px;'>"+item.label+"</span></div></li>" ).appendTo( ul );
 	    };
 	});
 </script>
