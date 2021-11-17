@@ -36,9 +36,20 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class FeedController {
 	@GetMapping("/feed/read")
-	public String home() {
+	public String friendsfeed() {
 
 		return "/feed/read";
 	}
+	
+	@GetMapping("/feed/myread")
+	public String myfeed() {
 
+		return "/feed/myread";
+	}
+	
+	@GetMapping("/alert/feed_login")
+	public String login_alert() {
+		System.out.println("??");
+		return "/alert/feed_login";
+	}
 }

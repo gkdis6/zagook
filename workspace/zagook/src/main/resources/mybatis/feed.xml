@@ -16,6 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
 		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
 	</select>
+	<select id="mylist" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.FeedDTO">
+		select * from zagook_contents
+		where id=#{id}
+	</select>
 	<select id="like" parameterType="Map"
 		resultType="int">
 		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
