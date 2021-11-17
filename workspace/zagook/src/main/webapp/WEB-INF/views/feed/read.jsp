@@ -33,7 +33,7 @@ body {
 		  <a href="/feed/myread">My Feed</a>
 		  <a href="/feed/read">Friends Feed</a>
 		  <a href="#">Friends List</a>
-		  <a href="#">Search</a>
+		  <a href="/search">Search</a>
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
 		</div>
