@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>공지 상세내용</title>
+<title>공지 조회</title>
 <meta charset="utf-8" />
 </head>
 <body>
@@ -12,7 +12,9 @@
 
 		<h2>조회</h2>
 		<div class="panel panel-default">
-		
+			<div class="panel-heading">등록번호</div>
+			<div class="panel-body">${dto.noticeno}</div>
+			
 			<div class="panel-heading">제목</div>
 			<div class="panel-body">${dto.title}</div>
 
@@ -29,8 +31,8 @@
 		<div>
 			<c:if test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
 			<button type="button" class="btn" onclick="location.href='/notice/create'">등록</button>
-			<button type="button" class="btn" onclick="location.href='/notice/update'">수정</button>
-			<button type="button" class="btn" onclick="location.href='/notice/delete'">삭제</button>
+			<button type="button" class="btn" onclick="location.href='/notice/update/${noticeno}'">수정</button>
+			<button type="button" class="btn" onclick="location.href='/notice/delete/${noticeno}'">삭제</button>
 			</c:if>
 			<button type="button" class="btn" onclick="location.href='/notice/list'">목록</button>
 		</div>

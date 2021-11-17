@@ -9,8 +9,8 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
    <script type="text/javascript">
-     function detail(noticeno){
-       var url = "detail";
+     function read(noticeno){
+       var url = "read";
        url += "?noticeno="+noticeno;
        url += "&col=${col}";
        url += "&word=${word}";
@@ -18,32 +18,11 @@
        location.href=url;
      }  
   </script>
-  <script>
-  $.ajax({ // 컨트롤러와 통신
-	  type: 'POST',
-	  url: "/notice/create",
-	  data: JSON.stringify(data),
-	  //contentType: "application/json; charset=UTF-8",
-	  dataType:"json",
-	  success: function(data) {
-		  if(data=="1"){
-		  alert("공지 등록 성공");
-	  }else{
-		  alert("등록 오류");
-	  }
-	  },
-	  error: function(request, status, error) {
-	  alert(("code = " + request.status + " message = "
-				+ request.responseText + " error = " + error);
-	  }
-	  });
-  </script>
  
 </head>
 <body>
 <div class="container">
- 
-   <h2>공지 사항</h2>
+<h1 class="col-sm-offset-2 col-sm-10">공지 사항</h1>
   <form class="form-inline" action="./list">
     <div class="form-group">
       <select class="form-control" name="col">
@@ -92,7 +71,7 @@
    <tr>
     <td>${dto.noticeno}</td>
     <td>
-    <a href="javascript:detail('${dto.noticeno}')">${dto.title}</a>
+    <a href="javascript:read('${dto.noticeno}')">${dto.title}</a>
 	<c:if test="${util:newImg(fn:substring(dto.rdate,0,10)) }">
          <img src="/images/new.gif"> 
     </c:if> 

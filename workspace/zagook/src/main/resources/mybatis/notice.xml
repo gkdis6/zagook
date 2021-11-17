@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.notice.NoticeMapper">
+	<!-- 등록 -->
+	<insert id="create" parameterType="com.project.notice.NoticeDTO">
+		insert into zagook_notice
+		values((select nvl(max(noticeno),0)+1 from zagook_notice),#{title},
+		#{content},
+		#{passwd}, 0, sysdate)
+	</insert>
+	<!-- 목록 -->
+	<select id="list" parameterType="Map"
+		resultType="com.project.notice.NoticeDTO">
+		SELECT noticeno, title, cnt, rdate, r
+			FROM ( select noticeno, title, cnt, rdate, rownum r
+				from( select noticeno, title, cnt, rdate
+				from zagook_notice
+		<where>	<!-- 검색 -->
+			<choose>
+				<when test="col=='title'">
+					title like '%'||#{word}||'%'
+				</when>
+				<when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+				<when test="col=='title_content'">
+					title like '%'||#{word}||'%'
+					or
+					content like
+					'%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+		order by rdate desc
+		)
+		<![CDATA[
+			)where r>=#{sno} and r<=#{eno}
+		]]>
+	</select>
+	<!--total -->
+	<select id="total" resultType="int" parameterType="Map">
+		select count(*) from zagook_notice
+		<where>
+			<choose>
+				<when test="col=='title'">
+					title like '%'||#{word}||'%'
+				</when>
+				<when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+				<when test="col=='title_content'">
+					title like '%'||#{word}||'%'
+					or
+					content like
+					'%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+	</select>
+	<!-- 조회수 증가 -->
+	<update id="upViewcnt" parameterType="int">
+		update zagook_notice
+		set cnt =
+		cnt + 1
+		where noticeno = #{noticeno}
+	</update>
+
+	<!-- 조회 -->
+	<select id="read" resultType="com.project.notice.NoticeDTO">
+		SELECT noticeno, title, content,
+		passwd, cnt, rdate
+		FROM zagook_notice
+		WHERE noticeno=#{noticeno}
+	</select>
+
+	<!-- 패스워드 검사 -->
+	<select id="passcheck" resultType="int" parameterType="HashMap">
+		SELECT
+		COUNT(*)
+		FROM zagook_notice
+		WHERE noticeno=#{noticeno} AND
+		passwd=#{passwd}
+	</select>
+
+	<!-- 수정 -->
+	<update id="update" parameterType="com.project.notice.NoticeDTO">
+		UPDATE zagook_notice
+		SET
+		title=#{title}, content=#{content}
+		WHERE
+		noticeno=#{noticeno}
+	</update>
+
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM zagook_notice
+		WHERE
+		noticeno=#{noticeno}
+	</delete>
+</mapper>
