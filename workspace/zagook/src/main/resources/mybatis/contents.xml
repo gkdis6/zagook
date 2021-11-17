@@ -92,7 +92,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="searchInput" parameterType="String" resultType="Map">
-		select tag from zagook_tag
-		where tag like '%'||#{searchInput}||'%'
+		select t.tag, count(p.contentsno) as cnt from zagook_tag t join zagook_posttag p
+		on t.tag_id = p.tag_id
+		where t.tag like '%'||#{searchInput}||'%'
+		group by t.tag
+		
+	</select>
+	<select id="searchInput_friend" parameterType="String" resultType="Map">
+		select id,fname from zagook_member
+		where id like '%'||#{searchInput}||'%'
 	</select>
 </mapper>

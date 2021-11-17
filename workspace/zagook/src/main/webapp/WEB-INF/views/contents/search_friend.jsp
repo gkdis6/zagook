@@ -17,17 +17,17 @@
 			source: function(request,response){
 				$.ajax({
 					type: "get",
-					url: "/searchInput",
-					data: { type: "json", searchInput: request.term },
+					url: "/searchInput_friend",
+					data: { type: "json", searchInput_friend: request.term },
 					contentType : "application/json; charset=utf-8;",
 					dataType: "json",
 		            success: function(data) {
 		                response(
 		                    $.map(data, function(item) {
 		                        return {
-		                            label: item.TAG,
-		                            value: item.TAG,
-		                            cnt: item.CNT
+		                            label: item.ID,
+		                            value: item.ID,
+		                            img: "/member/storage/profile/"+item.FNAME
 		                        };
 		                    })
 		                );
@@ -44,14 +44,14 @@
 			delay: 100,	//autocomplete 딜레이 시간(ms)
 		})
 		.autocomplete( "instance" )._renderItem = function( ul, item ) {
-	        return $( "<li><div><span>"+item.label+"</span><span style='right:10px;position:absolute;'>"+item.cnt+"</span></div></li>" ).appendTo( ul );
+	        return $( "<li><div style='text-align:justify;'><img style='width:40px; height:40px; border-radius:50%;' src='"+item.img+"'><span style='right:10px;position:absolute;top:13px;'>"+item.label+"</span></div></li>" ).appendTo( ul );
 	    };
 	});
 </script>
 
 <body>
 	<div>
-		검색어<input class="form" type="text" id="searchInput" name="searchInput" style="margin-left: 20px; width: 400px;">
+		친구검색<input class="form" type="text" id="searchInput" name="searchInput" style="margin-left: 20px; width: 400px;">
 	</div>
 </body>
 </html>

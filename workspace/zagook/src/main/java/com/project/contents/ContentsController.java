@@ -230,4 +230,19 @@ public class ContentsController {
 		System.out.println(searchlist);
 		return searchlist;
 	}
+	
+	@GetMapping("/search/friend")
+	public String search_friend() {
+		return "/search/friend";
+	}
+	
+	@GetMapping(value="/searchInput_friend", produces = "application/json")
+	@ResponseBody
+	public List<Map> searchInput_friend(HttpServletRequest request) throws IOException {
+		String searchInput = Utility.checkNull(request.getParameter("searchInput_friend"));
+		List<Map> searchFriendlist = service.searchInput_friend(searchInput);
+		System.out.println(searchInput);
+		System.out.println(searchFriendlist);
+		return searchFriendlist;
+	}
 }
