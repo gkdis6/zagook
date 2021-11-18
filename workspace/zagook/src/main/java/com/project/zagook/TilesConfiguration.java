@@ -18,7 +18,7 @@ public class TilesConfiguration {
 		  									 "classpath:/tiles/tiles_contents.xml",
 		  									 "classpath:/tiles/tiles_notice.xml",
 		  									 "classpath:/tiles/tiles_friend.xml",
-                        					 "classpath:/tiles/tiles_feed.xml"});
+                         "classpath:/tiles/tiles_feed.xml"});
 
       configurer.setCheckRefresh(true);
       return configurer;

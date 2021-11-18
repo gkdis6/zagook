@@ -33,8 +33,20 @@ public interface ContentsMapper {
 
 		int update3(ContentsDTO dto);
 
-		int like(Map map);
+		int likeCnt(Map map);
 
 		List<String> getTag(int contentsno);
+
+		List<Map> searchInput(String searchInput);
+
+		List<Map> searchInput_friend(String searchInput);
+
+		int updateLike(Map map);
+
+		int likeCheck(Map map);
+
+		int like(Map map);
+
+		int unlike(Map map);
 
 }

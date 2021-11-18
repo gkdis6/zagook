@@ -13,12 +13,11 @@
 <link rel="stylesheet" href="/css/feed/floating_button.css" type="text/css">
 
 <style>
-:root { 
-	--side_bar_size: 25%; 
-	--center_container_size: 800px; 
+:root {
+	--side_bar_size: 25%;
+	--center_container_size: 800px;
 	--feed_container_size: 740px;
 }
-
 body {
 	background: #f5f2b8;
 	font-family: "Lato", sans-serif;
@@ -38,7 +37,9 @@ body {
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
 		</div>
-		<div class="right_container">right_container</div>
+		<div class="right_container">
+			right_container
+		</div>
 	</div>
 	
 <script src="/js/feed/top_nav.js"></script>
@@ -46,7 +47,6 @@ body {
 <script src="/js/utils/number_format_util.js"></script>
 <script src="/js/feed/fetch_feed.js"></script>
 <script src="/js/feed/scroll_feed_ajax.js"></script>
-<script src="/js/feed/like_event.js"></script>
 <script src="/js/feed/side_nav.js"></script>
 
 </body>

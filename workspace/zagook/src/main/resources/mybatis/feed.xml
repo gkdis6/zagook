@@ -5,21 +5,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.feed.FeedMapper">
-	<select id="list" parameterType="String"
+	<select id="list" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
-		select * 
-		from zagook_contents 
-		where id 
-			in (
-				select id2 
-				from zagook_friend 
-				where id=#{id} and status=3
-				) 
-			and privacy!=3
+		select * from zagook_contents
+		where id in (
+            select id2 from zagook_friend 
+            where id=#{id} and status=3
+            ) 
+		and privacy!=3
+		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
+		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
 	</select>
-	<select id="like" parameterType="Map"
-		resultType="int">
-		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
+	<select id="mylist" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.FeedDTO">
+		select * from zagook_contents
+		where id=#{id}
 	</select>
 	<select id="tag" parameterType="int"
 		resultType="String">
@@ -30,16 +30,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select mname, fname from zagook_member where id=#{id}
 	</select>
 	
-	<select id="list2" parameterType="String"
-		resultType="com.project.feed.FeedDTO">
-		SELECT id, contentsno, filename, rdate, likecnt, privacy, x_site, y_site, contents, r
-		from(
-			SELECT id, contentsno, filename, rdate, likecnt, privacy, x_site, y_site, contents, rownum r
-			from(
-				SELECT id, contentsno, filename, rdate, likecnt, privacy, x_site, y_site, contents
-				FROM zagook_contents
-				where privacy = 2 
-			)
-		)
+	<select id="likecheck" parameterType="Map"
+		resultType="int">
+		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
 	</select>
+	<select id="likecnt" parameterType="Map"
+		resultType="int">
+		select count(*) from zagook_like where contentsno=#{contentsno}
+	</select>
+	<insert id="like" parameterType="Map">	
+		insert into zagook_like(contentsno, id, ldate)
+		values (#{contentsno},#{id},sysdate)
+	</insert>
+	<update id="updatelikecnt" parameterType="Map">
+		update zagook_contents
+		set likecnt=(select count(*) from zagook_like where contentsno=#{contentsno})
+		where contentsno = #{contentsno}
+	</update>
+	<delete id="unlike" parameterType="Map">
+		delete from zagook_like
+		where contentsno=#{contentsno}
+		and id=#{id}
+	</delete>
 </mapper>

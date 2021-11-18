@@ -140,7 +140,6 @@
 								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">🙄 <span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href="${root}/friend">친구신청</a></li>
-										<li><a href="#">친구목록</a></li>
 									</ul>
 								</li>
 								<li><a href="${root}/member/update"><span class="glyphicon glyphicon-edit"></span> 마이페이지

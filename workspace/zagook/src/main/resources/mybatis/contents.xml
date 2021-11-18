@@ -79,6 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from zagook_contents
 		where contentsno=#{contentsno}
 	</delete>
+<<<<<<< HEAD
 
 	<select id="list" parameterType="Map"
 		resultType="com.project.contents.ContentsDTO">
@@ -98,6 +99,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTag" parameterType="int" resultType="String">
 		select tag
 		from zagook_tag where tag_id
+=======
+	
+	<select id="list" parameterType="Map" resultType="com.project.contents.ContentsDTO">
+        select c.id, c.contentsno, c.filename, c.rdate, c.likecnt, c.privacy, c.x_site, c.y_site, c.contents, m.fname   
+        from zagook_contents c join zagook_member m
+        on c.id = m.id 
+        where c.id = #{id} 
+        order by rdate desc
+    </select>
+    
+    <select id="likeCnt" parameterType="Map"
+		resultType="int">
+		select count(*) from zagook_like where contentsno=#{contentsno}
+	</select>
+	
+	<select id="getTag" parameterType="int"
+		resultType="String">
+		select tag from zagook_tag where tag_id
+>>>>>>> a0d21d6b8b5249b21eef99c1072dee348c3f71d8
 		in (select tag_id from zagook_posttag where contentsno=#{contentsno})
+	</select>
+	
+	<select id="searchInput" parameterType="String" resultType="Map">
+		select t.tag, count(p.contentsno) as cnt from zagook_tag t join zagook_posttag p
+		on t.tag_id = p.tag_id
+		where t.tag like '%'||#{searchInput}||'%'
+		group by t.tag
+		
+	</select>
+	<select id="searchInput_friend" parameterType="String" resultType="Map">
+		select id,fname from zagook_member
+		where id like '%'||#{searchInput}||'%'
+	</select>
+	<update id="updateLike" parameterType="Map">
+		update zagook_contents
+		set likecnt=(select count(*) from zagook_like where contentsno=#{contentsno})
+		where contentsno = #{contentsno}
+	</update>
+	<insert id="like" parameterType="Map">	
+		insert into zagook_like(contentsno, id, ldate)
+		values (#{contentsno},#{id},sysdate)
+	</insert>
+	<delete id="unlike" parameterType="Map">
+		delete from zagook_like
+		where contentsno=#{contentsno}
+		and id=#{id}
+	</delete>
+	<select id="likeCheck" parameterType="Map" resultType="int">
+		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
 	</select>
 </mapper>

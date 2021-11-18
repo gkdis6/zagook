@@ -9,6 +9,7 @@ public class FeedDTO {
 	private String filename;
 	private String contents;
 	private String rdate;
+	private int likecnt;
 	private int privacy;
 	private double x_site;
 	private double y_site;
@@ -19,19 +20,25 @@ public class FeedDTO {
 	private int like_clicked;
 	private List<String> tag_list;
 	
+	private double base_distance;
+	
+	private String url_id;
+	
 	public FeedDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public FeedDTO(int contentsno, String id, String filename, String contents, String rdate, int privacy,
-			double x_site, double y_site, String mname, String fname, int like_clicked, List<String> tag_list) {
+	
+	public FeedDTO(int contentsno, String id, String filename, String contents, String rdate, int likecnt, int privacy,
+			double x_site, double y_site, String mname, String fname, int like_clicked, List<String> tag_list,
+			double base_distance, String url_id) {
 		super();
 		this.contentsno = contentsno;
 		this.id = id;
 		this.filename = filename;
 		this.contents = contents;
 		this.rdate = rdate;
+		this.likecnt = likecnt;
 		this.privacy = privacy;
 		this.x_site = x_site;
 		this.y_site = y_site;
@@ -39,13 +46,16 @@ public class FeedDTO {
 		this.fname = fname;
 		this.like_clicked = like_clicked;
 		this.tag_list = tag_list;
+		this.base_distance = base_distance;
+		this.url_id = url_id;
 	}
 
 	@Override
 	public String toString() {
 		return "FeedDTO [contentsno=" + contentsno + ", id=" + id + ", filename=" + filename + ", contents=" + contents
-				+ ", rdate=" + rdate + ", privacy=" + privacy + ", x_site=" + x_site + ", y_site=" + y_site + ", mname="
-				+ mname + ", fname=" + fname + ", like_clicked=" + like_clicked + ", tag_list=" + tag_list + "]";
+				+ ", rdate=" + rdate + ", likecnt=" + likecnt + ", privacy=" + privacy + ", x_site=" + x_site
+				+ ", y_site=" + y_site + ", mname=" + mname + ", fname=" + fname + ", like_clicked=" + like_clicked
+				+ ", tag_list=" + tag_list + ", base_distance=" + base_distance + ", url_id=" + url_id + "]";
 	}
 
 	public int getContentsno() {
@@ -108,20 +118,34 @@ public class FeedDTO {
 	public void setTag_list(List<String> tag_list) {
 		this.tag_list = tag_list;
 	}
-
 	public String getMname() {
 		return mname;
 	}
-
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
-
 	public String getFname() {
 		return fname;
 	}
-
 	public void setFname(String fname) {
 		this.fname = fname;
+	}
+	public double getBase_distance() {
+		return base_distance;
+	}
+	public void setBase_distance(double base_distance) {
+		this.base_distance = base_distance;
+	}
+	public int getLikecnt() {
+		return likecnt;
+	}
+	public void setLikecnt(int likecnt) {
+		this.likecnt = likecnt;
+	}
+	public String getUrl_id() {
+		return url_id;
+	}
+	public void setUrl_id(String url_id) {
+		this.url_id = url_id;
 	}
 }

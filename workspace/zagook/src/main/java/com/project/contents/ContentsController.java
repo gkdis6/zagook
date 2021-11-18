@@ -17,10 +17,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.Utility.Utility;
+import com.project.feed.FeedDTO;
+import com.project.member.Member;
 
 @Controller
 public class ContentsController {
@@ -44,11 +49,17 @@ public class ContentsController {
 			int k = 0;
 			while (k < list.size()) {
 				int cnt = 0;
+				int check = 0;
 				ContentsDTO dto = list.get(k);
 				map.put("contentsno", dto.getContentsno());
-				cnt = service.like(map);
-				dto.setLike_clicked(cnt);
-				
+				if(service.updateLike(map) > 0) {
+					cnt = service.likeCnt(map);
+					dto.setLikecnt(cnt);
+					check = service.likeCheck(map); 
+					if(check > 0) {
+						dto.setLike_clicked(check);
+					}
+				}
 				tag_list = service.getTag(dto.getContentsno());
 				dto.setTag_list(tag_list);
 				k++;
@@ -66,7 +77,7 @@ public class ContentsController {
 
 	@PostMapping("/contents/create")
 	public String create(ContentsDTO dto, HttpServletRequest request) throws IOException {// exception 지우기
-		String upDir = new ClassPathResource("/static/images").getFile().getAbsolutePath();
+		String upDir = Contents.getUploadDir();
 		String fname = Utility.saveFileSpring(dto.getFilenameMF(), upDir);
 
 		int size = (int) dto.getFilenameMF().getSize();
@@ -208,4 +219,65 @@ public class ContentsController {
 
 	}
 
+	@GetMapping("/search")
+	public String search() {
+		return "/search";
+	}
+	
+	@GetMapping(value="/searchInput", produces = "application/json")
+	@ResponseBody
+	public List<Map> searchInput(HttpServletRequest request) throws IOException {
+		String searchInput = Utility.checkNull(request.getParameter("searchInput"));
+		List<Map> searchlist = service.searchInput(searchInput);
+		System.out.println(searchInput);
+		System.out.println(searchlist);
+		return searchlist;
+	}
+	
+	@GetMapping("/search/friend")
+	public String search_friend() {
+		return "/search/friend";
+	}
+	
+	@GetMapping(value="/searchInput_friend", produces = "application/json")
+	@ResponseBody
+	public List<Map> searchInput_friend(HttpServletRequest request) throws IOException {
+		String searchInput = Utility.checkNull(request.getParameter("searchInput_friend"));
+		List<Map> searchFriendlist = service.searchInput_friend(searchInput);
+		System.out.println(searchInput);
+		System.out.println(searchFriendlist);
+		return searchFriendlist;
+	}
+	
+	@GetMapping(value="/like", produces = "application/json")
+	@ResponseBody
+	public int like(HttpServletRequest request, HttpSession session) throws IOException {
+		String id = (String) session.getAttribute("id");
+		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
+		Map map = new HashMap();
+		int cnt = 0;
+		map.put("contentsno", contentsno);
+		map.put("id", id);
+		if(service.like(map)>0) {
+			service.updateLike(map);
+			cnt = service.likeCnt(map);
+		}
+		return cnt;
+	}
+	
+	@GetMapping(value="/unlike", produces = "application/json")
+	@ResponseBody
+	public int unlike(HttpServletRequest request, HttpSession session) throws IOException {
+		String id = (String) session.getAttribute("id");
+		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
+		Map map = new HashMap();
+		int cnt = 0;
+		map.put("contentsno", contentsno);
+		map.put("id", id);
+		if(service.unlike(map)>0) {
+			service.updateLike(map);
+			cnt = service.likeCnt(map);
+		}
+		return cnt;
+	}
 }
