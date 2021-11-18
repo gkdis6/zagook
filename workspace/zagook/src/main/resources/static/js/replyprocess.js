@@ -47,20 +47,12 @@ function showPage(){
 });
 }
 let modal = $(".modal");
-<<<<<<< HEAD
-let modalInputContent = modal.find("input[name='content']");
-=======
 let modalInputContent = modal.find("textarea[name='content']");
->>>>>>> friend
  
 let modalModBtn = $("#modalModBtn");
 let modalRemoveBtn = $("#modalRemoveBtn");
 let modalRegisterBtn = $("#modalRegisterBtn");
-<<<<<<< HEAD
-
-=======
  
->>>>>>> friend
 $("#modalCloseBtn").on("click", function (e) {
  
   modal.modal('hide');

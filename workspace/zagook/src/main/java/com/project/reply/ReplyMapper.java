@@ -5,21 +5,13 @@ import java.util.Map;
  
 public interface ReplyMapper{
  
-<<<<<<< HEAD
-   int create(ReplyDTO dto);
-=======
    int create(ReplyDTO replyDTO);
->>>>>>> friend
  
    List<ReplyDTO> list(Map map);
  
    ReplyDTO read(int rnum);
   
-<<<<<<< HEAD
-   int update(ReplyDTO dto); 
-=======
    int update(ReplyDTO replyDTO); 
->>>>>>> friend
    
    int delete(int rnum);
  
@@ -28,7 +20,3 @@ public interface ReplyMapper{
    void upViewcnt(int contentsno);
 
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> friend

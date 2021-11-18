@@ -55,8 +55,4 @@ public class FriendController {
 
 		return "/reply/read";
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> friend

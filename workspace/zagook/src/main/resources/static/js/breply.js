@@ -1,18 +1,11 @@
 console.log("*****Reply Module........");
 class ReplyService {
     getList(param) {
-<<<<<<< HEAD
-       return new Promise((resolve, reject) => {
-            var contentsno = param.contentsno;
-            var sno = param.sno;
-            var eno = param.eno;
-=======
         return new Promise((resolve, reject) => {
             var contentsno = param.contentsno;
             var sno = param.sno;
             var eno = param.eno;
             //alert(param.bbsno);
->>>>>>> friend
             $.getJSON("./reply/list/" + contentsno + "/" + sno + "/" + eno ,
                 function (data) {
                     //alert(data);

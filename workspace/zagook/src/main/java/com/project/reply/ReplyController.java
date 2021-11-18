@@ -37,10 +37,6 @@ public class ReplyController {
     map.put("sno", sno);
     map.put("eno", eno);
     map.put("contentsno", contentsno);
-<<<<<<< HEAD
-    System.out.println(sno+" "+eno+" "+contentsno+" >> ");
-=======
->>>>>>> friend
  
     return new ResponseEntity<List<ReplyDTO>>(mapper.list(map), HttpStatus.OK);
   }
@@ -63,7 +59,6 @@ public class ReplyController {
  
   }
   @PostMapping("/reply/create")
-<<<<<<< HEAD
   public ResponseEntity<String> create(@RequestBody ReplyDTO dto) {
  
     log.info("ReplyDTO1: " + dto.getContent());
@@ -73,17 +68,6 @@ public class ReplyController {
     dto.setContent(dto.getContent().replaceAll("/n/r", "<br>"));
  
     int flag = mapper.create(dto);
-=======
-  public ResponseEntity<String> create(@RequestBody ReplyDTO vo) {
- 
-    log.info("ReplyDTO1: " + vo.getContent());
-    log.info("ReplyDTO1: " + vo.getId());
-    log.info("ReplyDTO1: " + vo.getContentsno());
- 
-    vo.setContent(vo.getContent().replaceAll("/n/r", "<br>"));
- 
-    int flag = mapper.create(vo);
->>>>>>> friend
  
     log.info("Reply INSERT flag: " + flag);
  

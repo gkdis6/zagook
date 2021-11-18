@@ -18,8 +18,4 @@ public class FriendDTO {
 		// TODO Auto-generated method stub
 		
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> friend
