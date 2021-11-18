@@ -354,7 +354,8 @@
 								id: "${dto.id}",
 								contentsno: "${dto.contentsno}",
 								fname: "${dto.fname}",
-								tag_list: "${dto.tag_list}"
+								tag_list: "${dto.tag_list}",
+								like_clicked: "${dto.like_clicked}"
 							}
 							<c:if test="${!i.last}">,</c:if>
 						</c:forEach>
@@ -439,9 +440,14 @@
 					
 					<div class="ellipsis" style="color: blue;">`+list+`</div>
 					
-					<div class="ellipsis">`+data.content+`</div>
-
-					<img src="../images/feed/like_outline.png" alt="like_img" width="28px"> <span class="feed_widget_text">`+data.likecnt+`</span>
+					<div class="ellipsis">`+data.content+`</div>`;
+					
+					if(data.like_clicked>0){
+						div6.innerHTML += '<img src="./images/feed/like_fill.png" style="width:28px;" id="like" >';
+					}else{
+						div6.innerHTML += '<img src="./images/feed/like_outline.png" style="width:28px;" id="like">';
+					}
+					div6.innerHTML += ` <span class="feed_widget_text" id="like_cnt">`+data.likecnt+`</span>
 					
 
 					<div class="ellipsis">댓글</div> 
@@ -481,6 +487,24 @@
 						var imgSrc = $(this).children("img").attr("src");
 						$(".modal_imgBox img").attr("src", imgSrc);
 					});
+					
+					var div7 = div6.children(like_cnt);
+					var like = function(clicked, contentsno){
+						let form = {
+							like_clicked: clicked,
+							contentsno: contentsno
+						};
+						$.ajax({
+							url : "/like",
+							type : "POST",
+							data : JSON.stringify(form),
+							contentType : "application/json; charset=utf-8;",
+							dataType : 'json',
+							success : function(data){
+								div7.text(data.like_cnt);
+							}
+						})
+					}
 				}
 
 				function makeOverListener(map, marker, infowindow, overlay) {
