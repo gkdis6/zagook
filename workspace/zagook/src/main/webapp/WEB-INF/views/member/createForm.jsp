@@ -16,7 +16,7 @@
   <script type="text/javascript">
   function idCheck(id){
 	  if(id==''){
-		  alert("아이디를 입력하세요");
+		  alert("닉네임을 입력하세요");
 		  document.frm.id.focus();
 	  }else{
 		  var url = "idcheck";
@@ -100,25 +100,25 @@ function inCheck(f){
 	
 
 	if(f.id.value.length==0){
-		alert("아이디를 입력하세요");
+		alert("닉네임을 입력하세요");
 		f.id.focus();
 		return false;
 	}
-	if(f.passwd.value.length==0){
+	if(f.password.value.length==0){
 		alert("비밀번호를 입력하세요");
-		f.passwd.focus();
+		f.password.focus();
 		return false;
 	}
-	if(f.repasswd.value.length==0){
+	if(f.repassword.value.length==0){
 		alert("비밀번호를 확인하세요");
-		f.repasswd.focus();
+		f.repassword.focus();
 		return false;
 	}
-	if(f.passwd.value != f.repasswd.value){
+	if(f.password.value != f.repassword.value){
 		alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-		f.passwd.value="";
-		f.repasswd.value="";
-		f.passwd.focus();
+		f.password.value="";
+		f.repassword.value="";
+		f.password.focus();
 		return false;
 	}
 	if(f.mname.value.length==0){
@@ -169,27 +169,38 @@ function inCheck(f){
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="id"><span id="need">*</span>아이디</label>
+      <label class="control-label col-sm-2" for="id"><span id="need">*</span>닉네임</label>
       <div class="col-sm-3">          
-        <input type="text" class="form-control" id="id" placeholder="Enter id" 
+        <input type="text" class="form-control" id="id" placeholder="Enter nickname" 
         name="id">
       </div>
-      <button type="button" class="btn btn-default col-sm-2"
-      onclick="idCheck(document.frm.id.value)">ID 중복확인</button>
+      <button type="button" class="btn btn-default col-sm-1"
+      onclick="idCheck(document.frm.id.value)">중복확인</button>
       <div id="idcheck"></div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="passwd"><span id="need">*</span>비밀번호</label>
+      <label class="control-label col-sm-2" for="email"><span id="need">*</span>이메일</label>
+      <div class="col-sm-3">          
+        <input type="email" class="form-control" id="email" 
+        placeholder="Enter email"  name="email">
+      </div>
+      
+      <button type="button" class="btn btn-default col-sm-1"
+      onclick="emailCheck(document.frm.email.value)">중복확인</button>
+      <div id="emailcheck"></div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="password"><span id="need">*</span>비밀번호</label>
       <div class="col-sm-4">          
-        <input type="password" class="form-control" id="passwd" 
-        placeholder="Enter passwd"  name="passwd">
+        <input type="password" class="form-control" id="password" 
+        placeholder="Enter password"  name="password">
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="repasswd"><span id="need">*</span>비밀번호 확인</label>
+      <label class="control-label col-sm-2" for="repassword"><span id="need">*</span>비밀번호 확인</label>
       <div class="col-sm-4">          
-        <input type="password" class="form-control" id="repasswd" 
-        placeholder="Enter repasswd"  name="repasswd">
+        <input type="password" class="form-control" id="repassword" 
+        placeholder="Enter repasswd"  name="repassword">
       </div>
     </div>
     <div class="form-group">
@@ -206,17 +217,7 @@ function inCheck(f){
         placeholder="Enter 전화번호"  name="tel">
       </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="email"><span id="need">*</span>이메일</label>
-      <div class="col-sm-3">          
-        <input type="email" class="form-control" id="email" 
-        placeholder="Enter email"  name="email">
-      </div>
-      
-      <button type="button" class="btn btn-default col-sm-2"
-      onclick="emailCheck(document.frm.email.value)">Email 중복확인</button>
-      <div id="emailcheck"></div>
-    </div>
+    
     <div class="form-group">
     <label class="control-label col-sm-2" for="job"><span id="need"></span>직업</label>
     <div class="col-sm-2">

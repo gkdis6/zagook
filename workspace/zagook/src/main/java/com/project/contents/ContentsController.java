@@ -52,6 +52,7 @@ public class ContentsController {
 				int check = 0;
 				ContentsDTO dto = list.get(k);
 				map.put("contentsno", dto.getContentsno());
+
 				if(service.updateLike(map) > 0) {
 					cnt = service.likeCnt(map);
 					dto.setLikecnt(cnt);
@@ -60,6 +61,11 @@ public class ContentsController {
 						dto.setLike_clicked(check);
 					}
 				}
+
+				cnt = service.like(map);
+				dto.setLike_clicked(cnt);
+				 
+
 				tag_list = service.getTag(dto.getContentsno());
 				dto.setTag_list(tag_list);
 				k++;
