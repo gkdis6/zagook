@@ -131,6 +131,7 @@ public class SocialController {
 		dto.setPassword(KakaoProfile.getId().toString());
 		dto.setMname(KakaoProfile.getProperties().getNickname());
 		dto.setEmail(KakaoProfile.getKakao_account().getEmail());
+		
 		Map map = new HashMap();
 		map.put("id", dto.getId());
 		map.put("email", dto.getEmail());
@@ -138,25 +139,30 @@ public class SocialController {
 		
 		HashMap map2 = new HashMap();
 		map2.putAll(map);
-		map2.put("id", ("kakao-"+map.get("id")));
-		System.out.println("##########::::"+map.get("id"));
-		System.out.println("@@@@@@@@@@::::"+map2.get("id"));
+//		map2.put("id", (map.get("id")));
+		System.out.println(":::"+map);
 //		System.out.println("카카오 아이디(번호):"+KakaoProfile.getId());
 //		System.out.println("카카오 이메일:"+KakaoProfile.getKakao_account().getEmail());
 //		System.out.println("카카오 닉네임:"+KakaoProfile.getProperties().getNickname());
 //		System.out.println("카카오 유저네임:"+KakaoProfile.getProperties().getNickname()+"_"+KakaoProfile.getId());
 //		System.out.println("카카오 패스워드:"+zagookKey);
         //회원이면
-		if (service.loginCheck(map) == 1) {
+		if (service.kakaoCheck(map) == 1) {
 			System.out.println("회원입니다.====================");
+			System.out.println("map::::"+map);
+			System.out.println("map2::::"+map2);
 			session.setAttribute("id",map2.get("id"));
-			System.out.println("2222@@@@@@@@@@::::"+map2.get("id"));
-			System.out.println("?????????:::::"+session.getId());
+			session.setAttribute("email",map2.get("email"));
+			//####################################################
+			System.out.println("email@@@@@@@@@@::::"+session.getAttribute("email"));
+			System.out.println("id@@@@@@@@@@::::"+session.getAttribute("id"));
+			
 			Cookie cookie = null;
-			System.out.println("===================="+session);
+//			String k_id = (String) map2.get("id");
 			String k_id = (String) map2.get("id");
+			String k_email = (String) map2.get("email");
 			 //if 쿠키값 저장--
-            if(k_id != null) {
+            if(k_id != null) { //|| k_email != null 추가
                 cookie = new Cookie("c_id",k_id ); //c_id=> Y
                 cookie.setMaxAge(60 * 60 * 24 * 365);//1년
                 response.addCookie(cookie);
@@ -173,11 +179,10 @@ public class SocialController {
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);             
             }
-		}//ifcnt>0 end
-		if(service.loginCheck(map) == 1) {
-			return "redirect:/"; 
 		}
-		
+		if(service.kakaoCheck(map) == 1) {
+			return "redirect:/";
+		}
 		else {
 			System.out.println("소셜을 통한 회원이 아닙니다.===============");
 //			model.addAttribute("msg","소셜을 통해 가입한 회원이 아닙니다.");

@@ -245,7 +245,6 @@ function inCheck(f){
         <button type="reset" class="btn" onclick="history.back()">취소</button>
       </div>
     </div>
-        <button type="reset" class="btn" onclick="history.back()">카카오톡</button>
   </form>
 <br><br>
 </div>

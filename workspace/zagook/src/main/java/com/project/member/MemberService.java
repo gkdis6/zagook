@@ -15,6 +15,12 @@ public interface MemberService {
 
 	int create(MemberDTO dto);
 
+	int update(MemberDTO dto);
+	
+	//카카오 소셜
+	MemberDTO kakaoread(String email);
 	int kakaocreate(MemberDTO dto);
+	int kakaoupdate(MemberDTO dto);
+	int kakaoCheck(Map<String, String> map);
 
 }

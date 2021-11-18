@@ -85,9 +85,9 @@
 											<div class="modal-body">
 												<form action="/member/login" class="was-validated" method="post">
 													<div class="form-group">
-														<label for="id" align="left">아이디 </label> <input type="text"
+														<label for="id" align="left">닉네임 </label> <input type="text"
 															class="form-control" style="width:250px;height:40px;"
-															id="userId" placeholder="Enter ID" name="id"
+															id="userId" placeholder="Enter Nickname" name="id"
 															required="required" value='${c_id_val}'>
 													</div>
 													<div class="form-group">
@@ -140,7 +140,7 @@
 										<li><a href="#">친구목록</a></li>
 									</ul>
 								</li>
-								<li><a href="${root}/member/update"><span class="glyphicon glyphicon-edit"></span> 마이페이지
+								<li><a href="${root}/member/mypage"><span class="glyphicon glyphicon-edit"></span> 마이페이지
 									</a></li>
 								<li><a href="${root}/member/logout"><span class="glyphicon glyphicon-log-out"></span>
 										로그아웃</a></li>
