@@ -251,4 +251,36 @@ public class ContentsController {
 		System.out.println(searchFriendlist);
 		return searchFriendlist;
 	}
+	
+	@GetMapping(value="/like", produces = "application/json")
+	@ResponseBody
+	public int like(HttpServletRequest request, HttpSession session) throws IOException {
+		String id = (String) session.getAttribute("id");
+		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
+		Map map = new HashMap();
+		int cnt = 0;
+		map.put("contentsno", contentsno);
+		map.put("id", id);
+		if(service.like(map)>0) {
+			service.updateLike(map);
+			cnt = service.likeCnt(map);
+		}
+		return cnt;
+	}
+	
+	@GetMapping(value="/unlike", produces = "application/json")
+	@ResponseBody
+	public int unlike(HttpServletRequest request, HttpSession session) throws IOException {
+		String id = (String) session.getAttribute("id");
+		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
+		Map map = new HashMap();
+		int cnt = 0;
+		map.put("contentsno", contentsno);
+		map.put("id", id);
+		if(service.unlike(map)>0) {
+			service.updateLike(map);
+			cnt = service.likeCnt(map);
+		}
+		return cnt;
+	}
 }

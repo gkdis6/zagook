@@ -44,5 +44,9 @@ public interface ContentsService {//요청할 수 있는 인터페이스 선언�
 	int updateLike(Map map);
 
 	int likeCheck(Map map);
+
+	int like(Map map);
+
+	int unlike(Map map);
 }
 

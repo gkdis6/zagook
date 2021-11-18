@@ -45,4 +45,8 @@ public interface ContentsMapper {
 
 		int likeCheck(Map map);
 
+		int like(Map map);
+
+		int unlike(Map map);
+
 }

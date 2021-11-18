@@ -443,11 +443,11 @@
 					<div class="ellipsis">`+data.content+`</div>`;
 					
 					if(data.like_clicked>0){
-						div6.innerHTML += '<img src="./images/feed/like_fill.png" style="width:28px;" id="like">';
+						div6.innerHTML += '<a href="javascript:" class="like" style="width:28px;height:28px;" idx="'+data.contentsno+'" ><img src="./images/feed/like_fill.png" style="width:28px;" id="like"></a>';
 					}else{
-						div6.innerHTML += '<img src="./images/feed/like_outline.png" style="width:28px;" id="like">';
+						div6.innerHTML += '<a href="javascript:" class="like" style="width:28px;height:28px;" idx="'+data.contentsno+'" ><img src="./images/feed/like_outline.png" style="width:28px;" id="unlike"></a>';
 					}
-					div6.innerHTML += ` <span class="feed_widget_text" id="like_cnt">`+data.likecnt+`</span>
+					div6.innerHTML += ` <span class="feed_widget_text" id="like_cnt`+data.contentsno+`">`+data.likecnt+`</span>
 					
 
 					<div class="ellipsis">댓글</div> 
@@ -482,12 +482,12 @@
 						map.setZoomable(true);
 					});
 					
-					/* div5.addEventListener('click', function(){
+					div5.addEventListener('click', function(){
 						$(".modal_img").show();
 						var imgSrc = $(this).children("img").attr("src");
 						$(".modal_imgBox img").attr("src", imgSrc);
 					});
-					
+					/*
 					var div7 = div6.children(like_cnt);
 					var like = function(clicked, contentsno){
 						let form = {
@@ -505,6 +505,7 @@
 							}
 						})
 					}*/
+					
 				}
 
 				function makeOverListener(map, marker, infowindow, overlay) {
@@ -535,7 +536,43 @@
 					}
 				}
 				
+				$(document).on("click","a[class='like']",function(){
+					let no = $(this).attr('idx');
+					if($(this).children('img').attr('id') == "like"){
+						$.ajax({
+							url : "/unlike",
+							type : "get",
+							data : {
+								contentsno : no
+							},
+							contentType : "application/json; charset=utf-8;",
+							dataType : 'json',
+							success : function(data){
+								let like_cnt = data;
+								$('#like_cnt'+no).text(like_cnt);
+							}
+						})
+						$(this).html('<img src="./images/feed/like_outline.png" style="width:28px;" id="unlike" class="like">');
+					}else if($(this).children('img').attr('id') == "unlike"){
+						$.ajax({
+							url : "/like",
+							type : "get",
+							data : {
+								contentsno : no
+							},
+							contentType : "application/json; charset=utf-8;",
+							dataType : 'json',
+							success : function(data){
+								let like_cnt = data;
+								$('#like_cnt'+no).text(like_cnt);
+							}
+						})
+						$(this).html('<img src="./images/feed/like_fill.png" style="width:28px;" id="like" class="like">');
+					}
+				})
 			}
+			
+			
 		</script>
 
 

@@ -131,4 +131,16 @@ public class ContentsServiceImpl implements ContentsService {
 		return mapper.likeCheck(map);
 	}
 
+	@Override
+	public int like(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.like(map);
+	}
+
+	@Override
+	public int unlike(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.unlike(map);
+	}
+
 }
