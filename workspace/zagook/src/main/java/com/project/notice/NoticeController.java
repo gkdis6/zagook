@@ -23,7 +23,7 @@ public class NoticeController {
 	@Qualifier("com.project.notice.NoticeServiceImpl")
 	private NoticeService service;
 	
-	@GetMapping("/notice/create")
+	@GetMapping("/admin/notice/create")
 	public String create() {
 
 		return "/notice/create";
@@ -91,7 +91,7 @@ public class NoticeController {
 		return "/notice/read";
 	}
 	
-	@GetMapping("/notice/update/{noticeno}")
+	@GetMapping("/admin/notice/update/{noticeno}")
 	public String update(@PathVariable("noticeno") int noticeno, Model model) {
 		NoticeDTO dto = service.read(noticeno);
 		model.addAttribute("dto", service.read(noticeno));
@@ -118,7 +118,7 @@ public class NoticeController {
 		}
 	}
 	
-	@GetMapping("/notice/delete/{noticeno}")
+	@GetMapping("/admin/notice/delete/{noticeno}")
 	public String delete(@PathVariable("noticeno") int noticeno) {
 
 		return "/notice/delete";
@@ -143,12 +143,6 @@ public class NoticeController {
 		} else {
 			return "/error";
 		}
-	}
-	
-	@GetMapping("/notice/detail")
-	public String detail() {
-
-		return "/notice/detail";
 	}
 	
 }

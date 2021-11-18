@@ -66,7 +66,9 @@ public class MemberController {
 		if(cnt>0) { //회원
 			 
 //			grade>> String grade = service.getGrade(map.get("id"));
-             session.setAttribute("id", map.get("id"));
+			String grade = service.getGrade(map.get("id")); 
+			session.setAttribute("id", map.get("id"));
+             session.setAttribute("grade", grade);
 //          grade >>   session.setAttribute("grade", grade);
              //Cookie 저장, id 저장 여부 및 id
              Cookie cookie = null;

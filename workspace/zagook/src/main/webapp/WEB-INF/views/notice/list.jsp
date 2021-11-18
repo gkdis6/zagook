@@ -22,7 +22,7 @@
 </head>
 <body>
 <div class="container">
-<h1 class="col-sm-offset-2 col-sm-10">공지 사항</h1>
+<h2><b>공지 사항</b></h2>
   <form class="form-inline" action="./list">
     <div class="form-group">
       <select class="form-control" name="col">
@@ -47,11 +47,11 @@
     <button type="submit" class="btn btn-default" >검색</button>
     <c:if test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
     <button type="button" class="btn btn-default"
-    onclick="location.href='/notice/create'">등록</button>
+    onclick="location.href='/admin/notice/create'">등록</button>
     </c:if>
   </form>
   
-  <table class="table table-striped">
+  <table class="table table-hover">
    <thead>
     <tr>
     <th>번호</th>

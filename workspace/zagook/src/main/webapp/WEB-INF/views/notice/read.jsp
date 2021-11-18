@@ -9,30 +9,24 @@
 </head>
 <body>
 	<div class="container">
-
-		<h2>조회</h2>
-		<div class="panel panel-default">
-			<div class="panel-heading">등록번호</div>
-			<div class="panel-body">${dto.noticeno}</div>
-			
-			<div class="panel-heading">제목</div>
-			<div class="panel-body">${dto.title}</div>
-
-			<div class="panel-heading">내용</div>
-			<div class="panel-body">${dto.content}</div>
-
-			<div class="panel-heading">조회수</div>
-			<div class="panel-body">${dto.cnt}</div>
-
-			<div class="panel-heading">등록일</div>
-			<div class="panel-body">${dto.rdate}</div>
-
+		<h2><b>공지 사항</b></h2>
+		<hr>
+		<div style="font-size:18px">
+		<b>${dto.title }</b>
 		</div>
+		<div style="font-size:15px; color:gray;">
+		조회수 ${dto.cnt} &nbsp;|&nbsp; 등록일 ${dto.rdate }
+		</div>
+		<hr size='10px'>
+		<p style="font-size:18px;">
+		${dto.content }
+		</p>
+		<hr size='10px'>
 		<div>
 			<c:if test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
-			<button type="button" class="btn" onclick="location.href='/notice/create'">등록</button>
-			<button type="button" class="btn" onclick="location.href='/notice/update/${noticeno}'">수정</button>
-			<button type="button" class="btn" onclick="location.href='/notice/delete/${noticeno}'">삭제</button>
+			<button type="button" class="btn" onclick="location.href='/admin/notice/create'">등록</button>
+			<button type="button" class="btn" onclick="location.href='/admin/notice/update/${dto.noticeno}'">수정</button>
+			<button type="button" class="btn" onclick="location.href='/admin/notice/delete/${dto.noticeno}'">삭제</button>
 			</c:if>
 			<button type="button" class="btn" onclick="location.href='/notice/list'">목록</button>
 		</div>

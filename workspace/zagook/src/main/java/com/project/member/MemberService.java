@@ -15,5 +15,7 @@ public interface MemberService {
 
 	int create(MemberDTO dto);
 
+	String getGrade(String string);
+
 
 }
