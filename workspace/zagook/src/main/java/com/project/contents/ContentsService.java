@@ -33,12 +33,16 @@ public interface ContentsService {//요청할 수 있는 인터페이스 선언�
 
 	int update2(ContentsDTO dto);
 
-	int like(Map map);
+	int likeCnt(Map map);
 
 	List<String> getTag(int contentsno);
 
 	List<Map> searchInput(String searchInput);
 
 	List<Map> searchInput_friend(String searchInput);
+
+	int updateLike(Map map);
+
+	int likeCheck(Map map);
 }
 

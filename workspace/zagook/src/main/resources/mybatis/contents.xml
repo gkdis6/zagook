@@ -80,9 +80,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by rdate desc
     </select>
     
-    <select id="like" parameterType="Map"
+    <select id="likeCnt" parameterType="Map"
 		resultType="int">
-		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
+		select count(*) from zagook_like where contentsno=#{contentsno}
 	</select>
 	
 	<select id="getTag" parameterType="int"
@@ -101,5 +101,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="searchInput_friend" parameterType="String" resultType="Map">
 		select id,fname from zagook_member
 		where id like '%'||#{searchInput}||'%'
+	</select>
+	<update id="updateLike" parameterType="Map">
+		update zagook_contents
+		set likecnt=(select count(*) from zagook_like where contentsno=#{contentsno})
+		where contentsno = #{contentsno}
+	</update>
+	<insert id="like" parameterType="Map">	
+		insert into zagook_like(contentsno, id, ldate)
+		values (#{contentsno},#{id},sysdate)
+	</insert>
+	<delete id="unlike" parameterType="Map">
+		delete from zagook_like
+		where contentsno=#{contentsno}
+		and id=#{id}
+	</delete>
+	<select id="likeCheck" parameterType="Map" resultType="int">
+		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
 	</select>
 </mapper>
