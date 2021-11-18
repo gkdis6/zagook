@@ -48,7 +48,7 @@
 				<div class="col-sm-6 col-sm-offset-2" id="selectimg"
 					style="display: none">
 					<input type="file" class="form-control" id="filenameMF"
-						name="filenameMF" accept=".jpg,.png,.gif" onchange="PreviewImage();" required="required">
+						name="filenameMF" accept=".jpg,.png,.gif" onchange="PreviewImage();">
 				</div>
 			</div>
 			<div class="form-group">
