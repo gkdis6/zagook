@@ -1,4 +1,3 @@
-
 $(function () {
 	//param is not allocated in navigator.geolocation.getCurrentPosition, so put the code repeatedly
 	let param = null;
