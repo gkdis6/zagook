@@ -72,7 +72,7 @@ function process_feed_list(param) {
             for (let i = 0; i < list.length; i++) {
 				console.log("[list.length] repeate : " + i);
 				console.log("[list " + i + "] " + typeof(list[i]));
-                html_str += '<div class="feed_container">';
+                html_str += '<div class="feed_container" onclick="container_clicK(event)" id="' + list[i].contentsno + '">';
                 html_str += '<div class="profile_container feed_padding">';
                 html_str += '<img src="../images/feed/profile/' + list[i].fname + '" class="profile_img" alt="profile_img">';
                 html_str += '<h3 class="name feed_padding">' + list[i].id + '</h3>';
@@ -91,13 +91,14 @@ function process_feed_list(param) {
                 html_str += '<p class="content feed_padding">' + list[i].contents + '</p>';
                 html_str += '<div class="date feed_padding">' + toStringByFormatting(new Date(list[i].rdate), '.') +'</div>';
                 html_str += '<div class="accessory feed_padding">';
+                // like area
                 html_str += '<img src="../images/feed/';
                 if (list[i].like_clicked > 0) {
 					html_str += 'like_fill.png"';
 				} else {
 					html_str += 'like_outline.png"';
 				}
-				html_str += ' alt="like_img" width="28px"> <span class="feed_widget_text">';
+				html_str += ' alt="like_img" width="28px" onclick="like_click(event)"> <span class="feed_widget_text">';
 				html_str += numberFormatting(list[i].likecnt) + '</span>';
                 html_str += '<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>';
                 html_str += '</div>';

@@ -9,7 +9,11 @@ import org.apache.ibatis.annotations.Mapper;
 public interface FeedMapper {
 	List<FeedDTO> list(FeedDTO dto);
 	List<FeedDTO> mylist(FeedDTO dto);
-	int like(Map map);
 	List<String> tag(int contentsno);
 	FeedDTO profile(String id);
+	int likecheck(Map map);
+	int likecnt(Map map);
+	int like(Map map);
+	int unlike(Map map);
+	int updatelikecnt(Map map);
 }
