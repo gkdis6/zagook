@@ -28,13 +28,14 @@ body {
 </head>
 <body>
 	<div class="body_container">
-		<a href="javascript:void(0)" class="float" onclick="openNav()"></a>
-		<div id="left_nav" class="sidenav" style="width: 0px;">
-		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		  <a href="/feed/myread">My Feed</a>
-		  <a href="/feed/read">Friends Feed</a>
-		  <a href="#">Friends List</a>
-		  <a href="/search">Search</a>
+		<div class="left_container">
+			<div id="left_nav" class="sidenav" style="width: 50px;" onclick="openNav()">
+			  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			  <a href="/feed/myread">My Feed</a>
+			  <a href="/feed/read">Friends Feed</a>
+			  <a href="/friend">Friends List</a>
+			  <a href="/search">Search</a>
+			</div>
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
 		</div>
