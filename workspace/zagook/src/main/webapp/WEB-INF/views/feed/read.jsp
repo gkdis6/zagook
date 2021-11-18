@@ -7,64 +7,14 @@
 <title>피드 페이지</title>
 <meta charset="utf-8">
 
+<link rel="stylesheet" href="/css/feed/constant.css" type="text/css">
+<link rel="stylesheet" href="/css/feed/body.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/container.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/feed_container.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/sidenav.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/floating_button.css" type="text/css">
+<link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
 
-<style>
-:root { 
-	--side_bar_size: 25%; 
-	--center_container_size: 800px; 
-	--feed_container_size: 740px;
-}
-
-body {
-	background: #f5f2b8;
-	font-family: "Lato", sans-serif;
-  	transition: background-color .5s;
-}
-.loader-wrapper {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #242f3f;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-}
-.loader {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  position: relative;
-  border: 4px solid #Fff;
-  animation: loader 2s infinite ease;
-}
-.loader-inner {
-  vertical-align: top;
-  display: inline-block;
-  width: 100%;
-  background-color: #fff;
-  animation: loader-inner 2s infinite ease-in;
-}
-@keyframes loader {
-  0% { transform: rotate(0deg);}
-  25% { transform: rotate(180deg);}
-  50% { transform: rotate(180deg);}
-  75% { transform: rotate(360deg);}
-  100% { transform: rotate(360deg);}
-}
-@keyframes loader-inner {
-  0% { height: 0%;}
-  25% { height: 0%;}
-  50% { height: 100%;}
-  75% { height: 100%;}
-  100% { height: 0%;}
-}
-</style>
 </head>
 <body>
 	<div class="loader-wrapper">
