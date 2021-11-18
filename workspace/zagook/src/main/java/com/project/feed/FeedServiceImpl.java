@@ -25,9 +25,9 @@ public class FeedServiceImpl implements FeedService {
 	}
 
 	@Override
-	public int like(Map map) {
+	public int likecheck(Map map) {
 		// TODO Auto-generated method stub
-		return mapper.like(map);
+		return mapper.likecheck(map);
 	}
 
 	@Override
@@ -40,5 +40,29 @@ public class FeedServiceImpl implements FeedService {
 	public FeedDTO profile(String id) {
 		// TODO Auto-generated method stub
 		return mapper.profile(id);
+	}
+
+	@Override
+	public int unlike(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.unlike(map);
+	}
+
+	@Override
+	public int updatelikecnt(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.updatelikecnt(map);
+	}
+
+	@Override
+	public int like(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.like(map);
+	}
+
+	@Override
+	public int likecnt(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.likecnt(map);
 	}
 }
