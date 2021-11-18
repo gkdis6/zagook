@@ -110,12 +110,15 @@ public class ContentsController {
 		if (oldfile != null && !oldfile.equals("default.jpg")) { // 원본파일 삭제
 			Utility.deleteFile(basePath, oldfile);
 		}
-
 		// pstorage에 변경 파일 저장
 		Map map = new HashMap();
 		map.put("contentsno", contentsno);
-		map.put("fname", Utility.saveFileSpring(filenameMF, basePath));
-
+		int size = (int) dto.getFilenameMF().getSize();
+		if (size<=0) {
+			map.put("fname",oldfile);
+		}else {
+			map.put("fname", Utility.saveFileSpring(filenameMF, basePath));
+		}
 		// 디비에 파일명 변경
 		int cnt = service.updateFile(map);
 		int cnt2 = service.update(dto);
