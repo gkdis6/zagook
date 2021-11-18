@@ -24,16 +24,6 @@ FROM(
 --total(목록)
 select count(*) from zagook_reply
 where contentsno = 10;
-
 --read(댓글 내용)
 select * from zagook_reply
 where rnum=10;
-
---update(댓글 수정)
-update zagook_reply
-set content = '새로운 의견을 올립니다.'
-where rnum = 34;
- 
---delete(댓글 삭제)
-delete from zagook_reply
-where rnum = 36;
