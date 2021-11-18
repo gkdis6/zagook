@@ -84,15 +84,15 @@ public class ContentsServiceImpl implements ContentsService {
 	}
 
 	@Override
-	public int delete3(int contentsno) {
-		// TODO Auto-generated method stub
-		return mapper.delete3(contentsno);
-	}
-
-	@Override
 	public int update2(ContentsDTO dto) {
 		// TODO Auto-generated method stub
 		return mapper.update2(dto);
+	}
+
+	@Override
+	public int update3(ContentsDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.update3(dto);
 	}
 
 	@Override

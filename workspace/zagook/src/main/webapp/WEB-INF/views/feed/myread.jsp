@@ -47,6 +47,7 @@ body {
 <script src="/js/utils/number_format_util.js"></script>
 <script src="/js/feed/fetch_feed.js"></script>
 <script src="/js/feed/scroll_feed_ajax.js"></script>
+<script src="/js/feed/like_event.js"></script>
 <script src="/js/feed/side_nav.js"></script>
 
 </body>

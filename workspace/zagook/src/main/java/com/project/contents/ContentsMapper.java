@@ -29,9 +29,9 @@ public interface ContentsMapper {
 
 		int delete2(int contentsno);
 
-		int delete3(int contentsno);
-
 		int update2(ContentsDTO dto);
+
+		int update3(ContentsDTO dto);
 
 		int likeCnt(Map map);
 

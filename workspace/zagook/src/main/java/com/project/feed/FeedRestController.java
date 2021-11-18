@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ServiceConfigurationError;
 
 import javax.servlet.http.HttpSession;
 
@@ -116,7 +117,7 @@ public class FeedRestController {
 				Map map = new HashMap();
 				map.put("id", dto.getId());
 				map.put("contentsno", tmp.getContentsno());
-				cnt = service.like(map);
+				cnt = service.likecheck(map);
 				tmp.setLike_clicked(cnt);
 				k++;
 			}
@@ -147,6 +148,37 @@ public class FeedRestController {
 		}
 		result_map.put("end_flag", end_flag);
 
+		return new ResponseEntity<Map>(result_map, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/feed/like", produces = "application/json;charset=UTF-8")
+	public ResponseEntity<Map> feed_like_ajax(@RequestBody FeedDTO dto, HttpSession session) {
+		// like count 검사
+		int cnt = 0;
+		Map map = new HashMap();
+		System.out.println("first check id: " + (String) session.getAttribute("id"));
+		map.put("id", (String) session.getAttribute("id"));
+		map.put("contentsno", dto.getContentsno());
+		cnt = service.likecheck(map);
+		if (cnt > 0) {
+			// contents 테이블 like_check 수 -1, like 테이블 접속 id, contentsno 기준으로 삭제
+			System.out.println(map.get("id"));
+			service.unlike(map);
+			service.updatelikecnt(map);
+		} else {
+			// contents 테이블 like_check 수 +1, like 테이블 접속 id, contentsno 기준으로 추가
+			System.out.println(map.get("id"));
+			service.like(map);
+			service.updatelikecnt(map);
+		}
+		
+		Map result_map = new HashMap<>();
+		if (cnt > 0) {
+			result_map.put("like", "unlike");
+		} else {
+			result_map.put("like", "like");
+		}
+		result_map.put("like_cnt", service.likecnt(map));
 		return new ResponseEntity<Map>(result_map, HttpStatus.OK);
 	}
 }
