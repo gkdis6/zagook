@@ -443,7 +443,7 @@
 					<div class="ellipsis">`+data.content+`</div>`;
 					
 					if(data.like_clicked>0){
-						div6.innerHTML += '<img src="./images/feed/like_fill.png" style="width:28px;" id="like" >';
+						div6.innerHTML += '<img src="./images/feed/like_fill.png" style="width:28px;" id="like">';
 					}else{
 						div6.innerHTML += '<img src="./images/feed/like_outline.png" style="width:28px;" id="like">';
 					}
@@ -482,7 +482,7 @@
 						map.setZoomable(true);
 					});
 					
-					div5.addEventListener('click', function(){
+					/* div5.addEventListener('click', function(){
 						$(".modal_img").show();
 						var imgSrc = $(this).children("img").attr("src");
 						$(".modal_imgBox img").attr("src", imgSrc);
@@ -504,7 +504,7 @@
 								div7.text(data.like_cnt);
 							}
 						})
-					}
+					}*/
 				}
 
 				function makeOverListener(map, marker, infowindow, overlay) {
