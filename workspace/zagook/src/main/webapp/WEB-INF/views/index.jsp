@@ -535,7 +535,7 @@
 						overlay.setMap(map);
 					}
 				}
-				
+				<c:if test="${!empty sessionScope.id }">
 				$(document).on("click","a[class='like']",function(){
 					let no = $(this).attr('idx');
 					if($(this).children('img').attr('id') == "like"){
@@ -570,6 +570,7 @@
 						$(this).html('<img src="./images/feed/like_fill.png" style="width:28px;" id="like" class="like">');
 					}
 				})
+				</c:if>
 			}
 			
 			
