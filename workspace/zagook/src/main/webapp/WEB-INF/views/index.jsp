@@ -412,7 +412,7 @@ jQuery(document).ready(function(){
 			                <c:if test="${not empty sessionScope.id}">
 				                <div class="btn_box1">
 									<button type="button" class="btn" onclick="location.href='/contents/update/`+data.contentsno+`'">수정</button>
-									<button type="button" class="btn" onclick="location.href='/contents/delete/`+data.contentsno+`">삭제</button>
+									<button type="button" class="btn" onclick="location.href='/contents/delete/`+data.contentsno+`'">삭제</button>
 								</div>
 							</c:if>
 			            </div>`;
