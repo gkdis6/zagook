@@ -92,10 +92,10 @@
 											<div class="modal-body">
 												<form action="/member/login" class="was-validated" method="post">
 													<div class="form-group">
-														<label for="id" align="left">닉네임 </label> <input type="text"
+														<label for="email" align="left">이메일 </label> <input type="text"
 															class="form-control" style="width:250px;height:40px;"
-															id="userId" placeholder="Enter Nickname" name="id"
-															required="required" value='${c_id_val}'>
+															id="userEmail" placeholder="Enter Email" name="email"
+															required="required" value='${c_email_val}'>	
 													</div>
 													<div class="form-group">
 														<label for="userPw">비밀번호 </label> <input type="password"
