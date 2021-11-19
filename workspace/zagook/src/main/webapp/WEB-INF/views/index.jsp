@@ -71,12 +71,14 @@
 
 	.info .body {
 		position: relative;
-		width: 490px;
+		width: 500px;
 		min-height: 182px;
 		max-height: 450px;
 		overflow: auto;
 	}
-	
+	.info .body::-webkit-scrollbar {
+		display: none;
+	}
 	.info .desc {
 		position: relative;
 		height: auto;
@@ -87,7 +89,7 @@
 		overflow: hidden;
 		height: auto;
 		margin-left: 5px;
-		width: 465px;
+		width: 490px;
 	}
 	.desc a{
 		margin-left: 5px;
@@ -95,7 +97,7 @@
 
 	.body .img {
 		position: relative;
-		width: 465px;
+		width: 490px;
 		height: auto;
 		color: #888;
 		margin: 5px;
@@ -239,6 +241,7 @@
 		font-size: 13px;
 		border-radius: 5px;
 		float: right;
+		margin-right: 5px;
 	}
 	
 	.btn_box1 button:hover {
@@ -376,7 +379,7 @@
 								.longitude)
 						});
 						var infowindow = new kakao.maps.InfoWindow({
-							content: '<div class="infowindow" id="myloca" style="text-align: center;">내 위치</div>'
+							content: '<div class="infowindow" id="myloca" style="text-align: center; width:150px;">내 위치</div>'
 						});
 						var markerImage = new kakao.maps.MarkerImage(
 							'./images/736653.png',

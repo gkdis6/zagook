@@ -48,7 +48,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/data.js"></script>
-<script src="/js/feed/loading_animation	.js"></script>
+<script src="/js/feed/loading_animation.js"></script>
 
 </body>
 </html>

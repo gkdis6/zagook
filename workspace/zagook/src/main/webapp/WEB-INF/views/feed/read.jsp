@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/css/feed/sidenav.css" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
 </head>
 <body>
 	<div class="loader-wrapper">
@@ -33,7 +33,7 @@
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
 		</div>
-		<div class="right_container">right_container</div>
+		<div class="right_container" id="map" style="width: 100vw; height: 100vh; position: fixed; z-index:-1;"></div>
 	</div>
 
 <script src="/js/feed/top_nav.js"></script>
@@ -49,6 +49,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/data.js"></script>
 <script src="/js/feed/loading_animation.js"></script>
+
 
 </body>
 </html>
