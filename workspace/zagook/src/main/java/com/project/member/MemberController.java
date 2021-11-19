@@ -32,10 +32,9 @@ public class MemberController {
 
    @GetMapping("/member/login")
    public String login(HttpServletRequest request) {
-      
       /*쿠키설정*/
         String c_id = "";     // ID 저장여부를 저장하는 변수, Y
-        String c_id_val = ""; // ID 값
+        String c_email_val = ""; // ID 값
          
         Cookie[] cookies = request.getCookies(); 
         Cookie cookie=null; 
@@ -46,14 +45,15 @@ public class MemberController {
          
            if (cookie.getName().equals("c_id")){ 
              c_id = cookie.getValue();     // Y 
-           }else if(cookie.getName().equals("c_id_val")){ 
-             c_id_val = cookie.getValue(); // user1... 
+           }else if(cookie.getName().equals("c_email_val")){ 
+             c_email_val = cookie.getValue(); // user1... 
            } 
          } 
         } 
         /*---쿠키 설정 끝----------------------------*/
         request.setAttribute("c_id", c_id);
-        request.setAttribute("c_id_val", c_id_val);
+        request.setAttribute("c_email_val", c_email_val);
+        System.out.println("######::::"+c_email_val);
       return "/member/login";
    }
    
@@ -61,18 +61,21 @@ public class MemberController {
    public String login(@RequestParam Map<String, String> map,
          HttpSession session,
          HttpServletResponse response,
-         Model model, String id) {
+         Model model, String id,String email) {
       int cnt = service.loginCheck(map);
-      MemberDTO dto = service.read(id);
-      System.out.println("dto:::::"+dto);
-      //cnt>0 logincheck가 성공
+      System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+      System.out.println("@@@@@@::::"+email);
+      System.out.println("map::::"+map);
+      MemberDTO dto = service.read(email);
+      map.put("id", dto.getId());
+      System.out.println("@@@@@@::::"+dto);
       if(cnt>0) { //회원
          
          //grade>> String grade = service.getGrade(map.get("id"));
-         System.out.println("111:::"+dto.getEmail());
-         System.out.println("222:::"+model);
          session.setAttribute("id", map.get("id"));
-         session.setAttribute("email",dto.getEmail());
+         session.setAttribute("email",map.get("email"));
+         System.out.println("seid:::"+session.getAttribute("id"));
+         System.out.println("seem:::"+session.getAttribute("email"));
          //#########################################################
          
              // grade >>   session.setAttribute("grade", grade);
@@ -85,7 +88,7 @@ public class MemberController {
                  cookie.setMaxAge(60 * 60 * 24 * 365);//1년
                  response.addCookie(cookie);
                  
-                 cookie = new Cookie("c_id_val",map.get("id"));
+                 cookie = new Cookie("c_email_val",map.get("email"));
                  cookie.setMaxAge(60 * 60 * 24 * 365);//1년
                  response.addCookie(cookie);
              }else { //체크 안하면 "" 넣어 지우기
@@ -93,15 +96,13 @@ public class MemberController {
                  cookie.setMaxAge(0);
                  response.addCookie(cookie);
                  
-                 cookie = new Cookie("c_id_val","");//쿠키 삭제
+                 cookie = new Cookie("c_email_val","");//쿠키 삭제
                  cookie.setMaxAge(0);
                  response.addCookie(cookie);             
              }
-      }//ifcnt>0 end
+      }
       
       if(cnt>0) {
-//         model.addAttribute("mssg","sdsd");
-//         return "/member/loginMsg";
          System.out.println("email:::"+session.getAttribute("email"));
          System.out.println("id:::"+session.getAttribute("id"));
             return "redirect:/";
@@ -131,7 +132,7 @@ public class MemberController {
    
    @PostMapping(value="/member/create",produces="application/json;charset=utf-8")
    public String crate(MemberDTO dto) throws IOException{
-//      String upDir = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
+	   //String upDir = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
       String upDir = Member.getUploadDir();
       String fname = Utility.saveFileSpring(dto.getFnameMF(), upDir);
       int size = (int)dto.getFnameMF().getSize();
@@ -182,50 +183,28 @@ public class MemberController {
    @GetMapping("/member/mypage")
    public String read(String id, String email,@RequestParam Map<String, String> map,
 	   				HttpSession session, Model model) {
-	   System.out.println("map:::"+map);
-	   System.out.println("model:::"+model);
       if(id == null) {
          id = (String) session.getAttribute("id");
-         System.out.println("@@@@@@@@@@@@#@!##@#@!#!@##!@#@#@#@!::::"+id);
       }
       if(email == null) {
          email = (String) session.getAttribute("email");
-         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%::::"+email);
       }
-
-      MemberDTO dto = service.read(id);
-      System.out.println("dto:::"+dto);
-      MemberDTO sdto = service.kakaoread(email);
-      System.out.println("sdto:::"+sdto);
-      model.addAttribute("social", sdto.getSocial());
-//      System.out.println("sssssooooo:::"+dto.getSocial());
-      System.out.println("sssssooooo:::"+sdto.getSocial());
-      System.out.println("GetSocial::::"+model.getAttribute("social"));
-      //소셜 회원이면 -----------------------------------------------
-      if(model.getAttribute("social").equals("kakao")) {
-//      if(model.getAttribute("social").equals("kakao")) {
-         System.out.println("카카오 회원입니다.");
-//         System.out.println("dto1111::::"+dto);
-         model.addAttribute("sdto", sdto);
-         return "/member/mypage";
-      }
-      System.out.println("dto1111::::"+dto);
-      System.out.println("일반 회원입니다.");
+      MemberDTO dto = service.read(email);
       model.addAttribute("dto",dto);
       return "/member/mypage";
    }
    
    @GetMapping("/member/update")
-   public String update(String id,HttpSession session, Model model) {
-      if(id == null) {
-         id = (String)session.getAttribute("id");
+   public String update(String id,String email,HttpSession session, Model model) {
+      if(email == null) {
+         email = (String)session.getAttribute("email");
       }
-      MemberDTO dto = service.read(id);
-      Map map = new HashMap();
+      MemberDTO dto = service.read(email);
       // 소셜 사용자 구분 ======================================
-      map.put("social", dto.getSocial());
-      map.get("social");
-      System.out.println("social:::::"+map.get("social"));
+//      Map map = new HashMap();
+//      map.put("social", dto.getSocial());
+//      map.get("social");
+//      System.out.println("social:::::"+map.get("social"));
       // ==================================================
       model.addAttribute("dto",dto);
       return "/member/update";
@@ -233,42 +212,18 @@ public class MemberController {
    
    @PostMapping("/member/update")
     public String update(MemberDTO dto,String id, Model model,HttpSession session) {
-      model.addAttribute("social", dto.getSocial());
-      System.out.println("3333social:::::"+model.getAttribute("social"));
-   
-      if(model.getAttribute("social").equals("kakao")) {
-         System.out.println("@@@@@카카오 회원입니다.");
-         int cnt = service.kakaoupdate(dto);
-         System.out.println("kakaocnt:::"+cnt);
-         
-         if(cnt ==1) {
-            model.addAttribute("id",dto.getId());
-//            session.removeAttribute("id");
-//            session.setAttribute("id",dto.getId());
-            return "redirect:./mypage";
-         }
-         else {
-            return "error";
-         }
-      } else {
-         
-         System.out.println("일반회원 입니다.");
-         int cnt = service.update(dto);
-         System.out.println("dto:::"+dto);
-            System.out.println("cnt:::"+cnt);
+	  System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+dto);
+	   int cnt = service.update(dto);
+       System.out.println("@@@@@@@@@@:::"+dto);
+       System.out.println("@@@cnt"+cnt);
+       if(cnt==1) {
+               model.addAttribute("id", dto.getId());
+               session.removeAttribute("id");
+               session.setAttribute("id",dto.getId());
+               return "redirect:./mypage";
+       }else {
+               return "error";
+       }
 
-            if(cnt==1) {
-                    model.addAttribute("id", dto.getId());
-                    System.out.println("model:::"+model);
-                    System.out.println("dto:::"+dto);
-                    session.removeAttribute("id");
-                    session.setAttribute("id",dto.getId());
-                    // return "redirect:./read";
-                    return "redirect:./mypage";
-                    //return "redirect:/";
-            }else {
-                    return "error";
-            }
-      }
     }
 }

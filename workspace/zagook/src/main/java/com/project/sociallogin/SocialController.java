@@ -46,19 +46,14 @@ public class SocialController {
 	@Qualifier("com.project.member.MemberServiceImpl")
 	private MemberService service;
 	
-//	@RequestMapping(value="/")
-//	public String index() {
-//		
-//		return "/member/kakaotest";
-//	}
-	
 	
 	@GetMapping("/kakaologin")
 	public String kakaoCallback(String code,
 								HttpServletRequest request,
 								HttpServletResponse response,
 								HttpSession session,								
-								Model model) {
+								Model model,
+								String email) {
 	//post 방식으로 key = value 데이터를 요청(카카오쪽으로)
 		 
 	RestTemplate rt = new RestTemplate();
@@ -92,7 +87,7 @@ public class SocialController {
 			e.printStackTrace();
 		}
 		
-		System.out.println("카카오액세스 :::"+oauthToken.getAccess_token());
+		System.out.println("카카오액세스 토큰값:::"+oauthToken.getAccess_token());
 		
 		RestTemplate rt2 = new RestTemplate();
 		
@@ -110,7 +105,7 @@ public class SocialController {
 			kakaoProfileRequest2,
 			String.class //String data가 response에 응답
 		);
-		System.out.println("@@@@@@@@@@@@@@@:::"+response2.getBody());
+		System.out.println("response.getBody:::"+response2.getBody());
 		
 		ObjectMapper objectMapper2 = new ObjectMapper();
 		KakaoProfile KakaoProfile = null;
@@ -136,38 +131,28 @@ public class SocialController {
 		map.put("id", dto.getId());
 		map.put("email", dto.getEmail());
 		map.put("password",dto.getPassword());
-		
 		HashMap map2 = new HashMap();
 		map2.putAll(map);
-//		map2.put("id", (map.get("id")));
+		MemberDTO sdto = service.read((String) map.get("email"));
+		
 		System.out.println(":::"+map);
-//		System.out.println("카카오 아이디(번호):"+KakaoProfile.getId());
-//		System.out.println("카카오 이메일:"+KakaoProfile.getKakao_account().getEmail());
-//		System.out.println("카카오 닉네임:"+KakaoProfile.getProperties().getNickname());
-//		System.out.println("카카오 유저네임:"+KakaoProfile.getProperties().getNickname()+"_"+KakaoProfile.getId());
-//		System.out.println("카카오 패스워드:"+zagookKey);
         //회원이면
 		if (service.kakaoCheck(map) == 1) {
 			System.out.println("회원입니다.====================");
-			System.out.println("map::::"+map);
-			System.out.println("map2::::"+map2);
-			session.setAttribute("id",map2.get("id"));
-			session.setAttribute("email",map2.get("email"));
-			//####################################################
-			System.out.println("email@@@@@@@@@@::::"+session.getAttribute("email"));
-			System.out.println("id@@@@@@@@@@::::"+session.getAttribute("id"));
+			session.setAttribute("id",sdto.getId());
+			session.setAttribute("email",map.get("email"));
 			
 			Cookie cookie = null;
 //			String k_id = (String) map2.get("id");
-			String k_id = (String) map2.get("id");
-			String k_email = (String) map2.get("email");
+			String k_id = sdto.getId();
+			String k_email = (String) map.get("email");
 			 //if 쿠키값 저장--
             if(k_id != null) { //|| k_email != null 추가
                 cookie = new Cookie("c_id",k_id ); //c_id=> Y
                 cookie.setMaxAge(60 * 60 * 24 * 365);//1년
                 response.addCookie(cookie);
                 
-                cookie = new Cookie("id",(String) map2.get("id"));
+                cookie = new Cookie("id",sdto.getId());
                 cookie.setMaxAge(60 * 60 * 24 * 365);//1년
                 response.addCookie(cookie);
             }else { //체크 안하면 "" 넣어 지우기
@@ -185,8 +170,6 @@ public class SocialController {
 		}
 		else {
 			System.out.println("소셜을 통한 회원이 아닙니다.===============");
-//			model.addAttribute("msg","소셜을 통해 가입한 회원이 아닙니다.");
-//			return "/member/loginerror"; 
 			service.kakaocreate(dto);
 			return "redirect:/"; 
 		}

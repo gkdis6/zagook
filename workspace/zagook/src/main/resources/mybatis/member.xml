@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="read" parameterType="String" resultType="com.project.member.MemberDTO">
 	select *
 	from zagook_member
-	where id = #{id}
+	where email = #{email}
 </select>
 
 <select id="kakaoread" parameterType="String" resultType="com.project.member.MemberDTO">
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="loginCheck" parameterType="Map" resultType="int">
 	select
     count(*) from zagook_member
-     where id = #{id}
+     where email = #{email}
      and password = #{password}
 </select>
 
@@ -60,25 +60,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      VALUES(#{id}, #{password},#{mname}, #{email}, sysdate,'member.jpg', 'H', 'kakao')
 </insert>
 
-
-
-<update id="kakaoupdate" parameterType="com.project.member.MemberDTO">
+<update id="update" parameterType="com.project.member.MemberDTO">
 	update zagook_member
       set id = #{id},
       mname = #{mname},
       tel = #{tel},
       job = #{job}
       where email = #{email}
-</update>
-
-<update id="update" parameterType="com.project.member.MemberDTO">
-	update zagook_member
-      set id = #{id},
-      mname = #{mname},
-      tel = #{tel},
-      email = #{email},
-      job = #{job}
-      where id = #{id}
 </update>
 
 </mapper>

@@ -7,7 +7,7 @@ public interface MemberService {
 
 	int loginCheck(Map<String, String> map);
 
-	MemberDTO read(String id);
+	MemberDTO read(String email);
 	
 	int duplicatedId(String id);
 
