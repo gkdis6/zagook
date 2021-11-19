@@ -62,10 +62,6 @@ public class ContentsController {
 					}
 				}
 
-				cnt = service.like(map);
-				dto.setLike_clicked(cnt);
-				 
-
 				tag_list = service.getTag(dto.getContentsno());
 				dto.setTag_list(tag_list);
 				k++;
