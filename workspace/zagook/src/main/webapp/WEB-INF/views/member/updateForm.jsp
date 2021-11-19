@@ -60,9 +60,13 @@ function inCheck(f){
         onsubmit="return inCheck(this)"
         >
      
-    <input type="hidden" name="social" value="${dto.social}">
-<%--     <input type="hidden" name="id" value="${dto.id}"> --%>
-    <div class="form-group">
+<%--     <input type="hidden" name="social" value="${dto.social}"> --%>
+    <input type="hidden" name="email" value="${dto.email}">
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="email">이메일</label>
+		<div class="col-sm-3">${dto.email}</div>
+	</div>
+	<div class="form-group">
       <label class="control-label col-sm-2" for="id">닉네임</label>
       <div class="col-sm-3">          
       <input type="text" class="form-control" id="id" 
@@ -83,19 +87,6 @@ function inCheck(f){
          value="${dto.tel}"  name="tel">
       </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="email"><span id="need">*</span>이메일</label>
-      <div class="col-sm-3">          
-        <input type="email" class="form-control" id="email" 
-        value="${dto.email}" name="email">
-      </div>
-      
-      <button type="button" class="btn btn-default col-sm-2"
-      onclick="emailCheck(document.frm.email.value)">Email 변경</button>
-      <div id="emailcheck"></div>
-      
-    </div>
-    
     <div class="form-group">
     <label class="control-label col-sm-2" for="job"><span id="need">*</span>직업</label>
     <div class="col-sm-2">

@@ -35,9 +35,9 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public MemberDTO read(String id) {
+	public MemberDTO read(String email) {
 		// TODO Auto-generated method stub
-		return mapper.read(id);
+		return mapper.read(email);
 	}
 
 
