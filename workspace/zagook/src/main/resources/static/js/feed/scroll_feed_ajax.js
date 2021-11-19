@@ -71,7 +71,7 @@ function process_feed_list(param) {
             for (let i = 0; i < list.length; i++) {
 				console.log("[list.length] repeate : " + i);
 				console.log("[list " + i + "] " + typeof(list[i]));
-                html_str += '<div class="feed_container" onclick="container_clicK(event)" id="' + list[i].contentsno + '">';
+                html_str += '<div class="feed_container" onclick="container_click(event)" id="' + list[i].contentsno + '">';
                 html_str += '<div class="profile_container feed_padding">';
                 html_str += '<img src="../images/feed/profile/' + list[i].fname + '" class="profile_img" alt="profile_img">';
                 html_str += '<h3 class="name feed_padding">' + list[i].id + '</h3>';
@@ -82,7 +82,7 @@ function process_feed_list(param) {
                 //tag area
                 if (list[i].tag_list != null) {
                     for (let j = 0; j < list[i].tag_list.length; j++) {
-                        html_str += '<a class="title feed_padding">';
+                        html_str += '<a href="javascript:void(0);" onclick="tag_click();return false;">';
                         html_str += '#' + list[i].tag_list[j];
                         html_str += '</a>';
                     }

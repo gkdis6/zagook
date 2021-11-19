@@ -137,6 +137,7 @@
 									로그아웃</a></li>
 						</c:when>
 						<c:otherwise>
+								<li id="searchbar_container"></li>
 								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">🙄 <span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href="${root}/friend">친구신청</a></li>

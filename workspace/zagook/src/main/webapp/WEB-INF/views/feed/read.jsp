@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="/css/feed/container.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/feed_container.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/sidenav.css" type="text/css">
-<link rel="stylesheet" href="/css/feed/floating_button.css" type="text/css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
 
 </head>
@@ -27,7 +27,8 @@
 			  <a href="/feed/myread">My Feed</a>
 			  <a href="/feed/read">Friends Feed</a>
 			  <a href="/friend">Friends List</a>
-			  <a href="/search">Search</a>
+			  <a href="javascript:void(0)" onclick="openSearchbar()">Search Tag</a>
+			  <a href="javascript:void(0)" onclick="openSearchbarFriend()">Search Friend</a>
 			</div>
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
@@ -42,7 +43,12 @@
 <script src="/js/feed/scroll_feed_ajax.js"></script>
 <script src="/js/feed/like_event.js"></script>
 <script src="/js/feed/side_nav.js"></script>
-<script src="/js/feed/loading_animation	.js"></script>
+<script src="/js/feed/onclick_tag.js"></script>
+<script src="/js/feed/searchbar.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/js/data.js"></script>
+<script src="/js/feed/loading_animation.js"></script>
 
 </body>
 </html>
