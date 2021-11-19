@@ -65,10 +65,10 @@ public class ContentsController {
 	}
 
 	@PostMapping("/contents/create")
-	public String create(ContentsDTO dto, HttpServletRequest request) throws IOException {// exception 지우기
+	public String create(ContentsDTO dto, String tag, HttpServletRequest request) throws IOException {// exception 지우기
 		String upDir = new ClassPathResource("/static/images").getFile().getAbsolutePath();
 		String fname = Utility.saveFileSpring(dto.getFilenameMF(), upDir);
-
+		
 		int size = (int) dto.getFilenameMF().getSize();
 
 		if (size > 0) {
@@ -77,17 +77,23 @@ public class ContentsController {
 			dto.setFilename("default.jpg");
 		}
 		int cnt = service.create(dto);
-		int cnt2 = service.create2(dto);
-		int cnt3 = service.create3(dto);
-
-		if (cnt3 > 0) {
-//			response.setContentType("text/html; charset=UTF-8");
-//			 
-//			PrintWriter out = response.getWriter();
-//			 
-//			out.println("<script>alert('계정이 등록 되었습니다');</script>");
-			return "redirect:/";
-		} else {
+		System.out.println("태그 값 확인:"+tag);
+		System.out.println("태그 길이 확인:"+tag.trim().length());
+		if(tag.trim().length() == 0){
+			if(cnt>0) {
+				return "redirect:/";
+			}else {
+				return "error";
+			}
+		}else if(tag.trim().length() != 0) {
+			int cnt2 = service.create2(dto);
+			int cnt3 = service.create3(dto);
+			if(cnt3 >0) {
+				return "redirect:/";
+			}else {
+				return "error";
+			}
+		}else {
 			return "error";
 		}
 	}
@@ -97,8 +103,12 @@ public class ContentsController {
 			Model model) {
 		ContentsDTO dto = service.detail(contentsno);
 		model.addAttribute("contentsno", contentsno);
+		System.out.println("파일이름:"+dto.getFilename());
 		model.addAttribute("oldfile", dto.getFilename());
 		model.addAttribute("dto", dto);
+		if(dto.getTag()==null) {
+			String tag="";
+		}
 		return "/contents/update";
 	}
 
@@ -123,7 +133,7 @@ public class ContentsController {
 		int cnt = service.updateFile(map);
 		int cnt2 = service.update(dto);
 		int cnt5 = service.delete(contentsno);
-		if (tag != null) {
+		if (tag.trim().length() != 0) {
 			int cnt3 = service.create2(dto);
 			int cnt4 = service.update2(dto);
 			if (cnt>0 & cnt2 > 0 & cnt4 > 0) {
@@ -131,7 +141,7 @@ public class ContentsController {
 			} else {
 				return "error";
 			}
-		} else if (tag == null) {
+		} else if (tag.trim().length() == 0) {
 			if (cnt>0 & cnt2 > 0 & cnt5 > 0) {
 				return "redirect:/";
 			} else {
