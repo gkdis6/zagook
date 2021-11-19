@@ -7,11 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.project.contents.ContentsMapper">
 	<select id="detail" parameterType="int"
 		resultType="com.project.contents.ContentsDTO">
-		select c.contentsno, c.contents, c.privacy, m.mname, c.filename, c.rdate, c.likecnt, (select t.tag
+		select c.contentsno, c.contents, c.privacy, m.mname, c.filename, c.rdate, c.likecnt,
+		'#'||(select listagg(t.tag,' #') within group(order by p.contentsno)
 		from zagook_tag t, zagook_posttag p
-		where exists(
-		    select * from zagook_contents c, zagook_posttag p
-		    where c.contentsno=p.contentsno
+		where EXISTS(
+    		select p.tag_id from zagook_contents c, zagook_posttag p
+   			where c.contentsno=p.contentsno
 		)
 		and t.tag_id=p.tag_id
 		and p.contentsno=#{contentsno}

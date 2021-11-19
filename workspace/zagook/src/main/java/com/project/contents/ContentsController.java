@@ -35,17 +35,17 @@ public class ContentsController {
 
 	@GetMapping("/")
 	public String home(HttpServletRequest request, HttpSession session) {
-		if(session.getAttribute("id") != null) {
+		if (session.getAttribute("id") != null) {
 			Map map = new HashMap();
 			String id = (String) session.getAttribute("id");
-			
+
 			map.put("id", id);
-			
+
 			List<ContentsDTO> list = service.list(map);
 			List<String> tag_list = new ArrayList();
-			
+
 			request.setAttribute("list", list);
-			
+
 			int k = 0;
 			while (k < list.size()) {
 				int cnt = 0;
@@ -53,28 +53,27 @@ public class ContentsController {
 				ContentsDTO dto = list.get(k);
 				map.put("contentsno", dto.getContentsno());
 
-				if(service.updateLike(map) > 0) {
+				if (service.updateLike(map) > 0) {
 					cnt = service.likeCnt(map);
 					dto.setLikecnt(cnt);
-					check = service.likeCheck(map); 
-					if(check > 0) {
+					check = service.likeCheck(map);
+					if (check > 0) {
 						dto.setLike_clicked(check);
 					}
 				}
 
 				cnt = service.like(map);
 				dto.setLike_clicked(cnt);
-				 
 
 				tag_list = service.getTag(dto.getContentsno());
 				dto.setTag_list(tag_list);
 				k++;
 			}
-			
+
 		}
 		return "/home";
 	}
-	
+
 	@GetMapping("/contents/create")
 	public String create() {
 
@@ -85,7 +84,7 @@ public class ContentsController {
 	public String create(ContentsDTO dto, String tag, HttpServletRequest request) throws IOException {// exception 지우기
 		String upDir = new ClassPathResource("/static/images").getFile().getAbsolutePath();
 		String fname = Utility.saveFileSpring(dto.getFilenameMF(), upDir);
-		
+
 		int size = (int) dto.getFilenameMF().getSize();
 
 		if (size > 0) {
@@ -94,37 +93,36 @@ public class ContentsController {
 			dto.setFilename("default.jpg");
 		}
 		int cnt = service.create(dto);
-		System.out.println("태그 값 확인:"+tag);
-		System.out.println("태그 길이 확인:"+tag.trim().length());
-		if(tag.trim().length() == 0){
-			if(cnt>0) {
-				return "redirect:/";
-			}else {
-				return "error";
-			}
-		}else if(tag.trim().length() != 0) {
-			int cnt2 = service.create2(dto);
-			int cnt3 = service.create3(dto);
-			if(cnt3 >0) {
-				return "redirect:/";
-			}else {
-				return "error";
+		System.out.println("태그 값 확인:" + tag);
+		if (tag.trim().length() != 0) {
+			String t[] = tag.split("#");
+			for (int i = 0; i < t.length; i++) {
+				if (t[i].trim().length() != 0) {
+					dto.setTag(t[i].trim().replace("", "_"));
+					int cnt2 = service.create2(dto);
+					int cnt3 = service.create3(dto);
+					if (cnt3 <= 0) {
+						return "error";
+					}
+				}
 			}
 		}else {
-			return "error";
+			if(cnt<=0) {
+				return "error";
+			}
 		}
+		return "redirect:/";
 	}
 
 	@GetMapping("/contents/update/{contentsno}")
-	public String update(@PathVariable("contentsno") int contentsno,
-			Model model) {
+	public String update(@PathVariable("contentsno") int contentsno, Model model) {
 		ContentsDTO dto = service.detail(contentsno);
 		model.addAttribute("contentsno", contentsno);
-		System.out.println("파일이름:"+dto.getFilename());
+		System.out.println("파일이름:" + dto.getFilename());
 		model.addAttribute("oldfile", dto.getFilename());
 		model.addAttribute("dto", dto);
-		if(dto.getTag()==null) {
-			String tag="";
+		if (dto.getTag() == null) {
+			String tag = "";
 		}
 		return "/contents/update";
 	}
@@ -140,9 +138,9 @@ public class ContentsController {
 		Map map = new HashMap();
 		map.put("contentsno", contentsno);
 		int size = (int) dto.getFilenameMF().getSize();
-		if (size<=0) {
-			map.put("fname",oldfile);
-		}else {
+		if (size <= 0) {
+			map.put("fname", oldfile);
+		} else {
 			map.put("fname", Utility.saveFileSpring(filenameMF, basePath));
 		}
 		// 디비에 파일명 변경
@@ -150,22 +148,23 @@ public class ContentsController {
 		int cnt2 = service.update(dto);
 		int cnt5 = service.delete(contentsno);
 		if (tag.trim().length() != 0) {
-			int cnt3 = service.create2(dto);
-			int cnt4 = service.update2(dto);
-			if (cnt>0 & cnt2 > 0 & cnt4 > 0) {
-				return "redirect:/";
-			} else {
+			String t[] = tag.split("#");
+			for (int i = 0; i < t.length; i++) {
+				if (t[i].trim().length() != 0) {
+					dto.setTag(t[i].trim().replace(" ", "_"));
+					int cnt3 = service.create2(dto);
+					int cnt4 = service.update2(dto);
+					if (cnt <= 0 || cnt2 <= 0 || cnt4 <= 0) {
+						return "error";
+					}
+				}
+			}
+		}else {
+			if(cnt<=0 || cnt2<=0 || cnt5<=0) {
 				return "error";
 			}
-		} else if (tag.trim().length() == 0) {
-			if (cnt>0 & cnt2 > 0 & cnt5 > 0) {
-				return "redirect:/";
-			} else {
-				return "error";
-			}
-		} else {
-			return "error";
 		}
+		return "redirect:/";
 
 	}
 
@@ -241,8 +240,8 @@ public class ContentsController {
 	public String search() {
 		return "/search";
 	}
-	
-	@GetMapping(value="/searchInput", produces = "application/json")
+
+	@GetMapping(value = "/searchInput", produces = "application/json")
 	@ResponseBody
 	public List<Map> searchInput(HttpServletRequest request) throws IOException {
 		String searchInput = Utility.checkNull(request.getParameter("searchInput"));
@@ -251,13 +250,13 @@ public class ContentsController {
 		System.out.println(searchlist);
 		return searchlist;
 	}
-	
+
 	@GetMapping("/search/friend")
 	public String search_friend() {
 		return "/search/friend";
 	}
-	
-	@GetMapping(value="/searchInput_friend", produces = "application/json")
+
+	@GetMapping(value = "/searchInput_friend", produces = "application/json")
 	@ResponseBody
 	public List<Map> searchInput_friend(HttpServletRequest request) throws IOException {
 		String searchInput = Utility.checkNull(request.getParameter("searchInput_friend"));
@@ -266,8 +265,8 @@ public class ContentsController {
 		System.out.println(searchFriendlist);
 		return searchFriendlist;
 	}
-	
-	@GetMapping(value="/like", produces = "application/json")
+
+	@GetMapping(value = "/like", produces = "application/json")
 	@ResponseBody
 	public int like(HttpServletRequest request, HttpSession session) throws IOException {
 		String id = (String) session.getAttribute("id");
@@ -276,14 +275,14 @@ public class ContentsController {
 		int cnt = 0;
 		map.put("contentsno", contentsno);
 		map.put("id", id);
-		if(service.like(map)>0) {
+		if (service.like(map) > 0) {
 			service.updateLike(map);
 			cnt = service.likeCnt(map);
 		}
 		return cnt;
 	}
-	
-	@GetMapping(value="/unlike", produces = "application/json")
+
+	@GetMapping(value = "/unlike", produces = "application/json")
 	@ResponseBody
 	public int unlike(HttpServletRequest request, HttpSession session) throws IOException {
 		String id = (String) session.getAttribute("id");
@@ -292,7 +291,7 @@ public class ContentsController {
 		int cnt = 0;
 		map.put("contentsno", contentsno);
 		map.put("id", id);
-		if(service.unlike(map)>0) {
+		if (service.unlike(map) > 0) {
 			service.updateLike(map);
 			cnt = service.likeCnt(map);
 		}
