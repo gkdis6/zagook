@@ -53,13 +53,10 @@ public class ContentsController {
 				ContentsDTO dto = list.get(k);
 				map.put("contentsno", dto.getContentsno());
 
-				if(service.updateLike(map) > 0) {
-					cnt = service.likeCnt(map);
-					dto.setLikecnt(cnt);
-					check = service.likeCheck(map); 
-					if(check > 0) {
-						dto.setLike_clicked(check);
-					}
+				
+				check = service.likeCheck(map); 
+				if(check > 0) {
+					dto.setLike_clicked(check);
 				}
 
 				tag_list = service.getTag(dto.getContentsno());
