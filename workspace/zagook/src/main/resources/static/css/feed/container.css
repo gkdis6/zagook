@@ -5,15 +5,10 @@
 	flex-direction: row;
 	flex-basis: auto;
 }
-/* .left_container {
-	position: fixed;
-	left: 0;
-	width: var(--side_bar_size);
-} */
 .center_container {
 	display: flex;
 	position: relative;
- 	left: calc(40% - (var(--center_container_size) / 2));
+ 	left: calc(25% - (var(--center_container_size) / 2));
 	flex-direction: column;
 	justice-content: center;
 	width: var(--center_container_size);
@@ -29,5 +24,5 @@
 .right_container {
 	position: fixed;
 	right: 0;
-	width: var(--side_bar_size);
+	width: calc(100% - var(--center_container_size) - 150px);
 }

@@ -43,6 +43,7 @@
 <script src="/js/feed/scroll_feed_ajax.js"></script>
 <script src="/js/feed/like_event.js"></script>
 <script src="/js/feed/side_nav.js"></script>
+<script src="/js/feed/onclick_tag.js"></script>
 <script src="/js/feed/searchbar.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
