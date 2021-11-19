@@ -53,17 +53,11 @@ public class ContentsController {
 				ContentsDTO dto = list.get(k);
 				map.put("contentsno", dto.getContentsno());
 
-				if (service.updateLike(map) > 0) {
-					cnt = service.likeCnt(map);
-					dto.setLikecnt(cnt);
-					check = service.likeCheck(map);
-					if (check > 0) {
-						dto.setLike_clicked(check);
-					}
+				
+				check = service.likeCheck(map); 
+				if(check > 0) {
+					dto.setLike_clicked(check);
 				}
-
-				cnt = service.like(map);
-				dto.setLike_clicked(cnt);
 
 				tag_list = service.getTag(dto.getContentsno());
 				dto.setTag_list(tag_list);
@@ -98,7 +92,7 @@ public class ContentsController {
 			String t[] = tag.split("#");
 			for (int i = 0; i < t.length; i++) {
 				if (t[i].trim().length() != 0) {
-					dto.setTag(t[i].trim().replace("", "_"));
+					dto.setTag(t[i].trim().replace(" ", "_"));
 					int cnt2 = service.create2(dto);
 					int cnt3 = service.create3(dto);
 					if (cnt3 <= 0) {

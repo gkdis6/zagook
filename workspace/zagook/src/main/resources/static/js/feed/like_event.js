@@ -6,7 +6,11 @@ function like_click(event) {
 	console.log(event_flag);
 }
 
-function container_clicK(event) {
+function tag_click(event) {
+	event_flag = 2;
+}
+
+function container_click(event) {
 	console.log(event_flag);
 	if (event_flag == 1) {
 		console.log(event.currentTarget.id);
@@ -29,6 +33,8 @@ function container_clicK(event) {
                 console.log(err);
             }
 		});
+	} else if (event_flag == 2) {
+		onclickTag(event);
 	}
 	
 	// after processing, should be change flag to default(0)
