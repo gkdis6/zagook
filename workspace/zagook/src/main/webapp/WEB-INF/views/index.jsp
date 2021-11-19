@@ -89,6 +89,9 @@
 		margin-left: 5px;
 		width: 465px;
 	}
+	.desc a{
+		margin-left: 5px;
+	}
 
 	.body .img {
 		position: relative;
@@ -315,6 +318,7 @@
 		max-height: 100%;
 	}
 	
+	
 </style>
 
 </head>
@@ -436,18 +440,22 @@
 					
 					var div6 = document.createElement('div');
 					div6.className = 'desc';
-					div6.innerHTML = `<div class="ellipsis">`+data.rdate.substring(0,16)+`</div>
+					div6.innerHTML = `<div class="ellipsis">`+data.rdate.substring(0,16)+`</div>`;
 					
-					<div class="ellipsis" style="color: blue;">`+list+`</div>
+					for(var item of list){
+						if(item){
+							div6.innerHTML += '<a href="javascript:" class="tag" style="color: blue;">'+"  #"+item+'</div>';
+						}
+					}
 					
-					<div class="ellipsis">`+data.content+`</div>`;
+					div6.innerHTML += `<div class="ellipsis">`+data.content+`</div>`;
 					
 					if(data.like_clicked>0){
 						div6.innerHTML += '<a href="javascript:" class="like" style="width:28px;height:28px;" idx="'+data.contentsno+'" ><img src="./images/feed/like_fill.png" style="width:28px;" id="like"></a>';
 					}else{
 						div6.innerHTML += '<a href="javascript:" class="like" style="width:28px;height:28px;" idx="'+data.contentsno+'" ><img src="./images/feed/like_outline.png" style="width:28px;" id="unlike"></a>';
 					}
-					div6.innerHTML += ` <span class="feed_widget_text" id="like_cnt`+data.contentsno+`">`+data.likecnt+`</span>
+					div6.innerHTML += ` <span class="feed_widget_text" id="like_cnt`+data.contentsno+`">`+numberFormatting(data.likecnt)+`</span>
 					
 
 					<div class="ellipsis">댓글</div> 
@@ -517,7 +525,7 @@
 						overlay.setMap(map);
 					}
 				}
-				
+				<c:if test="${!empty sessionScope.id }">
 				$(document).on("click","a[class='like']",function(){
 					let no = $(this).attr('idx');
 					if($(this).children('img').attr('id') == "like"){
@@ -552,6 +560,7 @@
 						$(this).html('<img src="./images/feed/like_fill.png" style="width:28px;" id="like" class="like">');
 					}
 				})
+				</c:if>
 			}
 			
 			
@@ -740,6 +749,7 @@
 		    }
 		});
 	</script>
+	<script src="/js/utils/number_format_util.js"></script>
 </body>
 
 </html>

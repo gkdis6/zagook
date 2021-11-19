@@ -122,8 +122,7 @@ public class ContentsController {
 	@PostMapping("/contents/update")
 	public String update(ContentsDTO dto, String tag, int contentsno, MultipartFile filenameMF, String oldfile,
 			HttpServletRequest request) throws IOException {
-		 String basePath = new ClassPathResource("/static/images").getFile().getAbsolutePath();
-		//String basePath = Contents.getUploadDir();
+		String basePath = Contents.getUploadDir();
 		if (oldfile != null && !oldfile.equals("default.jpg")) { // 원본파일 삭제
 			Utility.deleteFile(basePath, oldfile);
 		}
