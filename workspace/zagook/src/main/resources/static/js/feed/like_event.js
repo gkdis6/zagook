@@ -34,7 +34,7 @@ function container_click(event) {
             }
 		});
 	} else if (event_flag == 2) {
-		onclick_tag();
+		onclickTag(event);
 	}
 	
 	// after processing, should be change flag to default(0)
