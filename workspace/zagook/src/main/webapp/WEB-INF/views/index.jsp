@@ -388,7 +388,10 @@
 						kakao.maps.event.addListener(marker, 'mouseover', makeOverListener2(map, marker,
 							infowindow));
 						kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-					});
+					}, error);
+				}
+				function error(){
+					console.warn('param = {"x_site": "37.5535462", "y_site": "126.964296"};	');
 				}
 				for (var i = 0; i < positions.length; i++) {
 					var data = positions[i];
