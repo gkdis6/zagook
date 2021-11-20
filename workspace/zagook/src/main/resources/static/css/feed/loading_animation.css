@@ -11,7 +11,7 @@
   display:flex;
   justify-content: center;
   align-items: center;
-  z-index: 5;
+  z-index: var(--loading_animation_zindex);
 }
 .loader {
   display: inline-block;

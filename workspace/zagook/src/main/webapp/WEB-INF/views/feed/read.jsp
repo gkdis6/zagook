@@ -38,7 +38,7 @@
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
 		</div>
-		<div class="right_container">
+		<div class="map_container">
 			<div id="map" style="width: 100vw; height: 100vh; z-index:-1;">
 			</div>
 		</div>
