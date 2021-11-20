@@ -7,6 +7,15 @@
 <title>피드 페이지</title>
 <meta charset="utf-8">
 
+<script>
+function right_click() {
+	console.log("right_click");
+}
+function body_click() {
+	console.log("body_click");
+}
+</script>
+
 <link rel="stylesheet" href="/css/feed/constant.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/body.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/container.css" type="text/css">
@@ -33,7 +42,10 @@
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
 		</div>
-		<div class="right_container" id="map" style="width: 100vw; height: 100vh; position: fixed; z-index:-1;"></div>
+		<div class="right_container">
+			<div id="map" style="width: 100vw; height: 100vh; z-index:-1;">
+			</div>
+		</div>
 	</div>
 
 <script src="/js/feed/top_nav.js"></script>
