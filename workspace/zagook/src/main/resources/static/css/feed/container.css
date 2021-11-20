@@ -8,7 +8,7 @@
 .center_container {
 	display: flex;
 	position: relative;
- 	left: calc(25% - (var(--center_container_size) / 2));
+	left: 50px;
 	flex-direction: column;
 	justice-content: center;
 	width: var(--center_container_size);
