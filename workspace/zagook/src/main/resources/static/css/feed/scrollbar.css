@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+::-webkit-scrollbar{
+    width: 20px;
+}
+::-webkit-scrollbar-track{
+    background-color: transparent;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb{
+	border: 5px solid transparent;
+    border-radius: 100px;
+    background-color: #fff;
+    background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover{
+	border: 5px solid transparent;
+    border-radius: 100px;
+    background: linear-gradient(transparent, #fff);
+    background-clip: content-box;
+}
