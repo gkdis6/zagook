@@ -4,9 +4,9 @@ $(function () {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
 			if (window.location.href == "http://localhost:8005/feed/myread") {
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread"};	
+				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread", "load_type": "reload"};	
 			} else if (window.location.href == "http://localhost:8005/feed/read"){
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read"};	
+				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read", "load_type": "reload"};	
 			}
 			process_feed_list(param);
 		},reject);
@@ -15,18 +15,18 @@ $(function () {
 	
 function reject() {
 	if (window.location.href == "http://localhost:8005/feed/myread") {
-		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread"};	
+		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread", "load_type": "reload"};	
 	} else if (window.location.href == "http://localhost:8005/feed/read"){
-		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read"};	
+		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read", "load_type": "reload"};	
 	}
 	process_feed_list(param);
 }
 
 function reject_scroll_event() {
 	if (window.location.href == "http://localhost:8005/feed/myread") {
-		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread"};	
+		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread", "load_type": "scroll"};	
 	} else if (window.location.href == "http://localhost:8005/feed/read"){
-		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read"};	
+		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read", "load_type": "scroll"};	
 	}
 	let doc_height = this.document.scrollingElement.scrollHeight;
 	let top_height = this.document.scrollingElement.scrollTop;
@@ -49,11 +49,16 @@ function scrollEventHandler(event){
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
 			if (window.location.href == "http://localhost:8005/feed/myread") {
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread"};	
+				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread", "load_type": "scroll"};	
 			} else if (window.location.href == "http://localhost:8005/feed/read"){
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read"};	
+				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read", "load_type": "scroll"};	
 			}
-			process_feed_list(param);
+			let doc_height = this.document.scrollingElement.scrollHeight;
+			let top_height = this.document.scrollingElement.scrollTop;
+			let client_height = this.document.scrollingElement.clientHeight;
+			if (top_height + client_height >= doc_height) {
+				process_feed_list(param);
+			}
 		},reject_scroll_event);
 	}
 }

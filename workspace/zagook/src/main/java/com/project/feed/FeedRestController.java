@@ -42,6 +42,11 @@ public class FeedRestController {
 		List<FeedDTO> sub_list = null;
 		boolean end_flag = false;
 		
+		// load type 구분 : reload or scroll
+		if (dto.getLoad_type().equals("reload"))
+			sublist_idx = 0;
+		
+		// page 간 이동 구분
 		if ((url_flag == 1 && dto.getUrl_id().equals("myread")) || (url_flag == 2 && dto.getUrl_id().equals("read")))
 			sublist_idx = 0;
 		
