@@ -23,6 +23,11 @@ function reject() {
 }
 
 function reject_scroll_event() {
+	if (window.location.href == "http://localhost:8005/feed/myread") {
+		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread"};	
+	} else if (window.location.href == "http://localhost:8005/feed/read"){
+		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read"};	
+	}
 	let doc_height = this.document.scrollingElement.scrollHeight;
 	let top_height = this.document.scrollingElement.scrollTop;
 	let client_height = this.document.scrollingElement.clientHeight;
