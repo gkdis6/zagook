@@ -41,12 +41,6 @@ public class FeedController {
 		return "/feed/read";
 	}
 	
-	@GetMapping("/feed/read/**")
-	public String friendsfeedscroll() {
-
-		return "/feed/read";
-	}
-	
 	@GetMapping("/feed/myread")
 	public String myfeed() {
 
