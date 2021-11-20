@@ -7,23 +7,17 @@
 <title>피드 페이지</title>
 <meta charset="utf-8">
 
-<script>
-function right_click() {
-	console.log("right_click");
-}
-function body_click() {
-	console.log("body_click");
-}
-</script>
-
 <link rel="stylesheet" href="/css/feed/constant.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/body.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/container.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/feed_container.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/sidenav.css" type="text/css">
+<link rel="stylesheet" href="/css/feed/nav_mouse_click.css" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
+
 </head>
 <body>
 	<div class="loader-wrapper">
@@ -32,12 +26,14 @@ function body_click() {
 	<div class="body_container">
 		<div class="left_container">
 			<div id="left_nav" class="sidenav" style="width: 50px;" onclick="openNav()">
-			  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			  <a href="/feed/myread">My Feed</a>
-			  <a href="/feed/read">Friends Feed</a>
-			  <a href="/friend">Friends List</a>
-			  <a href="javascript:void(0)" onclick="openSearchbar()">Search Tag</a>
-			  <a href="javascript:void(0)" onclick="openSearchbarFriend()">Search Friend</a>
+				<div id="nav_click_img_container">
+					<img id="mose_click_img" src="../images/feed/mouse_click_v2.png" alt="mouse_click" style="width: 30px;">
+				</div>
+			  	<a href="/feed/myread">My Feed</a>
+			  	<a href="/feed/read">Friends Feed</a>
+			  	<a href="/friend">Friends List</a>
+			  	<a href="javascript:void(0)" onclick="openSearchbar()">Search Tag</a>
+			  	<a href="javascript:void(0)" onclick="openSearchbarFriend()">Search Friend</a>
 			</div>
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
@@ -61,7 +57,6 @@ function body_click() {
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/data.js"></script>
 <script src="/js/feed/loading_animation.js"></script>
-
 
 </body>
 </html>
