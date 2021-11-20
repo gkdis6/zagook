@@ -18,9 +18,6 @@ $(function () {
 			}
 		    process_feed_list(param);
 		}
-	})
-	.catch(err => {
-		console.log("Error Msg: " + err);
 	});
 });
 

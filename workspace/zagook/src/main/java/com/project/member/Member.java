@@ -11,7 +11,7 @@ public class Member {
         String path = "";
         String os = System.getProperty("os.name").toLowerCase();
         if (File.separator.equals("\\")) {
-            path = "C:/AIstudy/deploy/shopping/member/storage/";
+            path = "C:/AIstudy/deploy/zagook/member/storage/";
             System.out.println("Windows 10: " + path);
             
         } else if(os.equals("linux")){
