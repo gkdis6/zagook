@@ -23,6 +23,7 @@ public class FeedDTO {
 	private double base_distance;
 	
 	private String url_id;
+	private String load_type;
 	
 	public FeedDTO() {
 		super();
@@ -31,7 +32,7 @@ public class FeedDTO {
 	
 	public FeedDTO(int contentsno, String id, String filename, String contents, String rdate, int likecnt, int privacy,
 			double x_site, double y_site, String mname, String fname, int like_clicked, List<String> tag_list,
-			double base_distance, String url_id) {
+			double base_distance, String url_id, String load_type) {
 		super();
 		this.contentsno = contentsno;
 		this.id = id;
@@ -48,14 +49,16 @@ public class FeedDTO {
 		this.tag_list = tag_list;
 		this.base_distance = base_distance;
 		this.url_id = url_id;
+		this.load_type = load_type;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "FeedDTO [contentsno=" + contentsno + ", id=" + id + ", filename=" + filename + ", contents=" + contents
 				+ ", rdate=" + rdate + ", likecnt=" + likecnt + ", privacy=" + privacy + ", x_site=" + x_site
 				+ ", y_site=" + y_site + ", mname=" + mname + ", fname=" + fname + ", like_clicked=" + like_clicked
-				+ ", tag_list=" + tag_list + ", base_distance=" + base_distance + ", url_id=" + url_id + "]";
+				+ ", tag_list=" + tag_list + ", base_distance=" + base_distance + ", url_id=" + url_id + ", load_type="
+				+ load_type + "]";
 	}
 
 	public int getContentsno() {
@@ -147,5 +150,11 @@ public class FeedDTO {
 	}
 	public void setUrl_id(String url_id) {
 		this.url_id = url_id;
+	}
+	public String getLoad_type() {
+		return load_type;
+	}
+	public void setLoad_type(String load_type) {
+		this.load_type = load_type;
 	}
 }
