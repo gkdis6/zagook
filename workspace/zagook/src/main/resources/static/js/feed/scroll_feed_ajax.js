@@ -108,36 +108,70 @@ function process_feed_list(param) {
 				console.log(position);
 				console.log("[list.length] repeate : " + i);
 				console.log("[list " + i + "] " + typeof(list[i]));
+		
+		//----- <Feed container> ------------------------------------
                 html_str += '<div class="feed_container" onclick="container_click(event)" id="' + list[i].contentsno + '">';
+                
+            // profile container
                 html_str += '<div class="profile_container feed_padding">';
+                
+                // profile image area
+                html_str += '<span class="profile_image_container">';
                 html_str += '<img src="../images/feed/profile/' + list[i].fname + '" class="profile_img" alt="profile_img">';
-                html_str += '<h3 class="name feed_padding">' + list[i].id + '</h3>';
+                html_str += '</span>';
+                
+                // user id area
+                html_str += '<span class="user_id_container">';
+                html_str += '<a href="javascript:void(0);" class="user_id">' + list[i].id + '</a>';
+                html_str += '</span>';
+                
                 html_str += '</div>';
+                
+                // image area
                 html_str += '<div class="img_box_container">';
                 html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box">';
                 html_str += '</div>';
-                //tag area
+                
+                // tag area
+                html_str += '<div id="tag_container" class="tag_container">';
                 if (list[i].tag_list != null) {
                     for (let j = 0; j < list[i].tag_list.length; j++) {
-                        html_str += '<a class="feed_padding" href="javascript:void(0);" onclick="tag_click();return false;">';
+                        html_str += '<a href="javascript:void(0);" onclick="tag_click();return false;">';
                         html_str += '#' + list[i].tag_list[j];
                         html_str += '</a>';
                     }
                 }
+                html_str += '</div>';
+                
+                // contents area
                 html_str += '<p class="content feed_padding">' + list[i].contents + '</p>';
+                
+                // date area
                 html_str += '<div class="date feed_padding">' + toStringByFormatting(new Date(list[i].rdate), '.') +'</div>';
+                
+            // accessory container
                 html_str += '<div class="accessory feed_padding">';
+                
                 // like area
-                html_str += '<img src="../images/feed/';
+                html_str += '<span class="like_container">';
+                html_str += '<img class="like_icon" src="../images/feed/';
                 if (list[i].like_clicked > 0) {
 					html_str += 'like_fill.png"';
 				} else {
 					html_str += 'like_outline.png"';
 				}
-				html_str += ' alt="like_img" width="28px" onclick="like_click(event)"> <span class="feed_widget_text">';
+				html_str += ' alt="like_img" onclick="like_click(event)"> <span class="feed_widget_text">';
 				html_str += numberFormatting(list[i].likecnt) + '</span>';
-                html_str += '<img src="../images/feed/comment.png" alt="comments_img" width="28px"> <span class="feed_widget_text">Comments</span>';
+				html_str + '</span>';
+				
+				//reply area
+				html_str += '<span class="reply_container">';
+                html_str += '<img class="reply_icon" src="../images/feed/comment.png" alt="comments_img"> <span class="feed_widget_text">Comments</span>';
+                html_str += '</span>';
+                
+                
                 html_str += '</div>';
+                
                 html_str += '</div>';
             }
             if (end_flag == true) {
