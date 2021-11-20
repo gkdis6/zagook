@@ -18,6 +18,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   
   
+</head>
+<body>
 <script type="text/javascript">
 $(document).ready(function(){
 	 var msg = '${msg}'; //Controller에서 가져온 데이터
@@ -31,35 +33,33 @@ $(document).ready(function(){
 	     if(msg){
 	         $(".modal-body").html(msg);
 	         $("#myModal").modal("show");
-// 			location.href = "http://localhost:8005/member/agree";
 	     }
 	   }
 	});
-</script>
-</head>
-<body>
-<div class="container">
+	</script>
+	</head>
+	<body>
+	<div class="container">
 
 
-<!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-      
-          <h4 class="modal-title">오류 메세지!</h4>
-        </div>
-        <div class="modal-body">
-          <p>This is a small modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='${root}/member/agree'">가입하기</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="history.back()">Close</button>
-        </div>
-      </div>
-    </div>
+	<!-- Modal -->
+	  <div class="modal fade" id="myModal">
+	    <div class="modal-dialog modal-sm">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	      
+	          <h4 class="modal-title">가입 성공</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>This is a small modal.</p>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='/'">Close</button>
+	        </div>
+	      </div>
+	    </div>
+		</div>
 	</div>
-</div>
 
-</body>
-</html>
+	</body>
+	</html>

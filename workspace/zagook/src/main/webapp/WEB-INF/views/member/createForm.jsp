@@ -126,21 +126,21 @@ function inCheck(f){
 		f.mname.focus();
 		return false;
 	}
-	if(f.tel.value.length==0){
-		alert("전화번호를 입력하세요");
-		f.tel.focus();
-		return false;
-	}
+// 	if(f.tel.value.length==0){
+// 		alert("전화번호를 입력하세요");
+// 		f.tel.focus();
+// 		return false;
+// 	}
 	if(f.email.value.length==0){
 		alert("이메일을 입력하세요");
 		f.email.focus();
 		return false;
 	}
-	if(f.job.selectedIndex == 0){
-		alert("직업을 선택하세요");
-		f.job.focus();
-		return false;
-	}
+// 	if(f.job.selectedIndex == 0){
+// 		alert("직업을 선택하세요");
+// 		f.job.focus();
+// 		return false;
+// 	}
 }
 
 </script>
@@ -169,16 +169,6 @@ function inCheck(f){
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="id"><span id="need">*</span>닉네임</label>
-      <div class="col-sm-3">          
-        <input type="text" class="form-control" id="id" placeholder="Enter nickname" 
-        name="id">
-      </div>
-      <button type="button" class="btn btn-default col-sm-1"
-      onclick="idCheck(document.frm.id.value)">중복확인</button>
-      <div id="idcheck"></div>
-    </div>
-    <div class="form-group">
       <label class="control-label col-sm-2" for="email"><span id="need">*</span>이메일</label>
       <div class="col-sm-3">          
         <input type="email" class="form-control" id="email" 
@@ -188,6 +178,16 @@ function inCheck(f){
       <button type="button" class="btn btn-default col-sm-1"
       onclick="emailCheck(document.frm.email.value)">중복확인</button>
       <div id="emailcheck"></div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="id"><span id="need">*</span>닉네임</label>
+      <div class="col-sm-3">          
+        <input type="text" class="form-control" id="id" placeholder="Enter nickname" 
+        name="id">
+      </div>
+      <button type="button" class="btn btn-default col-sm-1"
+      onclick="idCheck(document.frm.id.value)">중복확인</button>
+      <div id="idcheck"></div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="password"><span id="need">*</span>비밀번호</label>
@@ -211,7 +211,7 @@ function inCheck(f){
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="tel"><span id="need">*</span>전화번호</label>
+      <label class="control-label col-sm-2" for="tel"><span id="need"></span>전화번호</label>
       <div class="col-sm-4">          
         <input type="text" class="form-control" id="tel" 
         placeholder="Enter 전화번호"  name="tel">
