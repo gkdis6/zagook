@@ -15,15 +15,15 @@
 	overflow: auto;
 	align-items: center;
 	transition: margin-left .5s;
-	z-index: 1;
+	z-index: var(--center_container_zindex);
 }
 .left_container {
 	position: fixed;
 	left: 0;
 	width: var(--side_bar_size);
-	z-index: 1;
+	z-index: var(--left_container_zindex);
 }
-.right_container {
+.map_container {
 	position: fixed;
 	right: 0;
 	width: 100%;
