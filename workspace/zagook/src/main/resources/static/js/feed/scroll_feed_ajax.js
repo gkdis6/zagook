@@ -13,13 +13,22 @@ $(function () {
 	}
 });
 	
-function reject(){
+function reject() {
 	if (window.location.href == "http://localhost:8005/feed/myread") {
 		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread"};	
 	} else if (window.location.href == "http://localhost:8005/feed/read"){
 		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read"};	
 	}
 	process_feed_list(param);
+}
+
+function reject_scroll_event() {
+	let doc_height = this.document.scrollingElement.scrollHeight;
+	let top_height = this.document.scrollingElement.scrollTop;
+	let client_height = this.document.scrollingElement.clientHeight;
+	if (top_height + client_height >= doc_height) {
+		process_feed_list(param);
+	}
 }
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -40,7 +49,7 @@ function scrollEventHandler(event){
 				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read"};	
 			}
 			process_feed_list(param);
-		},reject);
+		},reject_scroll_event);
 	}
 }
 
