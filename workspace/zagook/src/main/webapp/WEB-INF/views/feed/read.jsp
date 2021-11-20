@@ -50,9 +50,9 @@
 <script src="/js/feed/url_pattern/url_regex.js"></script>
 <script src="/js/feed/map/feed_map.js"></script>
 <script src="/js/feed/feed_ajax/feed_ajax.js"></script>
-<script src="/js/feed/feed_ajax/feed_scroll_event.js"></script>
 <script src="/js/feed/feed_ajax/feed_box_processing.js"></script>
 <script src="/js/feed/feed_ajax/feed_box_init_processing.js"></script>
+<script src="/js/feed/feed_ajax/feed_scroll_event.js"></script>
 <script src="/js/feed/like_event.js"></script>
 <script src="/js/feed/side_nav.js"></script>
 <script src="/js/feed/onclick_tag.js"></script>
