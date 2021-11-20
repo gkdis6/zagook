@@ -2,6 +2,9 @@
 
 body {
 	background: #f5f2b8;
-	font-family: "Lato", sans-serif;
+	font-family: "HelveticaNeue", Helvetica, Arial , sans-serif;
   	transition: background-color .5s;
+}
+.feed_container a:first-child{
+	padding-left: 20px;
 }
