@@ -7,5 +7,5 @@ window.onload = function() {
 	const body_container = document.getElementsByClassName("body_container");
 	console.log(body_container)
 	body_container[0].style.position = "relative";
-	body_container[0].style.top = "60px";
+	body_container[0].style.top = "50px";
 };
