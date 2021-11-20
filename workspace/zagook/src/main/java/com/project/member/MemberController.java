@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.Utility.Utility;
 import com.zaxxer.hikari.util.SuspendResumeLock;
@@ -131,7 +132,7 @@ public class MemberController {
    }
    
    @PostMapping(value="/member/create",produces="application/json;charset=utf-8")
-   public String crate(MemberDTO dto) throws IOException{
+   public String crate(MemberDTO dto,Model model) throws IOException{
 	   //String upDir = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
       String upDir = Member.getUploadDir();
       String fname = Utility.saveFileSpring(dto.getFnameMF(), upDir);
@@ -143,7 +144,10 @@ public class MemberController {
       }
       
       if(service.create(dto)>0) {
-         return "redirect:/";
+    	 System.out.println("###::가입");
+    	 model.addAttribute("msg","가입이 완료 되었습니다.<br>가입하신 정보로 로그인 해주세요.");
+    	 System.out.println("model::가입"+model);
+         return "/member/signcheck";
       }else{
          return "error";
       }
@@ -226,4 +230,34 @@ public class MemberController {
        }
 
     }
+   
+//   @GetMapping("member/updateFile")
+//	public String updateFile() {
+//	   System.out.println("@@@@@@get updatefile");
+//		return "/member/updateFile";
+//	}
+	
+	@PostMapping("/member/updateFile")
+   public String updateFile(MultipartFile fnameMF,
+                   String oldfile,
+                   HttpSession session,
+                   HttpServletRequest request) throws IOException{
+//           String basePath = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
+             String basePath = Member.getUploadDir();
+           if(oldfile !=null  && !oldfile.equals("member.jpg")) { //원본파일 삭제
+                   Utility.deleteFile(basePath, oldfile);
+           }
+           
+           //storage에 변경 파일 저장
+           Map map = new HashMap();
+           map.put("email", session.getAttribute("email"));
+           map.put("fname", Utility.saveFileSpring(fnameMF, basePath));
+           //디비에 파일명 변경
+           int cnt = service.updateFile(map);
+           if(cnt==1) {
+                   return "redirect:./mypage";
+           }else {
+                   return "./error";
+           }
+   }
 }

@@ -18,9 +18,10 @@ public interface MemberMapper {
 
 	int update(MemberDTO dto);
 
+	int updateFile(Map map);
+
 	//카카오 소셜
 	int kakaocreate(MemberDTO dto);
-	MemberDTO kakaoread(String email);
 	int kakaoupdate(MemberDTO dto);
 	int kakaoCheck(Map<String, String> map);
 	
