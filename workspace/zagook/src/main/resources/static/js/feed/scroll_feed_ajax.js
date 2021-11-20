@@ -1,3 +1,10 @@
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center: new kakao.maps.LatLng(37.52423, 127.06319), // 지도의 중심좌표
+		level: 10
+		// 지도의 확대 레벨
+	};
+const map_main = new kakao.maps.Map(mapContainer, mapOption);
 $(function () {
 	//param is not allocated in navigator.geolocation.getCurrentPosition, so put the code repeatedly
 	let param = null;
@@ -91,16 +98,16 @@ function process_feed_list(param) {
 			
             for (let i = 0; i < list.length; i++) {
 				var position = {
-					iwcontent: '<div class="infowindow" style="width: 140px; height: auto; padding: 5px;" class="img"><img src="/contents/storage/'+list[i].filename+'" width="138px" height="auto"></div>',
+					iwcontent: '<div class="infowindow" style="width: 140px; height: auto; padding: 5px;" id="info'+list[i].contentsno+'"><img src="/contents/storage/'+list[i].filename+'" width="138px" height="auto"></div>',
 					latlng: new kakao.maps.LatLng(list[i].x_site, list[i].y_site),
 					filename: list[i].filename,
 					//fname: list[i].fname,
 					//content: list[i].contents,
-					likecnt: list[i].likecnt
+					likecnt: list[i].likecnt,
 					//rdate: list[i].rdate,
 					//privacy: list[i].privacy,
 					//id: list[i].id,
-					//contentsno: list[i].contentsno,
+					contentsno: list[i].contentsno
 					//tag_list: list[i].tag_list,
 					//like_clicked: list[i].like_clicked
 				};
@@ -168,9 +175,9 @@ function displayMarker(data) {
 	var infowindow = new kakao.maps.InfoWindow({
 		content: data.iwcontent // 인포윈도우에 표시할 내용
 	});
-	
 	kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map_main, marker, infowindow));
 	kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	kakao.maps.event.addListener(marker, 'click', hrefon(data.contentsno));
 }
 function makeOverListener(map, marker, infowindow) {
 	return function () {
@@ -180,5 +187,10 @@ function makeOverListener(map, marker, infowindow) {
 function makeOutListener(infowindow) {
 	return function () {
 		infowindow.close();
+	};
+}
+function hrefon(id){
+	return function(){
+		location.href = '#'+id;
 	};
 }
