@@ -65,17 +65,41 @@ function start_autocomplete_friend() {
 		minLength: 1,// 최소 글자수
 		delay: 100,	//autocomplete 딜레이 시간(ms)
 	})
-	.autocomplete( "instance" )._renderItem = function( ul, item ) {
+	.autocomplete("instance")._renderItem = function( ul, item ) {
         return $( "<li><div style='text-align:justify;'><img style='width:40px; height:40px; border-radius:50%;' src='"+item.img+"'><span style='right:10px;position:absolute;top:13px;'>"+item.label+"</span></div></li>" ).appendTo( ul );
     };
 }
 
 function openSearchbar() {
-	document.getElementById("searchbar_container").innerHTML = '<input class="form ui-autocomplete-input" type="text" id="searchInput" name="searchInput" style="margin-top: 12px; margin-left: 20px; width: 400px;" autocomplete="off" placeholder="Search Tag">';
+	if (document.getElementById("searchInput") != null) {
+		document.getElementById("searchInput").setAttribute("placeholder", "Search Tag");
+		document.getElementById("searchInput").setAttribute("value", "");		
+		return false;
+	}
+	document.getElementById("searchbar_container").innerHTML = '<input class="form ui-autocomplete-input" type="text" id="searchInput" name="searchInput" autocomplete="off" placeholder="Search Tag">';
+	document.getElementById("searchbar_container").innerHTML += '<button type="submit"><i class="fa fa-search"></i></button>';
+	get_tag_style();
 	start_autocomplete();
 }
 
 function openSearchbarFriend() {
-	document.getElementById("searchbar_container").innerHTML = '<input class="form ui-autocomplete-input" type="text" id="searchInput" name="searchInput" style="margin-top: 12px; margin-left: 20px; width: 400px;" autocomplete="off" placeholder="Search Friend">';
+	if (document.getElementById("searchInput") != null) {
+		document.getElementById("searchInput").setAttribute("placeholder", "Search Friend");
+		document.getElementById("searchInput").setAttribute("value", "");
+		return false;
+	}
+	document.getElementById("searchbar_container").innerHTML = '<input class="form ui-autocomplete-input" type="text" id="searchInput" name="searchInput" autocomplete="off" placeholder="Search Friend">';
+	document.getElementById("searchbar_container").innerHTML += '<button type="submit"><i class="fa fa-search"></i></button>';
+	get_tag_style();
 	start_autocomplete_friend();
+}
+
+function get_tag_style() {
+	var link = document.createElement("link");
+	link.href = "/css/feed/searchbar.css";
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	link.media = "screen,print";
+	
+	document.getElementsByTagName("head")[0].appendChild(link);
 }

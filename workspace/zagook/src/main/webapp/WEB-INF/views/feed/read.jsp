@@ -14,14 +14,16 @@
 <link rel="stylesheet" href="/css/feed/sidenav.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/nav_mouse_click.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/scrollbar.css" type="text/css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
 
 </head>
 <body>
-	<div class="loader-wrapper">
+	<div class="loader-wrapper" id="loader-wrapper">
       <span class="loader"><span class="loader-inner"></span></span>
     </div>
 	<div class="body_container">

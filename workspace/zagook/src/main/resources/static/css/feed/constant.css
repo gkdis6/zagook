@@ -11,4 +11,8 @@
 	--center_container_zindex: 1;
 	--loading_animation_zindex: 2;
 	  /* map z-index: -1 > read.jsp */
+	  
+  	/* color */
+	--base_color_navy: #191A45;
+	--base_color_oatmeal: #F5F2B8;
 }
