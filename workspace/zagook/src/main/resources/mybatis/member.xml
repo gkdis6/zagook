@@ -9,13 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <select id="read" parameterType="String" resultType="com.project.member.MemberDTO">
-	select *
-	from zagook_member
-	where email = #{email}
-</select>
-
-<select id="kakaoread" parameterType="String" resultType="com.project.member.MemberDTO">
-	select *
+	select id, email, mname, tel, job, 
+			to_char(mdate,'YYYY/MM/DD')as mdate, fname
 	from zagook_member
 	where email = #{email}
 </select>
@@ -67,6 +62,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       tel = #{tel},
       job = #{job}
       where email = #{email}
+</update>
+
+<update id="updateFile" parameterType="Map">
+	update zagook_member
+	set	fname = #{fname}
+	where email = #{email}
 </update>
 
 </mapper>

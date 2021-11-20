@@ -55,11 +55,6 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.kakaocreate(dto);
 	}
 
-	@Override
-	public MemberDTO kakaoread(String email) {
-		// TODO Auto-generated method stub
-		return mapper.kakaoread(email);
-	}
 
 	@Override
 	public int kakaoupdate(MemberDTO dto) {
@@ -71,6 +66,12 @@ public class MemberServiceImpl implements MemberService {
 	public int kakaoCheck(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		return mapper.kakaoCheck(map);
+	}
+
+	@Override
+	public int updateFile(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.updateFile(map);
 	}
 
 }

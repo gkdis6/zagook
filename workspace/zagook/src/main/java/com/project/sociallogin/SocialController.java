@@ -137,7 +137,7 @@ public class SocialController {
 		
 		System.out.println(":::"+map);
         //회원이면
-		if (service.kakaoCheck(map) == 1) {
+		if (service.loginCheck(map) == 1) {
 			System.out.println("회원입니다.====================");
 			session.setAttribute("id",sdto.getId());
 			session.setAttribute("email",map.get("email"));
@@ -165,13 +165,15 @@ public class SocialController {
                 response.addCookie(cookie);             
             }
 		}
-		if(service.kakaoCheck(map) == 1) {
+		if(service.loginCheck(map) == 1) {
 			return "redirect:/";
 		}
 		else {
 			System.out.println("소셜을 통한 회원이 아닙니다.===============");
 			service.kakaocreate(dto);
-			return "redirect:/"; 
+			model.addAttribute("msg","가입이 완료 되었습니다.<br>가입하신 정보로 로그인 해주세요.");
+			return "/member/signcheck";
+//			return "redirect:/"; 
 		}
 	}
 		
