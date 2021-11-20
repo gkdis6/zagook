@@ -12,7 +12,7 @@
   <definition name="/feed/myread" extends="main">
     <put-attribute name="title" value="내 피드"></put-attribute>
     <put-attribute name="body"
-      value="/WEB-INF/views/feed/myread.jsp" />
+      value="/WEB-INF/views/feed/read.jsp" />
   </definition>
   <definition name="/alert/feed_login" extends="main">
     <put-attribute name="title" value="피드 로그인 경고"></put-attribute>
