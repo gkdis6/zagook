@@ -8,37 +8,46 @@ const map_main = new kakao.maps.Map(mapContainer, mapOption);
 $(function () {
 	//param is not allocated in navigator.geolocation.getCurrentPosition, so put the code repeatedly
 	let param = null;
-	if (navigator.geolocation) {
-	    //위치 정보를 얻기
-	    navigator.geolocation.getCurrentPosition (function(pos) {
+	getCoords()
+	.then(coords => {
+		if (coords == null) {
 			if (window.location.href == "http://localhost:8005/feed/myread") {
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread"};	
+				param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread"};	
 			} else if (window.location.href == "http://localhost:8005/feed/read"){
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read"};	
+				param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read"};	
 			}
 		    process_feed_list(param);
-	    });
-	} else {
-		// 서울역 기준 위치 정보
-		if (window.location.href == "http://localhost:8005/feed/myread") {
-	    	param = {"x_site" : "37.5535462", "y_site" : "126.964296", "url_id": "myread"};
-	    }else if (window.location.href == "http://localhost:8005/feed/read") {
-	    	param = {"x_site" : "37.5535462", "y_site" : "126.964296", "url_id": "read"};
-	    }
-	    process_feed_list(param);
-	}
+		} else {
+			if (window.location.href == "http://localhost:8005/feed/myread") {
+				param = {"x_site": String(coords.latitude), "y_site": String(coords.longitude), "url_id": "myread"};	
+			} else if (window.location.href == "http://localhost:8005/feed/read"){
+				param = {"x_site": String(coords.latitude), "y_site": String(coords.longitude), "url_id": "read"};	
+			}
+		    process_feed_list(param);
+		}
+	})
+	.catch(err => {
+		console.log("Error Msg: " + err);
+	});
 });
 
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center: new kakao.maps.LatLng(37.52423, 127.06319), // 지도의 중심좌표
+		level: 10
+		// 지도의 확대 레벨
+	};
+const map_main = new kakao.maps.Map(mapContainer, mapOption);
 	
 function scrollEventHandler(event){
 	let param = null;
-	if (navigator.geolocation) {
-	    //위치 정보를 얻기
-	    navigator.geolocation.getCurrentPosition (function(pos) {
-		    if (window.location.href == "http://localhost:8005/feed/myread") {
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread"};	
+	getCoords()
+	.then(coords => {
+		if (coords == null) {
+			if (window.location.href == "http://localhost:8005/feed/myread") {
+				param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread"};	
 			} else if (window.location.href == "http://localhost:8005/feed/read"){
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read"};	
+				param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read"};	
 			}
 		    let doc_height = this.document.scrollingElement.scrollHeight;
 			let top_height = this.document.scrollingElement.scrollTop;
@@ -46,17 +55,23 @@ function scrollEventHandler(event){
 			if (top_height + client_height >= doc_height) {
 				process_feed_list(param);
 			}
-	    });
-	} else {
-		// 서울역 기준 위치 정보
-	    param = {"x_site" : "37.5535462", "y_site" : "126.964296"};
-	    let doc_height = this.document.scrollingElement.scrollHeight;
-		let top_height = this.document.scrollingElement.scrollTop;
-	    let client_height = this.document.scrollingElement.clientHeight;
-		if (top_height + client_height >= doc_height) {
-			process_feed_list(param);
+		} else {
+			if (window.location.href == "http://localhost:8005/feed/myread") {
+				param = {"x_site": String(coords.latitude), "y_site": String(coords.longitude), "url_id": "myread"};	
+			} else if (window.location.href == "http://localhost:8005/feed/read"){
+				param = {"x_site": String(coords.latitude), "y_site": String(coords.longitude), "url_id": "read"};	
+			}
+		    let doc_height = this.document.scrollingElement.scrollHeight;
+			let top_height = this.document.scrollingElement.scrollTop;
+		    let client_height = this.document.scrollingElement.clientHeight;
+			if (top_height + client_height >= doc_height) {
+				process_feed_list(param);
+			}
 		}
-	}
+	})
+	.catch(err => {
+		console.log("Error Msg: " + err);
+	});
 }
 
 $(document).ready(function () {
