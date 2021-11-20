@@ -6,9 +6,9 @@
 	--feed_container_size: 550px;
 
 	/* z-index */	
-	  /* top_nav z-index: 3 > top_nav.js */
-	--center_container_zindex: 2;
-	--left_container_zindex: 2;
-	--loading_animation_zindex: 1;
+	  /* top_nav z-index: 4 > top_nav.js */
+	--left_container_zindex: 3;
+	--center_container_zindex: 1;
+	--loading_animation_zindex: 2;
 	  /* map z-index: -1 > read.jsp */
 }

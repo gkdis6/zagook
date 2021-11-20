@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/css/feed/feed_container.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/sidenav.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/nav_mouse_click.css" type="text/css">
+<link rel="stylesheet" href="/css/feed/scrollbar.css" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
 
