@@ -106,7 +106,7 @@ function process_feed_list(param) {
                 //tag area
                 if (list[i].tag_list != null) {
                     for (let j = 0; j < list[i].tag_list.length; j++) {
-                        html_str += '<a href="javascript:void(0);" onclick="tag_click();return false;">';
+                        html_str += '<a class="feed_padding" href="javascript:void(0);" onclick="tag_click();return false;">';
                         html_str += '#' + list[i].tag_list[j];
                         html_str += '</a>';
                     }
