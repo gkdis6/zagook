@@ -3,29 +3,30 @@ $(function () {
 	let param = null;
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
-			if (window.location.href == "http://localhost:8005/feed/myread") {
+			let url = window.location.href;
+			if (ajax_url_check_myread(url)) {
 				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread", "load_type": "reload"};	
-			} else if (window.location.href == "http://localhost:8005/feed/read"){
+			} else if (ajax_url_check_read(url)){
 				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read", "load_type": "reload"};	
 			}
 			process_feed_list(param);
 		},reject);
 	}
 });
-	
+
 function reject() {
-	if (window.location.href == "http://localhost:8005/feed/myread") {
+	if (ajax_url_check_myread(url)) {
 		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread", "load_type": "reload"};	
-	} else if (window.location.href == "http://localhost:8005/feed/read"){
+	} else if (ajax_url_check_read(url)){
 		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read", "load_type": "reload"};	
 	}
 	process_feed_list(param);
 }
 
 function reject_scroll_event() {
-	if (window.location.href == "http://localhost:8005/feed/myread") {
+	if (ajax_url_check_myread(url)) {
 		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread", "load_type": "scroll"};	
-	} else if (window.location.href == "http://localhost:8005/feed/read"){
+	} else if (ajax_url_check_read(url)){
 		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read", "load_type": "scroll"};	
 	}
 	let doc_height = this.document.scrollingElement.scrollHeight;
@@ -48,9 +49,10 @@ function scrollEventHandler(event){
 	let param = null;
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
-			if (window.location.href == "http://localhost:8005/feed/myread") {
+			let url = window.location.href;
+			if (ajax_url_check_myread(url)) {
 				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread", "load_type": "scroll"};	
-			} else if (window.location.href == "http://localhost:8005/feed/read"){
+			} else if (ajax_url_check_read(url)){
 				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read", "load_type": "scroll"};	
 			}
 			let doc_height = this.document.scrollingElement.scrollHeight;
