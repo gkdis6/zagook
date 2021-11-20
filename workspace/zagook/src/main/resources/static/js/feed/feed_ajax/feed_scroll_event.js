@@ -10,11 +10,11 @@ $(function () {
 				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read", "load_type": "reload"};	
 			}
 			process_feed_list(param);
-		},reject);
+		}, init_reject);
 	}
 });
 
-function reject() {
+function init_reject() {
 	if (ajax_url_check_myread(url)) {
 		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread", "load_type": "reload"};	
 	} else if (ajax_url_check_read(url)){
@@ -23,7 +23,7 @@ function reject() {
 	process_feed_list(param);
 }
 
-function reject_scroll_event() {
+function scroll_reject() {
 	if (ajax_url_check_myread(url)) {
 		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread", "load_type": "scroll"};	
 	} else if (ajax_url_check_read(url)){
@@ -35,7 +35,8 @@ function reject_scroll_event() {
 	if (top_height + client_height >= doc_height) {
 		process_feed_list(param);
 	}
-}	
+}
+
 function scrollEventHandler(event){
 	let param = null;
 	if (navigator.geolocation) {
@@ -52,7 +53,7 @@ function scrollEventHandler(event){
 			if (top_height + client_height >= doc_height) {
 				process_feed_list(param);
 			}
-		},reject_scroll_event);
+		}, scroll_reject);
 	}
 }
 
