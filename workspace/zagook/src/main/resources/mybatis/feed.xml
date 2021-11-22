@@ -20,6 +20,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents
 		where id=#{id}
+		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
+		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+	</select>
+	<select id="listbytime" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.FeedDTO">
+		select * from zagook_contents
+		where id in (
+            select id2 from zagook_friend 
+            where id=#{id} and status=3
+            ) 
+		and privacy!=3
+		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
+		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		order by rdate desc
+	</select>
+	<select id="mylistbytime" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.FeedDTO">
+		select * from zagook_contents
+		where id=#{id}
+		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
+		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		order by rdate desc
 	</select>
 	<select id="tag" parameterType="int"
 		resultType="String">

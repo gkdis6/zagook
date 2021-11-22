@@ -1,6 +1,7 @@
 package com.project.feed;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FeedDTO {
 //	minimum user info
@@ -24,6 +25,8 @@ public class FeedDTO {
 	
 	private String url_id;
 	private String load_type;
+	private String range;
+	private String order_type;
 	
 	public FeedDTO() {
 		super();
@@ -32,7 +35,7 @@ public class FeedDTO {
 	
 	public FeedDTO(int contentsno, String id, String filename, String contents, String rdate, int likecnt, int privacy,
 			double x_site, double y_site, String mname, String fname, int like_clicked, List<String> tag_list,
-			double base_distance, String url_id, String load_type) {
+			double base_distance, String url_id, String load_type, String range, String order_type) {
 		super();
 		this.contentsno = contentsno;
 		this.id = id;
@@ -50,15 +53,37 @@ public class FeedDTO {
 		this.base_distance = base_distance;
 		this.url_id = url_id;
 		this.load_type = load_type;
+		this.range = range;
+		this.order_type = order_type;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "FeedDTO [contentsno=" + contentsno + ", id=" + id + ", filename=" + filename + ", contents=" + contents
 				+ ", rdate=" + rdate + ", likecnt=" + likecnt + ", privacy=" + privacy + ", x_site=" + x_site
 				+ ", y_site=" + y_site + ", mname=" + mname + ", fname=" + fname + ", like_clicked=" + like_clicked
 				+ ", tag_list=" + tag_list + ", base_distance=" + base_distance + ", url_id=" + url_id + ", load_type="
-				+ load_type + "]";
+				+ load_type + ", range=" + range + ", order_type=" + order_type + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FeedDTO other = (FeedDTO) obj;
+		return Double.doubleToLongBits(base_distance) == Double.doubleToLongBits(other.base_distance)
+				&& Objects.equals(contents, other.contents) && contentsno == other.contentsno
+				&& Objects.equals(filename, other.filename) && Objects.equals(fname, other.fname)
+				&& Objects.equals(id, other.id) && like_clicked == other.like_clicked && likecnt == other.likecnt
+				&& Objects.equals(load_type, other.load_type) && Objects.equals(mname, other.mname)
+				&& privacy == other.privacy && Objects.equals(range, other.range) && Objects.equals(rdate, other.rdate)
+				&& Objects.equals(tag_list, other.tag_list) && Objects.equals(url_id, other.url_id)
+				&& Double.doubleToLongBits(x_site) == Double.doubleToLongBits(other.x_site)
+				&& Double.doubleToLongBits(y_site) == Double.doubleToLongBits(other.y_site);
 	}
 
 	public int getContentsno() {
@@ -156,5 +181,17 @@ public class FeedDTO {
 	}
 	public void setLoad_type(String load_type) {
 		this.load_type = load_type;
+	}
+	public String getRange() {
+		return range;
+	}
+	public void setRange(String range) {
+		this.range = range;
+	}
+	public String getOrder_type() {
+		return order_type;
+	}
+	public void setOrder_type(String order_type) {
+		this.order_type = order_type;
 	}
 }

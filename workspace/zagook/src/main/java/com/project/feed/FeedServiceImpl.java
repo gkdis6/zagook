@@ -19,9 +19,21 @@ public class FeedServiceImpl implements FeedService {
 	}
 	
 	@Override
+	public List<FeedDTO> listbytime(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.listbytime(dto);
+	}
+	
+	@Override
 	public List<FeedDTO> mylist(FeedDTO dto) {
 		// TODO Auto-generated method stub
 		return mapper.mylist(dto);
+	}
+	
+	@Override
+	public List<FeedDTO> mylistbytime(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.mylistbytime(dto);
 	}
 
 	@Override

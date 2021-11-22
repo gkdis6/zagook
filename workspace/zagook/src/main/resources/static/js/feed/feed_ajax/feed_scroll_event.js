@@ -1,18 +1,20 @@
 $(function () {
 	//param is not allocated in navigator.geolocation.getCurrentPosition, so put the code repeatedly
-	let url = window.location.href;
-	init_fetch_feed(null);
+	let order = $("input[name=order_type]").val();
+	init_fetch_feed(null, order);
 });
 
-function init_fetch_feed(range) {
+function init_fetch_feed(range, order) {
+	window.addEventListener("scroll", scrollEventHandler);
+	
 	let param = null;
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
 			let url = window.location.href;
 			if (ajax_url_check_myread(url))
-				param = is_set_feed_range(range, pos, "myread");
+				param = is_set_feed_range(range, pos, "myread", order);
 			else if (ajax_url_check_read(url))
-				param = is_set_feed_range(range, pos, "read");
+				param = is_set_feed_range(range, pos, "read", order);
 			process_feed_list(param);
 		}, init_reject);
 	}
@@ -20,10 +22,14 @@ function init_fetch_feed(range) {
 
 function init_reject() {
 	let param = null;
+	let url = window.location.href;
+	let str = $("input[name=distance_type]").val();
+	let range = str == "Select Range" ? null : str;
+	let order = $("input[name=order_type]").val();
 	if (ajax_url_check_myread(url))
-		param = is_set_feed_range_reject(range, "myread");
+		param = is_set_feed_range_reject(range, "myread", order);
 	else if (ajax_url_check_read(url))
-		param = is_set_feed_range_reject(range, "read");
+		param = is_set_feed_range_reject(range, "read", order);
 	process_feed_list(param);
 }
 
@@ -32,6 +38,7 @@ function scrollEventHandler(event){
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
 			let url = window.location.href;
+			let range = $("input[name=distance_type]").val();
 			if (ajax_url_check_myread(url))
 				param = is_set_feed_range_scroll(range, pos, "myread");	
 			else if (ajax_url_check_read(url))
@@ -47,6 +54,8 @@ function scrollEventHandler(event){
 }
 
 function scroll_reject() {
+	let url = window.location.href;
+	let range = $("input[name=distance_type]").val();
 	if (ajax_url_check_myread(url))
 		param = is_set_feed_range_scroll_reject(range, "myread");	
 	else if (ajax_url_check_read(url))
@@ -58,10 +67,6 @@ function scroll_reject() {
 		process_feed_list(param);
 	}
 }
-
-$(document).ready(function () {
-	window.addEventListener("scroll", scrollEventHandler);
-});
 
 const feedService = new getFeedService();
 let center_box = document.getElementsByClassName("center_container")[0];
