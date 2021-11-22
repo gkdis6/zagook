@@ -1,40 +1,30 @@
 $(function () {
 	//param is not allocated in navigator.geolocation.getCurrentPosition, so put the code repeatedly
+	let url = window.location.href;
+	init_fetch_feed(null);
+});
+
+function init_fetch_feed(range) {
 	let param = null;
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
 			let url = window.location.href;
-			if (ajax_url_check_myread(url)) {
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread", "load_type": "reload"};	
-			} else if (ajax_url_check_read(url)){
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read", "load_type": "reload"};	
-			}
+			if (ajax_url_check_myread(url))
+				param = is_set_feed_range(range, pos, "myread");
+			else if (ajax_url_check_read(url))
+				param = is_set_feed_range(range, pos, "read");
 			process_feed_list(param);
 		}, init_reject);
 	}
-});
-
-function init_reject() {
-	if (ajax_url_check_myread(url)) {
-		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread", "load_type": "reload"};	
-	} else if (ajax_url_check_read(url)){
-		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read", "load_type": "reload"};	
-	}
-	process_feed_list(param);
 }
 
-function scroll_reject() {
-	if (ajax_url_check_myread(url)) {
-		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "myread", "load_type": "scroll"};	
-	} else if (ajax_url_check_read(url)){
-		param = {"x_site": "37.5535462", "y_site": "126.964296", "url_id": "read", "load_type": "scroll"};	
-	}
-	let doc_height = this.document.scrollingElement.scrollHeight;
-	let top_height = this.document.scrollingElement.scrollTop;
-	let client_height = this.document.scrollingElement.clientHeight;
-	if (top_height + client_height >= doc_height) {
-		process_feed_list(param);
-	}
+function init_reject() {
+	let param = null;
+	if (ajax_url_check_myread(url))
+		param = is_set_feed_range_reject(range, "myread");
+	else if (ajax_url_check_read(url))
+		param = is_set_feed_range_reject(range, "read");
+	process_feed_list(param);
 }
 
 function scrollEventHandler(event){
@@ -42,11 +32,10 @@ function scrollEventHandler(event){
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
 			let url = window.location.href;
-			if (ajax_url_check_myread(url)) {
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "myread", "load_type": "scroll"};	
-			} else if (ajax_url_check_read(url)){
-				param = {"x_site": String(pos.coords.latitude), "y_site": String(pos.coords.longitude), "url_id": "read", "load_type": "scroll"};	
-			}
+			if (ajax_url_check_myread(url))
+				param = is_set_feed_range_scroll(range, pos, "myread");	
+			else if (ajax_url_check_read(url))
+				param = is_set_feed_range_scroll(range, pos, "read");		
 			let doc_height = this.document.scrollingElement.scrollHeight;
 			let top_height = this.document.scrollingElement.scrollTop;
 			let client_height = this.document.scrollingElement.clientHeight;
@@ -54,6 +43,19 @@ function scrollEventHandler(event){
 				process_feed_list(param);
 			}
 		}, scroll_reject);
+	}
+}
+
+function scroll_reject() {
+	if (ajax_url_check_myread(url))
+		param = is_set_feed_range_scroll_reject(range, "myread");	
+	else if (ajax_url_check_read(url))
+		param = is_set_feed_range_scroll_reject(range, "read");	
+	let doc_height = this.document.scrollingElement.scrollHeight;
+	let top_height = this.document.scrollingElement.scrollTop;
+	let client_height = this.document.scrollingElement.clientHeight;
+	if (top_height + client_height >= doc_height) {
+		process_feed_list(param);
 	}
 }
 
