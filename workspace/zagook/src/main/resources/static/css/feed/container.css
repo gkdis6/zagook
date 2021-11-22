@@ -10,7 +10,7 @@
 	position: relative;
 	left: 50px;
 	flex-direction: column;
-	justice-content: center;
+	justify-content: center;
 	width: var(--center_container_size);
 	overflow: auto;
 	align-items: center;
@@ -27,4 +27,10 @@
 	position: fixed;
 	right: 0;
 	width: 100%;
+}
+.selection_container {
+	position: fixed;
+	top: 10px;
+	right: 50px;
+	z-index: var(--selection_container_zindex);
 }

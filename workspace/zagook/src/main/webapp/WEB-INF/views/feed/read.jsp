@@ -14,10 +14,10 @@
 <link rel="stylesheet" href="/css/feed/sidenav.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/nav_mouse_click.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/scrollbar.css" type="text/css">
+<link rel="stylesheet" href="/css/feed/selection_menu.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
 
@@ -45,14 +45,37 @@
 			<div id="map" style="width: 100vw; height: 100vh; z-index:-1;">
 			</div>
 		</div>
+		<div class="selection_container">
+		      <div class="selection_box">
+		        <div class="select">
+		          <span>Select Range</span>
+		          <i class="fa fa-chevron-left"></i>
+		        </div>
+		        <input type="hidden">
+		        <ul class="selection_box_menu">
+		          <li id="0.1km">0.1km</li>
+		          <li id="1km">1km</li>
+		          <li id="2km">2km</li>
+		          <li id="5km">5km</li>
+		          <li id="10km">10km</li>
+		          <li id="20km">20km</li>
+		          <li id="30km">30km</li>
+		          <li id="50km">50km</li>
+		          <li id="80km">80km</li>
+		          <li id="100km">100km</li>
+		        </ul>
+		      </div>
+		</div>
 	</div>
 
 <script src="/js/feed/top_nav.js"></script>
+<script src="/js/feed/selection_menu.js"></script>
 <script src="/js/utils/date_format_util.js"></script>
 <script src="/js/utils/number_format_util.js"></script>
 <script src="/js/feed/url_pattern/url_regex.js"></script>
 <script src="/js/feed/map/feed_map.js"></script>
 <script src="/js/feed/feed_ajax/feed_ajax.js"></script>
+<script src="/js/feed/feed_ajax/feed_fetch_util.js"></script>
 <script src="/js/feed/feed_ajax/feed_box_processing.js"></script>
 <script src="/js/feed/feed_ajax/feed_scroll_event.js"></script>
 <script src="/js/feed/like_event.js"></script>

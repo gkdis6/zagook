@@ -99,6 +99,11 @@ function process_feed_list(param) {
                 
                 html_str += '</div>';
             }
+            
+			// insert searched range into selection box
+			$(".select").find("span").text("Range : " + String(base_distance * 100 * 2) + "km");
+			$(".selection_box").find("input").attr("value", "Range : " + String(base_distance * 100 * 2) + "km");
+            
             if (end_flag == true) {
 				html_str += '<span><strong>Page End: ';
 				if (base_distance == "no distance") {
