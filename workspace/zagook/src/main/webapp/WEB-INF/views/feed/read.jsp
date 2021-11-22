@@ -40,6 +40,7 @@
 			</div>
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
+			<input type="hidden" name="order_type" value="distance">
 		</div>
 		<div class="map_container">
 			<div id="map" style="width: 100vw; height: 100vh; z-index:-1;">
@@ -51,11 +52,10 @@
 		          <span>Select Range</span>
 		          <i class="fa fa-chevron-left"></i>
 		        </div>
-		        <input type="hidden">
+		        <input type="hidden" name="distance_type">
 		        <ul class="selection_box_menu">
 		          <li id="0.1km">0.1km</li>
 		          <li id="1km">1km</li>
-		          <li id="2km">2km</li>
 		          <li id="5km">5km</li>
 		          <li id="10km">10km</li>
 		          <li id="20km">20km</li>
@@ -72,8 +72,10 @@
 <script src="/js/feed/selection_menu.js"></script>
 <script src="/js/utils/date_format_util.js"></script>
 <script src="/js/utils/number_format_util.js"></script>
+<script src="/js/utils/scroll_util.js"></script>
 <script src="/js/feed/url_pattern/url_regex.js"></script>
 <script src="/js/feed/map/feed_map.js"></script>
+<script src="/js/feed/feed_ajax/feed_start_end_util.js"></script>
 <script src="/js/feed/feed_ajax/feed_ajax.js"></script>
 <script src="/js/feed/feed_ajax/feed_fetch_util.js"></script>
 <script src="/js/feed/feed_ajax/feed_box_processing.js"></script>

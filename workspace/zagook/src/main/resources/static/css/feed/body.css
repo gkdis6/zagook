@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+html { scroll-behavior: smooth; }
+
 body {
 	background: var(--base_color_navy);
 	font-family: "HelveticaNeue", Helvetica, Arial , sans-serif;

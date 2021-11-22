@@ -33,6 +33,11 @@ function process_feed_list(param) {
 				console.log("[list.length] repeate : " + i);
 				console.log("[list " + i + "] " + typeof(list[i]));
 				
+                // order by timeline
+                if (end_flag == -1) {
+					html_str += '<div class="order_by_time_container" onclick="order_by_time();">게시물을 <strong>시간순</strong>으로 정렬하려면 클릭해주세요</div>';
+					end_flag = 0;
+				}
                 
  				//----- <Feed container> ------------------------------------
                 html_str += '<div class="feed_container" onclick="container_click(event)" id="' + list[i].contentsno + '">';
@@ -72,7 +77,7 @@ function process_feed_list(param) {
                 html_str += '<p class="content feed_padding">' + list[i].contents + '</p>';
                 
                 // date area
-                html_str += '<div class="date feed_padding">' + toStringByFormatting(new Date(list[i].rdate), '.') +'</div>';
+                html_str += '<div class="date feed_padding">' + String(list[i].rdate).slice(0, -3) +'</div>';
                 
             // accessory container
                 html_str += '<div class="accessory feed_padding">';
@@ -102,19 +107,22 @@ function process_feed_list(param) {
             
 			// insert searched range into selection box
 			$(".select").find("span").text("Range : " + String(base_distance * 100 * 2) + "km");
-			$(".selection_box").find("input").attr("value", "Range : " + String(base_distance * 100 * 2) + "km");
+			$("input[name=distance_type]").val(String(base_distance * 100 * 2));
             
-            if (end_flag == true) {
-				html_str += '<span><strong>Page End: ';
+            if (end_flag == 1) {
+				html_str += '<div class="page_end_container" onclick="scroll_to_top();">Page End : ';
 				if (base_distance == "no distance") {
-					html_str += '게시물이 더 이상 없습니다.';
+					html_str += '게시물을 모두 찾았습니다.';
 				} else {				
-					html_str += '반경 ' + base_distance * 100 * 2 + 'km 안에 게시물이 더 이상 없습니다.';
+					html_str += '반경 ' + base_distance * 100 * 2 + 'km 내 게시물을 모두 찾았습니다.';
 				}
-				html_str += '</strong></span>';
+				html_str += '</div>';
+				
+				// add mouseenter, and mouseleave
 				window.removeEventListener("scroll", scrollEventHandler);
 			}
             center_box.innerHTML += html_str;
+			feed_end();
         })
         .catch(err => {
 			console.log("Error Msg: " + err);

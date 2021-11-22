@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FeedRestController {
 	// 반경 내 검색(개별 단위): 100m, 1km, 5km, 10km, 20km, 30km, 50km, 80km, 100km
-	final double[] base_distance = {0.001 / 2, 0.01 / 2, 0.05 / 2, 0.1 / 2, 0.2 / 2, 0.3 / 2, 0.5 / 2, 0.8 / 2, 1 / 2};
+	final double[] base_distance = {0.001 / 2, 0.01 / 2, 0.05 / 2, 0.1 / 2, 0.2 / 2, 0.3 / 2, 0.5 / 2, 0.8 / 2, 1.0 / 2};
 	final int minimum_feed_cnt = 15;
 	final int sublist_max_size = 15;
 	int result_base_idx = 0;
@@ -40,18 +40,19 @@ public class FeedRestController {
 	@PostMapping(value = "/feed/contents", produces = "application/json;charset=UTF-8")
 	public ResponseEntity<Map> postFeedList_ajax(@RequestBody FeedDTO dto, HttpSession session) {
 		List<FeedDTO> sub_list = null;
-		boolean end_flag = false;
+		int end_flag = 0;
 		
 		// load type 구분 : reload or scroll
 		if (dto.getLoad_type().equals("reload"))
 			sublist_idx = 0;
 		
-		// page 간 이동 구분
+		// page 간 이동 구분 > url_flag = 1(read page), = 2(myread page)
 		if ((url_flag == 1 && dto.getUrl_id().equals("myread")) || (url_flag == 2 && dto.getUrl_id().equals("read")))
 			sublist_idx = 0;
 		
 //	#1 초기 list 생성 부분 - sublist를 활용한 paging 적용
 		if (sublist_idx == 0) {
+			end_flag = -1;
 			//		Post 방식으로 FeedDTO에 삽입된 id를 사용
 			//		id값으로 Friends 테이블의 친구id 조회
 			//		조회된 친구 id값으로 contents 테이블의 각 row를 FeedDTO에 담아옴
@@ -59,38 +60,76 @@ public class FeedRestController {
 			dto.setId((String) session.getAttribute("id"));
 			//		url_id에 따라 내 or 친구 피드를 검색하는 sql문 mapping
 			if (dto.getUrl_id().equals("myread")) {
-				feed_list = service.mylist(dto);
-				url_flag = 2;
-			} else if (dto.getUrl_id().equals("read")) {					
-				for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
-					dto.setBase_distance(base_distance[base_idx]);
-					result_base_idx = base_idx;
-						feed_list = service.list(dto);
-						url_flag = 1;
-					if (feed_list.size() > minimum_feed_cnt) {
-						break;
+				if (dto.getRange().equals("null")) {
+					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
+						dto.setBase_distance(base_distance[base_idx]);
+						result_base_idx = base_idx;
+						String order_type = dto.getOrder_type();
+						feed_list = order_type.equals("distance") ? service.mylist(dto) : service.mylistbytime(dto);
+						url_flag = 2;
+						if (feed_list.size() > minimum_feed_cnt) {
+							break;
+						}
 					}
+				} else {
+					double selected_range = Double.parseDouble(dto.getRange()) / 100 / 2;
+					for (int i = 0; i < base_distance.length; i++) {
+						result_base_idx = i;
+						if (base_distance[i] == selected_range)
+							break;
+					}
+					dto.setBase_distance(selected_range);
+					String order_type = dto.getOrder_type();
+					feed_list = order_type.equals("distance") ? service.mylist(dto) : service.mylistbytime(dto);
+					url_flag = 2;
+				}
+			} else if (dto.getUrl_id().equals("read")) {
+				if (dto.getRange().equals("null")) {
+					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
+						dto.setBase_distance(base_distance[base_idx]);
+						result_base_idx = base_idx;
+						String order_type = dto.getOrder_type();
+						feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+						url_flag = 1;
+						if (feed_list.size() > minimum_feed_cnt) {
+							break;
+						}
+					}
+				} else {
+					double selected_range = Double.parseDouble(dto.getRange()) / 100 / 2;
+					for (int i = 0; i < base_distance.length; i++) {
+						result_base_idx = i;
+						if (base_distance[i] == selected_range)
+							break;
+					}
+					dto.setBase_distance(selected_range);
+					String order_type = dto.getOrder_type();
+					feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+					url_flag = 1;
 				}
 			}
 	
-	//		list 내의 정보를 x, y 좌표에 따라 재정렬
-			Collections.sort(feed_list, new Comparator<FeedDTO>() {
-				@Override
-				public int compare(FeedDTO o1, FeedDTO o2) {
-					double x1 = dto.getX_site();
-					double y1 = dto.getY_site();
-					double x2 = o1.getX_site();
-					double y2 = o1.getY_site();
-					double x3 = o2.getX_site();
-					double y3 = o2.getY_site();
-					double dst1 = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-					double dst2 = Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2));
-					return (dst1 - dst2) > 0 ? 1 : -1;
-				}
-			});
+			if (dto.getOrder_type().equals("distance")) {
+				//	list 내의 정보를 x, y 좌표에 따라 재정렬
+				Collections.sort(feed_list, new Comparator<FeedDTO>() {
+					@Override
+					public int compare(FeedDTO o1, FeedDTO o2) {
+						double x1 = dto.getX_site();
+						double y1 = dto.getY_site();
+						double x2 = o1.getX_site();
+						double y2 = o1.getY_site();
+						double x3 = o2.getX_site();
+						double y3 = o2.getY_site();
+						double dst1 = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+						double dst2 = Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2));
+						return (dst1 - dst2) > 0 ? 1 : -1;
+					}
+				});
+			}
 			
 	//		profile image, name 처리
 			int k = 0;
+			System.out.println("size: " + feed_list.size());
 			while (k < feed_list.size()) {
 				FeedDTO dst = feed_list.get(k);
 				FeedDTO src = service.profile(dst.getId());
@@ -104,7 +143,6 @@ public class FeedRestController {
 			k = 0;
 			while (k < feed_list.size()) {
 				FeedDTO tmp = feed_list.get(k);
-				System.out.println("feed contentsno: " + tmp.getContentsno());
 				tag_list = service.tag(tmp.getContentsno());
 				//tag_list mapper xml test
 	//					if (tag_list != null && !tag_list.isEmpty()) {
@@ -140,17 +178,13 @@ public class FeedRestController {
 		sublist_idx++;
 		
 		if (sub_list.size() < sublist_max_size) {
-			end_flag = true;
+			end_flag = 1;
 			sublist_idx = 0;
 		}
 		
 		Map result_map = new HashMap<>();
 		result_map.put("sub_list", sub_list);
-		if (dto.getUrl_id().equals("myread")) {			
-			result_map.put("base_distance", "no distance");
-		} else if (dto.getUrl_id().equals("read")) {
-			result_map.put("base_distance", base_distance[result_base_idx]);			
-		}
+		result_map.put("base_distance", base_distance[result_base_idx]);			
 		result_map.put("end_flag", end_flag);
 
 		return new ResponseEntity<Map>(result_map, HttpStatus.OK);
@@ -161,18 +195,15 @@ public class FeedRestController {
 		// like count 검사
 		int cnt = 0;
 		Map map = new HashMap();
-		System.out.println("first check id: " + (String) session.getAttribute("id"));
 		map.put("id", (String) session.getAttribute("id"));
 		map.put("contentsno", dto.getContentsno());
 		cnt = service.likecheck(map);
 		if (cnt > 0) {
 			// contents 테이블 like_check 수 -1, like 테이블 접속 id, contentsno 기준으로 삭제
-			System.out.println(map.get("id"));
 			service.unlike(map);
 			service.updatelikecnt(map);
 		} else {
 			// contents 테이블 like_check 수 +1, like 테이블 접속 id, contentsno 기준으로 추가
-			System.out.println(map.get("id"));
 			service.like(map);
 			service.updatelikecnt(map);
 		}

@@ -1,5 +1,5 @@
 .selection_container {
-  width: 300px;
+  width: var(--selection_container_size);
   margin: 50px auto 0;
   text-align: center;
 }
@@ -10,7 +10,7 @@
 
 /*Styling Selectbox*/
 .selection_box {
-  width: 300px;
+  width: var(--selection_container_size);
   display: inline-block;
   background-color: var(--base_color_navy);
   border-radius: 2px;
