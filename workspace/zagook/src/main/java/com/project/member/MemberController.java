@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.Utility.Utility;
-import com.zaxxer.hikari.util.SuspendResumeLock;
 
 import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 
@@ -253,11 +252,48 @@ public class MemberController {
            map.put("email", session.getAttribute("email"));
            map.put("fname", Utility.saveFileSpring(fnameMF, basePath));
            //디비에 파일명 변경
+           System.out.println("####::"+map);
            int cnt = service.updateFile(map);
+           System.out.println("####11::"+cnt);
            if(cnt==1) {
                    return "redirect:./mypage";
            }else {
                    return "./error";
            }
-   }
+	} 
+       	@GetMapping("/member/delete")
+    	public String delete() {
+
+    		return "/member/delete";
+    	}
+
+//    	@PostMapping("/admin/delete")
+    	@PostMapping("/member/delete")
+    	public String delete(HttpServletRequest request,HttpSession session,
+    			String email, String password) {
+    		System.out.println("post----------");
+    		Map map = new HashMap();
+    		map.put("email", email);
+    		map.put("password", password);
+    		int cnt = service.passwordCheck(map);
+    		System.out.println(email+":::"+password);
+    		System.out.println("cnt::::"+cnt);
+    		int dcnt = 0;
+    		if (cnt == 1) {
+    			dcnt = service.delete(email);
+    		}
+    		
+    		if (cnt != 1) {
+    			return "./passwdError";
+    		}
+    		else if (dcnt == 1) {
+    			System.out.println("삭제 성공");
+    			session.invalidate();
+    			return "redirect:/";
+    		}
+    		else {
+    			return "./error";
+    		}
+
+    	}
 }
