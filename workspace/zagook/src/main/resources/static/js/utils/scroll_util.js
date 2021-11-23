@@ -1,5 +1,5 @@
 function scroll_to_top() {
-	$('html, body').stop().animate( { scrollTop : 0 }, 500);
+	window.scrollTo(0, 0);
 }
 
 function wait_loading() {
