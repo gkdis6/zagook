@@ -13,6 +13,7 @@
 	--loading_animation_zindex: 2;
 	  /* map z-index: -1 > read.jsp */
 	--selection_container_zindex: 1;
+	--searchbar_item_zindex: 5;
 	  
   	/* color */
 	--base_color_navy: #191A45;
