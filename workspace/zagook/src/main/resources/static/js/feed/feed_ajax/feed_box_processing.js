@@ -40,7 +40,7 @@ function process_feed_list(param) {
 				}
                 
  				//----- <Feed container> ------------------------------------
-                html_str += '<div class="feed_container" onclick="container_click(event)" id="' + list[i].contentsno + '">';
+                html_str += '<div class="feed_container" onclick="container_click(event)" id="' + list[i].contentsno + '" x_site="'+list[i].x_site+'" y_site="'+list[i].y_site+'" filename="'+list[i].filename+'">';
                 
             // profile container
                 html_str += '<div class="profile_container feed_padding">';
@@ -59,7 +59,7 @@ function process_feed_list(param) {
                 
                 // image area
                 html_str += '<div class="img_box_container">';
-                html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box" x_site="'+list[i].x_site+'" y_site="'+list[i].y_site+'">';
+                html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box">';
                 html_str += '</div>';
                 
                 // tag area
