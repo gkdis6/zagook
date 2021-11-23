@@ -28,6 +28,7 @@ function init_fetch_feed(range, order) {
 			marker.setImage(markerImage);
 			kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map_main, marker, infowindow));
 			kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+			//kakao.maps.event.addListener(marker, 'custom_action', delMarker(marker));
 		}, init_reject);
 	}
 }
@@ -81,6 +82,10 @@ function scroll_reject() {
 		process_feed_list(param);
 	}
 }
+
+/*function delMarker(marker){
+	marker.setMap(null);
+}*/
 
 const feedService = new getFeedService();
 let center_box = document.getElementsByClassName("center_container")[0];

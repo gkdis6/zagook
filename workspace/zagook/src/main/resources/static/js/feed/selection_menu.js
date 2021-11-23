@@ -12,6 +12,7 @@ $(function(){
         /*$(this).parents('.selection_box').find('input').attr('value', "Range : " + $(this).attr('id'));*/
         $(".loader-wrapper").fadeIn("slow");
       	remove_feed();
+        //kakao.maps.event.trigger(marker, 'custom_action');
       	$("input[name=distance_type]").val($(this).text().split("k")[0]);
         search_by_select($("input[name=distance_type]").val());
     });

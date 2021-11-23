@@ -7,7 +7,6 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 const map_main = new kakao.maps.Map(mapContainer, mapOption);
 
 function displayMarker(data) {
-	console.log("되는 중");
 	// 마커를 생성합니다
 	var marker = new kakao.maps.Marker({
 		map: map_main, // 마커를 표시할 지도

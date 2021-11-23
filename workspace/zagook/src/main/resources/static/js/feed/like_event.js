@@ -35,8 +35,21 @@ function container_click(event) {
 		});
 	} else if (event_flag == 2) {
 		onclickTag(event);
+	} else if(event_flag == 0){
+		let filename = event.currentTarget.getAttribute("filename");
+		let posi = new kakao.maps.LatLng(event.currentTarget.getAttribute("x_site"), event.currentTarget.getAttribute("y_site"));
+		let infowindow = new kakao.maps.InfoWindow({
+			map: map_main,
+			position: posi,
+			content: '<img style="padding:20px 5px 5px 5px; width:150px; height:auto;"src="/contents/storage/'+filename+'">',
+			removable: true
+		});
+		map_main.setCenter(posi);
 	}
+	
 	
 	// after processing, should be change flag to default(0)
 	event_flag = 0;
 }
+
+			
