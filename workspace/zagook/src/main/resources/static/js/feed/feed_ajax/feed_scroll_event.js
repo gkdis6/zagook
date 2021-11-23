@@ -58,7 +58,7 @@ function scrollEventHandler(event){
 			let doc_height = this.document.scrollingElement.scrollHeight;
 			let top_height = this.document.scrollingElement.scrollTop;
 			let client_height = this.document.scrollingElement.clientHeight;
-			if (top_height + client_height >= doc_height) {
+			if (top_height + client_height>= doc_height) {
 				process_feed_list(param);
 			}
 		}, scroll_reject);
