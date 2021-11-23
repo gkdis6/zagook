@@ -84,7 +84,7 @@ table.mypage-type td {
 
 	function deleteM() {
 		var url = "delete";
-		url += "?id=${dto.id}";
+		url += "?email=${dto.email}";
 		url += "&oldfile=${dto.fname}";
 		location.href = url;
 	}
