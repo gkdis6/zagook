@@ -59,11 +59,7 @@ function process_feed_list(param) {
                 
                 // image area
                 html_str += '<div class="img_box_container">';
-<<<<<<< HEAD
-                html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box" loading="lazy">';
-=======
                 html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box" x_site="'+list[i].x_site+'" y_site="'+list[i].y_site+'">';
->>>>>>> 2adc7f45316150b1d26d06b3b0d80048376beaae
                 html_str += '</div>';
                 
                 // tag area
