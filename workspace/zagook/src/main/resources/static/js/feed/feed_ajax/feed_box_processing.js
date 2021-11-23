@@ -47,7 +47,7 @@ function process_feed_list(param) {
                 
                 // profile image area
                 html_str += '<span class="profile_image_container">';
-                html_str += '<img src="../images/feed/profile/' + list[i].fname + '" class="profile_img" alt="profile_img">';
+                html_str += '<img src="../images/feed/profile/' + list[i].fname + '" class="profile_img" alt="profile_img" loading="lazy">';
                 html_str += '</span>';
                 
                 // user id area
@@ -59,7 +59,7 @@ function process_feed_list(param) {
                 
                 // image area
                 html_str += '<div class="img_box_container">';
-                html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box">';
+                html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box" loading="lazy">';
                 html_str += '</div>';
                 
                 // tag area
@@ -90,13 +90,13 @@ function process_feed_list(param) {
 				} else {
 					html_str += 'like_outline.png"';
 				}
-				html_str += ' alt="like_img" onclick="like_click(event)"> <span class="feed_widget_text">';
+				html_str += ' alt="like_img" onclick="like_click(event)" loading="lazy"> <span class="feed_widget_text">';
 				html_str += numberFormatting(list[i].likecnt) + '</span>';
 				html_str + '</span>';
 				
 				//reply area
 				html_str += '<span class="reply_container">';
-                html_str += '<img class="reply_icon" src="../images/feed/comment.png" alt="comments_img"> <span class="feed_widget_text">Comments</span>';
+                html_str += '<img class="reply_icon" src="../images/feed/comment.png" alt="comments_img" loading="lazy"> <span class="feed_widget_text">Comments</span>';
                 html_str += '</span>';
                 
                 
@@ -121,7 +121,10 @@ function process_feed_list(param) {
 				// add mouseenter, and mouseleave
 				window.removeEventListener("scroll", scrollEventHandler);
 			}
-            center_box.innerHTML += html_str;
+            let newElement = document.createElement('div');
+			newElement.innerHTML = html_str;
+            document.getElementById("center_container").appendChild(newElement);
+            wait_loading();
 			feed_end();
         })
         .catch(err => {

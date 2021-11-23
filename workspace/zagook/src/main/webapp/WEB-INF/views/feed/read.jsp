@@ -41,6 +41,7 @@
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
 			<input type="hidden" name="order_type" value="distance">
+			<input type="hidden" name="page_flag" value="0">
 		</div>
 		<div class="map_container">
 			<div id="map" style="width: 100vw; height: 100vh; z-index:-1;">
