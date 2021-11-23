@@ -59,8 +59,13 @@ function scrollEventHandler(event){
 				param = is_set_feed_range_scroll(range, pos, "read");		
 			let doc_height = this.document.scrollingElement.scrollHeight;
 			let top_height = this.document.scrollingElement.scrollTop;
+<<<<<<< HEAD
 			if (((doc_height / 2) <= top_height) && $("input[name=page_flag]").val() == "0") {
 				$("input[name=page_flag]").val("1");
+=======
+			let client_height = this.document.scrollingElement.clientHeight;
+			if (top_height + client_height>= doc_height) {
+>>>>>>> 2adc7f45316150b1d26d06b3b0d80048376beaae
 				process_feed_list(param);
 			}
 		}, scroll_reject);

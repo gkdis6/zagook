@@ -74,4 +74,16 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.updateFile(map);
 	}
 
+	@Override
+	public int passwordCheck(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.passwordCheck(map);
+	}
+
+	@Override
+	public int delete(String email) {
+		// TODO Auto-generated method stub
+		return mapper.delete(email);
+	}
+
 }
