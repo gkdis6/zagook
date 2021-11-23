@@ -16,6 +16,7 @@ function init_fetch_feed(range, order) {
 			else if (ajax_url_check_read(url))
 				param = is_set_feed_range(range, pos, "read", order);
 			process_feed_list(param);
+			map_main.setCenter(new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
 			var marker = new kakao.maps.Marker({
 				map: map_main,
 				position: new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
