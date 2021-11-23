@@ -16,6 +16,17 @@ function init_fetch_feed(range, order) {
 			else if (ajax_url_check_read(url))
 				param = is_set_feed_range(range, pos, "read", order);
 			process_feed_list(param);
+			var marker = new kakao.maps.Marker({
+				map: map_main,
+				position: new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
+			});
+			var infowindow = new kakao.maps.InfoWindow({
+				content: '<div class="infowindow" id="myloca" style="text-align: center; width:150px;">내 위치</div>'
+			});
+			var markerImage = new kakao.maps.MarkerImage('/images/736653.png', new kakao.maps.Size(50, 53));
+			marker.setImage(markerImage);
+			kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map_main, marker, infowindow));
+			kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 		}, init_reject);
 	}
 }
