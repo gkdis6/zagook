@@ -35,7 +35,7 @@ function start_autocomplete(){
 }
 
 function start_autocomplete_friend() {
-	$("#searchInput").autocomplete({  //오토 컴플릿트 시작
+	$("#searchInput_friend").autocomplete({  //오토 컴플릿트 시작
 		source: function(request,response){
 			$.ajax({
 				type: "get",
@@ -83,12 +83,12 @@ function openSearchbar() {
 }
 
 function openSearchbarFriend() {
-	if (document.getElementById("searchInput") != null) {
-		document.getElementById("searchInput").setAttribute("placeholder", "Search Friend");
-		document.getElementById("searchInput").setAttribute("value", "");
+	if (document.getElementById("searchInput_friend") != null) {
+		document.getElementById("searchInput_friend").setAttribute("placeholder", "Search Friend");
+		document.getElementById("searchInput_friend").setAttribute("value", "");
 		return false;
 	}
-	document.getElementById("searchbar_container").innerHTML = '<input class="form ui-autocomplete-input" type="text" id="searchInput" name="searchInput" autocomplete="off" placeholder="Search Friend">';
+	document.getElementById("searchbar_container").innerHTML = '<input class="form ui-autocomplete-input" type="text" id="searchInput_friend" name="searchInput_friend" autocomplete="off" placeholder="Search Friend">';
 	document.getElementById("searchbar_container").innerHTML += '<button type="submit"><i class="fa fa-search"></i></button>';
 	get_tag_style();
 	start_autocomplete_friend();
