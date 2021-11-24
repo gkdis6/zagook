@@ -321,36 +321,36 @@ input[type=file] {
 }
 
 /*chat*/
-.chat>.modal-content {
-	border-radius: 20px;
-}
+  .chat>.modal-content {   
+ 	border-radius: 20px;  
+   }  
 
-.chat {
-	width: 350px;
-	height: auto;
-	border-radius: 20px;
-	background-color: #fff;
-}
+ .chat {  
+  	width: 350px;  
+  	height: auto;  
+  	border-radius: 20px;  
+  	background-color: #fff;  
+  }  
 
-#connect_btn {
-	color: #fff;
-	background: blue;
-	border-radius: 0.5em;
-}
+  #connect_btn {  
+  	color: #fff;  
+  	background: blue;  
+  	border-radius: 0.5em;  
+  }  
 
-#disconnect_btn {
-	color: #fff;
-	background: red;
-	border-radius: 0.5em;
-}
+  #disconnect_btn {  
+  	color: #fff;  
+  	background: red; 
+  	border-radius: 0.5em;  
+  }  
 
-.communicate {
-	width: 100%;
-}
-/* .conversation:ntn-child(odd){ */
-/* 	text-align:right; */
-/* 	color:black; */
-/* } */
+ .communicate {  
+  	width: 100%;  
+  }  
+  .conversation:ntn-child(odd){  
+ 	text-align:right;  
+  	color:black;  
+  }  
 /*chat-end*/
 </style>
 
@@ -360,7 +360,7 @@ input[type=file] {
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
 <script src="../js/sockjs.min.js"></script>
 <script src="../js/stomp.min.js"></script>
-<script type="text/JavaScript" src="../js/app.js"></script>
+<!-- <script type="text/JavaScript" src="../js/app.js"></script> -->
 
 </head>
 
@@ -613,7 +613,7 @@ input[type=file] {
 	</div>
 	<div
 		style="position: fixed; right: 20px; top: auto; 
-		bottom: 90px; z-index: 8; background: white; border: 1px solid #191a45"
+	bottom: 90px; z-index: 8; background: white; border: 1px solid #191a45" 
 		id="chat" class="chat">
 		<div class="modal-content">
 			<div class="modal-header" style="padding:0px; color:#191a45;">
@@ -634,7 +634,6 @@ input[type=file] {
 						<div id="main-content" class="container" style="width: 100%;">
 
 							<div class="row">
-<!-- 								<div class="col-md-12"> -->
 								<div>
 									<table id="conversation" class="table table-striped">
 										<tbody id="communicate" style="margin-left:0px;">
@@ -693,7 +692,7 @@ input[type=file] {
 									로 그 인</button>
 								<div class="join">
 									회원이 아니신가요? <a href="${root}/member/agree">회원가입</a>
-									<!-- 													<button type="button" class="btn btn-secondary">회원가입</button> -->
+									<!--<button type="button" class="btn btn-secondary">회원가입</button> -->
 								</div>
 							</div>
 						</form>

@@ -70,8 +70,8 @@ public class MemberController {
          //grade>> String grade = service.getGrade(map.get("id"));
          session.setAttribute("id", map.get("id"));
          session.setAttribute("email",map.get("email"));
-
          session.setAttribute("grade",dto.getGrade());
+         
          System.out.println("seid:::"+session.getAttribute("id"));
          System.out.println("seem:::"+session.getAttribute("email"));
 
