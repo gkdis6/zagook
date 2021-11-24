@@ -22,12 +22,6 @@
       value="/WEB-INF/views/member/read.jsp"/>
   </definition>
   
-  <definition name="/member/mypage" extends="main">
-    <put-attribute name="title" value="마이페이지"></put-attribute>
-    <put-attribute name="body"
-      value="/WEB-INF/views/member/read.jsp"/>
-  </definition>
-  
   <definition name="/member/update" extends="main">
     <put-attribute name="title" value="마이페이지"></put-attribute>
     <put-attribute name="body"
@@ -39,4 +33,9 @@
     <put-attribute name="body"
       value="/WEB-INF/views/member/deleteForm.jsp"/>
   </definition>
+  
+  	<definition name="/chat" extends="main"> 
+      <put-attribute name="title" value="문의사항" ></put-attribute> 
+      <put-attribute name="body" value="/WEB-INF/views/chat/naver_chatting.jsp" /> 
+    </definition>
 </tiles-definitions>

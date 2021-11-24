@@ -63,20 +63,18 @@ public class MemberController {
          HttpServletResponse response,
          Model model, String id,String email) {
       int cnt = service.loginCheck(map);
-      System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-      System.out.println("@@@@@@::::"+email);
-      System.out.println("map::::"+map);
       MemberDTO dto = service.read(email);
       map.put("id", dto.getId());
-      System.out.println("@@@@@@::::"+dto);
       if(cnt>0) { //회원
          
          //grade>> String grade = service.getGrade(map.get("id"));
          session.setAttribute("id", map.get("id"));
          session.setAttribute("email",map.get("email"));
+
          session.setAttribute("grade",dto.getGrade());
          System.out.println("seid:::"+session.getAttribute("id"));
          System.out.println("seem:::"+session.getAttribute("email"));
+
          //#########################################################
          
              // grade >>   session.setAttribute("grade", grade);
