@@ -360,7 +360,7 @@ input[type=file] {
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
 <script src="../js/sockjs.min.js"></script>
 <script src="../js/stomp.min.js"></script>
-<!-- <script type="text/JavaScript" src="../js/app.js"></script> -->
+<script type="text/JavaScript" src="../js/app.js"></script>
 
 </head>
 
@@ -619,7 +619,7 @@ input[type=file] {
 			<div class="modal-header" style="padding:0px; color:#191a45;">
 				<H4>ZAGOOK 문의</H4>
 				<form class="form-inline">
-					<div class="form-group">
+					<div class="form-group" id="chatform">
 						<label for="connect" style="text-align:left;font-size: 14px;">무엇을 도와드릴까요?</label>
 
 						<button id="connect_btn" class="btn btn-default" type="submit">시작</button>
@@ -644,8 +644,8 @@ input[type=file] {
 						</div>
 					</div>
 				</div>
-					<div class="form-group" style="width: 100%;margin-bottom:2.3px;padding-left:10px;padding-top:3px;">
-						<input type="text" id="msg" class="form-control"
+					<div class="form-group" id="chatform" style="width: 100%;margin-bottom:2.3px;padding-left:10px;padding-top:3px;">
+						<input type="text" id="msg" class="form1-control"
 							placeholder="문의사항을 입력하세요." style="width: 80%;">
 						<button id="send" class="btn btn-default" disabled type="submit">전송</button>
 					</div>

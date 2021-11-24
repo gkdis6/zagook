@@ -49,7 +49,7 @@ function showMessage(message) {
 }
 
 $(function () {
-    $("form").on('submit', function (e) {
+    $("#chat").on('submit', function (e) {
         e.preventDefault();
     });
     disconnect();
