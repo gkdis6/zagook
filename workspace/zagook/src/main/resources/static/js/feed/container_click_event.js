@@ -12,6 +12,12 @@ function like_click(event) {
 
 function tag_click(event) {
 	event_flag = 2;
+	console.log(event_flag);
+}
+
+function id_click(event) {
+	event_flag = 3;
+	console.log(event_flag);
 }
 
 function container_click(event) {
@@ -39,6 +45,8 @@ function container_click(event) {
 		});
 	} else if (event_flag == 2) {
 		onclickTag(event);
+	} else if (event_flag == 3) {
+		onclickId(event);
 	} else if(event_flag == 0){
 		let filename = event.currentTarget.getAttribute("filename");
 		let posi = new kakao.maps.LatLng(event.currentTarget.getAttribute("x_site"), event.currentTarget.getAttribute("y_site"));
@@ -69,8 +77,6 @@ function container_click(event) {
 		overlay_pre.setMap(map_main);
 		overlays.push(overlay_pre);
 	}
-	
-	
 	// after processing, should be change flag to default(0)
 	event_flag = 0;
 }
