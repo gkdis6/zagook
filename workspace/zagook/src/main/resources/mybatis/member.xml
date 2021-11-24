@@ -38,9 +38,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      grade)
      VALUES(#{id}, #{password},#{mname}, #{tel}, #{email}, #{job}, sysdate, #{fname}, 'H')
 </insert>
-<select id="getGrade" parameterType="String" resultType="String">
-	select
-	grade from zagook_member
-	where id = #{id}
-</select>
 </mapper>

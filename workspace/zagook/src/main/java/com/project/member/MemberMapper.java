@@ -15,7 +15,5 @@ public interface MemberMapper {
 
 	int create(MemberDTO dto);
 
-	String getGrade(String string);
-
 
 }

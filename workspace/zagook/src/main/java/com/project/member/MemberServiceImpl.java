@@ -40,12 +40,6 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.read(id);
 	}
 
-	@Override
-	public String getGrade(String string) {
-		// TODO Auto-generated method stub
-		return mapper.getGrade(string);
-	}
-
 
 
 }
