@@ -34,3 +34,9 @@ function is_set_feed_range_scroll_reject(range, url_id) {
 		return {"x_site": base_x_site, "y_site": base_y_site, "url_id": String(url_id), "load_type": "scroll", "range" : String(range), "order_type" : "empty"};
 	}
 }
+
+function is_tag_or_friend_url (url) {
+	if (url == "http://localhost:8005/feed/tag" || url == "http://localhost:8005/feed/friend")
+		return true;
+	return false;
+}
