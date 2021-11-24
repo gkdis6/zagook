@@ -43,6 +43,7 @@
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
 			<input type="hidden" name="order_type" value="distance">
 			<input type="hidden" name="page_flag" value="0">
+			<input type="hidden" name="selected_id" value="${param.selected_id}">
 		</div>
 		<div class="map_container">
 			<div id="map" style="width: 100vw; height: 100vh; z-index:-1;">
@@ -80,6 +81,7 @@
 <script src="/js/utils/date_format_util.js"></script>
 <script src="/js/utils/number_format_util.js"></script>
 <script src="/js/utils/scroll_util.js"></script>
+<script src="/js/utils/send_post_util.js"></script>
 <script src="/js/feed/url_pattern/url_regex.js"></script>
 <script src="/js/feed/map/feed_map.js"></script>
 <script src="/js/feed/feed_ajax/feed_start_end_util.js"></script>
@@ -87,9 +89,9 @@
 <script src="/js/feed/feed_ajax/feed_fetch_util.js"></script>
 <script src="/js/feed/feed_ajax/feed_box_processing.js"></script>
 <script src="/js/feed/feed_ajax/feed_scroll_event.js"></script>
-<script src="/js/feed/like_event.js"></script>
+<script src="/js/feed/container_click_event.js"></script>
 <script src="/js/feed/side_nav.js"></script>
-<script src="/js/feed/onclick_tag.js"></script>
+<script src="/js/feed/onclick_processing.js"></script>
 <script src="/js/feed/searchbar.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

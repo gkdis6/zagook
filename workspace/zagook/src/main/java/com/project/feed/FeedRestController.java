@@ -46,19 +46,31 @@ public class FeedRestController {
 		if (dto.getLoad_type().equals("reload"))
 			sublist_idx = 0;
 		
-		// page 간 이동 구분 > url_flag = 1(read page), = 2(myread page)
-		if ((url_flag == 1 && dto.getUrl_id().equals("myread")) || (url_flag == 2 && dto.getUrl_id().equals("read")))
-			sublist_idx = 0;
+		// page 간 이동 구분 > url_flag = 1(read page), = 2(myread page), =3(tag page), =4(friend page)
+		int cur_url_flag = 0;
+		if (dto.getUrl_id().equals("read"))
+			cur_url_flag = 1;
+		else if (dto.getUrl_id().equals("myread"))
+			cur_url_flag = 2;
+		else if (dto.getUrl_id().equals("tag"))
+			cur_url_flag = 3;
+		else if (dto.getUrl_id().equals("friend"))
+			cur_url_flag = 4;
 		
+		// 생성된 list를 전역으로 controller가 보관하고 있기 때문에, 페이지 url 변경 시 이를 버리고 다시 list를 생성해야 함
+		if (cur_url_flag != url_flag)
+			sublist_idx = 0;
+
+//========================================================== < 초기 list 생성 part 시작> =======================================================
 //	#1 초기 list 생성 부분 - sublist를 활용한 paging 적용
 		if (sublist_idx == 0) {
 			end_flag = -1;
-			//		Post 방식으로 FeedDTO에 삽입된 id를 사용
-			//		id값으로 Friends 테이블의 친구id 조회
-			//		조회된 친구 id값으로 contents 테이블의 각 row를 FeedDTO에 담아옴
-			//		**추가: base_distance를 기준으로 받아온 list의 size가 minimum_feed_cnt 이상일 경우 정렬 단계로 이동
-			dto.setId((String) session.getAttribute("id"));
-			//		url_id에 따라 내 or 친구 피드를 검색하는 sql문 mapping
+			if (dto.getUrl_id().equals("myread") || dto.getUrl_id().equals("read")) {
+				dto.setId((String) session.getAttribute("id"));
+			} else if (dto.getUrl_id().equals("tag") || dto.getUrl_id().equals("friend")) {
+				dto.setId(dto.getSelected_id());
+			}
+//----------------------------------------------------------- < myread > --------------------------------------------------------------------
 			if (dto.getUrl_id().equals("myread")) {
 				if (dto.getRange().equals("null")) {
 					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
@@ -83,55 +95,9 @@ public class FeedRestController {
 					feed_list = order_type.equals("distance") ? service.mylist(dto) : service.mylistbytime(dto);
 					url_flag = 2;
 				}
-			} else if (dto.getUrl_id().equals("read")) {
-				if (dto.getRange().equals("null")) {
-					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
-						dto.setBase_distance(base_distance[base_idx]);
-						result_base_idx = base_idx;
-						String order_type = dto.getOrder_type();
-						feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
-						url_flag = 1;
-						if (feed_list.size() > minimum_feed_cnt) {
-							break;
-						}
-					}
-				} else {
-					double selected_range = Double.parseDouble(dto.getRange()) / 100 / 2;
-					for (int i = 0; i < base_distance.length; i++) {
-						result_base_idx = i;
-						if (base_distance[i] == selected_range)
-							break;
-					}
-					dto.setBase_distance(selected_range);
-					String order_type = dto.getOrder_type();
-					feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
-					url_flag = 1;
-				}
-			} else if (dto.getUrl_id().equals("tag")) {
-				if (dto.getRange().equals("null")) {
-					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
-						dto.setBase_distance(base_distance[base_idx]);
-						result_base_idx = base_idx;
-						String order_type = dto.getOrder_type();
-						feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
-						url_flag = 1;
-						if (feed_list.size() > minimum_feed_cnt) {
-							break;
-						}
-					}
-				} else {
-					double selected_range = Double.parseDouble(dto.getRange()) / 100 / 2;
-					for (int i = 0; i < base_distance.length; i++) {
-						result_base_idx = i;
-						if (base_distance[i] == selected_range)
-							break;
-					}
-					dto.setBase_distance(selected_range);
-					String order_type = dto.getOrder_type();
-					feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
-					url_flag = 1;
-				}
-			} else if (dto.getUrl_id().equals("friend")) {
+			}
+//--------------------------------------------------------------- < read > -------------------------------------------------------------------
+			else if (dto.getUrl_id().equals("read")) {
 				if (dto.getRange().equals("null")) {
 					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
 						dto.setBase_distance(base_distance[base_idx]);
@@ -156,6 +122,71 @@ public class FeedRestController {
 					url_flag = 1;
 				}
 			}
+//-------------------------------------------------------------- < tag > ---------------------------------------------------------------------
+			else if (dto.getUrl_id().equals("tag")) {
+				if (dto.getRange().equals("null")) {
+					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
+						dto.setBase_distance(base_distance[base_idx]);
+						result_base_idx = base_idx;
+						String order_type = dto.getOrder_type();
+						feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+						url_flag = 3;
+						if (feed_list.size() > minimum_feed_cnt) {
+							break;
+						}
+					}
+				} else {
+					double selected_range = Double.parseDouble(dto.getRange()) / 100 / 2;
+					for (int i = 0; i < base_distance.length; i++) {
+						result_base_idx = i;
+						if (base_distance[i] == selected_range)
+							break;
+					}
+					dto.setBase_distance(selected_range);
+					String order_type = dto.getOrder_type();
+					feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+					url_flag = 3;
+				}
+			}
+//---------------------------------------------------------------  < friend >-------------------------------------------------------------------
+			else if (dto.getUrl_id().equals("friend")) {
+				Map friend_check_map = new HashMap<>();
+				friend_check_map.put("session_id", (String) session.getAttribute("id"));
+				friend_check_map.put("selected_id", (String) dto.getSelected_id());
+				if (dto.getRange().equals("null")) {
+					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
+						dto.setBase_distance(base_distance[base_idx]);
+						result_base_idx = base_idx;
+						String order_type = dto.getOrder_type();
+						if (service.friendcheck(friend_check_map) > 0) {
+							feed_list = order_type.equals("distance") ? service.friendlist(dto) : service.friendlistbytime(dto);
+						} else {
+							feed_list = order_type.equals("distance") ? service.notfriendlist(dto) : service.notfriendlistbytime(dto);
+						}
+						url_flag = 4;
+						if (feed_list.size() > minimum_feed_cnt) {
+							break;
+						}
+					}
+				} else {
+					double selected_range = Double.parseDouble(dto.getRange()) / 100 / 2;
+					for (int i = 0; i < base_distance.length; i++) {
+						result_base_idx = i;
+						if (base_distance[i] == selected_range)
+							break;
+					}
+					dto.setBase_distance(selected_range);
+					String order_type = dto.getOrder_type();
+					if (service.friendcheck(friend_check_map) > 0) {
+						feed_list = order_type.equals("distance") ? service.friendlist(dto) : service.friendlistbytime(dto);
+					} else {
+						feed_list = order_type.equals("distance") ? service.notfriendlist(dto) : service.notfriendlistbytime(dto);
+					}
+					url_flag = 4;
+				}
+			}
+//------------------------------------------------------------------------------------------------------------------------------------------
+//========================================================= < 초기 list 생성 part 끝> =========================================================
 	
 			if (dto.getOrder_type().equals("distance")) {
 				//	list 내의 정보를 x, y 좌표에 따라 재정렬

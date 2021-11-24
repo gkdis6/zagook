@@ -8,6 +8,10 @@ public interface FeedService {
 	List<FeedDTO> listbytime(FeedDTO dto);
 	List<FeedDTO> mylist(FeedDTO dto);
 	List<FeedDTO> mylistbytime(FeedDTO dto);
+	List<FeedDTO> friendlist(FeedDTO dto);
+	List<FeedDTO> friendlistbytime(FeedDTO dto);
+	List<FeedDTO> notfriendlist(FeedDTO dto);
+	List<FeedDTO> notfriendlistbytime(FeedDTO dto);
 	List<String> tag(int contentsno);
 	FeedDTO profile(String id);
 	int likecheck(Map map);
@@ -15,4 +19,5 @@ public interface FeedService {
 	int like(Map map);
 	int unlike(Map map);
 	int updatelikecnt(Map map);
+	int friendcheck(Map map);
 }

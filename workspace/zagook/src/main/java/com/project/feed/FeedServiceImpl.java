@@ -35,6 +35,30 @@ public class FeedServiceImpl implements FeedService {
 		// TODO Auto-generated method stub
 		return mapper.mylistbytime(dto);
 	}
+	
+	@Override
+	public List<FeedDTO> friendlist(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.friendlist(dto);
+	}
+	
+	@Override
+	public List<FeedDTO> friendlistbytime(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.friendlistbytime(dto);
+	}
+	
+	@Override
+	public List<FeedDTO> notfriendlist(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.notfriendlist(dto);
+	}
+	
+	@Override
+	public List<FeedDTO> notfriendlistbytime(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.notfriendlistbytime(dto);
+	}
 
 	@Override
 	public int likecheck(Map map) {
@@ -76,5 +100,11 @@ public class FeedServiceImpl implements FeedService {
 	public int likecnt(Map map) {
 		// TODO Auto-generated method stub
 		return mapper.likecnt(map);
+	}
+	
+	@Override
+	public int friendcheck(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.friendcheck(map);
 	}
 }

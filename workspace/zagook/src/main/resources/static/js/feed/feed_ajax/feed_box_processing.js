@@ -52,7 +52,7 @@ function process_feed_list(param) {
                 
                 // user id area
                 html_str += '<span class="user_id_container">';
-                html_str += '<a href="javascript:void(0);" class="user_id">' + list[i].id + '</a>';
+                html_str += '<a href="javascript:void(0);" class="user_id" onclick="id_click(event);return false;">' + list[i].id + '</a>';
                 html_str += '</span>';
                 
                 html_str += '</div>';

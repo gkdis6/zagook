@@ -37,7 +37,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class FeedController {
 	@GetMapping("/feed/read")
 	public String friendsfeed() {
-
 		return "/feed/read";
 	}
 	
@@ -47,15 +46,19 @@ public class FeedController {
 		return "/feed/myread";
 	}
 	
-	@GetMapping("/feed/friendread")
-	public String friendfeed() {
+	@PostMapping("/feed/tag")
+	public String tagfeed() {
 		
-		return "/feed/friendread";
+		return "/feed/tag";
+	}
+	
+	@PostMapping("/feed/friend")
+	public String friendfeed() {
+		return "/feed/friend";
 	}
 	
 	@GetMapping("/alert/feed_login")
 	public String login_alert() {
-		System.out.println("??");
 		return "/alert/feed_login";
 	}
 }
