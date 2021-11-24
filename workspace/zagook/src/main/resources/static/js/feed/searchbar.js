@@ -76,8 +76,11 @@ function openSearchbar() {
 		document.getElementById("searchInput").setAttribute("value", "");		
 		return false;
 	}
-	document.getElementById("searchbar_container").innerHTML = '<input class="form ui-autocomplete-input" type="text" id="searchInput" name="searchInput" autocomplete="off" placeholder="Search Tag">';
-	document.getElementById("searchbar_container").innerHTML += '<button type="submit"><i class="fa fa-search"></i></button>';
+	let html_str = '<form action="http://localhost:8005/feed/tag" method="post">';
+	html_str += '<input class="form ui-autocomplete-input" type="text" id="searchInput" name="selected_id" autocomplete="off" placeholder="Search Tag">';
+	html_str += '<button type="submit" formmethod="post"><i class="fa fa-search"></i></button>';
+	html_str += '</form>';
+	document.getElementById("searchbar_container").innerHTML = html_str;
 	get_tag_style();
 	start_autocomplete();
 }
@@ -88,8 +91,11 @@ function openSearchbarFriend() {
 		document.getElementById("searchInput_friend").setAttribute("value", "");
 		return false;
 	}
-	document.getElementById("searchbar_container").innerHTML = '<input class="form ui-autocomplete-input" type="text" id="searchInput_friend" name="searchInput_friend" autocomplete="off" placeholder="Search Friend">';
-	document.getElementById("searchbar_container").innerHTML += '<button type="submit"><i class="fa fa-search"></i></button>';
+	let html_str = '<form action="http://localhost:8005/feed/friend" method="post">';
+	html_str += '<input class="form ui-autocomplete-input" type="text" id="searchInput_friend" name="selected_id" autocomplete="off" placeholder="Search Friend">';
+	html_str += '<button type="submit" formmethod="post"><i class="fa fa-search"></i></button>';
+	html_str += '</form>';
+	document.getElementById("searchbar_container").innerHTML = html_str;
 	get_tag_style();
 	start_autocomplete_friend();
 }
