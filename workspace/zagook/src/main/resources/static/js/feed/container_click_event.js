@@ -21,7 +21,7 @@ function id_click(event) {
 }
 
 function img_click(event) {
-	event_flag = 3;
+	event_flag = 4;
 	$(".modal_img").show();
 	var imgSrc = event.target.getAttribute("src");
 	
