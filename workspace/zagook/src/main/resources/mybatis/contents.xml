@@ -7,16 +7,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.project.contents.ContentsMapper">
 	<select id="detail" parameterType="int"
 		resultType="com.project.contents.ContentsDTO">
-		select c.contentsno, c.contents, c.privacy, m.mname, c.filename, t.tag, c.rdate, c.likecnt
-		from zagook_contents c, zagook_tag t, zagook_posttag p, zagook_member m
-		where m.id=c.id
-		and c.contentsno=p.contentsno
+		select c.contentsno, c.contents, c.privacy, m.mname, c.filename, c.rdate, c.likecnt,
+		'#'||(select listagg(t.tag,' #') within group(order by p.contentsno)
+		from zagook_tag t, zagook_posttag p
+		where EXISTS(
+    		select p.tag_id from zagook_contents c, zagook_posttag p
+   			where c.contentsno=p.contentsno
+		)
 		and t.tag_id=p.tag_id
+		and p.contentsno=#{contentsno}
+		)as tag
+		from zagook_contents c, zagook_member m
+		where m.id=c.id
 		and c.contentsno=#{contentsno}
 	</select>
 
 	<update id="updateFile" parameterType="Map">
-		update contents
+		update zagook_contents
 		set
 		filename = #{fname}
 		where contentsno = #{contentsno}
@@ -31,43 +38,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<update id="update2"
 		parameterType="com.project.contents.ContentsDTO">
-		update zagook_tag
-		set tag=#{tag}
-		where tag_id=#{tag_id}
+		insert into zagook_posttag(contentsno, tag_id)
+		values
+		(#{contentsno}, (select tag_id from zagook_tag where tag=#{tag}))
 	</update>
 
 	<insert id="create"
 		parameterType="com.project.contents.ContentsDTO">
-			insert	into zagook_contents(contentsno, id, filename, contents,
-			rdate, privacy, x_site, y_site)
-			values((select nvl(max(contentsno),0)+1
-			from zagook_contents),
-			#{id}, #{filename}, #{contents}, sysdate, #{privacy}, #{x_site}, #{y_site})
+
+		insert into zagook_contents(contentsno, id, filename, contents,
+		rdate, privacy, x_site, y_site)
+		values((select nvl(max(contentsno),0)+1
+		from zagook_contents),
+		#{id}, #{filename}, #{contents}, sysdate, #{privacy}, #{x_site}, #{y_site})
+
 	</insert>
 	<insert id="create2"
 		parameterType="com.project.contents.ContentsDTO">
-			insert into zagook_tag(tag_id, tag)
-			values ((select nvl(max(tag_id),0)+1
-			from zagook_tag), #{tag})
+		merge into zagook_tag
+		using dual
+		on (tag=#{tag})
+		when not
+		matched then
+		insert (tag_id, tag)
+		values ((select nvl(max(tag_id),0)+1
+		from zagook_tag), #{tag})
 	</insert>
 	<insert id="create3"
-		parameterType="com.project.contents.ContentsDTO">	
-			insert into zagook_posttag(contentsno, tag_id)
-			values ((select max(contentsno)
-			from zagook_contents), (select max(tag_id)
-			from zagook_tag))
+		parameterType="com.project.contents.ContentsDTO">
+		insert into zagook_posttag(contentsno, tag_id)
+		values
+		((select max(contentsno)
+		from zagook_contents), (select tag_id from
+		zagook_tag where tag=#{tag}))
 	</insert>
-	
+
 	<!-- 삭제 -->
 	<delete id="delete" parameterType="int">
 		delete from zagook_posttag
 		where contentsno=#{contentsno}
 	</delete>
-	<delete id="delete2" parameterType="int">	
-		delete from zagook_tag
-		where tag_id=#{tag_id}
-	</delete>
-	<delete id="delete3" parameterType="int">	
+	<delete id="delete2" parameterType="int">
 		delete from zagook_contents
 		where contentsno=#{contentsno}
 	</delete>
@@ -80,14 +91,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by rdate desc
     </select>
     
-    <select id="like" parameterType="Map"
+    <select id="likeCnt" parameterType="Map"
 		resultType="int">
-		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
+		select count(*) from zagook_like where contentsno=#{contentsno}
 	</select>
 	
 	<select id="getTag" parameterType="int"
 		resultType="String">
-		select tag from zagook_tag where tag_id 
+		select tag from zagook_tag where tag_id
 		in (select tag_id from zagook_posttag where contentsno=#{contentsno})
+	</select>
+	
+	<select id="searchInput" parameterType="String" resultType="Map">
+		select t.tag, count(p.contentsno) as cnt from zagook_tag t join zagook_posttag p
+		on t.tag_id = p.tag_id
+		where t.tag like '%'||#{searchInput}||'%'
+		group by t.tag
+		
+	</select>
+	<select id="searchInput_friend" parameterType="String" resultType="Map">
+		select id,fname from zagook_member
+		where id like '%'||#{searchInput}||'%'
+	</select>
+	<update id="updateLike" parameterType="Map">
+		update zagook_contents
+		set likecnt=(select count(*) from zagook_like where contentsno=#{contentsno})
+		where contentsno = #{contentsno}
+	</update>
+	<insert id="like" parameterType="Map">	
+		insert into zagook_like(contentsno, id, ldate)
+		values (#{contentsno},#{id},sysdate)
+	</insert>
+	<delete id="unlike" parameterType="Map">
+		delete from zagook_like
+		where contentsno=#{contentsno}
+		and id=#{id}
+	</delete>
+	<select id="likeCheck" parameterType="Map" resultType="int">
+		select count(*) from zagook_like where id=#{id} and contentsno=#{contentsno}
 	</select>
 </mapper>

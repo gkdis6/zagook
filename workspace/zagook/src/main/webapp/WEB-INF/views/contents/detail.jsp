@@ -25,8 +25,6 @@
 			</div>
 		</div>
 		<div class="panel panel-default" style="width: 50%; float: left;">
-			<div class="panel-heading">작성자</div>
-			<div class="panel-body">${dto.wname}</div>
 
 			<div class="panel-heading">내용</div>
 			<div class="panel-body">${dto.contents}</div>

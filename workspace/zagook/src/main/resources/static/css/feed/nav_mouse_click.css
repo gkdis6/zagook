@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+#nav_click_img_container {
+	-webkit-animation: fadeOut 0.5s 3s infinite ease-in-out alternate;
+    -moz-animation: fadeOut 0.5s 3s infinite ease-in-out alternate;
+    -ms-animation: fadeOut 0.5s 3s infinite ease-in-out alternate;
+    -o-animation: fadeOut 0.5s 3s infinite ease-in-out alternate;
+    animation: fadeOut 0.5s 3s infinite ease-in-out alternate;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeOut {   
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fadeOut { 
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-ms-keyframes fadeOut {   
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  } 
+}
+@-o-keyframes fadeOut {   
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {   
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  } 
+}

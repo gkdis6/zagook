@@ -84,15 +84,45 @@ public class ContentsServiceImpl implements ContentsService {
 	}
 
 	@Override
-	public int delete3(int contentsno) {
-		// TODO Auto-generated method stub
-		return mapper.delete3(contentsno);
-	}
-
-	@Override
 	public int update2(ContentsDTO dto) {
 		// TODO Auto-generated method stub
 		return mapper.update2(dto);
+	}
+
+	@Override
+	public int likeCnt(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.likeCnt(map);
+	}
+
+	@Override
+	public List<String> getTag(int contentsno) {
+		// TODO Auto-generated method stub
+		return mapper.getTag(contentsno);
+	}
+
+	@Override
+	public List<Map> searchInput(String searchInput) {
+		// TODO Auto-generated method stub
+		return mapper.searchInput(searchInput);
+	}
+
+	@Override
+	public List<Map> searchInput_friend(String searchInput) {
+		// TODO Auto-generated method stub
+		return mapper.searchInput_friend(searchInput);
+	}
+
+	@Override
+	public int updateLike(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.updateLike(map);
+	}
+
+	@Override
+	public int likeCheck(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.likeCheck(map);
 	}
 
 	@Override
@@ -102,9 +132,9 @@ public class ContentsServiceImpl implements ContentsService {
 	}
 
 	@Override
-	public List<String> getTag(int contentsno) {
+	public int unlike(Map map) {
 		// TODO Auto-generated method stub
-		return mapper.getTag(contentsno);
+		return mapper.unlike(map);
 	}
 
 }

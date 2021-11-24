@@ -1,6 +1,7 @@
 package com.project.feed;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FeedDTO {
 //	minimum user info
@@ -9,6 +10,7 @@ public class FeedDTO {
 	private String filename;
 	private String contents;
 	private String rdate;
+	private int likecnt;
 	private int privacy;
 	private double x_site;
 	private double y_site;
@@ -19,19 +21,28 @@ public class FeedDTO {
 	private int like_clicked;
 	private List<String> tag_list;
 	
+	private double base_distance;
+	
+	private String url_id;
+	private String load_type;
+	private String range;
+	private String order_type;
+	
 	public FeedDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public FeedDTO(int contentsno, String id, String filename, String contents, String rdate, int privacy,
-			double x_site, double y_site, String mname, String fname, int like_clicked, List<String> tag_list) {
+	
+	public FeedDTO(int contentsno, String id, String filename, String contents, String rdate, int likecnt, int privacy,
+			double x_site, double y_site, String mname, String fname, int like_clicked, List<String> tag_list,
+			double base_distance, String url_id, String load_type, String range, String order_type) {
 		super();
 		this.contentsno = contentsno;
 		this.id = id;
 		this.filename = filename;
 		this.contents = contents;
 		this.rdate = rdate;
+		this.likecnt = likecnt;
 		this.privacy = privacy;
 		this.x_site = x_site;
 		this.y_site = y_site;
@@ -39,13 +50,40 @@ public class FeedDTO {
 		this.fname = fname;
 		this.like_clicked = like_clicked;
 		this.tag_list = tag_list;
+		this.base_distance = base_distance;
+		this.url_id = url_id;
+		this.load_type = load_type;
+		this.range = range;
+		this.order_type = order_type;
 	}
 
 	@Override
 	public String toString() {
 		return "FeedDTO [contentsno=" + contentsno + ", id=" + id + ", filename=" + filename + ", contents=" + contents
-				+ ", rdate=" + rdate + ", privacy=" + privacy + ", x_site=" + x_site + ", y_site=" + y_site + ", mname="
-				+ mname + ", fname=" + fname + ", like_clicked=" + like_clicked + ", tag_list=" + tag_list + "]";
+				+ ", rdate=" + rdate + ", likecnt=" + likecnt + ", privacy=" + privacy + ", x_site=" + x_site
+				+ ", y_site=" + y_site + ", mname=" + mname + ", fname=" + fname + ", like_clicked=" + like_clicked
+				+ ", tag_list=" + tag_list + ", base_distance=" + base_distance + ", url_id=" + url_id + ", load_type="
+				+ load_type + ", range=" + range + ", order_type=" + order_type + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FeedDTO other = (FeedDTO) obj;
+		return Double.doubleToLongBits(base_distance) == Double.doubleToLongBits(other.base_distance)
+				&& Objects.equals(contents, other.contents) && contentsno == other.contentsno
+				&& Objects.equals(filename, other.filename) && Objects.equals(fname, other.fname)
+				&& Objects.equals(id, other.id) && like_clicked == other.like_clicked && likecnt == other.likecnt
+				&& Objects.equals(load_type, other.load_type) && Objects.equals(mname, other.mname)
+				&& privacy == other.privacy && Objects.equals(range, other.range) && Objects.equals(rdate, other.rdate)
+				&& Objects.equals(tag_list, other.tag_list) && Objects.equals(url_id, other.url_id)
+				&& Double.doubleToLongBits(x_site) == Double.doubleToLongBits(other.x_site)
+				&& Double.doubleToLongBits(y_site) == Double.doubleToLongBits(other.y_site);
 	}
 
 	public int getContentsno() {
@@ -108,20 +146,52 @@ public class FeedDTO {
 	public void setTag_list(List<String> tag_list) {
 		this.tag_list = tag_list;
 	}
-
 	public String getMname() {
 		return mname;
 	}
-
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
-
 	public String getFname() {
 		return fname;
 	}
-
 	public void setFname(String fname) {
 		this.fname = fname;
+	}
+	public double getBase_distance() {
+		return base_distance;
+	}
+	public void setBase_distance(double base_distance) {
+		this.base_distance = base_distance;
+	}
+	public int getLikecnt() {
+		return likecnt;
+	}
+	public void setLikecnt(int likecnt) {
+		this.likecnt = likecnt;
+	}
+	public String getUrl_id() {
+		return url_id;
+	}
+	public void setUrl_id(String url_id) {
+		this.url_id = url_id;
+	}
+	public String getLoad_type() {
+		return load_type;
+	}
+	public void setLoad_type(String load_type) {
+		this.load_type = load_type;
+	}
+	public String getRange() {
+		return range;
+	}
+	public void setRange(String range) {
+		this.range = range;
+	}
+	public String getOrder_type() {
+		return order_type;
+	}
+	public void setOrder_type(String order_type) {
+		this.order_type = order_type;
 	}
 }

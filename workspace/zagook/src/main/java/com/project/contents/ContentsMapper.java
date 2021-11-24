@@ -29,12 +29,22 @@ public interface ContentsMapper {
 
 		int delete2(int contentsno);
 
-		int delete3(int contentsno);
-
 		int update2(ContentsDTO dto);
+
+		int likeCnt(Map map);
+
+		List<String> getTag(int contentsno);
+
+		List<Map> searchInput(String searchInput);
+
+		List<Map> searchInput_friend(String searchInput);
+
+		int updateLike(Map map);
+
+		int likeCheck(Map map);
 
 		int like(Map map);
 
-		List<String> getTag(int contentsno);
+		int unlike(Map map);
 
 }

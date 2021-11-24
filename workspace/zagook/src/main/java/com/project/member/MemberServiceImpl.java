@@ -35,11 +35,55 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public MemberDTO read(String id) {
+	public MemberDTO read(String email) {
 		// TODO Auto-generated method stub
-		return mapper.read(id);
+		return mapper.read(email);
 	}
 
 
+	@Override
+	public int update(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.update(dto);
+	}
+	
+	//카카오 소셜
+	
+	@Override
+	public int kakaocreate(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.kakaocreate(dto);
+	}
+
+
+	@Override
+	public int kakaoupdate(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.kakaoupdate(dto);
+	}
+
+	@Override
+	public int kakaoCheck(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return mapper.kakaoCheck(map);
+	}
+
+	@Override
+	public int updateFile(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.updateFile(map);
+	}
+
+	@Override
+	public int passwordCheck(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.passwordCheck(map);
+	}
+
+	@Override
+	public int delete(String email) {
+		// TODO Auto-generated method stub
+		return mapper.delete(email);
+	}
 
 }

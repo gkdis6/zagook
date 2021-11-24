@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+html { scroll-behavior: smooth; }
+
+body {
+	background: var(--base_color_navy);
+	font-family: "HelveticaNeue", Helvetica, Arial , sans-serif;
+  	transition: background-color .5s;
+}
+.feed_container a:first-child{
+	padding-left: 20px;
+}

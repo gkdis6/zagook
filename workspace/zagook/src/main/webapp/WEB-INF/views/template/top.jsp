@@ -92,10 +92,10 @@
 											<div class="modal-body">
 												<form action="/member/login" class="was-validated" method="post">
 													<div class="form-group">
-														<label for="id" align="left">아이디 </label> <input type="text"
+														<label for="email" align="left">이메일 </label> <input type="text"
 															class="form-control" style="width:250px;height:40px;"
-															id="userId" placeholder="Enter ID" name="id"
-															required="required" value='${c_id_val}'>
+															id="userEmail" placeholder="Enter Email" name="email"
+															required="required" value='${c_email_val}'>	
 													</div>
 													<div class="form-group">
 														<label for="userPw">비밀번호 </label> <input type="password"
@@ -105,11 +105,15 @@
 													</div>
 													<div class="form=group">
 														<button type="submit"
-															style="width:250px; background-color:black; color:white; padding-top:10px">
+															style="width:250px; background-color:black; color:white; 
+															padding-top:10px; margin-left:7px">
 															로 그 인</button>
+														<a href="https://kauth.kakao.com/oauth/authorize?client_id=8b0badea65f50a87408b62085e369711&redirect_uri=http://localhost:8005/kakaologin&response_type=code">
+														<img src="../images/kakao_login.png" style="width:250px; height:45px;padding-top:10px; margin-left:7px ">
+														</a>
 														<div class="join">
 															회원이 아니신가요? <a href="${root}/member/agree">회원가입</a>
-															<!-- 													<button type="button" class="btn btn-secondary">회원가입</button> -->
+															<!--<button type="button" class="btn btn-secondary">회원가입</button> -->
 														</div>
 													</div>
 												</form>
@@ -137,13 +141,13 @@
 									로그아웃</a></li>
 						</c:when>
 						<c:otherwise>
+								<li id="searchbar_container"></li>
 								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">🙄 <span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href="${root}/friend">친구신청</a></li>
-										<li><a href="#">친구목록</a></li>
 									</ul>
 								</li>
-								<li><a href="${root}/member/update"><span class="glyphicon glyphicon-edit"></span> 마이페이지
+								<li><a href="${root}/member/mypage"><span class="glyphicon glyphicon-edit"></span> 마이페이지
 									</a></li>
 								<li><a href="${root}/member/logout"><span class="glyphicon glyphicon-log-out"></span>
 										로그아웃</a></li>

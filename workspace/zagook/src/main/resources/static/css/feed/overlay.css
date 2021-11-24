@@ -1,0 +1,92 @@
+.wrap {
+	position: absolute;
+	bottom: 35px;
+	width: 160px;
+	margin-left: -80px;
+	text-align: left;
+	font-size: 12px;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	line-height: 1.5;
+	white-space: normal;
+	height: auto;
+	background: white;
+	border-radius: 10px 10px 5px 5px;
+}
+
+.wrap * {
+	padding: 0;
+	margin: 0;
+	white-space: normal;
+	height: auto;
+}
+
+.wrap .info {
+	width: 160px;
+	height: auto;
+	border-bottom: 2px solid #ccc;
+	border-right: 1px solid #ccc;
+	background: #fff;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+}
+
+.wrap .info:nth-child(1) {
+	border: 0;
+	box-shadow: 0px 1px 1px #888;
+}
+
+.info .title {
+	padding: 0;
+	height: 25px;
+	background: #eee;
+	/* background-color: #191a45; */
+	border-bottom: 1px solid #ddd;
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 10px 10px 0px 0px;
+}
+
+.info .close {
+	position: absolute;
+	top: 5px;
+	right: 7px;
+	color: #888;
+	width: 17px;
+	height: 17px;
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+}
+
+.info .close:hover {
+	cursor: pointer;
+}
+
+.info .body {
+	position: relative;
+	width: 160px;
+	height: auto;
+	background: white;
+}
+.info .body::-webkit-scrollbar {
+	display: none;
+}
+
+.body .img {
+	position: relative;
+	width: 150px;
+	height: auto;
+	color: #888;
+	margin: 5px;
+}
+
+.body:after {
+	content: '';
+	position: absolute;
+	margin-leÏft: -11px;
+	left: 50%;
+	bottom: -12;
+	width: 24px;
+	height: 12px;
+	background:
+		url('https://t1.d aumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}

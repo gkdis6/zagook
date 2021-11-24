@@ -13,15 +13,33 @@ public class FeedServiceImpl implements FeedService {
 	  private FeedMapper mapper;
 
 	@Override
-	public List<FeedDTO> list(String id) {
+	public List<FeedDTO> list(FeedDTO dto) {
 		// TODO Auto-generated method stub
-		return mapper.list(id);
+		return mapper.list(dto);
+	}
+	
+	@Override
+	public List<FeedDTO> listbytime(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.listbytime(dto);
+	}
+	
+	@Override
+	public List<FeedDTO> mylist(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.mylist(dto);
+	}
+	
+	@Override
+	public List<FeedDTO> mylistbytime(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.mylistbytime(dto);
 	}
 
 	@Override
-	public int like(Map map) {
+	public int likecheck(Map map) {
 		// TODO Auto-generated method stub
-		return mapper.like(map);
+		return mapper.likecheck(map);
 	}
 
 	@Override
@@ -34,5 +52,29 @@ public class FeedServiceImpl implements FeedService {
 	public FeedDTO profile(String id) {
 		// TODO Auto-generated method stub
 		return mapper.profile(id);
+	}
+
+	@Override
+	public int unlike(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.unlike(map);
+	}
+
+	@Override
+	public int updatelikecnt(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.updatelikecnt(map);
+	}
+
+	@Override
+	public int like(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.like(map);
+	}
+
+	@Override
+	public int likecnt(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.likecnt(map);
 	}
 }
