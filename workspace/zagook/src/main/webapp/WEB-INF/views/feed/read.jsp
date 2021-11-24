@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="/css/feed/scrollbar.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/selection_menu.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
+<link rel="stylesheet" href="/css/feed/overlay.css" type="text/css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
