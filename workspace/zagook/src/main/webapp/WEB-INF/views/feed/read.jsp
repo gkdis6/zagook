@@ -69,7 +69,12 @@
 		      </div>
 		</div>
 	</div>
-
+	<div class="modal_img">
+		<button>&times;</button>
+		<div class="modal_imgBox">
+			<img src="">
+		</div>
+	</div>
 <script src="/js/feed/top_nav.js"></script>
 <script src="/js/feed/selection_menu.js"></script>
 <script src="/js/utils/date_format_util.js"></script>
@@ -90,6 +95,18 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/data.js"></script>
 <script src="/js/feed/loading_animation.js"></script>
-
+<script>
+	$(".modal_img button").click(function(){
+		$(".modal_img").hide();
+	});
+		
+	$(".modal_img").click(function (e) {
+	    if (e.target.className != "modal_img") {
+	      return false;
+	    } else {
+	      $(".modal_img").hide();
+	    }
+	});
+</script>
 </body>
 </html>

@@ -77,3 +77,7 @@
 	width: 28px;
 	height: 27px;
 }
+
+.img_box_container img:hover{
+	cursor: -webkit-zoom-in;
+}
