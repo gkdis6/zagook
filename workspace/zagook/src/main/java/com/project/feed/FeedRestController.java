@@ -107,6 +107,54 @@ public class FeedRestController {
 					feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
 					url_flag = 1;
 				}
+			} else if (dto.getUrl_id().equals("tag")) {
+				if (dto.getRange().equals("null")) {
+					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
+						dto.setBase_distance(base_distance[base_idx]);
+						result_base_idx = base_idx;
+						String order_type = dto.getOrder_type();
+						feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+						url_flag = 1;
+						if (feed_list.size() > minimum_feed_cnt) {
+							break;
+						}
+					}
+				} else {
+					double selected_range = Double.parseDouble(dto.getRange()) / 100 / 2;
+					for (int i = 0; i < base_distance.length; i++) {
+						result_base_idx = i;
+						if (base_distance[i] == selected_range)
+							break;
+					}
+					dto.setBase_distance(selected_range);
+					String order_type = dto.getOrder_type();
+					feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+					url_flag = 1;
+				}
+			} else if (dto.getUrl_id().equals("friend")) {
+				if (dto.getRange().equals("null")) {
+					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
+						dto.setBase_distance(base_distance[base_idx]);
+						result_base_idx = base_idx;
+						String order_type = dto.getOrder_type();
+						feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+						url_flag = 1;
+						if (feed_list.size() > minimum_feed_cnt) {
+							break;
+						}
+					}
+				} else {
+					double selected_range = Double.parseDouble(dto.getRange()) / 100 / 2;
+					for (int i = 0; i < base_distance.length; i++) {
+						result_base_idx = i;
+						if (base_distance[i] == selected_range)
+							break;
+					}
+					dto.setBase_distance(selected_range);
+					String order_type = dto.getOrder_type();
+					feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+					url_flag = 1;
+				}
 			}
 	
 			if (dto.getOrder_type().equals("distance")) {

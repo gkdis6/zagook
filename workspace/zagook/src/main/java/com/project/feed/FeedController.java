@@ -47,6 +47,12 @@ public class FeedController {
 		return "/feed/myread";
 	}
 	
+	@GetMapping("/feed/friendread")
+	public String friendfeed() {
+		
+		return "/feed/friendread";
+	}
+	
 	@GetMapping("/alert/feed_login")
 	public String login_alert() {
 		System.out.println("??");

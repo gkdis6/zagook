@@ -1,6 +1,8 @@
 $(function () {
 	//param is not allocated in navigator.geolocation.getCurrentPosition, so put the code repeatedly
 	let order = $("input[name=order_type]").val();
+	
+	// To maintain the only one page(read.jsp), check the url to distinguish (read, myread) / (tag, friend)
 	init_fetch_feed(null, order);
 });
 
