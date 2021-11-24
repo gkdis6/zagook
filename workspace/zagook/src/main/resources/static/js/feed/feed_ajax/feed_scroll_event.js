@@ -17,6 +17,10 @@ function init_fetch_feed(range, order) {
 				param = is_set_feed_range(range, pos, "myread", order);
 			else if (ajax_url_check_read(url))
 				param = is_set_feed_range(range, pos, "read", order);
+			else if (ajax_url_check_tag(url))
+				param = is_set_feed_range(range, pos, "tag", order);
+			else if (ajax_url_check_friend(url))
+				param = is_set_feed_range(range, pos, "friend", order);
 			process_feed_list(param);
 			map_main.setCenter(new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
 			var marker = new kakao.maps.Marker({
@@ -40,12 +44,14 @@ function init_reject() {
 	let str = $("input[name=distance_type]").val().trim();
 	let range = (str == "Select Range" || str.length == 0)? null : str;
 	let order = $("input[name=order_type]").val();
-	console.log(range);
-	console.log(order);
 	if (ajax_url_check_myread(url))
 		param = is_set_feed_range_reject(range, "myread", order);
 	else if (ajax_url_check_read(url))
 		param = is_set_feed_range_reject(range, "read", order);
+	else if (ajax_url_check_tag(url))
+		param = is_set_feed_range_reject(range, "tag", order);
+	else if (ajax_url_check_friend(url))
+		param = is_set_feed_range_reject(range, "friend", order);
 	process_feed_list(param);
 }
 
@@ -59,6 +65,10 @@ function scrollEventHandler(event){
 				param = is_set_feed_range_scroll(range, pos, "myread");	
 			else if (ajax_url_check_read(url))
 				param = is_set_feed_range_scroll(range, pos, "read");		
+			else if (ajax_url_check_tag(url))
+				param = is_set_feed_range_scroll(range, pos, "tag");		
+			else if (ajax_url_check_friend(url))
+				param = is_set_feed_range_scroll(range, pos, "friend");		
 			let doc_height = this.document.scrollingElement.scrollHeight;
 			let top_height = this.document.scrollingElement.scrollTop;
 			if (((doc_height / 2) <= top_height) && $("input[name=page_flag]").val() == "0") {
@@ -75,7 +85,11 @@ function scroll_reject() {
 	if (ajax_url_check_myread(url))
 		param = is_set_feed_range_scroll_reject(range, "myread");	
 	else if (ajax_url_check_read(url))
-		param = is_set_feed_range_scroll_reject(range, "read");	
+		param = is_set_feed_range_scroll_reject(range, "read");
+	else if (ajax_url_check_tag(url))
+		param = is_set_feed_range_scroll_reject(range, "tag");
+	else if (ajax_url_check_friend(url))
+		param = is_set_feed_range_scroll_reject(range, "friend");
 	let doc_height = this.document.scrollingElement.scrollHeight;
 	let top_height = this.document.scrollingElement.scrollTop;
 	if (((doc_height / 2) <= top_height) && $("input[name=page_flag]").val() == "0") {
