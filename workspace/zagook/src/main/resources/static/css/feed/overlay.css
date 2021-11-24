@@ -90,3 +90,43 @@
 	background:
 		url('https://t1.d aumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
 }
+
+.modal_img {
+	display: none;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal_img button {
+	position: absolute;
+	top: 3rem;
+	right: 3rem;
+	background: transparent;
+	border: 0;
+	color: #ffffff;
+	font-size: 3rem;
+}
+
+.modal_imgBox {
+    max-height: 80vh;
+    max-width: 80vw;
+    position: fixed;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	overflow: auto;
+}
+
+.modal_imgBox img {
+	max-width: 100%;
+	max-height: 100%;
+}

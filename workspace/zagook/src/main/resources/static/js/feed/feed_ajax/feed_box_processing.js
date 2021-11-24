@@ -58,7 +58,7 @@ function process_feed_list(param) {
                 html_str += '</div>';
                 
                 // image area
-                html_str += '<div class="img_box_container">';
+                html_str += '<div class="img_box_container" onclick="img_click(event)">';
                 html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box">';
                 html_str += '</div>';
                 

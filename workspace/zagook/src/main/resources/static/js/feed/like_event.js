@@ -14,6 +14,14 @@ function tag_click(event) {
 	event_flag = 2;
 }
 
+function img_click(event) {
+	event_flag = 3;
+	$(".modal_img").show();
+	var imgSrc = event.target.getAttribute("src");
+	
+	$(".modal_imgBox img").attr("src", imgSrc);
+}
+
 function container_click(event) {
 	console.log(event_flag);
 	if (event_flag == 1) {
