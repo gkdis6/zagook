@@ -115,4 +115,10 @@ public class FeedServiceImpl implements FeedService {
 		// TODO Auto-generated method stub
 		return mapper.read(seleted_id);
 	}
+
+	@Override
+	public int friendcheck_2(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.friendcheck_2(map);
+	}
 }

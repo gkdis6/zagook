@@ -9,7 +9,8 @@ function process_feed_list(param) {
 			let base_distance = map.get("base_distance");
 			let end_flag = map.get("end_flag");
             let html_str = "";
-
+            let end_flag_2 = 0;
+			
             console.log("[map type] : " + typeof(map));
             console.log(map);
             console.log("[list.length] : " + list.length);
@@ -37,7 +38,23 @@ function process_feed_list(param) {
 				
                 // order by timeline
                 if (end_flag == -1) {
-					if(window.location.pathname == '/feed/friend'){
+					if(window.location.pathname == '/feed/myread'||session_id == dto_member.id){
+						html_str += '<div class="banner">';
+						html_str += '<div class="banner_area">';
+						html_str += '<div class="banner_profile_img"><img src="/member/storage/profile/'+dto_member.fname+'" alt="profile_img"></div>';
+						html_str += '<div class="banner_inner">';
+						html_str += '<div class="banner_inner_first">';
+						html_str += '<span>'+dto_member.id+'</span>';
+						html_str += '<button type="button" class="setting"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
+						html_str += '</div>';
+						html_str += '<div class="banner_inner_second">';
+						if(dto_member.introduction !== undefined){
+							html_str += '<span>'+dto_member.introduction+'</span>';
+						}
+						html_str += '</div>';
+						html_str += '</div>';
+						html_str += '</div>';
+					}else if(window.location.pathname == '/feed/friend'){
 						html_str += '<div class="banner">';
 						html_str += '<div class="banner_area">';
 						html_str += '<div class="banner_profile_img"><img src="/member/storage/profile/'+dto_member.fname+'" alt="profile_img"></div>';
@@ -64,10 +81,11 @@ function process_feed_list(param) {
 						html_str += '</div>';
 					}
 					html_str += '<div class="order_by_time_container" onclick="order_by_time();">게시물을 <strong>시간순</strong>으로 정렬하려면 클릭해주세요</div>';
-					if(window.location.pathname == '/feed/friend'){
+					if(window.location.pathname == '/feed/friend'||window.location.pathname == '/feed/myread'){
 						html_str += '</div>';
 					}
 					end_flag = 0;
+					end_flag_2 = 1;
 				}
                 
  				//----- <Feed container> ------------------------------------
@@ -141,6 +159,36 @@ function process_feed_list(param) {
 			$("input[name=distance_type]").val(String(base_distance * 100 * 2));
             
             if (end_flag == 1) {
+				if(end_flag_2 != 1){
+					if(window.location.pathname == '/feed/friend'){
+						html_str += '<div class="banner">';
+						html_str += '<div class="banner_area">';
+						html_str += '<div class="banner_profile_img"><img src="/member/storage/profile/'+dto_member.fname+'" alt="profile_img"></div>';
+						html_str += '<div class="banner_inner">';
+						html_str += '<div class="banner_inner_first">';
+						html_str += '<span>'+dto_member.id+'</span>';
+						if(friend_status == 1){
+							html_str += '<button type="button" class="friend_btn_2"disabled>친구신청중</button>';
+						}else if(friend_status == 2){
+							html_str += '<button type="button" class="friend_btn_3"disabled>친구신청받음</button>';
+						}else if(friend_status == 3){
+							html_str += '<button type="button" class="friend_btn_4"disabled>친구</button>';
+						}else{
+							html_str += '<button type="button" class="friend_btn_1">친구신청</button>';
+						}
+//						html_str += '<button type="button" class="setting"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
+						html_str += '</div>';
+						html_str += '<div class="banner_inner_second">';
+						if(dto_member.introduction !== undefined){
+							html_str += '<span>'+dto_member.introduction+'</span>';
+						}
+						html_str += '</div>';
+						html_str += '</div>';
+						html_str += '</div>';
+						html_str += '</div>'
+					}
+				}
+				end_flag_2 = 0;
 				html_str += '<div class="page_end_container" onclick="scroll_to_top();">Page End : ';
 				if (base_distance == "no distance") {
 					html_str += '게시물을 모두 찾았습니다.';

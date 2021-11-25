@@ -3,6 +3,9 @@ package com.project.feed;
 import java.util.List;
 import java.util.Objects;
 
+import lombok.Data;
+
+@Data
 public class FeedDTO {
 //	minimum user info
 	private int contentsno;

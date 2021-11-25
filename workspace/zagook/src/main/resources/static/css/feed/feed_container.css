@@ -11,6 +11,7 @@
 }
 .feed_padding {
 	padding-left: 20px;
+	padding-right: 20px;
 }
 .profile_container {
 	display: flex;
@@ -45,6 +46,9 @@
 .tag_container {
 	margin-top: 10px;
 	font-size: large;
+}
+.tag_container a{
+	margin-right: 10px;
 }
 .tag_container a:hover { text-decoration: none;}
 .content {

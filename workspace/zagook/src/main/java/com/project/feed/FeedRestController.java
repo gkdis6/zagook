@@ -1,6 +1,8 @@
 package com.project.feed;
 
 import java.io.Console;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,9 +43,10 @@ public class FeedRestController {
     FeedCachingService feedCachingService;
 
 	@PostMapping(value = "/feed/contents", produces = "application/json;charset=UTF-8")
-	public ResponseEntity<Map> postFeedList_ajax(@RequestBody FeedDTO dto, HttpSession session) {
+	public ResponseEntity<Map> postFeedList_ajax(@RequestBody FeedDTO dto, HttpSession session) throws URISyntaxException {
 		List<FeedDTO> sub_list = null;
 		int end_flag = 0;
+		int switch_flag = 0;
 		Map result_map = new HashMap<>();
 		// load type 구분 : reload or scroll
 		if (dto.getLoad_type().equals("reload"))
@@ -56,8 +60,13 @@ public class FeedRestController {
 			cur_url_flag = 2;
 		else if (dto.getUrl_id().equals("tag"))
 			cur_url_flag = 3;
-		else if (dto.getUrl_id().equals("friend"))
+		else if (dto.getUrl_id().equals("friend")) {
 			cur_url_flag = 4;
+			if(dto.getSelected_id().equals((String) session.getAttribute("id"))) {
+				dto.setUrl_id("myread");
+				cur_url_flag = 2;
+			}
+		}
 		
 		// 생성된 list를 전역으로 controller가 보관하고 있기 때문에, 페이지 url 변경 시 이를 버리고 다시 list를 생성해야 함
 		if (cur_url_flag != url_flag)
@@ -97,6 +106,8 @@ public class FeedRestController {
 					feed_list = order_type.equals("distance") ? service.mylist(dto) : service.mylistbytime(dto);
 					url_flag = 2;
 				}
+				MemberDTO dto_member = service.read((String) dto.getId());
+				result_map.put("dto_member", dto_member);
 			}
 //--------------------------------------------------------------- < read > -------------------------------------------------------------------
 			else if (dto.getUrl_id().equals("read")) {
@@ -160,8 +171,10 @@ public class FeedRestController {
 						dto.setBase_distance(base_distance[base_idx]);
 						result_base_idx = base_idx;
 						String order_type = dto.getOrder_type();
-						if (service.friendcheck(friend_check_map) == 3) {
-							feed_list = order_type.equals("distance") ? service.friendlist(dto) : service.friendlistbytime(dto);
+						if (service.friendcheck(friend_check_map) > 0 ) {
+							if(service.friendcheck_2(friend_check_map) == 3) {
+								feed_list = order_type.equals("distance") ? service.friendlist(dto) : service.friendlistbytime(dto);
+							}
 						} else {
 							feed_list = order_type.equals("distance") ? service.notfriendlist(dto) : service.notfriendlistbytime(dto);
 						}
@@ -179,8 +192,10 @@ public class FeedRestController {
 					}
 					dto.setBase_distance(selected_range);
 					String order_type = dto.getOrder_type();
-					if (service.friendcheck(friend_check_map) == 3) {
-						feed_list = order_type.equals("distance") ? service.friendlist(dto) : service.friendlistbytime(dto);
+					if (service.friendcheck(friend_check_map) > 0) {
+						if(service.friendcheck_2(friend_check_map) == 3) {
+							feed_list = order_type.equals("distance") ? service.friendlist(dto) : service.friendlistbytime(dto);
+						}
 					} else {
 						feed_list = order_type.equals("distance") ? service.notfriendlist(dto) : service.notfriendlistbytime(dto);
 					}
@@ -188,7 +203,12 @@ public class FeedRestController {
 				} 
 				MemberDTO dto_member = service.read((String) dto.getSelected_id());
 				result_map.put("dto_member", dto_member);
-				result_map.put("friend_status", service.friendcheck(friend_check_map));
+				if (service.friendcheck(friend_check_map) > 0 ) {
+					result_map.put("friend_status", service.friendcheck_2(friend_check_map));
+				}else {
+					result_map.put("friend_status", 0);
+				}
+				
 			}
 //------------------------------------------------------------------------------------------------------------------------------------------
 //========================================================= < 초기 list 생성 part 끝> =========================================================
@@ -261,12 +281,13 @@ public class FeedRestController {
 		}
 		sublist_idx++;
 		
-		if (sub_list.size() < sublist_max_size) {
+		if ((sub_list.size() < sublist_max_size) || 
+				((sub_list.size() == sublist_max_size) && ((feed_list.size() / sublist_max_size) + 1 == sublist_idx))) {
 			end_flag = 1;
 			sublist_idx = 0;
 		}
-		
-		
+		System.out.println((sub_list.size() < sublist_max_size) || ((sub_list.size() == sublist_max_size) && ((feed_list.size() / sublist_max_size) + 1 == sublist_idx)));
+		System.out.println(end_flag);
 		result_map.put("sub_list", sub_list);
 		result_map.put("base_distance", base_distance[result_base_idx]);			
 		result_map.put("end_flag", end_flag);
