@@ -63,7 +63,22 @@ function process_feed_list(param) {
 						html_str += '</div>';
 						html_str += '</div>';
 					}
-					html_str += '<div class="order_by_time_container" onclick="order_by_time();">게시물을 <strong>시간순</strong>으로 정렬하려면 클릭해주세요</div>';
+					//html_str += '<div class="order_by_time_container" onclick="order_by_time();">게시물을'
+					html_str += '<div class="order_by_time_container" onclick="time_container_click(event);"><div>게시물을</div>'
+					html_str += '<div class="time_button_cover">\
+							        <div class="time_button r" id="time_button_9">';
+					if ($("input[name=order_type]").val() == "old") {
+						html_str +=      '<input type="checkbox" class="time_checkbox" id="time_checkbox" checked>';
+					} else {
+						html_str +=      '<input type="checkbox" class="time_checkbox" id="time_checkbox">';
+					}
+					html_str +=		     '<div class="time_knobs">\
+							            <span></span>\
+							          </div>\
+							          <div class="time_layer"></div>\
+							        </div>\
+							    </div>';
+					html_str += '<div class="time_click_container">으로 정렬하려면<div class="time_click" onclick="time_click();">클릭</div>해주세요</div></div>';
 					if(window.location.pathname == '/feed/friend'){
 						html_str += '</div>';
 					}

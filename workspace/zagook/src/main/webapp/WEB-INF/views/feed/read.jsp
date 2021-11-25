@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="/css/feed/nav_mouse_click.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/scrollbar.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/selection_menu.css" type="text/css">
+<link rel="stylesheet" href="/css/feed/time_button.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/overlay.css" type="text/css">
 <link rel="stylesheet" href="/css/create.css" type="text/css">
@@ -185,6 +186,7 @@
 <script src="/js/feed/selection_menu.js"></script>
 <script src="/js/utils/date_format_util.js"></script>
 <script src="/js/utils/number_format_util.js"></script>
+<script src="/js/utils/remove_display_util.js"></script>
 <script src="/js/utils/scroll_util.js"></script>
 <script src="/js/utils/send_post_util.js"></script>
 <script src="/js/feed/url_pattern/url_regex.js"></script>

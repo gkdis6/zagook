@@ -7,15 +7,20 @@ import com.project.member.MemberDTO;
 
 public interface FeedService {
 	List<FeedDTO> list(FeedDTO dto);
-	List<FeedDTO> listbytime(FeedDTO dto);
+	List<FeedDTO> listbyrecent(FeedDTO dto);
+	List<FeedDTO> listbyold(FeedDTO dto);
 	List<FeedDTO> mylist(FeedDTO dto);
-	List<FeedDTO> mylistbytime(FeedDTO dto);
+	List<FeedDTO> mylistbyrecent(FeedDTO dto);
+	List<FeedDTO> mylistbyold(FeedDTO dto);
 	List<FeedDTO> taglist(FeedDTO dto);
-	List<FeedDTO> taglistbytime(FeedDTO dto);
+	List<FeedDTO> taglistbyrecent(FeedDTO dto);
+	List<FeedDTO> taglistbyold(FeedDTO dto);
 	List<FeedDTO> friendlist(FeedDTO dto);
-	List<FeedDTO> friendlistbytime(FeedDTO dto);
+	List<FeedDTO> friendlistbyrecent(FeedDTO dto);
+	List<FeedDTO> friendlistbyold(FeedDTO dto);
 	List<FeedDTO> notfriendlist(FeedDTO dto);
-	List<FeedDTO> notfriendlistbytime(FeedDTO dto);
+	List<FeedDTO> notfriendlistbyrecent(FeedDTO dto);
+	List<FeedDTO> notfriendlistbyold(FeedDTO dto);
 	List<String> tag(int contentsno);
 	FeedDTO profile(String id);
 	int likecheck(Map map);
