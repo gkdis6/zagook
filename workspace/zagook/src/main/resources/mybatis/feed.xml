@@ -13,8 +13,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             where id=#{id} and status=3
             ) 
 		and privacy!=0
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 	</select>
 	<select id="listbyrecent" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
@@ -24,8 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             where id=#{id} and status=3
             ) 
 		and privacy!=0
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate desc
 	</select>
 	<select id="listbyold" parameterType="com.project.feed.FeedDTO"
@@ -36,31 +36,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             where id=#{id} and status=3
             ) 
 		and privacy!=0
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate asc
 	</select>
 	<select id="mylist" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents
 		where id=#{id}
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 	</select>
 	<select id="mylistbyrecent" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents
 		where id=#{id}
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate desc
 	</select>
 	<select id="mylistbyold" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents
 		where id=#{id}
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate asc
 	</select>
 	<select id="taglist" parameterType="com.project.feed.FeedDTO"
@@ -71,8 +71,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		)
 		and privacy=2
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 	</select>
 	<select id="taglistbyrecent" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
@@ -82,8 +82,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		)
 		and privacy=2
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate desc
 	</select>
 	<select id="taglistbyold" parameterType="com.project.feed.FeedDTO"
@@ -94,8 +94,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		)
 		and privacy=2
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate asc
 	</select>
 	<select id="friendlist" parameterType="com.project.feed.FeedDTO"
@@ -103,16 +103,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from zagook_contents
 		where id=#{id}
 		and privacy!=0
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 	</select>
 	<select id="friendlistbyrecent" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents
 		where id=#{id}
 		and privacy!=0
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate desc
 	</select>
 	<select id="friendlistbyold" parameterType="com.project.feed.FeedDTO"
@@ -120,8 +120,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from zagook_contents
 		where id=#{id}
 		and privacy!=0
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate asc
 	</select>
 	<select id="notfriendlist" parameterType="com.project.feed.FeedDTO"
@@ -130,8 +130,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=#{id}
 		and privacy!=0
 		and privacy!=1
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 	</select>
 	<select id="notfriendlistbyrecent" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
@@ -139,8 +139,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=#{id}
 		and privacy!=0
 		and privacy!=1
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate desc
 	</select>
 	<select id="notfriendlistbyold" parameterType="com.project.feed.FeedDTO"
@@ -149,8 +149,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=#{id}
 		and privacy!=0
 		and privacy!=1
-		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
-		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate asc
 	</select>
 	<select id="tag" parameterType="int"
