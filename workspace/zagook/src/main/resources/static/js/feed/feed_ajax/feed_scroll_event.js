@@ -38,6 +38,7 @@ function init_fetch_feed(range, order) {
 			marker.setImage(markerImage);
 			kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map_main, marker, infowindow));
 			kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+			overlays.push(marker);
 		}, init_reject);
 	}
 }
