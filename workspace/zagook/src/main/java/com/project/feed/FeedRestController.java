@@ -41,7 +41,6 @@ public class FeedRestController {
 	public ResponseEntity<Map> postFeedList_ajax(@RequestBody FeedDTO dto, HttpSession session) {
 		List<FeedDTO> sub_list = null;
 		int end_flag = 0;
-		int switch_flag = 0;
 		Map result_map = new HashMap<>();
 		// load type 구분 : reload or scroll
 		if (dto.getLoad_type().equals("reload"))
@@ -57,10 +56,6 @@ public class FeedRestController {
 			cur_url_flag = 3;
 		else if (dto.getUrl_id().equals("friend")) {
 			cur_url_flag = 4;
-			if(dto.getSelected_id() == null || dto.getSelected_id().equals((String) session.getAttribute("id"))) {
-				dto.setUrl_id("myread");
-				cur_url_flag = 2;
-			}
 		}
 		
 		// 생성된 list를 전역으로 controller가 보관하고 있기 때문에, 페이지 url 변경 시 이를 버리고 다시 list를 생성해야 함
