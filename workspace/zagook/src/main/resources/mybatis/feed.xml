@@ -23,7 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="listbyrecent" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
-		select * from zagook_contents
+		select * from
+		(select * from zagook_contents
 		where id in (
 		    select id2 from zagook_friend 
 		    where id=#{id} and status=3
@@ -35,12 +36,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from zagook_contents
 		where privacy=2
 		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
-		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance}))
 		order by rdate desc
 	</select>
 	<select id="listbyold" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
-		select * from zagook_contents
+		select * from
+		(select * from zagook_contents
 		where id in (
 		    select id2 from zagook_friend 
 		    where id=#{id} and status=3
@@ -52,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from zagook_contents
 		where privacy=2
 		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
-		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance}))
 		order by rdate asc
 	</select>
 	<select id="mylist" parameterType="com.project.feed.FeedDTO"
