@@ -28,4 +28,6 @@ public interface MemberMapper {
 	int kakaoupdate(MemberDTO dto);
 	int kakaoCheck(Map<String, String> map);
 	
+	//네이버 소셜
+	int navercreate(MemberDTO dto);
 }

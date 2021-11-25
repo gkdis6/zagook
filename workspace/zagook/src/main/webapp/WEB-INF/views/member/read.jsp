@@ -92,7 +92,14 @@ table.mypage-type td {
 </head>
 <body>
 	<div class="container">
+	<c:choose>
+		<c:when test="${dto.id.length() gt 10}">
+		<h2 style="padding-left: 10px; font-weight:bold; color:#191A45">${dto.id.substring(0, 10)}의 회원정보</h2>
+		</c:when>
+		<c:otherwise>
 		<h2 style="padding-left: 10px; font-weight:bold; color:#191A45">${dto.id}의 회원정보</h2>
+		</c:otherwise>
+	</c:choose>
 		<table class="mypage-type">
 			<tr>
 				<td colspan="2" style="text-align: center"><img
@@ -144,7 +151,15 @@ table.mypage-type td {
 			</tr>
 			<tr>
 				<th>닉네임</th>
+			<c:choose>
+			<c:when test="${dto.id.length() gt 10}">	
+				<td>${dto.id.substring(0, 10)}</td>
+				</c:when>
+			<c:otherwise>
 				<td>${dto.id}</td>
+			</c:otherwise>
+			</c:choose>			
+			
 			</tr>
 			<tr>
 				<th>이메일</th>

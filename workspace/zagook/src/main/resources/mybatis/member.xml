@@ -62,6 +62,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      VALUES(#{id}, #{password},#{mname}, #{email}, sysdate,'member.jpg', 'H', 'kakao')
 </insert>
 
+<insert id="navercreate" parameterType="com.project.member.MemberDTO">
+	 INSERT INTO zagook_member(id, password,
+     mname, email, mdate, fname, grade, social)
+     VALUES(#{id}, #{password},#{mname}, #{email}, sysdate,'member.jpg', 'H', 'naver')
+</insert>
+
 <update id="update" parameterType="com.project.member.MemberDTO">
 	update zagook_member
       set id = #{id},

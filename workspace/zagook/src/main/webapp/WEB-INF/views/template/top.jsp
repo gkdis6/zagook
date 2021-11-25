@@ -111,6 +111,9 @@
 														<a href="https://kauth.kakao.com/oauth/authorize?client_id=8b0badea65f50a87408b62085e369711&redirect_uri=http://localhost:8005/kakaologin&response_type=code">
 														<img src="../images/kakao_login.png" style="width:250px; height:45px;padding-top:10px; margin-left:7px ">
 														</a>
+														<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ixM36J7baPEJLD3Q1N43&state=STATE_STRING&redirect_uri=http://localhost:8005/naverlogin">
+														<img src="../images/naver_login.png" style="width:250px; height:45px;padding-top:10px; margin-left:7px ">
+														</a>
 														<div class="join">
 															회원이 아니신가요? <a href="${root}/member/agree">회원가입</a>
 															<!--<button type="button" class="btn btn-secondary">회원가입</button> -->

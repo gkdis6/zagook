@@ -67,7 +67,15 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return mapper.kakaoCheck(map);
 	}
+	
+	//네이버 소셜
 
+	@Override
+	public int navercreate(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.navercreate(dto);
+	}
+	
 	@Override
 	public int updateFile(Map map) {
 		// TODO Auto-generated method stub
