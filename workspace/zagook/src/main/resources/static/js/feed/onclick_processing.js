@@ -1,8 +1,10 @@
 function onclickTag(event) {
-	openSearchbar();
+	if (document.getElementById("searchInput") == null)
+		openSearchbar();
 	let tag_name = event.target.innerText;
-	document.getElementById("searchInput").setAttribute("value", tag_name.substr(1, tag_name.length));
-	document.getElementById("searchInput").focus();
+	console.log(tag_name);
+	$("#searchInput").val(tag_name.substr(1, tag_name.length))
+	$("#searchInput").focus();
 }
 
 function onclickId(event) {
