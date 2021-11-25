@@ -1,10 +1,4 @@
 function onclickTag(event) {
-	/*if (document.getElementById("searchInput") == null)
-		openSearchbar();
-	let tag_name = event.target.innerText;
-	console.log(tag_name);
-	$("#searchInput").val(tag_name.substr(1, tag_name.length));
-	$("#searchInput").focus();*/
 	// 1) 현재 페이지에서 선택된 tag 값을 post 파라미터로 전달
 	let tag_name = event.target.innerText;
 	let params = {'selected_id' : tag_name.substr(1, tag_name.length)};
@@ -23,4 +17,22 @@ function onclickId(event) {
 
 function onclick_search_id(event) {
 	console.log(event.target);
+}
+
+function onclick_time(event) {
+	console.log(event.currentTarget);
+	console.log($(event.currentTarget).find('#time_checkbox').is(':checked'));
+	let time_flag = $(event.currentTarget).find('#time_checkbox').is(':checked')
+	let str = $("input[name=distance_type]").val().trim();
+	let range = (str == "Select Range" || str.length == 0)? null : str;
+	remove_front_display();
+	if (time_flag == false) {
+		// 최신순 정렬
+		$("input[name=order_type]").val("recent");
+		init_fetch_feed(range, "recent");
+	} else {
+		// 오래된순 정렬
+		$("input[name=order_type]").val("old");
+		init_fetch_feed(range, "old");
+	}
 }

@@ -1,5 +1,6 @@
 // if default = 0, like_click = 1, 
 let event_flag = 0;
+let time_order_event_flag = 0;
 let overlay_pre= new kakao.maps.CustomOverlay({
 	xAnchor: 0.5,
 	yAnchor: 1
@@ -87,6 +88,18 @@ function container_click(event) {
 	}
 	// after processing, should be change flag to default(0)
 	event_flag = 0;
+}
+
+function time_click() {
+	time_order_event_flag = 1;
+}
+
+function time_container_click(event) {
+	console.log(time_order_event_flag);
+	if (time_order_event_flag == 1) {
+		onclick_time(event);
+	}
+	time_order_event_flag = 0;
 }
 
 			

@@ -79,7 +79,13 @@ public class FeedRestController {
 						dto.setBase_distance(base_distance[base_idx]);
 						result_base_idx = base_idx;
 						String order_type = dto.getOrder_type();
-						feed_list = order_type.equals("distance") ? service.mylist(dto) : service.mylistbytime(dto);
+						if (order_type.equals("distance")) {
+							feed_list = service.mylist(dto);
+						} else if (order_type.equals("recent")) {
+							feed_list = service.mylistbyrecent(dto);
+						} else if (order_type.equals("old")) {
+							feed_list = service.mylistbyold(dto);
+						}
 						url_flag = 2;
 						if (feed_list.size() > minimum_feed_cnt) {
 							break;
@@ -94,7 +100,13 @@ public class FeedRestController {
 					}
 					dto.setBase_distance(selected_range);
 					String order_type = dto.getOrder_type();
-					feed_list = order_type.equals("distance") ? service.mylist(dto) : service.mylistbytime(dto);
+					if (order_type.equals("distance")) {
+						feed_list = service.mylist(dto);
+					} else if (order_type.equals("recent")) {
+						feed_list = service.mylistbyrecent(dto);
+					} else if (order_type.equals("old")) {
+						feed_list = service.mylistbyold(dto);
+					}
 					url_flag = 2;
 				}
 			}
@@ -105,7 +117,13 @@ public class FeedRestController {
 						dto.setBase_distance(base_distance[base_idx]);
 						result_base_idx = base_idx;
 						String order_type = dto.getOrder_type();
-						feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+						if (order_type.equals("distance")) {
+							feed_list = service.list(dto);
+						} else if (order_type.equals("recent")) {
+							feed_list = service.listbyrecent(dto);
+						} else if (order_type.equals("old")) {
+							feed_list = service.listbyold(dto);
+						}
 						url_flag = 1;
 						if (feed_list.size() > minimum_feed_cnt) {
 							break;
@@ -120,7 +138,13 @@ public class FeedRestController {
 					}
 					dto.setBase_distance(selected_range);
 					String order_type = dto.getOrder_type();
-					feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+					if (order_type.equals("distance")) {
+						feed_list = service.list(dto);
+					} else if (order_type.equals("recent")) {
+						feed_list = service.listbyrecent(dto);
+					} else if (order_type.equals("old")) {
+						feed_list = service.listbyold(dto);
+					}
 					url_flag = 1;
 				}
 			}
@@ -131,7 +155,13 @@ public class FeedRestController {
 						dto.setBase_distance(base_distance[base_idx]);
 						result_base_idx = base_idx;
 						String order_type = dto.getOrder_type();
-						feed_list = order_type.equals("distance") ? service.taglist(dto) : service.taglistbytime(dto);
+						if (order_type.equals("distance")) {
+							feed_list = service.taglist(dto);
+						} else if (order_type.equals("recent")) {
+							feed_list = service.taglistbyrecent(dto);
+						} else if (order_type.equals("old")) {
+							feed_list = service.taglistbyold(dto);
+						}
 						url_flag = 3;
 						if (feed_list.size() > minimum_feed_cnt) {
 							break;
@@ -146,7 +176,13 @@ public class FeedRestController {
 					}
 					dto.setBase_distance(selected_range);
 					String order_type = dto.getOrder_type();
-					feed_list = order_type.equals("distance") ? service.taglist(dto) : service.taglistbytime(dto);
+					if (order_type.equals("distance")) {
+						feed_list = service.taglist(dto);
+					} else if (order_type.equals("recent")) {
+						feed_list = service.taglistbyrecent(dto);
+					} else if (order_type.equals("old")) {
+						feed_list = service.taglistbyold(dto);
+					}
 					url_flag = 3;
 				}
 			}
@@ -161,9 +197,21 @@ public class FeedRestController {
 						result_base_idx = base_idx;
 						String order_type = dto.getOrder_type();
 						if (service.friendcheck(friend_check_map) == 3) {
-							feed_list = order_type.equals("distance") ? service.friendlist(dto) : service.friendlistbytime(dto);
+							if (order_type.equals("distance")) {
+								feed_list = service.friendlist(dto);
+							} else if (order_type.equals("recent")) {
+								feed_list = service.friendlistbyrecent(dto);
+							} else if (order_type.equals("old")) {
+								feed_list = service.friendlistbyold(dto);
+							}
 						} else {
-							feed_list = order_type.equals("distance") ? service.notfriendlist(dto) : service.notfriendlistbytime(dto);
+							if (order_type.equals("distance")) {
+								feed_list = service.notfriendlist(dto);
+							} else if (order_type.equals("recent")) {
+								feed_list = service.notfriendlistbyrecent(dto);
+							} else if (order_type.equals("old")) {
+								feed_list = service.notfriendlistbyold(dto);
+							}
 						}
 						url_flag = 4;
 						if (feed_list.size() > minimum_feed_cnt) {
@@ -180,9 +228,21 @@ public class FeedRestController {
 					dto.setBase_distance(selected_range);
 					String order_type = dto.getOrder_type();
 					if (service.friendcheck(friend_check_map) == 3) {
-						feed_list = order_type.equals("distance") ? service.friendlist(dto) : service.friendlistbytime(dto);
+						if (order_type.equals("distance")) {
+							feed_list = service.friendlist(dto);
+						} else if (order_type.equals("recent")) {
+							feed_list = service.friendlistbyrecent(dto);
+						} else if (order_type.equals("old")) {
+							feed_list = service.friendlistbyold(dto);
+						}
 					} else {
-						feed_list = order_type.equals("distance") ? service.notfriendlist(dto) : service.notfriendlistbytime(dto);
+						if (order_type.equals("distance")) {
+							feed_list = service.notfriendlist(dto);
+						} else if (order_type.equals("recent")) {
+							feed_list = service.notfriendlistbyrecent(dto);
+						} else if (order_type.equals("old")) {
+							feed_list = service.notfriendlistbyold(dto);
+						}
 					}
 					url_flag = 4;
 				} 

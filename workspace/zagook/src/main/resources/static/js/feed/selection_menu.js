@@ -10,10 +10,7 @@ $(function(){
     $('.selection_box .selection_box_menu li').click(function () {
         $(this).parents('.selection_box').find('span').text("Range : " + $(this).text());
         /*$(this).parents('.selection_box').find('input').attr('value', "Range : " + $(this).attr('id'));*/
-        $(".loader-wrapper").fadeIn("slow");
-      	remove_feed();
-        //kakao.maps.event.trigger(marker, 'custom_action');
-        removeOverlays();
+        remove_front_display();
       	$("input[name=distance_type]").val($(this).text().split("k")[0]);
         search_by_select($("input[name=distance_type]").val());
     });
@@ -21,14 +18,4 @@ $(function(){
 
 function search_by_select(range) {
 	init_fetch_feed(range, "distance");
-}
-
-function removeOverlays() {
-    var len = overlays.length, i = 0;
-
-    for (; i < len; i++) {
-        overlays[i].setMap(null);
-    }
-
-    overlays = [];
 }
