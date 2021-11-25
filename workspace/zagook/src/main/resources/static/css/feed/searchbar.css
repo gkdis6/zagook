@@ -9,15 +9,6 @@
 	outline:none;
 }
 
-#searchbar_container input:hover {
-	margin-top: 12px;
-	padding-left: 10px;
-	width: 400px;
-	border-color: #fff;
-	box-shadow:0 0 5px 0 var(--base_color_oatmeal);
-	opacity: 1;
-}
-
 #searchbar_container input:focus {
 	margin-top: 12px;
 	padding-left: 10px;
@@ -57,4 +48,5 @@
 
 .searchbar_item:hover {
 	cursor: pointer;
+	background-color: var(--base_color_oatmeal);
 }
