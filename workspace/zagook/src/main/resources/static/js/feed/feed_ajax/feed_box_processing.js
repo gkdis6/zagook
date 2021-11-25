@@ -37,37 +37,36 @@ function process_feed_list(param) {
 				
                 // order by timeline
                 if (end_flag == -1) {
-					console.log(window.location.pathname);
-					if(window.location.pathname == '/feed/friend'){
-						html_str += '<div class="banner">';
-						html_str += '<div class="banner_area">';
-						html_str += '<div class="banner_profile_img"><img src="/member/storage/profile/'+dto_member.fname+'" alt="profile_img"></div>';
-						html_str += '<div class="banner_inner">';
-						html_str += '<div class="banner_inner_first">';
-						html_str += '<span>'+dto_member.id+'</span>';
-						if(friend_status == 1){
-							html_str += '<button type="button" class="friend_btn_2"disabled>친구신청중</button>';
-						}else if(friend_status == 2){
-							html_str += '<button type="button" class="friend_btn_3"disabled>친구신청받음</button>';
-						}else if(friend_status == 3){
-							html_str += '<button type="button" class="friend_btn_4"disabled>친구</button>';
-						}else{
-							html_str += '<button type="button" class="friend_btn_1">친구신청</button>';
-						}
-						//html_str += '<button type="button" class="setting"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
-						html_str += '</div>';
-						html_str += '<div class="banner_inner_second">';
-						if(dto_member.introduction !== undefined){
-							html_str += '<span>'+dto_member.introduction+'</span>';
-						}
-						html_str += '</div>';
-						html_str += '</div>';
-						html_str += '</div>';
-					}
+//					if(window.location.pathname == '/feed/friend'){
+//						html_str += '<div class="banner">';
+//						html_str += '<div class="banner_area">';
+//						html_str += '<div class="banner_profile_img"><img src="/member/storage/profile/'+dto_member.fname+'" alt="profile_img"></div>';
+//						html_str += '<div class="banner_inner">';
+//						html_str += '<div class="banner_inner_first">';
+//						html_str += '<span>'+dto_member.id+'</span>';
+//						if(friend_status == 1){
+//							html_str += '<button type="button" class="friend_btn_2"disabled>친구신청중</button>';
+//						}else if(friend_status == 2){
+//							html_str += '<button type="button" class="friend_btn_3"disabled>친구신청받음</button>';
+//						}else if(friend_status == 3){
+//							html_str += '<button type="button" class="friend_btn_4"disabled>친구</button>';
+//						}else{
+//							html_str += '<button type="button" class="friend_btn_1">친구신청</button>';
+//						}
+//						html_str += '<button type="button" class="setting"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
+//						html_str += '</div>';
+//						html_str += '<div class="banner_inner_second">';
+//						if(dto_member.introduction !== undefined){
+//							html_str += '<span>'+dto_member.introduction+'</span>';
+//						}
+//						html_str += '</div>';
+//						html_str += '</div>';
+//						html_str += '</div>';
+//					}
 					html_str += '<div class="order_by_time_container" onclick="order_by_time();">게시물을 <strong>시간순</strong>으로 정렬하려면 클릭해주세요</div>';
-					if(window.location.pathname == '/feed/friend'){
-						html_str += '</div>';
-					}
+//					if(window.location.pathname == '/feed/friend'){
+//						html_str += '</div>';
+//					}
 					end_flag = 0;
 				}
                 
