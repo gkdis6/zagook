@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
+@Data
 public class MemberDTO {          
 	private String id             ;
 	private String password                        ;
@@ -19,6 +20,7 @@ public class MemberDTO {
 	private MultipartFile fnameMF			     ;
 	private String grade                         ;
 	private String social						 ;
+	private String intoduction;
 	public MemberDTO() {
 		super();
 		// TODO Auto-generated constructor stub

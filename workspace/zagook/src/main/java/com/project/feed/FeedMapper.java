@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.member.MemberDTO;
+
 @Mapper
 public interface FeedMapper {
 	List<FeedDTO> list(FeedDTO dto);
@@ -23,4 +25,5 @@ public interface FeedMapper {
 	int unlike(Map map);
 	int updatelikecnt(Map map);
 	int friendcheck(Map map);
+	MemberDTO read(String seleted_id);
 }

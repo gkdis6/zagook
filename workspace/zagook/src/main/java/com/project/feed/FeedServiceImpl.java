@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.member.MemberDTO;
+
 @Service("com.project.feed.FeedServiceImpl")
 public class FeedServiceImpl implements FeedService {
 
@@ -106,5 +108,11 @@ public class FeedServiceImpl implements FeedService {
 	public int friendcheck(Map map) {
 		// TODO Auto-generated method stub
 		return mapper.friendcheck(map);
+	}
+
+	@Override
+	public MemberDTO read(String seleted_id) {
+		// TODO Auto-generated method stub
+		return mapper.read(seleted_id);
 	}
 }

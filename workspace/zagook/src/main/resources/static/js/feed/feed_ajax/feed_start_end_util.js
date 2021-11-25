@@ -11,6 +11,7 @@ function remove_feed() {
 	$(".order_by_time_container").remove();
   	$(".feed_container").remove();
   	$(".page_end_container").remove();
+	$(".banner").remove();
 }
 
 function order_by_time() {

@@ -112,6 +112,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	<select id="friendcheck" parameterType="Map"
 		resultType="int">
-		select count(*) from zagook_friend where id=#{session_id} and id2=#{selected_id} and status=3
+		select status from zagook_friend where id=#{session_id} and id2=#{selected_id}
+	</select>
+	
+	<select id="read" parameterType="String" resultType="com.project.member.MemberDTO">
+		select id, email, mname, tel, job, 
+				to_char(mdate,'YYYY/MM/DD')as mdate, fname, grade, introduction
+		from zagook_member
+		where id = #{selected_id}
 	</select>
 </mapper>

@@ -3,6 +3,8 @@ package com.project.feed;
 import java.util.List;
 import java.util.Map;
 
+import com.project.member.MemberDTO;
+
 public interface FeedService {
 	List<FeedDTO> list(FeedDTO dto);
 	List<FeedDTO> listbytime(FeedDTO dto);
@@ -20,4 +22,5 @@ public interface FeedService {
 	int unlike(Map map);
 	int updatelikecnt(Map map);
 	int friendcheck(Map map);
+	MemberDTO read(String selected_id);
 }
