@@ -83,6 +83,7 @@ function openSearchbar() {
 	document.getElementById("searchbar_container").innerHTML = html_str;
 	get_tag_style();
 	start_autocomplete();
+	$('#searchInput').focus();
 }
 
 function openSearchbarFriend() {
@@ -98,6 +99,7 @@ function openSearchbarFriend() {
 	document.getElementById("searchbar_container").innerHTML = html_str;
 	get_tag_style();
 	start_autocomplete_friend();
+	$('#searchInput').focus();
 }
 
 function get_tag_style() {
