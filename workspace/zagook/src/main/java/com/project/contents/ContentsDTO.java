@@ -1,5 +1,6 @@
 package com.project.contents;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -23,4 +24,5 @@ public class ContentsDTO {
 	  private String fname;
 	  private int like_clicked;
 	  private List<String> tag_list;
+	 
 }

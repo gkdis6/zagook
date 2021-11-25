@@ -316,7 +316,6 @@
 	}
 	
 </style>
-
 </head>
 
 <body>
@@ -356,6 +355,7 @@
 								fname: "${dto.fname}",
 								tag_list: "${dto.tag_list}",
 								like_clicked: "${dto.like_clicked}"
+								
 							}
 							<c:if test="${!i.last}">,</c:if>
 						</c:forEach>
@@ -448,15 +448,17 @@
 						div6.innerHTML += '<a href="javascript:" class="like" style="width:28px;height:28px;" idx="'+data.contentsno+'" ><img src="./images/feed/like_outline.png" style="width:28px;" id="unlike"></a>';
 					}
 					div6.innerHTML += ` <span class="feed_widget_text" id="like_cnt`+data.contentsno+`">`+data.likecnt+`</span>
-					
-
-					<div class="ellipsis">댓글</div> 
+				
 	                <c:if test="${not empty sessionScope.id}">
 		            <div class="btn_box1">
 						<button type="button" class="btn" onclick="location.href='/contents/update/`+data.contentsno+`'">수정</button>
 						<button type="button" class="btn" onclick="location.href='/contents/delete/`+data.contentsno+`'">삭제</button>
 					</div>
 					</c:if>
+					
+					<br>					
+					
+					
 	            	</div>`;
 
 					div4.appendChild(div5);

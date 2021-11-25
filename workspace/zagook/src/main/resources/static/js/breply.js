@@ -36,6 +36,7 @@ class ReplyService {
  
 
 
+
 add(reply) {
         return new Promise((resolve, reject) => {
             console.log("add reply...............");
@@ -68,21 +69,4 @@ add(reply) {
             });
         });
     }
-    remove(rnum) {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                type: 'delete',
-                url: './reply/' + rnum,
-                success: function (deleteResult, status, xhr) {
-                    resolve(deleteResult);
- 
-                },
-                error: function (xhr, status, er) {
-                    reject(er);
- 
-                }
-            });
-        });
     }
- 
-}
