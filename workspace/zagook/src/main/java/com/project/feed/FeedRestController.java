@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.member.MemberDTO;
+
 @RestController
 public class FeedRestController {
 	// 반경 내 검색(개별 단위): 100m, 1km, 5km, 10km, 20km, 30km, 50km, 80km, 100km
@@ -41,7 +43,7 @@ public class FeedRestController {
 	public ResponseEntity<Map> postFeedList_ajax(@RequestBody FeedDTO dto, HttpSession session) {
 		List<FeedDTO> sub_list = null;
 		int end_flag = 0;
-		
+		Map result_map = new HashMap<>();
 		// load type 구분 : reload or scroll
 		if (dto.getLoad_type().equals("reload"))
 			sublist_idx = 0;
@@ -158,7 +160,7 @@ public class FeedRestController {
 						dto.setBase_distance(base_distance[base_idx]);
 						result_base_idx = base_idx;
 						String order_type = dto.getOrder_type();
-						if (service.friendcheck(friend_check_map) > 0) {
+						if (service.friendcheck(friend_check_map) == 3) {
 							feed_list = order_type.equals("distance") ? service.friendlist(dto) : service.friendlistbytime(dto);
 						} else {
 							feed_list = order_type.equals("distance") ? service.notfriendlist(dto) : service.notfriendlistbytime(dto);
@@ -177,13 +179,16 @@ public class FeedRestController {
 					}
 					dto.setBase_distance(selected_range);
 					String order_type = dto.getOrder_type();
-					if (service.friendcheck(friend_check_map) > 0) {
+					if (service.friendcheck(friend_check_map) == 3) {
 						feed_list = order_type.equals("distance") ? service.friendlist(dto) : service.friendlistbytime(dto);
 					} else {
 						feed_list = order_type.equals("distance") ? service.notfriendlist(dto) : service.notfriendlistbytime(dto);
 					}
 					url_flag = 4;
-				}
+				} 
+				MemberDTO dto_member = service.read((String) dto.getSelected_id());
+				result_map.put("dto_member", dto_member);
+				result_map.put("friend_status", service.friendcheck(friend_check_map));
 			}
 //------------------------------------------------------------------------------------------------------------------------------------------
 //========================================================= < 초기 list 생성 part 끝> =========================================================
@@ -261,7 +266,7 @@ public class FeedRestController {
 			sublist_idx = 0;
 		}
 		
-		Map result_map = new HashMap<>();
+		
 		result_map.put("sub_list", sub_list);
 		result_map.put("base_distance", base_distance[result_base_idx]);			
 		result_map.put("end_flag", end_flag);
