@@ -9,10 +9,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents
 		where id in (
-            select id2 from zagook_friend 
-            where id=#{id} and status=3
-            ) 
+		    select id2 from zagook_friend 
+		    where id=#{id} and status=3
+		    ) 
 		and privacy!=0
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
+		union
+		select * from zagook_contents
+		where privacy=2
 		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
 		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 	</select>
@@ -20,10 +25,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents
 		where id in (
-            select id2 from zagook_friend 
-            where id=#{id} and status=3
-            ) 
+		    select id2 from zagook_friend 
+		    where id=#{id} and status=3
+		    ) 
 		and privacy!=0
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
+		union
+		select * from zagook_contents
+		where privacy=2
 		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
 		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate desc
@@ -32,10 +42,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents
 		where id in (
-            select id2 from zagook_friend 
-            where id=#{id} and status=3
-            ) 
+		    select id2 from zagook_friend 
+		    where id=#{id} and status=3
+		    ) 
 		and privacy!=0
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
+		union
+		select * from zagook_contents
+		where privacy=2
 		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
 		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate asc
