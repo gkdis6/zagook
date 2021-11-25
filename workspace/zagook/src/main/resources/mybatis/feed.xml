@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents
+<<<<<<< HEAD
 		where id in (
 		    select id2 from zagook_friend 
 		    where id=#{id} and status=3
@@ -20,9 +21,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where privacy=2
 		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
 		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
+=======
+		where privacy=2
+		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
+		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+>>>>>>> map
 	</select>
 	<select id="listbyrecent" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
+<<<<<<< HEAD
 		select * from
 		(select * from zagook_contents
 		where id in (
@@ -37,6 +44,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where privacy=2
 		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
 		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance}))
+=======
+		select * from zagook_contents
+		where privacy=2
+		and (x_site between 37.5535462 - #{base_distance} and 37.5535462 + #{base_distance})
+		and (y_site between 126.964296 - #{base_distance} and 126.964296 + #{base_distance})
+>>>>>>> map
 		order by rdate desc
 	</select>
 	<select id="listbyold" parameterType="com.project.feed.FeedDTO"
@@ -202,6 +215,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and id=#{id}
 	</delete>
 	<select id="friendcheck" parameterType="Map"
+		resultType="int">
+		select count(*) from zagook_friend where id=#{session_id} and id2=#{selected_id}
+	</select>
+	<select id="friendcheck_2" parameterType="Map"
 		resultType="int">
 		select status from zagook_friend where id=#{session_id} and id2=#{selected_id}
 	</select>

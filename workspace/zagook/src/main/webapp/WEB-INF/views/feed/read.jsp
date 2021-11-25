@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
-
+<script>let session_id = '<%=(String)session.getAttribute("id")%>';</script>
 </head>
 <body>
 	<div class="loader-wrapper" id="loader-wrapper">

@@ -33,4 +33,5 @@ public interface FeedMapper {
 	int updatelikecnt(Map map);
 	int friendcheck(Map map);
 	MemberDTO read(String seleted_id);
+	int friendcheck_2(Map map);
 }
