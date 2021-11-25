@@ -24,13 +24,16 @@ function start_autocomplete(){
 			})
 		},
 		focus : function(event, ui) { // 방향키로 자동완성단어 선택 가능하게 만들어줌	
-			return false;
+			$(".searchbar_item").css("background-color", "#fff");
+			$("#searchInput").val(ui.item.label);
+			$("#" + ui.item.label).css("background-color", "#F5F2B8");
+            return false;
 		},
 		minLength: 1,// 최소 글자수
 		delay: 100,	//autocomplete 딜레이 시간(ms)
 	})
 	.autocomplete( "instance" )._renderItem = function( ul, item ) {
-        return $( "<li class='searchbar_item'><div><span>"+item.label+"</span><span style='right:10px;position:absolute;'>"+item.cnt+"</span></div></li>" ).appendTo( ul );
+        return $( "<li class='searchbar_item' id='" + item.label + "'><div><span>"+item.label+"</span><span style='right:10px;position:absolute;'>"+item.cnt+"</span></div></li>" ).appendTo( ul );
     };
 }
 
@@ -59,21 +62,24 @@ function start_autocomplete_friend() {
 	    		}
 			})
 		},
-		focus : function(event, ui) { // 방향키로 자동완성단어 선택 가능하게 만들어줌	
-			return false;
+		focus : function(event, ui) { // 방향키로 자동완성단어 선택 가능하게 만들어줌
+			$(".searchbar_item").css("background-color", "#fff");
+			$("#searchInput_friend").val(ui.item.label);
+			$("#" + ui.item.label).css("background-color", "#F5F2B8");	
+            return false;
 		},
 		minLength: 1,// 최소 글자수
 		delay: 100,	//autocomplete 딜레이 시간(ms)
 	})
 	.autocomplete("instance")._renderItem = function( ul, item ) {
-        return $( "<li class='searchbar_item'><div style='text-align:justify;'><img style='width:40px; height:40px; border-radius:50%;' src='"+item.img+"'><span style='right:10px;position:absolute;top:13px;'>"+item.label+"</span></div></li>" ).appendTo( ul );
+        return $( "<li class='searchbar_item' id='" + item.label + "'><div style='text-align:justify;'><img style='width:40px; height:40px; border-radius:50%;' src='"+item.img+"'><span style='right:10px;position:absolute;top:13px;'>"+item.label+"</span></div></li>" ).appendTo( ul );
     };
 }
 
 function openSearchbar() {
 	if (document.getElementById("searchInput") != null) {
 		document.getElementById("searchInput").setAttribute("placeholder", "Search Tag");
-		document.getElementById("searchInput").setAttribute("value", "");		
+		document.getElementById("searchInput").setAttribute("value", "");
 		return false;
 	}
 	let html_str = '<form action="http://localhost:8005/feed/tag" method="post">';
@@ -99,7 +105,7 @@ function openSearchbarFriend() {
 	document.getElementById("searchbar_container").innerHTML = html_str;
 	get_tag_style();
 	start_autocomplete_friend();
-	$('#searchInput').focus();
+	$('#searchInput_friend').focus();
 }
 
 function get_tag_style() {
