@@ -57,7 +57,7 @@ public class FeedRestController {
 			cur_url_flag = 3;
 		else if (dto.getUrl_id().equals("friend")) {
 			cur_url_flag = 4;
-			if(dto.getSelected_id().equals((String) session.getAttribute("id"))) {
+			if(dto.getSelected_id() == null || dto.getSelected_id().equals((String) session.getAttribute("id"))) {
 				dto.setUrl_id("myread");
 				cur_url_flag = 2;
 			}
