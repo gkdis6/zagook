@@ -129,7 +129,7 @@ public class FeedRestController {
 						dto.setBase_distance(base_distance[base_idx]);
 						result_base_idx = base_idx;
 						String order_type = dto.getOrder_type();
-						feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+						feed_list = order_type.equals("distance") ? service.taglist(dto) : service.taglistbytime(dto);
 						url_flag = 3;
 						if (feed_list.size() > minimum_feed_cnt) {
 							break;
@@ -144,7 +144,7 @@ public class FeedRestController {
 					}
 					dto.setBase_distance(selected_range);
 					String order_type = dto.getOrder_type();
-					feed_list = order_type.equals("distance") ? service.list(dto) : service.listbytime(dto);
+					feed_list = order_type.equals("distance") ? service.taglist(dto) : service.taglistbytime(dto);
 					url_flag = 3;
 				}
 			}
