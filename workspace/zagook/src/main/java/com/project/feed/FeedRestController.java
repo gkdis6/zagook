@@ -25,8 +25,8 @@ import com.project.member.MemberDTO;
 public class FeedRestController {
 	// 반경 내 검색(개별 단위): 100m, 1km, 5km, 10km, 20km, 30km, 50km, 80km, 100km
 	final double[] base_distance = {0.001 / 2, 0.01 / 2, 0.05 / 2, 0.1 / 2, 0.2 / 2, 0.3 / 2, 0.5 / 2, 0.8 / 2, 1.0 / 2};
-	final int minimum_feed_cnt = 15;
-	final int sublist_max_size = 15;
+	final int minimum_feed_cnt = 10;
+	final int sublist_max_size = 7;
 	int result_base_idx = 0;
 	List<FeedDTO> feed_list = null;
 	int sublist_idx = 0;
