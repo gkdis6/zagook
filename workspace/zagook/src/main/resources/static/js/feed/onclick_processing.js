@@ -1,10 +1,16 @@
 function onclickTag(event) {
-	if (document.getElementById("searchInput") == null)
+	/*if (document.getElementById("searchInput") == null)
 		openSearchbar();
 	let tag_name = event.target.innerText;
 	console.log(tag_name);
-	$("#searchInput").val(tag_name.substr(1, tag_name.length))
-	$("#searchInput").focus();
+	$("#searchInput").val(tag_name.substr(1, tag_name.length));
+	$("#searchInput").focus();*/
+	// 1) 현재 페이지에서 선택된 tag 값을 post 파라미터로 전달
+	let tag_name = event.target.innerText;
+	let params = {'selected_id' : tag_name.substr(1, tag_name.length)};
+	// 2) /feed/friend url로 이동
+	url = "http://localhost:8005/feed/tag";
+	send_post(url, params);
 }
 
 function onclickId(event) {

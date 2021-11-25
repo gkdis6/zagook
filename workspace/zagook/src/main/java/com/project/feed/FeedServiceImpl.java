@@ -38,6 +38,19 @@ public class FeedServiceImpl implements FeedService {
 		return mapper.mylistbytime(dto);
 	}
 	
+	
+	@Override
+	public List<FeedDTO> taglist(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.taglist(dto);
+	}
+	
+	@Override
+	public List<FeedDTO> taglistbytime(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.taglistbytime(dto);
+	}
+	
 	@Override
 	public List<FeedDTO> friendlist(FeedDTO dto) {
 		// TODO Auto-generated method stub

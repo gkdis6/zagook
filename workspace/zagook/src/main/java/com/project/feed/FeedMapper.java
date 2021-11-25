@@ -13,6 +13,8 @@ public interface FeedMapper {
 	List<FeedDTO> listbytime(FeedDTO dto);
 	List<FeedDTO> mylist(FeedDTO dto);
 	List<FeedDTO> mylistbytime(FeedDTO dto);
+	List<FeedDTO> taglist(FeedDTO dto);
+	List<FeedDTO> taglistbytime(FeedDTO dto);
 	List<FeedDTO> friendlist(FeedDTO dto);
 	List<FeedDTO> friendlistbytime(FeedDTO dto);
 	List<FeedDTO> notfriendlist(FeedDTO dto);

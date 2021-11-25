@@ -22,7 +22,7 @@ function init_fetch_feed(range, order) {
 			else if (ajax_url_check_read(url))
 				param = is_set_feed_range(range, pos, "read", order, null);
 			else if (ajax_url_check_tag(url))
-				param = is_set_feed_range(range, pos, "tag", order, null);
+				param = is_set_feed_range(range, pos, "tag", order, selected_id);
 			else if (ajax_url_check_friend(url))
 				param = is_set_feed_range(range, pos, "friend", order, selected_id);
 			process_feed_list(param);
@@ -54,7 +54,7 @@ function init_reject() {
 	else if (ajax_url_check_read(url))
 		param = is_set_feed_range_reject(range, "read", order, null);
 	else if (ajax_url_check_tag(url))
-		param = is_set_feed_range_reject(range, "tag", order, null);
+		param = is_set_feed_range_reject(range, "tag", order, selected_id);
 	else if (ajax_url_check_friend(url))
 		param = is_set_feed_range_reject(range, "friend", order, selected_id);
 	process_feed_list(param);
