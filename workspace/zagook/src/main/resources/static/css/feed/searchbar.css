@@ -54,3 +54,7 @@
 	box-shadow:0 0 5px 0 var(--base_color_oatmeal);
 	z-index: var(--searchbar_item_zindex);
 }
+
+.searchbar_item:hover {
+	cursor: pointer;
+}
