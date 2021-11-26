@@ -29,7 +29,12 @@ public class MemberController {
    @Autowired
    @Qualifier("com.project.member.MemberServiceImpl")
    private MemberService service;
-
+   
+   @GetMapping("/modallogin")
+   public String loginmodal() {
+	   return "/loginmodal";
+   }
+   
    @GetMapping("/member/login")
    public String login(HttpServletRequest request) {
       /*쿠키설정*/
@@ -75,7 +80,6 @@ public class MemberController {
          System.out.println("seid:::"+session.getAttribute("id"));
          System.out.println("seem:::"+session.getAttribute("email"));
 
-         //#########################################################
          
              // grade >>   session.setAttribute("grade", grade);
              //Cookie 저장, id 저장 여부 및 id
@@ -175,9 +179,9 @@ public class MemberController {
       Map<String,String> map = new HashMap<String,String>();
       if(cnt>0) {
          //map에 들어갈 data
-         map.put("str", id+"는 중복되어서 사용할 수 없습니다.");
+         map.put("str", id+"은/는 중복되어 사용할 수 없습니다.");
       }else {
-         map.put("str", id+"는 중복아님, 사용가능 합니다.");
+         map.put("str", id+"은/는 사용가능 합니다.");
       }
       return map;
    }
@@ -202,12 +206,6 @@ public class MemberController {
          email = (String)session.getAttribute("email");
       }
       MemberDTO dto = service.read(email);
-      // 소셜 사용자 구분 ======================================
-//      Map map = new HashMap();
-//      map.put("social", dto.getSocial());
-//      map.get("social");
-//      System.out.println("social:::::"+map.get("social"));
-      // ==================================================
       model.addAttribute("dto",dto);
       return "/member/update";
    }
@@ -229,11 +227,6 @@ public class MemberController {
 
     }
    
-//   @GetMapping("member/updateFile")
-//	public String updateFile() {
-//	   System.out.println("@@@@@@get updatefile");
-//		return "/member/updateFile";
-//	}
 	
 	@PostMapping("/member/updateFile")
    public String updateFile(MultipartFile fnameMF,
