@@ -186,6 +186,8 @@ public class FeedRestController {
 					}
 					url_flag = 3;
 				}
+				result_map.put("tagcnt", service.tagcnt(dto));
+				result_map.put("tag", dto.getSelected_id());
 			}
 //---------------------------------------------------------------  < friend >-------------------------------------------------------------------
 			else if (dto.getUrl_id().equals("friend")) {

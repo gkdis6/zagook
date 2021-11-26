@@ -140,4 +140,9 @@ public class FeedServiceImpl implements FeedService {
 		// TODO Auto-generated method stub
 		return mapper.friendcheck_2(map);
 	}
+	@Override
+	public int tagcnt(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.tagcnt(dto);
+	}
 }

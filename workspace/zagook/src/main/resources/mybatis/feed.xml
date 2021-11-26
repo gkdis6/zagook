@@ -216,4 +216,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from zagook_member
 		where id = #{selected_id}
 	</select>
+	
+	<select id="tagcnt" parameterType="com.project.feed.FeedDTO" resultType="int">
+		select count(*) from zagook_contents where contentsno in (
+			select contentsno from zagook_posttag where tag_id=(
+				select tag_id from zagook_tag where tag=#{selected_id}
+			)
+		)
+		and privacy=2
+	</select>
 </mapper>

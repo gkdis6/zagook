@@ -8,6 +8,8 @@ function process_feed_list(param) {
 			let friend_status = map.get("friend_status");
 			let base_distance = map.get("base_distance");
 			let end_flag = map.get("end_flag");
+			let tagcnt = map.get("tagcnt");
+			let tag = map.get("tag");
             let html_str = "";
 			
             console.log("[map type] : " + typeof(map));
@@ -16,8 +18,9 @@ function process_feed_list(param) {
             
             // order by timeline
 			if (end_flag == -1||end_flag == -2) {
+				console.log(dto_member);
 				if(window.location.pathname == '/feed/read'){
-				}else if(window.location.pathname == '/feed/myread'||(window.location.pathname == '/feed/friend' && session_id == dto_member.id)){
+				}else if(window.location.pathname == '/feed/myread'||(dto_member && session_id == dto_member.id)){
 					html_str += '<div class="banner">';
 					html_str += '<div class="banner_area">';
 					html_str += '<div class="banner_profile_img"><img src="/member/storage/profile/'+dto_member.fname+'" alt="profile_img"></div>';
@@ -32,6 +35,16 @@ function process_feed_list(param) {
 					}
 					html_str += '</div>';
 					html_str += '</div>';
+					html_str += '</div>';
+				}else if(window.location.pathname == '/feed/tag'){
+					html_str += '<div class="banner">';
+					html_str += '<div class="banner_tag">';
+					html_str += '<span>#'+tag+' '+tagcnt+'개</span>';
+					html_str += '</div>';
+				}else if(!dto_member){
+					html_str += '<div class="banner">';
+					html_str += '<div class="banner_empty">';
+					html_str += '<span>존재하지 않는 사용자입니다.</span>';
 					html_str += '</div>';
 				}else if(window.location.pathname == '/feed/friend'){
 					html_str += '<div class="banner">';
@@ -75,7 +88,7 @@ function process_feed_list(param) {
 						        </div>\
 						    </div>';
 				html_str += '<div class="time_click_container">으로 정렬하려면<div class="time_click" onclick="time_click();">클릭</div>해주세요</div></div>';
-				if(window.location.pathname == '/feed/friend'||window.location.pathname == '/feed/myread'){
+				if(window.location.pathname == '/feed/friend'||window.location.pathname == '/feed/myread'||window.location.pathname == '/feed/tag'){
 					html_str += '</div>';
 				}
 			}
