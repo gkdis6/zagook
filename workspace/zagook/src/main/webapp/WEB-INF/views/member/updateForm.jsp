@@ -8,6 +8,22 @@
   	#need,#emailcheck{
   		color:red;
   	}
+  	.container {
+	margin-left: 0px; 
+	padding: 50px 0px 0px;
+	}
+	.form-horizontal{
+	margin-left: -90px;
+	font-size:20px;
+	padding-top:90px;
+	}
+	#email{ 
+		font-size:20px;
+		font-weight:bold;
+		padding-top:4px;
+/* 		outline : solid 1px black; */
+		
+ 	} 
   </style>
   <script type="text/javascript">
   function emailCheck(email){
@@ -26,7 +42,6 @@
 		  })
 	  }
   }
-
 function inCheck(f){
 	
 	if(f.tel.value.length==0){
@@ -45,26 +60,28 @@ function inCheck(f){
 		return false;
 	}
 }
-
 </script>
 </head>
 <body>
 <div class="container">
 
-<h2 class="col-sm-offset-2 col-sm-10">회원수정</h2>
-<label class="col-sm-offset-2 col-sm-10">(<span id="need">*</span> 필수입력사항)</label>
+<h2 class="col-sm-offset-2 col-sm-10" style="margin-left:30px">회원수정</h2>
+<label class="col-sm-offset-2 col-sm-10"style="margin-left:30px">(<span id="need">*</span> 필수입력사항)</label>
+ 
   <form class="form-horizontal" 
         action="update"
         method="post"
         name = 'frm'
         onsubmit="return inCheck(this)"
+        
         >
      
 <%--     <input type="hidden" name="social" value="${dto.social}"> --%>
     <input type="hidden" name="email" value="${dto.email}">
+	<hr width="50%" align="left">
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="email">이메일</label>
-		<div class="col-sm-3">${dto.email}</div>
+		<div class="col-sm-3" id="email">${dto.email}</div>
 	</div>
 	<div class="form-group">
       <label class="control-label col-sm-2" for="id">닉네임</label>
@@ -80,6 +97,8 @@ function inCheck(f){
          value="${dto.mname}"  name="mname">
       </div>
     </div>
+    <h3 style="padding-left:140px">추가 정보</h3>
+    <hr width="50%" align="left">
     <div class="form-group">
       <label class="control-label col-sm-2" for="tel">전화번호</label>
       <div class="col-sm-4">          

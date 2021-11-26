@@ -361,7 +361,14 @@ input[type=file] {
 <script src="../js/sockjs.min.js"></script>
 <script src="../js/stomp.min.js"></script>
 <script type="text/JavaScript" src="../js/app.js"></script>
+<script src="../js/login/modal.js"></script>
+<script src="../js/utils/login_modal.js"></script>
 
+<script>
+	$(function(){
+		$('.btn-modal-open').bind('click', load_login_modal);
+	});
+</script>
 </head>
 
 <body>
