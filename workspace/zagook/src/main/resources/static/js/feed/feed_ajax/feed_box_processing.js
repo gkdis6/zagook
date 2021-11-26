@@ -19,8 +19,8 @@ function process_feed_list(param) {
             // order by timeline
 			if (end_flag == -1||end_flag == -2) {
 				console.log(dto_member);
-				if(window.location.pathname == '/feed/read'){
-				}else if(window.location.pathname == '/feed/myread'||(dto_member && session_id == dto_member.id)){
+				if(window.location.pathname == '/' || window.location.pathname == '/feed/read'){
+				} else if(window.location.pathname == '/feed/myread'||(dto_member && session_id == dto_member.id)){
 					html_str += '<div class="banner">';
 					html_str += '<div class="banner_area">';
 					html_str += '<div class="banner_profile_img"><img src="/member/storage/profile/'+dto_member.fname+'" alt="profile_img"></div>';
@@ -195,7 +195,6 @@ function process_feed_list(param) {
 				}
 				html_str += '</div>';
 				
-				// add mouseenter, and mouseleave
 				window.removeEventListener("scroll", scrollEventHandler);
 			}
             let newElement = document.createElement('div');

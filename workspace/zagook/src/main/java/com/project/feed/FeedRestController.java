@@ -37,7 +37,7 @@ public class FeedRestController {
 	@Autowired
     FeedCachingService feedCachingService;
 
-	@PostMapping(value = "/feed/contents", produces = "application/json;charset=UTF-8")
+	@PostMapping(value = "/ajax/contents", produces = "application/json;charset=UTF-8")
 	public ResponseEntity<Map> postFeedList_ajax(@RequestBody FeedDTO dto, HttpSession session) {
 		List<FeedDTO> sub_list = null;
 		int end_flag = 0;
@@ -54,9 +54,10 @@ public class FeedRestController {
 			cur_url_flag = 2;
 		else if (dto.getUrl_id().equals("tag"))
 			cur_url_flag = 3;
-		else if (dto.getUrl_id().equals("friend")) {
+		else if (dto.getUrl_id().equals("friend"))
 			cur_url_flag = 4;
-		}
+		else if (dto.getUrl_id().equals("home"))
+			cur_url_flag = 5;
 		
 		// 생성된 list를 전역으로 controller가 보관하고 있기 때문에, 페이지 url 변경 시 이를 버리고 다시 list를 생성해야 함
 		if (cur_url_flag != url_flag)
@@ -71,8 +72,46 @@ public class FeedRestController {
 			} else if (dto.getUrl_id().equals("tag") || dto.getUrl_id().equals("friend")) {
 				dto.setId(dto.getSelected_id());
 			}
+//------------------------------------------------------------- < home > --------------------------------------------------------------------
+			if (dto.getUrl_id().equals("home")) {
+				if (dto.getRange().equals("null")) {
+					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
+						dto.setBase_distance(base_distance[base_idx]);
+						result_base_idx = base_idx;
+						String order_type = dto.getOrder_type();
+						if (order_type.equals("distance")) {
+							feed_list = service.homelist(dto);
+						} else if (order_type.equals("recent")) {
+							feed_list = service.homelistbyrecent(dto);
+						} else if (order_type.equals("old")) {
+							feed_list = service.homelistbyold(dto);
+						}
+						url_flag = 5;
+						if (feed_list.size() > 10) {
+							break;
+						}
+					}
+				} else {
+					double selected_range = Double.parseDouble(dto.getRange()) / 100 / 2;
+					for (int i = 0; i < base_distance.length; i++) {
+						result_base_idx = i;
+						if (base_distance[i] == selected_range)
+							break;
+					}
+					dto.setBase_distance(selected_range);
+					String order_type = dto.getOrder_type();
+					if (order_type.equals("distance")) {
+						feed_list = service.homelist(dto);
+					} else if (order_type.equals("recent")) {
+						feed_list = service.homelistbyrecent(dto);
+					} else if (order_type.equals("old")) {
+						feed_list = service.homelistbyold(dto);
+					}
+					url_flag = 5;
+				}
+			}
 //----------------------------------------------------------- < myread > --------------------------------------------------------------------
-			if (dto.getUrl_id().equals("myread")) {
+			else if (dto.getUrl_id().equals("myread")) {
 				if (dto.getRange().equals("null")) {
 					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
 						dto.setBase_distance(base_distance[base_idx]);
@@ -309,16 +348,18 @@ public class FeedRestController {
 			}
 	
 	//		while문으로 list 내의 contentsno를 받아 DB에서 좋아요 여부 counting
-			k = 0;
-			while (k < feed_list.size()) {
-				int cnt = 0;
-				FeedDTO tmp = feed_list.get(k);
-				Map map = new HashMap();
-				map.put("id", dto.getId());
-				map.put("contentsno", tmp.getContentsno());
-				cnt = service.likecheck(map);
-				tmp.setLike_clicked(cnt);
-				k++;
+			if (!dto.getUrl_id().equals("home")) {
+				k = 0;
+				while (k < feed_list.size()) {
+					int cnt = 0;
+					FeedDTO tmp = feed_list.get(k);
+					Map map = new HashMap();
+					map.put("id", dto.getId());
+					map.put("contentsno", tmp.getContentsno());
+					cnt = service.likecheck(map);
+					tmp.setLike_clicked(cnt);
+					k++;
+				}
 			}
 		}
 //	#2 sublist 호출 부분
@@ -334,7 +375,8 @@ public class FeedRestController {
 		sublist_idx++;
 		
 		if ((sub_list.size() < sublist_max_size) || 
-				((sub_list.size() == sublist_max_size) && ((feed_list.size() / sublist_max_size) + 1 == sublist_idx))) {
+				((sub_list.size() == sublist_max_size) && ((feed_list.size() / sublist_max_size) + 1 == sublist_idx)) || 
+				dto.getUrl_id().equals("home")) {
 			if (end_flag == -1)
 				end_flag = -2;
 			else

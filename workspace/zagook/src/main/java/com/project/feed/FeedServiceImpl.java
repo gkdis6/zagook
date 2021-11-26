@@ -15,6 +15,21 @@ public class FeedServiceImpl implements FeedService {
 	  private FeedMapper mapper;
 
 	@Override
+	public List<FeedDTO> homelist(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.homelist(dto);
+	}
+	@Override
+	public List<FeedDTO> homelistbyrecent(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.homelistbyrecent(dto);
+	}
+	@Override
+	public List<FeedDTO> homelistbyold(FeedDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.homelistbyold(dto);
+	}
+	@Override
 	public List<FeedDTO> list(FeedDTO dto) {
 		// TODO Auto-generated method stub
 		return mapper.list(dto);
