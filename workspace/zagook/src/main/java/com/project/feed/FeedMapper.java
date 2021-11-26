@@ -9,6 +9,9 @@ import com.project.member.MemberDTO;
 
 @Mapper
 public interface FeedMapper {
+	List<FeedDTO> homelist(FeedDTO dto);
+	List<FeedDTO> homelistbyrecent(FeedDTO dto);
+	List<FeedDTO> homelistbyold(FeedDTO dto);
 	List<FeedDTO> list(FeedDTO dto);
 	List<FeedDTO> listbyrecent(FeedDTO dto);
 	List<FeedDTO> listbyold(FeedDTO dto);

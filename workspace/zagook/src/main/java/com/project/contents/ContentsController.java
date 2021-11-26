@@ -33,7 +33,7 @@ public class ContentsController {
 	@Qualifier("com.project.contents.ContentsServiceImpl")
 	private ContentsService service;
 
-	@GetMapping("/")
+//	@GetMapping("/")
 	public String home(HttpServletRequest request, HttpSession session) {
 		if (session.getAttribute("id") != null) {
 			Map map = new HashMap();

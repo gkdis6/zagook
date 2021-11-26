@@ -17,7 +17,9 @@ function init_fetch_feed(range, order) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
 			let url = window.location.href;
 			let selected_id = $("input[name=selected_id]").val();
-			if (ajax_url_check_myread(url))
+			if (ajax_url_check_home(url))
+				param = is_set_feed_range(range, pos, "home", order, null);
+			else if (ajax_url_check_myread(url))
 				param = is_set_feed_range(range, pos, "myread", order, null);
 			else if (ajax_url_check_read(url))
 				param = is_set_feed_range(range, pos, "read", order, null);
@@ -50,7 +52,9 @@ function init_reject() {
 	let range = (str == "Select Range" || str.length == 0)? null : str;
 	let order = $("input[name=order_type]").val();
 	let selected_id = $("input[name=selected_id]").val();
-	if (ajax_url_check_myread(url))
+	if (ajax_url_check_home(url))
+		param = is_set_feed_range_reject(range, "home", order, null);
+	else if (ajax_url_check_myread(url))
 		param = is_set_feed_range_reject(range, "myread", order, null);
 	else if (ajax_url_check_read(url))
 		param = is_set_feed_range_reject(range, "read", order, null);
@@ -67,7 +71,12 @@ function scrollEventHandler(event){
 		navigator.geolocation.getCurrentPosition(function (pos) {
 			let url = window.location.href;
 			let range = $("input[name=distance_type]").val();
-			if (ajax_url_check_myread(url))
+			if (ajax_url_check_home(url)) {
+				window.removeEventListener("scroll", scrollEventHandler);
+				//modal login 삽입
+				return false;
+			}
+			else if (ajax_url_check_myread(url))
 				param = is_set_feed_range_scroll(range, pos, "myread");	
 			else if (ajax_url_check_read(url))
 				param = is_set_feed_range_scroll(range, pos, "read");		
@@ -88,7 +97,12 @@ function scrollEventHandler(event){
 function scroll_reject() {
 	let url = window.location.href;
 	let range = $("input[name=distance_type]").val();
-	if (ajax_url_check_myread(url))
+	if (ajax_url_check_home(url)) {
+		window.removeEventListener("scroll", scrollEventHandler);
+		//modal login 삽입
+		return false;
+	}
+	else if (ajax_url_check_myread(url))
 		param = is_set_feed_range_scroll_reject(range, "myread");	
 	else if (ajax_url_check_read(url))
 		param = is_set_feed_range_scroll_reject(range, "read");

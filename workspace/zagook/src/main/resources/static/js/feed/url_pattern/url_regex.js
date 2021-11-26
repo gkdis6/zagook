@@ -1,3 +1,10 @@
+function ajax_url_check_home(url) {
+	const criterion_url = "http://localhost:8005/";
+	if (url == criterion_url || regex_processing_home(url))
+		return true;
+	return false;
+}
+
 function ajax_url_check_myread(url) {
 	const criterion_url = "http://localhost:8005/feed/myread";
 	if (url == criterion_url || regex_processing_myread(url))
@@ -27,6 +34,13 @@ function ajax_url_check_friend(url) {
 }
 
 //--------------------------------- regex -------------------------------------
+
+function regex_processing_home(url) {
+	const criterion_url = "http://localhost:8005/";
+	const parsed_url = url.split("#");
+	// only digit
+	return common_regex_process(criterion_url, parsed_url);
+}
 
 function regex_processing_myread(url) {
 	const criterion_url = "http://localhost:8005/feed/myread";

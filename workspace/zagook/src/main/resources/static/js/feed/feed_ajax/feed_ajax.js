@@ -2,7 +2,7 @@ class getFeedService {
     get_feed_list(param) {
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: '/feed/contents',
+                url: '/ajax/contents',
                 type: 'POST',
                 data: JSON.stringify(param),
                 //dataType is a aspect of client, contentType is a aspect of server that means received data type from client.

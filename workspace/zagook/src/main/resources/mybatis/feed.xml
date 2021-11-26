@@ -5,6 +5,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.feed.FeedMapper">
+	<select id="homelist" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.FeedDTO">
+		select * from zagook_contents
+		where privacy=2
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
+	</select>
+	<select id="homelistbyrecent" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.FeedDTO">
+		select * from zagook_contents
+		where privacy=2
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance}))
+		order by rdate desc
+	</select>
+	<select id="homelistbyold" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.FeedDTO">
+		select * from zagook_contents
+		where privacy=2
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance}))
+		order by rdate asc
+	</select>
 	<select id="list" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents
