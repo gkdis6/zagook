@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.friend.FriendMapper">
+	<select id="friendList" parameterType="Map" resultType="com.project.friend.FriendDTO">
+        select f.id, f.id2, f.status, f.fdate, m.fname
+        from zagook_friend f join zagook_member m
+        on f.id2 = m.id
+        where f.id = #{id}
+        order by status, id2
+    </select>
+</mapper>

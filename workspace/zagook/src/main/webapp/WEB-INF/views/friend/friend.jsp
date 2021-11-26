@@ -7,65 +7,39 @@
 <title>친구페이지</title>
 <meta charset="utf-8">
 <style>
-input[type="submit"] {
-	float: right;
-	border-radius: 5px;
+.container{
+	display: grid;
+	grid-template-columns: 220px 220px 220px 220px;
+	grid-auto-rows: 300px;
+	grid-gap: 10px;
+}
+.friend_container{
+	border: solid;
+	width: 220px;
+	height: 300px;
+	border-radius: 8px;
+	text-align:center;
+}
+.friend_container span{
+	font-size: 20px;
+}
+.friend_img_container{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.friend_img_container img{
+	width: 200px;
+	height: 200px;
+	objec-fit: cover;
 }
 
-summary {
-	width: 30%;
-	margin: 0 auto;
-	padding: 1rem;
-	display: block;
-	background: #5B92E3;
-	padding-left: 2.2rem;
-	position: relative;
-	cursor: pointer;
-}
-
-summary:before {
-	content: '';
-	border-width: .4rem;
-	border-style: solid;
-	border-color: transparent transparent transparent #fff;
-	position: absolute;
-	top: 1.3rem;
-	left: 1rem;
-	transform: rotate(0);
-	transform-origin: .2rem 50%;
-	transition: .25s transform ease;
-}
-
-body {
-	background: #222;
-	height: 100vh;
-	font-family: sans-serif;
-	color: white;
-	line-height: 1.5;
-	letter-spacing: 1px;
-}
-
-body2 {
-	width: 50%;
-	background: #222;
-	height: 100vh;
-	font-family: sans-serif;
-	color: black;
-	line-height: 1.5;
-	letter-spacing: 1px;
-}
-
-fieldset {
-	padding: 6px;
-	background: #5B92E3;
-	border: 1px solid white;
-}
 </style>
 <script src="/js/reply/reply.js">
 
 </script>
 </head>
 <body>
+<<<<<<< HEAD
 	<body2> 
 					<!-- 댓글 수 --> 
 					<span>
@@ -183,5 +157,28 @@ fieldset {
 				style="color: black"> <br> <br>
 		</fieldset>
 	</summary> </body2>
+=======
+	<span>친구 리스트</span>
+	<div class="container">
+	<c:choose>   
+		<c:when test="${empty list}">
+		</c:when>
+		<c:otherwise>
+			<c:forEach var="dto" items="${list}">
+			<div class="friend_container">
+				<div class="friend_img_container">
+					<img src="/member/storage/profile/${dto.fname }"></img>
+				</div>
+				<span>${dto.id2}</span><br>
+				<c:if test="${dto.status == 3 }"> 친구</c:if>
+				<c:if test="${dto.status == 2 }"> 친구신청 받음</c:if>
+				<c:if test="${dto.status == 1 }"> 친구신청 중</c:if>
+			</div>
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
+
+	</div>
+>>>>>>> 59109d400380b958f306a0864d79d380389dc799
 </body>
 </html>
