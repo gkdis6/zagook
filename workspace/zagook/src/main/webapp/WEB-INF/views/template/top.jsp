@@ -18,75 +18,45 @@
 <html>
 
 <head>
-<title>memo</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>memo</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		#grade {
+			color: white;
+		}
 
-<script src="../js/login/modal.js"></script>
-<script src="../js/utils/login_modal.js"></script>
+		.modal-header {
+			text-align: center;
+		}
 
-<script>
-	$(function(){
-		$('.btn-modal-open').bind('click', load_login_modal);
-	});
-</script>
+		.form-group {
+			align: center;
+		}
 
-<style type="text/css">
-#grade {
-	color: white;
-}
-
-.modal-header {
-	text-align: center;
-}
-
-.form-group {
-	align: center;
-}
-
-.join {
-	margin: 15px 0px 0px 0px;
-}
-
-.container-fluid {
-	background-color: #191a45;
-}
-
-.navbar-inverse .navbar-brand:hover {
-	cursor: pointer;
-	color: #f5f2b8;
-}
-
-.navbar-inverse .navbar-brand {
-	color: #ffffff;
-	font-size: 25px;
-	padding: 12px;
-	font-weight: bold;
-}
-
-.hr-sect {
-	display: flex;
-	flex-basis: 100%;
-	align-items: center;
-	color: rgba(0, 0, 0, 0.35);
-	font-size: 12px;
-	margin: 8px 0px;
-}
-
-.hr-sect::before, .hr-sect::after {
-	content: "";
-	flex-grow: 1;
-	background: rgba(0, 0, 0, 0.35);
-	height: 1px;
-	font-size: 0px;
-	line-height: 0px;
-	margin: 0px 16px;
-}
-</style>
+		.join {
+			margin: 15px 0px 0px 0px;
+		}
+		.container-fluid{
+			background-color: #191a45;
+		}
+		.navbar-inverse .navbar-brand:hover {
+			cursor: pointer;
+			color: #f5f2b8;
+		}
+		.navbar-inverse .navbar-brand{
+			color: #ffffff;
+			font-size: 25px; 
+			padding: 12px;
+			font-weight: bold;
+		}
+		.modal-backdrop{
+			z-index: -2;
+		}
+	</style>
 </head>
 
 <body>
