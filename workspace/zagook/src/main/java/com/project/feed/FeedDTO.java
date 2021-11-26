@@ -1,7 +1,11 @@
 package com.project.feed;
 
 import java.util.List;
+import java.util.Objects;
 
+import lombok.Data;
+
+@Data
 public class FeedDTO {
 //	minimum user info
 	private int contentsno;
@@ -23,6 +27,10 @@ public class FeedDTO {
 	private double base_distance;
 	
 	private String url_id;
+	private String load_type;
+	private String range;
+	private String order_type;
+	private String selected_id;
 	
 	public FeedDTO() {
 		super();
@@ -31,7 +39,8 @@ public class FeedDTO {
 	
 	public FeedDTO(int contentsno, String id, String filename, String contents, String rdate, int likecnt, int privacy,
 			double x_site, double y_site, String mname, String fname, int like_clicked, List<String> tag_list,
-			double base_distance, String url_id) {
+			double base_distance, String url_id, String load_type, String range, String order_type,
+			String selected_id) {
 		super();
 		this.contentsno = contentsno;
 		this.id = id;
@@ -48,14 +57,38 @@ public class FeedDTO {
 		this.tag_list = tag_list;
 		this.base_distance = base_distance;
 		this.url_id = url_id;
+		this.load_type = load_type;
+		this.range = range;
+		this.order_type = order_type;
+		this.selected_id = selected_id;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(base_distance, contents, contentsno, filename, fname, id, like_clicked, likecnt, load_type,
+				mname, order_type, privacy, range, rdate, selected_id, tag_list, url_id, x_site, y_site);
 	}
 
 	@Override
-	public String toString() {
-		return "FeedDTO [contentsno=" + contentsno + ", id=" + id + ", filename=" + filename + ", contents=" + contents
-				+ ", rdate=" + rdate + ", likecnt=" + likecnt + ", privacy=" + privacy + ", x_site=" + x_site
-				+ ", y_site=" + y_site + ", mname=" + mname + ", fname=" + fname + ", like_clicked=" + like_clicked
-				+ ", tag_list=" + tag_list + ", base_distance=" + base_distance + ", url_id=" + url_id + "]";
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FeedDTO other = (FeedDTO) obj;
+		return Double.doubleToLongBits(base_distance) == Double.doubleToLongBits(other.base_distance)
+				&& Objects.equals(contents, other.contents) && contentsno == other.contentsno
+				&& Objects.equals(filename, other.filename) && Objects.equals(fname, other.fname)
+				&& Objects.equals(id, other.id) && like_clicked == other.like_clicked && likecnt == other.likecnt
+				&& Objects.equals(load_type, other.load_type) && Objects.equals(mname, other.mname)
+				&& Objects.equals(order_type, other.order_type) && privacy == other.privacy
+				&& Objects.equals(range, other.range) && Objects.equals(rdate, other.rdate)
+				&& Objects.equals(selected_id, other.selected_id) && Objects.equals(tag_list, other.tag_list)
+				&& Objects.equals(url_id, other.url_id)
+				&& Double.doubleToLongBits(x_site) == Double.doubleToLongBits(other.x_site)
+				&& Double.doubleToLongBits(y_site) == Double.doubleToLongBits(other.y_site);
 	}
 
 	public int getContentsno() {
@@ -147,5 +180,29 @@ public class FeedDTO {
 	}
 	public void setUrl_id(String url_id) {
 		this.url_id = url_id;
+	}
+	public String getLoad_type() {
+		return load_type;
+	}
+	public void setLoad_type(String load_type) {
+		this.load_type = load_type;
+	}
+	public String getRange() {
+		return range;
+	}
+	public void setRange(String range) {
+		this.range = range;
+	}
+	public String getOrder_type() {
+		return order_type;
+	}
+	public void setOrder_type(String order_type) {
+		this.order_type = order_type;
+	}
+	public String getSelected_id() {
+		return selected_id;
+	}
+	public void setSelected_id(String selected_id) {
+		this.selected_id = selected_id;
 	}
 }

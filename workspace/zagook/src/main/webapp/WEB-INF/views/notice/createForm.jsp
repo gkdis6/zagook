@@ -7,9 +7,19 @@
   <meta charset="utf-8">
   <script type="text/JavaScript">
  function checkIn(f){
+     if (f.title.value == ""){
+         alert("제목을 입력하세요");
+         f.title.focus()
+         return false;
+ 	}
      if (f.content.value == ""){
          alert("내용을 입력하세요");
-         f.title.focus()
+         f.content.focus()
+         return false;
+ 	}
+     if (f.passwd.value == ""){
+         alert("비밀번호를 입력하세요");
+         f.passwd.focus()
          return false;
  	}
 }
@@ -31,13 +41,12 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-xs-6">
-      <textarea name="contents" id="contents" class="form-control" style="height:100px;resize:none;" placeholder="내용"></textarea>
+      <textarea name="content" id="content" class="form-control" style="height:100px;resize:none;" placeholder="내용"></textarea>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="filenameMF">이미지</label>
-    <div class="col-sm-6">
-      <input type="file" name="filenameMF" id="filenameMF" class="form-control">
+    <div class="col-sm-offset-2 col-sm-6">
+      <input type="password" name="passwd" id="passwd" class="form-control" placeholder="비밀번호">
     </div>
   </div>
    <div class="form-group">

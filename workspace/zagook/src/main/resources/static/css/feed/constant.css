@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+:root { 
+	--side_bar_size: 25%; 
+	--center_container_size: 600px; 
+	--feed_container_size: 550px;
+	--selection_container_size: 250px;
+
+	/* z-index */	
+	  /* top_nav z-index: 4 > top_nav.js */
+	--left_container_zindex: 3;
+	--center_container_zindex: 1;
+	--loading_animation_zindex: 2;
+	  /* map z-index: -1 > read.jsp */
+	--selection_container_zindex: 1;
+	--searchbar_item_zindex: 5;
+	  
+  	/* color */
+	--base_color_navy: #191A45;
+	--base_color_oatmeal: #F5F2B8;
+}

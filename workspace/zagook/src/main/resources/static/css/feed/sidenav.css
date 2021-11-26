@@ -1,23 +1,27 @@
 @charset "utf-8";
 
 .sidenav {
+  cursor: pointer;
   height: 100%;
-  width: 0px;
   position: fixed;
   z-index: 1;
-  top: 0px;
   left: 0px;
   background-color: #191A45;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
+  opacity: 0.75;
+  text-align: center;
+}
+.sidenav:hover {
+    opacity: 1;
 }
 .sidenav a {
-  padding: 8px 8px 8px 32px;
+  padding: 8px 8px 8px 8px;
   text-decoration: none;
   font-size: 25px;
   color: #818181;
-  display: block;
+  display: none;
   transition: 0.3s;
 }
 

@@ -90,12 +90,6 @@ public class ContentsServiceImpl implements ContentsService {
 	}
 
 	@Override
-	public int update3(ContentsDTO dto) {
-		// TODO Auto-generated method stub
-		return mapper.update3(dto);
-	}
-
-	@Override
 	public int likeCnt(Map map) {
 		// TODO Auto-generated method stub
 		return mapper.likeCnt(map);

@@ -9,8 +9,8 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
    <script type="text/javascript">
-     function detail(noticeno){
-       var url = "detail";
+     function read(noticeno){
+       var url = "read";
        url += "?noticeno="+noticeno;
        url += "&col=${col}";
        url += "&word=${word}";
@@ -18,38 +18,14 @@
        location.href=url;
      }  
   </script>
-  <script>
-  $.ajax({ // 컨트롤러와 통신
-	  type: 'POST',
-	  url: "/admin/notice/create",
-	  data: JSON.stringify(data),
-	  //contentType: "application/json; charset=UTF-8",
-	  dataType:"json",
-	  success: function(data) {
-		  if(data=="1"){
-		  alert("공지 등록 성공");
-	  }else{
-		  alert("등록 오류");
-	  }
-	  },
-	  error: function(request, status, error) {
-	  alert(("code = " + request.status + " message = "
-				+ request.responseText + " error = " + error);
-	  }
-	  });
-  </script>
  
 </head>
 <body>
 <div class="container">
- 
-   <h2>공지 사항</h2>
+<h2><b>공지 사항</b></h2>
   <form class="form-inline" action="./list">
     <div class="form-group">
       <select class="form-control" name="col">
-        <option value="wname"
-        <c:if test= "${col=='wname'}"> selected </c:if>
-        >작성자</option>
         <option value="title"
         <c:if test= "${col=='title'}"> selected </c:if>
         >제목</option>
@@ -75,12 +51,11 @@
     </c:if>
   </form>
   
-  <table class="table table-striped">
+  <table class="table table-hover">
    <thead>
     <tr>
     <th>번호</th>
     <th>제목</th>
-    <th>작성자</th>
     <th>등록날짜</th>
     <th>조회수</th>
     </tr>
@@ -97,13 +72,12 @@
     <td>${dto.noticeno}</td>
     <td>
     <a href="javascript:read('${dto.noticeno}')">${dto.title}</a>
-	<c:if test="${util:newImg(fn:substring(dto.ndate,0,10)) }">
+	<c:if test="${util:newImg(fn:substring(dto.rdate,0,10)) }">
          <img src="/images/new.gif"> 
     </c:if> 
     </td>
-    <td>${dto.wname}</td>
-    <td>${dto.ndate}</td>
-    <td>${dto.viewcnt}</td>
+    <td>${dto.rdate}</td>
+    <td>${dto.cnt}</td>
    </tr>
    </c:forEach>
    </c:otherwise>

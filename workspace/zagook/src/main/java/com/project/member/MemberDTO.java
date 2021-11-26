@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import lombok.Data;
+
 @Data
 public class MemberDTO {          
 	private String id             ;
@@ -18,13 +19,14 @@ public class MemberDTO {
 	private String fname                         ;
 	private MultipartFile fnameMF			     ;
 	private String grade                         ;
-	
+	private String social						 ;
+	private String intoduction;
 	public MemberDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public MemberDTO(String id, String password, String mname, String tel, String email, String job, String mdate,
-			String fname, MultipartFile fnameMF, String grade) {
+			String fname, MultipartFile fnameMF, String grade, String social) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -36,12 +38,13 @@ public class MemberDTO {
 		this.fname = fname;
 		this.fnameMF = fnameMF;
 		this.grade = grade;
+		this.social = social;
 	}
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", password=" + password + ", mname=" + mname + ", tel=" + tel + ", email="
 				+ email + ", job=" + job + ", mdate=" + mdate + ", fname=" + fname + ", fnameMF=" + fnameMF + ", grade="
-				+ grade + "]";
+				+ grade + ", social=" + social + "]";
 	}
 	public String getId() {
 		return id;
@@ -102,6 +105,12 @@ public class MemberDTO {
 	}
 	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+	public String getSocial() {
+		return social;
+	}
+	public void setSocial(String social) {
+		this.social = social;
 	}
 	
 }      

@@ -26,9 +26,9 @@ import java.util.Date;
 public class ChatCont {
 
     // 시크릿 키
-    private static String secretKey = "V1FyZ3lodkdPTVlIdU9zek1GT0pPR21yb1pEZ2pQZW0=";
+    private static String secretKey = "Z21OZ1Rzb1lxT1VJT0pOWFlWbUNZaElmZmdlSEdwSEo=";
     // APIGW Invoe URL , 관련 Exception: 
-    private static String apiUrl = "https://928ff5853ef24f4fb0da63d0ed9e69cc.apigw.ntruss.com/custom/v1/5736/6cf39fd2354e17841d48bdc91c743eb2e0dd6029fefda611581a5e4c03959ed9";
+    private static String apiUrl = "https://73f2a8dd12624fc3bec9e584ef0ae474.apigw.ntruss.com/custom/v1/5851/5457e47d8245ce340468c20ab292ef2318a00987a4b95b0af3204d4f1c39fe09";
   
 
     @RequestMapping("/chat")  // http://localhost:9093/naver_chatting
