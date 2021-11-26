@@ -37,7 +37,7 @@
 .img_box_container {
 	text-align: center;
 	max-width: var(--feed_container_size);
-	max-height: var(--feed_container_size);
+	height: auto;
 }
 .img_box {
 	width: 100%;
