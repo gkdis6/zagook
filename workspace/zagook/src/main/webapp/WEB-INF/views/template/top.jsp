@@ -51,6 +51,9 @@
 			padding: 12px;
 			font-weight: bold;
 		}
+		.modal-backdrop{
+			z-index: -2;
+		}
 	</style>
 </head>
 
