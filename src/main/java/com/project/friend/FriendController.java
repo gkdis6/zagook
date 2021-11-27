@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class FriendController {
@@ -32,5 +34,14 @@ public class FriendController {
 		}
 		
 		return "/friend";
+	}
+	
+	@PostMapping(value="/friend", produces = "application/json")
+	public Map friend_status(HttpServletRequest request, HttpSession session) {
+		Map<> map = new HashMap<>();
+		if (session.getAttribute("id") != null) {
+			
+		}
+		return map;
 	}
 }

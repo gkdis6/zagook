@@ -152,5 +152,9 @@
 
 	</div>
 </body>
-
+<script type="text/javascript">
+	function close_modal(){
+		$(".modal").hide();
+	}
+</script>
 </html>

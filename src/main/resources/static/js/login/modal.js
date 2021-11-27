@@ -14,7 +14,7 @@ body에 append 해주기
 		success: function(html){
 			var $modal = $(html)
 			$('body').append($modal);
-			$modal.modal('show');
+			$modal.show();
 			//닫기
 			$modal.on('hidden.bs.modal',function(){
 				$modal.remove();

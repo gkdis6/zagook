@@ -7,16 +7,24 @@
 <title>친구페이지</title>
 <meta charset="utf-8">
 <style>
+body{
+	text-align: center;
+}
 .container{
 	display: grid;
-	grid-template-columns: 220px 220px 220px 220px;
-	grid-auto-rows: 300px;
+	grid-template-columns: 220px 220px 220px 220px 220px;
+	grid-auto-rows: 312px;
 	grid-gap: 10px;
+	height: auto;
+	padding-bottom: 100px;
 }
+.container::after, .container::before{ 
+	display:none !important;
+	}
 .friend_container{
 	border: solid;
 	width: 220px;
-	height: 300px;
+	height: 312px;
 	border-radius: 8px;
 	text-align:center;
 }
@@ -32,6 +40,51 @@
 	height: 200px;
 	objec-fit: cover;
 }
+.container_title{
+	display: flex;
+	justify-content: center;
+} 
+.container_title div{
+	text-align:left;
+	width: 1140px;
+	font-size: 40px;
+	padding-top: 60px;
+	padding-bottom: 10px;
+}
+.friend_container button{
+	width: 200px;
+	height: 35px;
+}
+.friend_container .accept_friend{
+	background-color: skyblue;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	color: white;
+}
+.friend_container .friend_processing{
+	background-color: #191A45;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	color: white;
+}
+.friend_container .already_friend{
+	background-color: green;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	color: white;
+}
+.friend_container .delete_friend{
+	margin-top: 3px;
+	background-color: red;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	height: 25px;
+}
 
 </style>
 <script src="/js/reply/reply.js">
@@ -39,80 +92,8 @@
 </script>
 </head>
 <body>
-<<<<<<< HEAD
-	<body2> 
-	<summary>
-		친구신청
-		<form action="action_page.php">
-			<fieldset>
-				<img
-					src="https://blog.yena.io/assets/post-img/171123-nachoi-300.jpg"
-					width="200px;" height="200px;" alt="My Image"> <br> User
-				ID:<br> <input type="text" name="username" value="Mickey"
-					style="color: black"> <br> <br> <input
-					type="submit" value="거절" style="background-color: #EB4E4E">
-				<input type="submit" value="수락" style="background-color: #30BA87">
-			</fieldset>
-	</summary> <summary>
-		친구신청
-		<form action="action_page.php">
-			<fieldset>
-				<img
-					src="https://magazineb-ckeditor-upload.s3.ap-northeast-2.amazonaws.com/upload/sim.jpg"
-					width="200px;" height="200px;" alt="My Image"> <br> User
-				ID:<br> <input type="text" name="username" value="John"
-					style="color: black"> <br> <br> <input
-					type="submit" value="거절" style="background-color: #EB4E4E">
-				<input type="submit" value="수락" style="background-color: #30BA87">
-			</fieldset>
-	</summary> <summary>
-		친구신청
-		<form action="action_page.php">
-			<fieldset>
-				<img
-					src="https://img.favpng.com/23/12/18/donuts-homer-simpson-food-bread-image-png-favpng-y1f2UZmqc31qUHPYM7raS8uRK.jpg"
-					width="200px;" height="200px;" alt="My Img"> <br> User
-				ID:<br> <input type="text" name="username" value="Son"
-					style="color: black"> <br> <br> <input
-					type="submit" value="거절" style="background-color: #EB4E4E">
-				<input type="submit" value="수락" style="background-color: #30BA87">
-			</fieldset>
-	</summary> <summary>
-		친구신청
-		<form action="action_page.php">
-			<fieldset>
-				<img
-					src="https://mblogthumb-phinf.pstatic.net/20130130_91/k_homer_k_1359473362889Iy7AY_GIF/MargeSimpson31.gif?type=w2"
-					width="200px;" height="200px;" alt="My Img"> <br> User
-				ID:<br> <input type="text" name="username" value="Messi"
-					style="color: black"> <br> <br> <input
-					type="submit" value="거절" style="background-color: #EB4E4E">
-				<input type="submit" value="수락" style="background-color: #30BA87">
-			</fieldset>
-	</summary> <summary>
-		친구신청
-		<form action="action_page.php">
-			<fieldset>
-				<img
-					src="https://mblogthumb-phinf.pstatic.net/20140126_164/ahn3607_1390723993086MhbS8_JPEG/%28The_Simpsons%29S19E15.Smoke_on_the_Daughter.avi_000826283.jpg?type=w2"
-					width="200px;" height="200px;" alt="My Img"> <br> User
-				ID:<br> <input type="text" name="username" value="Ramos"
-					style="color: black"> <br> <br> <input
-					type="submit" value="거절" style="background-color: #EB4E4E">
-				<input type="submit" value="수락" style="background-color: #30BA87">
-			</fieldset>
-	</summary> <summary>
-		My Friend
-		<fieldset>
-			<img
-				src="https://mblogthumb-phinf.pstatic.net/20151117_52/ysb0509270_1447771663198llOux_PNG/ldd4_%281%29.png?type=w2"
-				width="200px;" height="200px;" alt="My Img"> <br> User
-			ID:<br> <input type="text" name="username" value="SayHo"
-				style="color: black"> <br> <br>
-		</fieldset>
-	</summary> </body2>
-=======
-	<span>친구 리스트</span>
+
+	<div class="container_title"><div>친구 관리</div></div>
 	<div class="container">
 	<c:choose>   
 		<c:when test="${empty list}">
@@ -124,15 +105,33 @@
 					<img src="/member/storage/profile/${dto.fname }"></img>
 				</div>
 				<span>${dto.id2}</span><br>
-				<c:if test="${dto.status == 3 }"> 친구</c:if>
-				<c:if test="${dto.status == 2 }"> 친구신청 받음</c:if>
-				<c:if test="${dto.status == 1 }"> 친구신청 중</c:if>
+				<c:if test="${dto.status == 3 }"> 
+				<button type="button" class="already_friend">친구</button>
+				<button type="button" class="delete_friend">삭제</button>
+				</c:if>
+				<c:if test="${dto.status == 2 }">
+				<button type="button" class="friend_processing">친구 신청중</button>
+				<button type="button" class="delete_friend">삭제</button>
+				</c:if>
+				<c:if test="${dto.status == 1 }">
+				<button type="button" class="accept_friend">수락</button>
+				<button type="button" class="delete_friend">삭제</button>
+				</c:if>
 			</div>
 			</c:forEach>
 		</c:otherwise>
 	</c:choose>
 
 	</div>
->>>>>>> 59109d400380b958f306a0864d79d380389dc799
 </body>
+<script>
+var delete_friend=function(id2){
+	let form = {
+			id2 : id2
+	};
+	$.ajax({
+		url : 
+	})
+}
+</script>
 </html>
