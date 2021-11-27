@@ -25,10 +25,9 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	
 	<script src="../js/login/modal.js"></script>
 	<script src="../js/utils/login_modal.js"></script>
-	
+		
 	<script>
 		$(function(){
 			$('.btn-modal-open').bind('click', load_login_modal);
@@ -152,5 +151,9 @@
 
 	</div>
 </body>
-
+<script type="text/javascript">
+	function close_modal(){
+		$(".modal").hide();
+	}
+</script>
 </html>

@@ -32,14 +32,15 @@ public class MemberController {
    
    @GetMapping("/modallogin")
    public String loginmodal() {
+	   System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@");
 	   return "/loginmodal";
    }
    
    @GetMapping("/member/login")
    public String login(HttpServletRequest request) {
-      /*쿠키설정*/
-        String c_id = "";     // ID 저장여부를 저장하는 변수, Y
-        String c_email_val = ""; // ID 값
+      /*荑좏궎�꽕�젙*/
+        String c_id = "";     // ID ���옣�뿬遺�瑜� ���옣�븯�뒗 蹂��닔, Y
+        String c_email_val = ""; // ID 媛�
          
         Cookie[] cookies = request.getCookies(); 
         Cookie cookie=null; 
@@ -55,7 +56,7 @@ public class MemberController {
            } 
          } 
         } 
-        /*---쿠키 설정 끝----------------------------*/
+        /*---荑좏궎 �꽕�젙 �걹----------------------------*/
         request.setAttribute("c_id", c_id);
         request.setAttribute("c_email_val", c_email_val);
         System.out.println("######::::"+c_email_val);
@@ -70,7 +71,7 @@ public class MemberController {
       int cnt = service.loginCheck(map);
       MemberDTO dto = service.read(email);
       map.put("id", dto.getId());
-      if(cnt>0) { //회원
+      if(cnt>0) { //�쉶�썝
          
          //grade>> String grade = service.getGrade(map.get("id"));
          session.setAttribute("id", map.get("id"));
@@ -82,24 +83,24 @@ public class MemberController {
 
          
              // grade >>   session.setAttribute("grade", grade);
-             //Cookie 저장, id 저장 여부 및 id
+             //Cookie ���옣, id ���옣 �뿬遺� 諛� id
              Cookie cookie = null;
              String c_id = map.get("c_id");
-            //if 쿠키값 저장--
+            //if 荑좏궎媛� ���옣--
              if(c_id != null) {
                  cookie = new Cookie("c_id",c_id ); //c_id=> Y
-                 cookie.setMaxAge(60 * 60 * 24 * 365);//1년
+                 cookie.setMaxAge(60 * 60 * 24 * 365);//1�뀈
                  response.addCookie(cookie);
                  
                  cookie = new Cookie("c_email_val",map.get("email"));
-                 cookie.setMaxAge(60 * 60 * 24 * 365);//1년
+                 cookie.setMaxAge(60 * 60 * 24 * 365);//1�뀈
                  response.addCookie(cookie);
-             }else { //체크 안하면 "" 넣어 지우기
-                 cookie = new Cookie("c_id",""); //쿠키 삭제
+             }else { //泥댄겕 �븞�븯硫� "" �꽔�뼱 吏��슦湲�
+                 cookie = new Cookie("c_id",""); //荑좏궎 �궘�젣
                  cookie.setMaxAge(0);
                  response.addCookie(cookie);
                  
-                 cookie = new Cookie("c_email_val","");//쿠키 삭제
+                 cookie = new Cookie("c_email_val","");//荑좏궎 �궘�젣
                  cookie.setMaxAge(0);
                  response.addCookie(cookie);             
              }
@@ -111,7 +112,7 @@ public class MemberController {
             return "redirect:/";
          
       }else {
-         model.addAttribute("msg","아이디 또는 비밀번호를 잘못 입력 했거나 <br>회원이 아닙니다. 회원가입 하세요");
+         model.addAttribute("msg","�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇瑜� �옒紐� �엯�젰 �뻽嫄곕굹 <br>�쉶�썝�씠 �븘�떃�땲�떎. �쉶�썝媛��엯 �븯�꽭�슂");
          return "/member/errorMsg";
       }
       
@@ -119,7 +120,7 @@ public class MemberController {
    
    @GetMapping("/member/logout")
    public String logout(HttpSession session) {
-      session.invalidate(); //세션 지우고 로그아웃 처리
+      session.invalidate(); //�꽭�뀡 吏��슦怨� 濡쒓렇�븘�썐 泥섎━
       return "redirect:/";
    }
    
@@ -146,9 +147,9 @@ public class MemberController {
       }
       
       if(service.create(dto)>0) {
-    	 System.out.println("###::가입");
-    	 model.addAttribute("msg","가입이 완료 되었습니다.<br>가입하신 정보로 로그인 해주세요.");
-    	 System.out.println("model::가입"+model);
+    	 System.out.println("###::媛��엯");
+    	 model.addAttribute("msg","媛��엯�씠 �셿猷� �릺�뿀�뒿�땲�떎.<br>媛��엯�븯�떊 �젙蹂대줈 濡쒓렇�씤 �빐二쇱꽭�슂.");
+    	 System.out.println("model::媛��엯"+model);
          return "/member/signcheck";
       }else{
          return "error";
@@ -163,14 +164,14 @@ public class MemberController {
       int cnt = service.duplicatedEmail(email); 
       Map<String,String> map = new HashMap<String,String>();
       if(cnt>0) {
-         //map에 들어갈 data
-         map.put("str", email+" 로 가입한 내역이 존재합니다. 로그인 해주세요.");
+         //map�뿉 �뱾�뼱媛� data
+         map.put("str", email+" 濡� 媛��엯�븳 �궡�뿭�씠 議댁옱�빀�땲�떎. 濡쒓렇�씤 �빐二쇱꽭�슂.");
       }else {
-         map.put("str", email+"는 중복아님, 사용가능 합니다.");
+         map.put("str", email+"�뒗 以묐났�븘�떂, �궗�슜媛��뒫 �빀�땲�떎.");
       }
       return map;
    }
-   //id 중복확인
+   //id 以묐났�솗�씤
    @GetMapping(value="/member/idcheck",produces="application/json;charset=utf-8")
    @ResponseBody
    public Map<String,String> idcheck(String id){
@@ -178,14 +179,14 @@ public class MemberController {
       
       Map<String,String> map = new HashMap<String,String>();
       if(cnt>0) {
-         //map에 들어갈 data
-         map.put("str", id+"은/는 중복되어 사용할 수 없습니다.");
+         //map�뿉 �뱾�뼱媛� data
+         map.put("str", id+"��/�뒗 以묐났�릺�뼱 �궗�슜�븷 �닔 �뾾�뒿�땲�떎.");
       }else {
-         map.put("str", id+"은/는 사용가능 합니다.");
+         map.put("str", id+"��/�뒗 �궗�슜媛��뒫 �빀�땲�떎.");
       }
       return map;
    }
-   //마이페이지
+   //留덉씠�럹�씠吏�
    @GetMapping("/member/mypage")
    public String read(String id, String email,@RequestParam Map<String, String> map,
 	   				HttpSession session, Model model) {
@@ -235,15 +236,15 @@ public class MemberController {
                    HttpServletRequest request) throws IOException{
 //           String basePath = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
              String basePath = Member.getUploadDir();
-           if(oldfile !=null  && !oldfile.equals("member.jpg")) { //원본파일 삭제
+           if(oldfile !=null  && !oldfile.equals("member.jpg")) { //�썝蹂명뙆�씪 �궘�젣
                    Utility.deleteFile(basePath, oldfile);
            }
            
-           //storage에 변경 파일 저장
+           //storage�뿉 蹂�寃� �뙆�씪 ���옣
            Map map = new HashMap();
            map.put("email", session.getAttribute("email"));
            map.put("fname", Utility.saveFileSpring(fnameMF, basePath));
-           //디비에 파일명 변경
+           //�뵒鍮꾩뿉 �뙆�씪紐� 蹂�寃�
            System.out.println("####::"+map);
            int cnt = service.updateFile(map);
            System.out.println("####11::"+cnt);
@@ -279,7 +280,7 @@ public class MemberController {
     			return "./passwdError";
     		}
     		else if (dcnt == 1) {
-    			System.out.println("삭제 성공");
+    			System.out.println("�궘�젣 �꽦怨�");
     			session.invalidate();
     			return "redirect:/";
     		}
