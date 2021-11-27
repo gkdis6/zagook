@@ -105,7 +105,14 @@
 							<li><a href="${root}/notice/list">Notice</a></li>
 							<li><a href="${root}/chat">문의하기</a></li>
 						</ul></li>
-					<li><a id="feed" href="${root}/feed/read">내 주변</a></li>
+					<c:choose>
+						<c:when test="${not empty sessionScope.id }">
+							<li><a id="feed" href="${root}/feed/read">내 주변</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a id="feed" href="javascript:void(0);" onclick="onclick_login_open()">내 주변</a></li>
+						</c:otherwise>
+					</c:choose>
 					<li><a id="grade"><span class="glyphicon glyphicon-grain"></span>${str}</a>
 					</li>
 				</ul>

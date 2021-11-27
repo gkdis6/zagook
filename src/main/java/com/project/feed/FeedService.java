@@ -32,7 +32,7 @@ public interface FeedService {
 	int unlike(Map map);
 	int updatelikecnt(Map map);
 	int friendcheck(Map map);
+	int friendcheckstatus(Map map);
 	MemberDTO read(String selected_id);
-	int friendcheck_2(Map map);
 	int tagcnt(FeedDTO dto);
 }

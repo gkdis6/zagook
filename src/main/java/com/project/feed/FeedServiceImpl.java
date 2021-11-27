@@ -151,9 +151,9 @@ public class FeedServiceImpl implements FeedService {
 	}
 
 	@Override
-	public int friendcheck_2(Map map) {
+	public int friendcheckstatus(Map map) {
 		// TODO Auto-generated method stub
-		return mapper.friendcheck_2(map);
+		return mapper.friendcheckstatus(map);
 	}
 	@Override
 	public int tagcnt(FeedDTO dto) {

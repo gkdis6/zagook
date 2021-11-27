@@ -195,7 +195,8 @@ function process_feed_list(param) {
 				}
 				html_str += '</div>';
 				
-				window.removeEventListener("scroll", scrollEventHandler);
+				if (window.location.pathname != '/')
+					window.removeEventListener("scroll", scrollEventHandler);
 			}
             let newElement = document.createElement('div');
 			newElement.innerHTML = html_str;
