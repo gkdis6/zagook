@@ -38,7 +38,7 @@ public class FriendController {
 	
 	@PostMapping(value="/friend", produces = "application/json")
 	public Map friend_status(HttpServletRequest request, HttpSession session) {
-		Map<> map = new HashMap<>();
+		Map map = new HashMap<>();
 		if (session.getAttribute("id") != null) {
 			
 		}
