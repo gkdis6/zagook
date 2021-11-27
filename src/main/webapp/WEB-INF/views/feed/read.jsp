@@ -36,11 +36,22 @@
 				<div id="nav_click_img_container">
 					<img id="mose_click_img" src="../images/feed/mouse_click_v2.png" alt="mouse_click" style="width: 30px;">
 				</div>
-			  	<a href="/feed/myread">My Feed</a>
-			  	<a href="/feed/read">Friends Feed</a>
-			  	<a href="/friend">Friends List</a>
-			  	<a href="javascript:void(0)" onclick="openSearchbar()">Search Tag</a>
-			  	<a href="javascript:void(0)" onclick="openSearchbarFriend()">Search Friend</a>
+				<c:choose>
+				<c:when test="${not empty sessionScope.id }">
+				  	<a href="/feed/myread">My Feed</a>
+				  	<a href="/feed/read">Friends Feed</a>
+				  	<a href="/friend">Friends List</a>
+				  	<a href="javascript:void(0)" onclick="openSearchbar()">Search Tag</a>
+				  	<a href="javascript:void(0)" onclick="openSearchbarFriend()">Search Friend</a>
+			  	</c:when>
+			  	<c:otherwise>
+				  	<a href="javascript:void(0)" onclick="onclick_login_open()">My Feed</a>
+				  	<a href="javascript:void(0)" onclick="onclick_login_open()">Friends Feed</a>
+				  	<a href="javascript:void(0)" onclick="onclick_login_open()">Friends List</a>
+				  	<a href="javascript:void(0)" onclick="onclick_login_open()">Search Tag</a>
+				  	<a href="javascript:void(0)" onclick="onclick_login_open()">Search Friend</a>
+			  	</c:otherwise>
+			  	</c:choose>
 			</div>
 		</div>
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
@@ -190,6 +201,7 @@
 <script src="/js/utils/remove_display_util.js"></script>
 <script src="/js/utils/scroll_util.js"></script>
 <script src="/js/utils/send_post_util.js"></script>
+<script src="/js/utils/login_modal_open.js"></script>
 <script src="/js/feed/url_pattern/url_regex.js"></script>
 <script src="/js/feed/map/feed_map.js"></script>
 <script src="/js/feed/feed_ajax/feed_start_end_util.js"></script>

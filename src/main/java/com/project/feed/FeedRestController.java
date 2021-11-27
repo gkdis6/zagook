@@ -239,14 +239,12 @@ public class FeedRestController {
 						result_base_idx = base_idx;
 						String order_type = dto.getOrder_type();
 						if (service.friendcheck(friend_check_map) > 0) {
-							if(service.friendcheck_2(friend_check_map) == 3) {
-								if (order_type.equals("distance")) {
-									feed_list = service.friendlist(dto);
-								} else if (order_type.equals("recent")) {
-									feed_list = service.friendlistbyrecent(dto);
-								} else if (order_type.equals("old")) {
-									feed_list = service.friendlistbyold(dto);
-								}
+							if (order_type.equals("distance")) {
+								feed_list = service.friendlist(dto);
+							} else if (order_type.equals("recent")) {
+								feed_list = service.friendlistbyrecent(dto);
+							} else if (order_type.equals("old")) {
+								feed_list = service.friendlistbyold(dto);
 							}
 						} else {
 							if (order_type.equals("distance")) {
@@ -272,14 +270,12 @@ public class FeedRestController {
 					dto.setBase_distance(selected_range);
 					String order_type = dto.getOrder_type();
 					if (service.friendcheck(friend_check_map) > 0) {
-						if(service.friendcheck_2(friend_check_map) == 3) {
-							if (order_type.equals("distance")) {
-								feed_list = service.friendlist(dto);
-							} else if (order_type.equals("recent")) {
-								feed_list = service.friendlistbyrecent(dto);
-							} else if (order_type.equals("old")) {
-								feed_list = service.friendlistbyold(dto);
-							}
+						if (order_type.equals("distance")) {
+							feed_list = service.friendlist(dto);
+						} else if (order_type.equals("recent")) {
+							feed_list = service.friendlistbyrecent(dto);
+						} else if (order_type.equals("old")) {
+							feed_list = service.friendlistbyold(dto);
 						}
 					} else {
 						if (order_type.equals("distance")) {
@@ -294,9 +290,10 @@ public class FeedRestController {
 				} 
 				MemberDTO dto_member = service.read((String) dto.getSelected_id());
 				result_map.put("dto_member", dto_member);
-				if (service.friendcheck(friend_check_map) > 0 ) {
-					result_map.put("friend_status", service.friendcheck_2(friend_check_map));
-				}else {
+				int check_status = service.friendcheckstatus(friend_check_map);
+				if (check_status > 0) {
+					result_map.put("friend_status", check_status);
+				} else {
 					result_map.put("friend_status", 0);
 				}
 				
