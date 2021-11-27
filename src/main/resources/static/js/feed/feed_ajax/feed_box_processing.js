@@ -54,9 +54,9 @@ function process_feed_list(param) {
 					html_str += '<div class="banner_inner_first">';
 					html_str += '<span>'+dto_member.id+'</span>';
 					if(friend_status == 1){
-						html_str += '<button type="button" class="friend_btn_2"disabled>친구신청중</button>';
-					}else if(friend_status == 2){
 						html_str += '<button type="button" class="friend_btn_3"disabled>친구신청받음</button>';
+					}else if(friend_status == 2){
+						html_str += '<button type="button" class="friend_btn_2"disabled>친구신청중</button>';
 					}else if(friend_status == 3){
 						html_str += '<button type="button" class="friend_btn_4"disabled>친구</button>';
 					}else{
