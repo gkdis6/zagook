@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="read" parameterType="String" resultType="com.project.member.MemberDTO">
 	select id, email, mname, tel, job, 
-			to_char(mdate,'YYYY/MM/DD')as mdate, fname, grade
+			to_char(mdate,'YYYY/MM/DD')as mdate, fname, grade,introduction
 	from zagook_member
 	where email = #{email}
 </select>
@@ -51,8 +51,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="create" parameterType="com.project.member.MemberDTO">
 	 INSERT INTO zagook_member(id, password,
      mname, tel, email, job, mdate, fname,
-     grade)
-     VALUES(#{id}, #{password},#{mname}, #{tel}, #{email}, #{job}, sysdate, #{fname}, 'H')
+     grade, intro)
+     VALUES(#{id}, #{password},#{mname}, #{tel}, #{email}, #{job}, sysdate, #{fname}, 'H',"프로필 소개를 작성하세요")
 </insert>
 
 
@@ -73,7 +73,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       set id = #{id},
       mname = #{mname},
       tel = #{tel},
-      job = #{job}
+      job = #{job},
+      introduction =#{introduction}
       where email = #{email}
 </update>
 
