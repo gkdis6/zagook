@@ -23,8 +23,9 @@
 		padding-top:4px;
 /* 		outline : solid 1px black; */
 		
- 	} 
+ 	}
   </style>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script type="text/javascript">
   function emailCheck(email){
 	  //alert(email);
@@ -44,19 +45,14 @@
   }
 function inCheck(f){
 	
-	if(f.tel.value.length==0){
-		alert("전화번호를 입력하세요");
-		f.tel.focus();
+	if(f.id.value.length==0){
+		alert("닉네임을 입력하세요");
+		f.id.focus();
 		return false;
 	}
-	if(f.email.value.length==0){
-		alert("이메일을 입력하세요");
-		f.email.focus();
-		return false;
-	}
-	if(f.job.selectedIndex == 0){
-		alert("직업을 선택하세요");
-		f.job.focus();
+	if(f.mname.value.length==0){
+		alert("이름을 입력하세요");
+		f.mname.focus();
 		return false;
 	}
 }
@@ -65,8 +61,8 @@ function inCheck(f){
 <body>
 <div class="container">
 
-<h2 class="col-sm-offset-2 col-sm-10" style="margin-left:30px">회원수정</h2>
-<label class="col-sm-offset-2 col-sm-10"style="margin-left:30px">(<span id="need">*</span> 필수입력사항)</label>
+<h2 class="col-sm-offset-2 col-sm-10" style="margin-left:15px;font-weight:bold">회원수정</h2>
+<label class="col-sm-offset-2 col-sm-10"style="margin-left:15px">(<span id="need">*</span> 필수입력사항)</label>
  
   <form class="form-horizontal" 
         action="update"
@@ -84,21 +80,21 @@ function inCheck(f){
 		<div class="col-sm-3" id="email">${dto.email}</div>
 	</div>
 	<div class="form-group">
-      <label class="control-label col-sm-2" for="id">닉네임</label>
+      <label class="control-label col-sm-2" for="id"><span id="need">*</span>닉네임</label>
       <div class="col-sm-3">          
       <input type="text" class="form-control" id="id" 
          value="${dto.id}"  name="id">
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="mname">이름</label>
+      <label class="control-label col-sm-2" for="mname"><span id="need">*</span>이름</label>
       <div class="col-sm-3">          
         <input type="text" class="form-control" id="mname" 
          value="${dto.mname}"  name="mname">
       </div>
     </div>
-    <h3 style="padding-left:140px">추가 정보</h3>
-    <hr width="50%" align="left">
+    <h3 style="padding-left:120px; font-weight:bold;">추가 정보</h3>
+    <hr width="50%" align="left" style="padding-bottom:10px;">
     <div class="form-group">
       <label class="control-label col-sm-2" for="tel">전화번호</label>
       <div class="col-sm-4">          
@@ -107,7 +103,7 @@ function inCheck(f){
       </div>
     </div>
     <div class="form-group">
-    <label class="control-label col-sm-2" for="job"><span id="need">*</span>직업</label>
+    <label class="control-label col-sm-2" for="job">직업</label>
     <div class="col-sm-2">
     	<select name="job" class="form-control">
     		<option value="0">선택하세요</option>
@@ -129,16 +125,34 @@ function inCheck(f){
     
     </div>
     </div>
-       
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="intro">소개말</label>
+      <div class="col-sm-4">          
+        <textarea id="introduction" name="introduction" cols="50" rows="5" style="border-color:grey;">${dto.introduction}</textarea>
+        <div id="intro_cnt" >(0 / 100)</div>
+      </div>
+    </div>   
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-5">
         <button type="submit" class="btn btn-default">수정</button>
-        <button type="reset" class="btn btn-default">취소</button>
+        <button type="reset" class="btn btn-default" onclick="location.href='${root}/member/mypage'">취소</button>
       </div>
     </div>
   </form>
 
 <br><br>
 </div>
+<script>
+$(document).ready(function() {
+    $('#introduction').on('keyup', function() {
+        $('#intro_cnt').html("("+$(this).val().length+" / 100)");
+
+        if($(this).val().length > 100) {
+            $(this).val($(this).val().substring(0, 100));
+            $('#intro_cnt').html("(100 / 100)");
+        }
+    });
+});
+</script>
 </body>
 </html>

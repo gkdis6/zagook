@@ -11,7 +11,9 @@
 	margin-left: 20px;
 	padding-top: 20px;
 }
-
+table{
+	table-layout:fixed;
+}
 table.mypage-type {
 	border-collapse: collapse;
 	text-align: left;
@@ -77,7 +79,7 @@ table.mypage-type td {
 <script type="text/javascript">
 	function updateM() {
 		var url = "update";
-		url += "?email=${dto.email}${sdto.email}";
+		url += "?email=${dto.email}";
 
 		location.href = url;
 	}
@@ -149,6 +151,10 @@ table.mypage-type td {
 						</div>
 					</div></td>
 			</tr>
+			<tr style="word-wrap:break-word">
+				<th>프로필 소개</th>
+				<td>${dto.introduction}</td>
+			</tr>
 			<tr>
 				<th>닉네임</th>
 			<c:choose>
@@ -181,6 +187,7 @@ table.mypage-type td {
 				<th>가입날짜</th>
 				<td>${dto.mdate}</td>
 			</tr>
+		
 		</table>
 
 		<div id="mypage-button">

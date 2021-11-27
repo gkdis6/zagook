@@ -195,6 +195,7 @@ public class MemberController {
       }
       MemberDTO dto = service.read(email);
       model.addAttribute("dto",dto);
+      System.out.println(dto);
       return "/member/mypage";
    }
    

@@ -23,7 +23,7 @@
   </definition>
   
   <definition name="/member/update" extends="main">
-    <put-attribute name="title" value="마이페이지"></put-attribute>
+    <put-attribute name="title" value="회원 정보수정"></put-attribute>
     <put-attribute name="body"
       value="/WEB-INF/views/member/updateForm.jsp"/>
   </definition>
