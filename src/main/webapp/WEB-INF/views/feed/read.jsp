@@ -60,7 +60,7 @@
 			<input type="hidden" name="selected_id" value="${param.selected_id}">
 		</div>
 		<div class="map_container">
-			<div id="map" style="width: 100vw; height: 100vh; z-index:-1;">
+			<div id="map" style="width: 140vw; height: 100vh; z-index:-1;">
 			</div>
 		</div>
 		<div class="selection_container">
@@ -220,7 +220,10 @@
 <script src="/js/feed/feed_ajax/feed_img_click.js"></script>
 <script src="/js/feed/create_click_event.js"></script>
 <script>
-	
+	/* $(document).ready(function(){
+		console.log('들어감');
+		$("#map > div:first-child").css({"left":"300px"});
+	}); */
 	
 	
 	
