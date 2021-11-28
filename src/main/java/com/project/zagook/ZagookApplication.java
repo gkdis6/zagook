@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 
-// insert caching
-@EnableCaching
 @SpringBootApplication
 @ComponentScan(basePackages= {"com.project.*"})
 public class ZagookApplication {
