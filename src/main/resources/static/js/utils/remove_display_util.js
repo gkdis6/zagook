@@ -11,8 +11,7 @@ function reset_time_checkbox() {
 }
 
 function remove_feed() {
-	$(".order_by_time_container").remove();
-	$(".show_search_condition_container").remove();
+	$(".time_and_condition_container").remove();
   	$(".feed_container").remove();
   	$(".page_end_container").remove();
 	$(".banner").remove();
