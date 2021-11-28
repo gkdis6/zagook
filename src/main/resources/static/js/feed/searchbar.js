@@ -4,6 +4,7 @@ $(function start_autocomplete(){
 			if (request.term[0] == "#") {
 				$("#searchInput").css("color", "#337AB7");
 				$("#searchInput").css("text-decoration", "underline");
+				$("input[name=search_type]").val("tag");
 				$.ajax({
 					type: "get",
 					url: "/searchInput",
@@ -76,6 +77,7 @@ $(function start_autocomplete(){
 });
 
 $("#searchInput").change(function () {
+	console.log("search_type : ", $("input[name=search_type]").val());
 	$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
 });
 
