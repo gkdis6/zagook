@@ -7,11 +7,12 @@ function remove_front_display() {
 }
 
 function reset_time_checkbox() {
-	$("input[name=order_type]").val("recent");
+	$("input[name=order_type]").val("distance");
 }
 
 function remove_feed() {
 	$(".order_by_time_container").remove();
+	$(".show_search_condition_container").remove();
   	$(".feed_container").remove();
   	$(".page_end_container").remove();
 	$(".banner").remove();

@@ -1,4 +1,4 @@
-function create_banner(dto_member, tag, tagcnt, friend_status) {
+function create_banner(dto_member, tag, tagcnt, friend_status, base_distance) {
 	let html_str = "";
 	console.log(dto_member);
 	if(window.location.pathname == '/' || window.location.pathname == '/feed/read'){
@@ -54,10 +54,12 @@ function create_banner(dto_member, tag, tagcnt, friend_status) {
 		html_str += '</div>';
 		html_str += '</div>';
 	}
+	// order_by_time
+	html_str += '<div class="time_and_condition_container">';
 	html_str += '<div class="order_by_time_container" onclick="time_container_click(event);"><div>게시물을</div>'
 	html_str += '<div class="time_button_cover">\
 			        <div class="time_button r" id="time_button_9">';
-	if ($("input[name=order_type]").val() 	== "old") {
+	if ($("input[name=order_type]").val() == "old") {
 		html_str +=      '<input type="checkbox" class="time_checkbox" id="time_checkbox" checked>';
 	} else {
 		html_str +=      '<input type="checkbox" class="time_checkbox" id="time_checkbox">';
@@ -69,6 +71,19 @@ function create_banner(dto_member, tag, tagcnt, friend_status) {
 			        </div>\
 			    </div>';
 	html_str += '<div class="time_click_container">으로 정렬하려면<div class="time_click" onclick="time_click();">클릭</div>해주세요</div></div>';
+	// show_search_condition
+	html_str += '<div class="show_search_condition_container">';
+	html_str += '<span>반경 <strong>' + base_distance * 100 * 2 + 'km</strong>';
+	if ($("input[name=order_type]").val() == "recent") {
+		html_str += " 내 <strong>최근순</strong> 게시물 검색 결과입니다"
+	} else if ($("input[name=order_type]").val() == "old") {
+		html_str += " 내 <strong>오래된순</strong> 게시물 검색 결과입니다"
+	} else {
+		html_str += " 내 게시물 검색 결과입니다"
+	}
+	html_str += '</span>';
+	html_str += '</div>';
+	html_str += '</div>';
 	if(window.location.pathname == '/feed/friend'||window.location.pathname == '/feed/myread'||window.location.pathname == '/feed/tag'){
 		html_str += '</div>';
 	}
