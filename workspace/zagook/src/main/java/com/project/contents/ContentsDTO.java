@@ -24,5 +24,8 @@ public class ContentsDTO {
 	  private String fname;
 	  private int like_clicked;
 	  private List<String> tag_list;
-	 
+	  
+	  private String rnum;
+	  private String reply;
+	  
 }
