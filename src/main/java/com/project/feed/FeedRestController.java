@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.friend.FriendDTO;
 import com.project.member.MemberDTO;
 
 @RestController
@@ -290,13 +291,14 @@ public class FeedRestController {
 				} 
 				MemberDTO dto_member = service.read((String) dto.getSelected_id());
 				result_map.put("dto_member", dto_member);
-				int check_status = service.friendcheckstatus(friend_check_map);
-				if (check_status > 0) {
-					result_map.put("friend_status", check_status);
-				} else {
+				System.out.println("friend_check_map, session_id: " + friend_check_map.get("session_id"));
+				System.out.println("friend_check_map, selected_id: " + friend_check_map.get("selected_id"));
+				FriendDTO status_dto = service.friendcheckstatus(friend_check_map);
+				if (status_dto == null) {
 					result_map.put("friend_status", 0);
+				} else if (status_dto.getStatus() > 0) {
+					result_map.put("friend_status", status_dto.getStatus());
 				}
-				
 			}
 //------------------------------------------------------------------------------------------------------------------------------------------
 //========================================================= < 초기 list 생성 part 끝> =========================================================

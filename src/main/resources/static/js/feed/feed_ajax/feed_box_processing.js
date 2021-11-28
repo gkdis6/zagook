@@ -72,7 +72,6 @@ function process_feed_list(param) {
 					html_str += '</div>';
 					html_str += '</div>';
 				}
-				//html_str += '<div class="order_by_time_container" onclick="order_by_time();">게시물을'
 				html_str += '<div class="order_by_time_container" onclick="time_container_click(event);"><div>게시물을</div>'
 				html_str += '<div class="time_button_cover">\
 						        <div class="time_button r" id="time_button_9">';

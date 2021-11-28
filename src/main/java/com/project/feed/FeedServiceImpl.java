@@ -6,13 +6,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.friend.FriendDTO;
 import com.project.member.MemberDTO;
 
 @Service("com.project.feed.FeedServiceImpl")
 public class FeedServiceImpl implements FeedService {
 
 	@Autowired
-	  private FeedMapper mapper;
+    private FeedMapper mapper;
 
 	@Override
 	public List<FeedDTO> homelist(FeedDTO dto) {
@@ -151,7 +152,7 @@ public class FeedServiceImpl implements FeedService {
 	}
 
 	@Override
-	public int friendcheckstatus(Map map) {
+	public FriendDTO friendcheckstatus(Map map) {
 		// TODO Auto-generated method stub
 		return mapper.friendcheckstatus(map);
 	}

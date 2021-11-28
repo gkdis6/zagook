@@ -1,5 +1,6 @@
 $(function () {
 	let order = $("input[name=order_type]").val();
+	onload_draw_map();
 	init_fetch_feed(null, order);
 });
 
@@ -10,24 +11,9 @@ $(function () {
 	3) feed_start_end_util.js > order_by_time() : 시간순 정렬 container를 클릭 시 호출
 	4) 
 */
-function init_fetch_feed(range, order) {
-	window.addEventListener("scroll", scrollEventHandler);
-	let param = null;
+function onload_draw_map() {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
-			let url = window.location.href;
-			let selected_id = $("input[name=selected_id]").val();
-			if (ajax_url_check_home(url))
-				param = is_set_feed_range(range, pos, "home", order, null);
-			else if (ajax_url_check_myread(url))
-				param = is_set_feed_range(range, pos, "myread", order, null);
-			else if (ajax_url_check_read(url))
-				param = is_set_feed_range(range, pos, "read", order, null);
-			else if (ajax_url_check_tag(url))
-				param = is_set_feed_range(range, pos, "tag", order, selected_id);
-			else if (ajax_url_check_friend(url))
-				param = is_set_feed_range(range, pos, "friend", order, selected_id);
-			process_feed_list(param);
 			map_main.setCenter(new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
 			var marker = new kakao.maps.Marker({
 				map: map_main,
@@ -41,9 +27,47 @@ function init_fetch_feed(range, order) {
 			kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map_main, marker, infowindow));
 			kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 			overlays.push(marker);
+		});
+	}
+}
+
+function init_fetch_feed(range, order) {
+	window.addEventListener("scroll", scrollEventHandler);
+	let param = null;
+	let hidden_selected_id = $("#hidden_selected_id").val();
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function (pos) {
+			let url = window.location.href;
+			if (ajax_url_check_home(url))
+				param = is_set_feed_range(range, pos, "home", order, null);
+			else if (ajax_url_check_myread(url))
+				param = is_set_feed_range(range, pos, "myread", order, null);
+			else if (ajax_url_check_read(url))
+				param = is_set_feed_range(range, pos, "read", order, null);
+			else if (ajax_url_check_tag(url))
+				param = is_set_feed_range(range, pos, "tag", order, hidden_selected_id);
+			else if (ajax_url_check_friend(url))
+				param = is_set_feed_range(range, pos, "friend", order, hidden_selected_id);
+			process_feed_list(param);
 		}, init_reject);
 	}
 }
+
+/*function secondary_fetch_feed(range, pos, order) {
+	let param = null;
+	let selected_id = $("input[name=selected_id]").val();
+	if (selected_id != null && selected_id != "" && selected_id != "undefined") {
+		console.log("col_selected_id : " + selected_id);
+		if (ajax_url_check_tag(url))
+			param = is_set_feed_range(range, pos, "tag", order, selected_id);
+		else if (ajax_url_check_friend(url))
+			param = is_set_feed_range(range, pos, "friend", order, selected_id);
+		process_feed_list(param);
+	} else {
+		
+		console.log("col_selected_id : " + selected_id);
+	}
+}*/
 
 function init_reject() {
 	let param = null;
@@ -51,7 +75,7 @@ function init_reject() {
 	let str = $("input[name=distance_type]").val().trim();
 	let range = (str == "Select Range" || str.length == 0)? null : str;
 	let order = $("input[name=order_type]").val();
-	let selected_id = $("input[name=selected_id]").val();
+	let hidden_selected_id = $("#hidden_selected_id").val();
 	if (ajax_url_check_home(url))
 		param = is_set_feed_range_reject(range, "home", order, null);
 	else if (ajax_url_check_myread(url))
@@ -59,9 +83,9 @@ function init_reject() {
 	else if (ajax_url_check_read(url))
 		param = is_set_feed_range_reject(range, "read", order, null);
 	else if (ajax_url_check_tag(url))
-		param = is_set_feed_range_reject(range, "tag", order, selected_id);
+		param = is_set_feed_range_reject(range, "tag", order, hidden_selected_id);
 	else if (ajax_url_check_friend(url))
-		param = is_set_feed_range_reject(range, "friend", order, selected_id);
+		param = is_set_feed_range_reject(range, "friend", order, hidden_selected_id);
 	process_feed_list(param);
 }
 
