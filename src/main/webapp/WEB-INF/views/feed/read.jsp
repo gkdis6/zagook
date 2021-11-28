@@ -205,6 +205,7 @@
 <script src="/js/feed/feed_ajax/feed_start_end_util.js"></script>
 <script src="/js/feed/feed_ajax/feed_ajax.js"></script>
 <script src="/js/feed/feed_ajax/feed_fetch_util.js"></script>
+<script src="/js/feed/feed_ajax/feed_create_banner.js"></script>
 <script src="/js/feed/feed_ajax/feed_box_processing.js"></script>
 <script src="/js/feed/feed_ajax/feed_scroll_event.js"></script>
 <script src="/js/feed/container_click_event.js"></script>

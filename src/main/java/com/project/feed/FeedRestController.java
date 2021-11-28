@@ -35,9 +35,6 @@ public class FeedRestController {
 	@Qualifier("com.project.feed.FeedServiceImpl")
 	private FeedService service;
 
-	@Autowired
-    FeedCachingService feedCachingService;
-
 	@PostMapping(value = "/ajax/contents", produces = "application/json;charset=UTF-8")
 	public ResponseEntity<Map> postFeedList_ajax(@RequestBody FeedDTO dto, HttpSession session) {
 		List<FeedDTO> sub_list = null;
