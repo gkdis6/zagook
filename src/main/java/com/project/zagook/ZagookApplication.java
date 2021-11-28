@@ -12,5 +12,4 @@ public class ZagookApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ZagookApplication.class, args);
 	}
-
 }
