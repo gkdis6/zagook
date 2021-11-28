@@ -18,7 +18,7 @@ function process_feed_list(param) {
             
             // banner
 			if (end_flag == -1||end_flag == -2) {
-				html_str += create_banner(dto_member, tag, tagcnt, friend_status);
+				html_str += create_banner(dto_member, tag, tagcnt, friend_status, base_distance);
 			}
 			
             for (let i = 0; i < list.length; i++) {
