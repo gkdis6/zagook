@@ -1,8 +1,13 @@
 function remove_front_display() {
 	$(".loader-wrapper").fadeIn("slow");
+	reset_time_checkbox();
   	remove_feed();
     //kakao.maps.event.trigger(marker, 'custom_action');
     removeOverlays();
+}
+
+function reset_time_checkbox() {
+	$("input[name=order_type]").val("recent");
 }
 
 function remove_feed() {
