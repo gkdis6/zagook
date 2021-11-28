@@ -57,7 +57,7 @@ function create_banner(dto_member, tag, tagcnt, friend_status) {
 	html_str += '<div class="order_by_time_container" onclick="time_container_click(event);"><div>게시물을</div>'
 	html_str += '<div class="time_button_cover">\
 			        <div class="time_button r" id="time_button_9">';
-	if ($("input[name=order_type]").val() == "old") {
+	if ($("input[name=order_type]").val() 	== "old") {
 		html_str +=      '<input type="checkbox" class="time_checkbox" id="time_checkbox" checked>';
 	} else {
 		html_str +=      '<input type="checkbox" class="time_checkbox" id="time_checkbox">';
