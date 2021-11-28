@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="/css/feed/time_button.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/overlay.css" type="text/css">
+<link rel="stylesheet" href="/css/feed/searchbar.css" type="text/css">
 <link rel="stylesheet" href="/css/create.css" type="text/css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
@@ -41,15 +42,11 @@
 				  	<a href="/feed/myread">My Feed</a>
 				  	<a href="/feed/read">Friends Feed</a>
 				  	<a href="/friend">Friends List</a>
-				  	<a href="javascript:void(0)" onclick="openSearchbar()">Search Tag</a>
-				  	<a href="javascript:void(0)" onclick="openSearchbarFriend()">Search Friend</a>
 			  	</c:when>
 			  	<c:otherwise>
 				  	<a href="javascript:void(0)" onclick="onclick_login_open()">My Feed</a>
 				  	<a href="javascript:void(0)" onclick="onclick_login_open()">Friends Feed</a>
 				  	<a href="javascript:void(0)" onclick="onclick_login_open()">Friends List</a>
-				  	<a href="javascript:void(0)" onclick="onclick_login_open()">Search Tag</a>
-				  	<a href="javascript:void(0)" onclick="onclick_login_open()">Search Friend</a>
 			  	</c:otherwise>
 			  	</c:choose>
 			</div>
@@ -57,7 +54,8 @@
 		<div class="center_container" id="center_container" style="margin-left: 0px;">
 			<input type="hidden" name="order_type" value="distance">
 			<input type="hidden" name="page_flag" value="0">
-			<input type="hidden" name="selected_id" value="${param.selected_id}">
+			<input type="hidden" name="search_type" value="">
+			<input type="hidden" id= "hidden_selected_id"name="selected_id" value="${param.selected_id}">
 		</div>
 		<div class="map_container">
 			<div id="map" style="width: 140vw; height: 100vh; z-index:-1;">

@@ -229,8 +229,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from zagook_friend where id=#{session_id} and id2=#{selected_id} and status=3
 	</select>
 	<select id="friendcheckstatus" parameterType="Map"
-		resultType="int">
-		select status from zagook_friend where id=#{session_id} and id2=#{selected_id} group by status
+		resultType="com.project.friend.FriendDTO">
+		select status from zagook_friend where id=#{session_id} and id2=#{selected_id}
 	</select>
 	
 	<select id="read" parameterType="String" resultType="com.project.member.MemberDTO">
