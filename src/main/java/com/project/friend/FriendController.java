@@ -3,6 +3,7 @@ package com.project.friend;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -36,11 +37,21 @@ public class FriendController {
 		return "/friend";
 	}
 	
-	@PostMapping(value="/friend", produces = "application/json")
-	public Map friend_status(HttpServletRequest request, HttpSession session) {
-		Map<> map = new HashMap<>();
+	@GetMapping(value="/friend_delete", produces = "application/json")
+	@ResponseBody
+	public Map delete_friend(HttpServletRequest request, HttpSession session) {
+		Map map = new HashMap();
+		String id2 = request.getParameter("id2");
+		System.out.println(request.getParameter("id2"));
+		String id = (String) session.getAttribute("id");
 		if (session.getAttribute("id") != null) {
-			
+			System.out.println(id);
+			map.put("id", id);
+			map.put("id2", id2);
+			map.put("status", "0");
+			if(service.delete_friend(map) > 0) {
+				map.put("status", "1");
+			}
 		}
 		return map;
 	}

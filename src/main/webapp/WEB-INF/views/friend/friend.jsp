@@ -100,23 +100,21 @@ body{
 		</c:when>
 		<c:otherwise>
 			<c:forEach var="dto" items="${list}">
-			<div class="friend_container">
+			<div class="friend_container" id="${dto.id2 }">
 				<div class="friend_img_container">
 					<img src="/member/storage/profile/${dto.fname }"></img>
 				</div>
 				<span>${dto.id2}</span><br>
 				<c:if test="${dto.status == 3 }"> 
 				<button type="button" class="already_friend">친구</button>
-				<button type="button" class="delete_friend">삭제</button>
 				</c:if>
 				<c:if test="${dto.status == 2 }">
 				<button type="button" class="friend_processing">친구 신청중</button>
-				<button type="button" class="delete_friend">삭제</button>
 				</c:if>
 				<c:if test="${dto.status == 1 }">
-				<button type="button" class="accept_friend">수락</button>
-				<button type="button" class="delete_friend">삭제</button>
+				<button type="button" class="accept_friend" name="${dto.id2 }">수락</button>
 				</c:if>
+				<button type="button" class="delete_friend" name="${dto.id2 }">삭제</button>
 			</div>
 			</c:forEach>
 		</c:otherwise>
@@ -125,13 +123,49 @@ body{
 	</div>
 </body>
 <script>
-var delete_friend=function(id2){
-	let form = {
-			id2 : id2
-	};
+<c:if test="${!empty sessionScope.id }">
+$(document).on("click","button[class='delete_friend']",function(){
+	let name = $(this).attr("name");
+	console.log(name);
 	$.ajax({
-		url : 
+		url : "/friend_delete",
+		type : "get",
+		data : {
+			id2 : name
+		},
+		contentType : "application/json; charset=utf-8;",
+		dataType : 'json',
+		success : function(data){
+			let id = data.id2;
+			if(data.status == "1"){
+				$('#'+id).remove();
+			}
+		}
 	})
-}
+})
+
+$(document).on("click","button.accept_friend",function(){
+	let name = $(this).attr("name");
+	console.log($(this));
+	$.ajax({
+		url : "/friend_accept",
+		type : "get",
+		data : {
+			id2 : name
+		},
+		contentType : "application/json; charset=utf-8;",
+		dataType : 'json',
+		success : function(data){
+			let id = data.id2;
+		}
+		error: function (xhr, status, err) {
+            reject(err);
+        }
+	})
+	$(this).removeClass();
+	$(this).addClass('already_friend');
+	$(this).text('친구');
+})
+</c:if>
 </script>
 </html>

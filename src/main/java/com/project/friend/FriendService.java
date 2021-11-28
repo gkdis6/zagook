@@ -7,4 +7,6 @@ public interface FriendService {
 
 	List<FriendDTO> friendList(Map map);
 
+	int delete_friend(Map map);
+
 }
