@@ -316,7 +316,7 @@ public class FeedRestController {
 						double y3 = o2.getY_site();
 						double dst1 = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 						double dst2 = Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2));
-						return (dst1 - dst2) > 0 ? 1 : -1;
+						return (dst1 - dst2) >= 0 ? 1 : -1;
 					}
 				});
 			}
