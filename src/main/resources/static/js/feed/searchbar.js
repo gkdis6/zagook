@@ -78,3 +78,9 @@ $(function start_autocomplete(){
 $("#searchInput").change(function () {
 	$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
 });
+
+function onsearchbar_login_valid() {
+	onclick_login_open();
+	$("#searchInput").val("");
+	return false;
+}
