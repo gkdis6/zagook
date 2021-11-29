@@ -27,12 +27,4 @@ public class ContentsDTO {
 	  private String rnum;
 	  private String reply;
 	  
-<<<<<<< HEAD:src/main/java/com/project/contents/ContentsDTO.java
-	  public void setRnum(String contentsno) {
-		// TODO Auto-generated method stub
-		
-	}
-
-=======
->>>>>>> rereply:workspace/zagook/src/main/java/com/project/contents/ContentsDTO.java
 }
