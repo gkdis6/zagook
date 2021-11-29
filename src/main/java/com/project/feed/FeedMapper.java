@@ -38,4 +38,5 @@ public interface FeedMapper {
 	MemberDTO read(String seleted_id);
 	int friendcheck_2(Map map);
 	int tagcnt(FeedDTO dto);
+	int delete_feed(Map map);
 }

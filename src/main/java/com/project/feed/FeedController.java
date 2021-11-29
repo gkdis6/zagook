@@ -35,6 +35,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FeedController {
+	@Autowired
+	@Qualifier("com.project.feed.FeedServiceImpl")
+	private FeedService service;
+	
 	@GetMapping("/")
 	public String homefeed() {
 		return "/feed/home";
@@ -66,4 +70,20 @@ public class FeedController {
 	public String login_alert() {
 		return "/alert/feed_login";
 	}
+	
+	@GetMapping(value="/feed_delete", produces = "application/json")
+	@ResponseBody
+	public Map accept_friend(HttpServletRequest request, HttpSession session) {
+		Map map = new HashMap();
+		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
+		String id = (String) session.getAttribute("id");
+		if (session.getAttribute("id") != null) {
+			map.put("contentsno", contentsno);
+			map.put("id", id);
+			service.delete_feed(map);
+		}
+		return map;
+	}
+
+	
 }

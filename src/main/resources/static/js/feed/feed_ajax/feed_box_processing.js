@@ -133,8 +133,7 @@ function process_feed_list(param) {
                 
                 //delete button area
                 html_str += '<span class="delete_btn_container">';
-                html_str += '<button class="btn" onclick="delete_click(event)" style="float:right;">삭제</button>';
-                html_str += '<input type="hidden" id="contentsno" value="'+list[i].contentsno+'">';
+                html_str += '<button class="delete_feed" name="'+list[i].contentsno+'"style="float:right;">삭제</button>';
                 html_str += '</span>';
                 
                 html_str += '</div>';

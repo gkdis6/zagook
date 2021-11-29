@@ -1,5 +1,7 @@
 function delete_click(event) {
-	let param = {"contentsno": event.currentTarget.id};
+	//console.log(event.currentTarget.id);
+	let param=document.getElementById("contentsno").value;
+	//let param = {"contentsno": event.currentTarget.id};
 	console.log(param);
 	$(".modal_delete").show();
 	
@@ -8,16 +10,19 @@ function delete_click(event) {
     $.ajax({
         type: "POST",
         url: "/contents/delete",
-        data: param,
-        success: function(result) {
+        data: JSON.stringify(param),
+        dataType: 'json',
+        success: function(data) {
             alert('ok');
         },
         error: function(result) {
             alert('error');
         }
     });
+    
 });
 }
+
 
 $("#closeModal").click(function (e) {
 $(".modal_delete").hide();

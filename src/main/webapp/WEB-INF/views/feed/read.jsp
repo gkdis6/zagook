@@ -227,7 +227,28 @@
 <script src="/js/feed/create_click_event.js"></script>
 <script src="/js/crud/deletemodal.js"></script>
 <script>
-	
+$(document).on("click","button.delete_feed",function(){
+	let name = $(this).attr("name");
+	console.log(name);
+	var ans = confirm("게시글을 삭제하시겠습니까?");
+    if(!ans) return false;
+    
+	$.ajax({
+		url : "/feed_delete",
+		type : "get",
+		data : {
+			contentsno : name
+		},
+		contentType : "application/json; charset=utf-8;",
+		dataType : 'json',
+		success : function(data){
+			$('#'+id).remove();
+		},
+		error : function(data) {
+            alert("게시글 삭제 중 오류가 발생하였습니다.");
+        }
+	})
+})
 	
 	
 	

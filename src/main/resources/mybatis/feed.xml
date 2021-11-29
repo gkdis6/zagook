@@ -248,4 +248,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		and privacy=2
 	</select>
+	<delete id="feed_delete" parameterType="Map">
+		delete from zagook_contents
+		where contentsno=#{contentsno}
+		and id=#{id}
+	</delete>
 </mapper>

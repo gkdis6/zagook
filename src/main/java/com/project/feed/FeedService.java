@@ -35,4 +35,5 @@ public interface FeedService {
 	MemberDTO read(String selected_id);
 	int friendcheck_2(Map map);
 	int tagcnt(FeedDTO dto);
+	int delete_feed(Map map);
 }
