@@ -87,7 +87,7 @@ public class FeedController {
 	}
 	@GetMapping(value="/feed_delete", produces = "application/json")
 	@ResponseBody
-	public Map accept_friend(HttpServletRequest request, HttpSession session) {
+	public Map feed_delete(HttpServletRequest request, HttpSession session) {
 		Map map = new HashMap();
 		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
 		String id = (String) session.getAttribute("id");
