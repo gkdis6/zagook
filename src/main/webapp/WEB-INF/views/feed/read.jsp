@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="/css/feed/time_button.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/overlay.css" type="text/css">
-<link rel="stylesheet" href="/css/feed/searchbar.css" type="text/css">
 <link rel="stylesheet" href="/css/create.css" type="text/css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
