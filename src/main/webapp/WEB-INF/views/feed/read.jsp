@@ -222,6 +222,7 @@
 <c:if test="${!empty sessionScope.id }">
 $(document).on("click","button.friend_btn_1",function(){
 	let name = $(this).attr("name");
+	var element = $(this);
 	var ans = confirm("친구를 신청하시겠습니까?");
     if(!ans) return false;
     
@@ -234,15 +235,14 @@ $(document).on("click","button.friend_btn_1",function(){
 		contentType : "application/json; charset=utf-8;",
 		dataType : 'json',
 		success : function(data){
-			$(this).removeClass();
-			$(this).addClass('friend_btn_2');
-			$(this).text('친구신청중');
+			element.removeClass();
+			element.addClass('friend_btn_2');
+			element.text('친구신청중');
 		},
 		error : function(data) {
             alert("친구 신청 중 오류가 발생하였습니다.");
         }
 	})
-	
 })
 </c:if>
 	
