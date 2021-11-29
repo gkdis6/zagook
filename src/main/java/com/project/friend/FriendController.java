@@ -48,10 +48,21 @@ public class FriendController {
 			System.out.println(id);
 			map.put("id", id);
 			map.put("id2", id2);
-			map.put("status", "0");
-			if(service.delete_friend(map) > 0) {
-				map.put("status", "1");
-			}
+			service.delete_friend(map);
+		}
+		return map;
+	}
+	
+	@GetMapping(value="/friend_accept", produces = "application/json")
+	@ResponseBody
+	public Map accept_friend(HttpServletRequest request, HttpSession session) {
+		Map map = new HashMap();
+		String id2 = request.getParameter("id2");
+		String id = (String) session.getAttribute("id");
+		if (session.getAttribute("id") != null) {
+			map.put("id", id);
+			map.put("id2", id2);
+			service.accept_friend(map);
 		}
 		return map;
 	}

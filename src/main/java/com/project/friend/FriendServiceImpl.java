@@ -24,4 +24,10 @@ public class FriendServiceImpl implements FriendService {
 		return mapper.delete_friend(map);
 	}
 
+	@Override
+	public int accept_friend(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.accept_friend(map);
+	}
+
 }

@@ -68,6 +68,8 @@ body{
 	border: none;
 	border-radius: 5px;
 	color: white;
+	pointer-events: none;
+	
 }
 .friend_container .already_friend{
 	background-color: green;
@@ -75,6 +77,7 @@ body{
 	border: none;
 	border-radius: 5px;
 	color: white;
+	pointer-events: none;
 }
 .friend_container .delete_friend{
 	margin-top: 3px;
@@ -127,6 +130,9 @@ body{
 $(document).on("click","button[class='delete_friend']",function(){
 	let name = $(this).attr("name");
 	console.log(name);
+	var ans = confirm("친구를 삭제하시겠습니까?");
+    if(!ans) return false;
+    
 	$.ajax({
 		url : "/friend_delete",
 		type : "get",
@@ -137,16 +143,19 @@ $(document).on("click","button[class='delete_friend']",function(){
 		dataType : 'json',
 		success : function(data){
 			let id = data.id2;
-			if(data.status == "1"){
-				$('#'+id).remove();
-			}
-		}
+			$('#'+id).remove();
+		},
+		error : function(data) {
+            alert("친구 삭제 중 오류가 발생하였습니다.");
+        }
 	})
 })
 
 $(document).on("click","button.accept_friend",function(){
 	let name = $(this).attr("name");
 	console.log($(this));
+	var ans = confirm("친구를 수락하시겠습니까?");
+    if(!ans) return false;
 	$.ajax({
 		url : "/friend_accept",
 		type : "get",
@@ -156,10 +165,9 @@ $(document).on("click","button.accept_friend",function(){
 		contentType : "application/json; charset=utf-8;",
 		dataType : 'json',
 		success : function(data){
-			let id = data.id2;
-		}
-		error: function (xhr, status, err) {
-            reject(err);
+		},
+		error: function(data) {
+           alert("친구 수락 중 오류가 발생하였습니다.")
         }
 	})
 	$(this).removeClass();

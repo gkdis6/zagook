@@ -16,4 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from zagook_friend
 		where (id=#{id} and id2=#{id2}) or (id=#{id2} and id2=#{id}) 
 	</delete>
+	<update id="accept_friend" parameterType="Map">
+		update zagook_friend set status = 3 
+		where (id=#{id} and id2=#{id2}) or (id=#{id2} and id2=#{id})
+	</update>
 </mapper>
