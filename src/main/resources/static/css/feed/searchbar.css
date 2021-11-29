@@ -34,7 +34,7 @@
 
 .searchbar_item {
 	position: relative;
-	max-width: 320px;
+	width: 400px;
 	margin-top: 3px;
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -42,7 +42,7 @@
 	list-style: none;
 	border-radius: 5px;
 	background-color: white;
-	box-shadow:0 0 5px 0 var(--base_color_oatmeal);
+	box-shadow:0 0 3px 0 var(--base_color_oatmeal);
 	z-index: var(--searchbar_item_zindex);
 }
 
