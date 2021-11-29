@@ -219,10 +219,32 @@
 <script src="/js/feed/feed_ajax/feed_img_click.js"></script>
 <script src="/js/feed/create_click_event.js"></script>
 <script>
-	/* $(document).ready(function(){
-		console.log('들어감');
-		$("#map > div:first-child").css({"left":"300px"});
-	}); */
+<c:if test="${!empty sessionScope.id }">
+$(document).on("click","button.friend_btn_1",function(){
+	let name = $(this).attr("name");
+	var ans = confirm("친구를 신청하시겠습니까?");
+    if(!ans) return false;
+    
+	$.ajax({
+		url : "/submit_friend",
+		type : "get",
+		data : {
+			id2 : name
+		},
+		contentType : "application/json; charset=utf-8;",
+		dataType : 'json',
+		success : function(data){
+			$(this).removeClass();
+			$(this).addClass('friend_btn_2');
+			$(this).text('친구신청중');
+		},
+		error : function(data) {
+            alert("친구 신청 중 오류가 발생하였습니다.");
+        }
+	})
+	
+})
+</c:if>
 	
 	
 	

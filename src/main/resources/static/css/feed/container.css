@@ -165,6 +165,7 @@
 	border: none;
 	border-radius: 5px;
 	color: white;
+	pointer-events: none;
 }
 .friend_btn_3{
 	background-color: blue;
@@ -172,6 +173,7 @@
 	border: none;
 	border-radius: 5px;
 	color: white;
+	pointer-events: none;
 }
 .friend_btn_4{
 	background-color:green;
@@ -179,6 +181,7 @@
 	border: none;
 	border-radius: 5px;
 	color: white;
+	pointer-events: none;
 }
 .banner_inner_first span{
 	margin-right: 5px;
