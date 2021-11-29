@@ -12,7 +12,7 @@ function create_banner(dto_member, tag, tagcnt, friend_status, base_distance) {
 		html_str += '<button type="button" class="setting"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
 		html_str += '</div>';
 		html_str += '<div class="banner_inner_second">';
-		if(dto_member.introduction !== undefined){
+		if(dto_member.introduction !== null){
 			html_str += '<span>'+dto_member.introduction+'</span>';
 		}
 		html_str += '</div>';
@@ -36,18 +36,18 @@ function create_banner(dto_member, tag, tagcnt, friend_status, base_distance) {
 		html_str += '<div class="banner_inner_first">';
 		html_str += '<span>'+dto_member.id+'</span>';
 		if(friend_status == 1){
-			html_str += '<button type="button" class="friend_btn_3"disabled>친구신청받음</button>';
+			html_str += '<button type="button" class="friend_btn_3">친구신청받음</button>';
 		}else if(friend_status == 2){
-			html_str += '<button type="button" class="friend_btn_2"disabled>친구신청중</button>';
+			html_str += '<button type="button" class="friend_btn_2">친구신청중</button>';
 		}else if(friend_status == 3){
-			html_str += '<button type="button" class="friend_btn_4"disabled>친구</button>';
+			html_str += '<button type="button" class="friend_btn_4">친구</button>';
 		}else{
-			html_str += '<button type="button" class="friend_btn_1">친구신청</button>';
+			html_str += '<button type="button" class="friend_btn_1" name="'+dto_member.id+'">친구신청</button>';
 		}
 //		html_str += '<button type="button" class="setting"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
 		html_str += '</div>';
 		html_str += '<div class="banner_inner_second">';
-		if(dto_member.introduction !== undefined){
+		if(dto_member.introduction !== null){
 			html_str += '<span>'+dto_member.introduction+'</span>';
 		}
 		html_str += '</div>';

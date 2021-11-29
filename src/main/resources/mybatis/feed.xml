@@ -250,8 +250,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="submit_friend" parameterType="Map">
-		insert into zagook_friend  
-		values(#{id}, #{id2}, 2,sysdate), 
-		(#{id2}, #{id}, 1, sysdate)
+		insert into zagook_friend (id, id2, status, fdate) 
+		values(#{id}, #{id2}, 2, sysdate)
+	</insert>
+	<insert id="submit_friend2" parameterType="Map">
+		insert into zagook_friend (id, id2, status, fdate) 
+		values(#{id2}, #{id}, 1, sysdate)
 	</insert>
 </mapper>
