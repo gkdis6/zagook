@@ -26,13 +26,4 @@ public class ContentsDTO {
 	  
 	  private String rnum;
 	  private String reply;
-	  
-<<<<<<< HEAD
-=======
-	  public void setRnum(String contentsno) {
-		// TODO Auto-generated method stub
-		
-	}
-
->>>>>>> 6f91278c3df34b3ad455db60535ef21d4f3d04bf
 }

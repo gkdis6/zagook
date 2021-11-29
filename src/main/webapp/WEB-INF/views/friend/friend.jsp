@@ -7,18 +7,6 @@
 <title>친구페이지</title>
 <meta charset="utf-8">
 <style>
-<<<<<<< HEAD
-.container{
-	display: grid;
-	grid-template-columns: 220px 220px 220px 220px;
-	grid-auto-rows: 300px;
-	grid-gap: 10px;
-}
-.friend_container{
-	border: solid;
-	width: 220px;
-	height: 300px;
-=======
 body{
 	text-align: center;
 }
@@ -37,7 +25,6 @@ body{
 	border: solid;
 	width: 220px;
 	height: 312px;
->>>>>>> 6f91278c3df34b3ad455db60535ef21d4f3d04bf
 	border-radius: 8px;
 	text-align:center;
 }
@@ -53,8 +40,6 @@ body{
 	height: 200px;
 	objec-fit: cover;
 }
-<<<<<<< HEAD
-=======
 .container_title{
 	display: flex;
 	justify-content: center;
@@ -103,7 +88,6 @@ body{
 	color: white;
 	height: 25px;
 }
->>>>>>> 6f91278c3df34b3ad455db60535ef21d4f3d04bf
 
 </style>
 <script src="/js/reply/reply.js">
@@ -111,32 +95,19 @@ body{
 </script>
 </head>
 <body>
-<<<<<<< HEAD
-	<span>친구 리스트</span>
-=======
 
 	<div class="container_title"><div>친구 관리</div></div>
->>>>>>> 6f91278c3df34b3ad455db60535ef21d4f3d04bf
 	<div class="container">
 	<c:choose>   
 		<c:when test="${empty list}">
 		</c:when>
 		<c:otherwise>
 			<c:forEach var="dto" items="${list}">
-<<<<<<< HEAD
-			<div class="friend_container">
-=======
 			<div class="friend_container" id="${dto.id2 }">
->>>>>>> 6f91278c3df34b3ad455db60535ef21d4f3d04bf
 				<div class="friend_img_container">
 					<img src="/member/storage/profile/${dto.fname }"></img>
 				</div>
 				<span>${dto.id2}</span><br>
-<<<<<<< HEAD
-				<c:if test="${dto.status == 3 }"> 친구</c:if>
-				<c:if test="${dto.status == 2 }"> 친구신청 받음</c:if>
-				<c:if test="${dto.status == 1 }"> 친구신청 중</c:if>
-=======
 				<c:if test="${dto.status == 3 }"> 
 				<button type="button" class="already_friend">친구</button>
 				</c:if>
@@ -147,7 +118,6 @@ body{
 				<button type="button" class="accept_friend" name="${dto.id2 }">수락</button>
 				</c:if>
 				<button type="button" class="delete_friend" name="${dto.id2 }">삭제</button>
->>>>>>> 6f91278c3df34b3ad455db60535ef21d4f3d04bf
 			</div>
 			</c:forEach>
 		</c:otherwise>
@@ -155,8 +125,6 @@ body{
 
 	</div>
 </body>
-<<<<<<< HEAD
-=======
 <script>
 <c:if test="${!empty sessionScope.id }">
 $(document).on("click","button[class='delete_friend']",function(){
@@ -208,5 +176,4 @@ $(document).on("click","button.accept_friend",function(){
 })
 </c:if>
 </script>
->>>>>>> 6f91278c3df34b3ad455db60535ef21d4f3d04bf
 </html>
