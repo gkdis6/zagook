@@ -18,4 +18,8 @@ public class ReplyTO {
 	
 	// writer의 프로필사진을 가져온다.
 	private String profile;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> rereply

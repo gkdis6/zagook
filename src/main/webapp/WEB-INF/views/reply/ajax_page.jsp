@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<script>
 	<c:forEach var="tmp" items="${list }">
 		<!-- 댓글 수 -->
 		<span> <a idx="${tmp.no}" href="javascript:"
@@ -54,5 +55,7 @@
 			</section>
 		</div>
 	</c:forEach>
+	</script>
+	<script></script>
 </body>
 </html>
