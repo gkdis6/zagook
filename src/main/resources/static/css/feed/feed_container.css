@@ -85,3 +85,8 @@
 .img_box_container img:hover{
 	cursor: -webkit-zoom-in;
 }
+.delete_btn_container {
+	width:80px;
+	float: right;
+	margin-right: 10px;
+}

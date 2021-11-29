@@ -257,4 +257,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into zagook_friend (id, id2, status, fdate) 
 		values(#{id2}, #{id}, 1, sysdate)
 	</insert>
+	<delete id="feed_delete" parameterType="Map">
+		delete from zagook_contents
+		where contentsno=#{contentsno}
+		and id=#{id}
+	</delete>
 </mapper>

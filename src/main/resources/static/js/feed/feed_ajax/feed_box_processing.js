@@ -59,6 +59,11 @@ function process_feed_list(param) {
                 html_str += '<a href="javascript:void(0);" class="user_id" onclick="id_click(event);return false;">' + list[i].id + '</a>';
                 html_str += '</span>';
                 
+                //delete button area
+                html_str += '<span class="delete_btn_container">';
+                html_str += '<button class="delete_feed" name="'+list[i].contentsno+'"style="float:right;">삭제</button>';
+                html_str += '</span>';
+                
                 html_str += '</div>';
                 
                 // image area

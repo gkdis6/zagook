@@ -170,5 +170,9 @@ public class FeedServiceImpl implements FeedService {
 	public int submit_friend2(Map map) {
 		// TODO Auto-generated method stub
 		return mapper.submit_friend2(map);
+	@Override
+	public int delete_feed(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.delete_feed(map);
 	}
 }
