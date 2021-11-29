@@ -65,7 +65,8 @@ $(function start_autocomplete(){
 	.autocomplete( "instance" )._renderItem = function( ul, item ) {
 		ul.css("position", "fixed");
 		ul.css("padding-top", "10px");
-		ul.css("max-width", "400px");
+		ul.css("padding-left", "0px");
+		ul.css("max-width", "500px");
 		ul.css("max-height", "300px");
 		ul.css("overflow-y", "scroll");
 		ul.css("z-index", "5");
