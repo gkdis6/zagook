@@ -19,7 +19,11 @@ public class ReplyTO {
 	// writer의 프로필사진을 가져온다.
 	private String profile;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> rereply
+=======
+}
+>>>>>>> 6f91278c3df34b3ad455db60535ef21d4f3d04bf

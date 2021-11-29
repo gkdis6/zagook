@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 	<script>
+=======
+>>>>>>> 6f91278c3df34b3ad455db60535ef21d4f3d04bf
 	<c:forEach var="tmp" items="${list }">
 		<!-- 댓글 수 -->
 		<span> <a idx="${tmp.no}" href="javascript:"
@@ -55,7 +58,10 @@
 			</section>
 		</div>
 	</c:forEach>
+<<<<<<< HEAD
 	</script>
 	<script></script>
+=======
+>>>>>>> 6f91278c3df34b3ad455db60535ef21d4f3d04bf
 </body>
 </html>
