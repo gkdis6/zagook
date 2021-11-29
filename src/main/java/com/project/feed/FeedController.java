@@ -90,6 +90,7 @@ public class FeedController {
 	public Map feed_delete(HttpServletRequest request, HttpSession session) {
 		Map map = new HashMap();
 		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
+		System.out.println(contentsno);
 		String id = (String) session.getAttribute("id");
 		if (session.getAttribute("id") != null) {
 			map.put("contentsno", contentsno);
