@@ -9,4 +9,6 @@ public interface FriendMapper {
 
 	int delete_friend(Map map);
 
+	int accept_friend(Map map);
+
 }

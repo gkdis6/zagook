@@ -143,12 +143,10 @@ $(document).on("click","button[class='delete_friend']",function(){
 		dataType : 'json',
 		success : function(data){
 			let id = data.id2;
-			if(data.status == "1"){
-				$('#'+id).remove();
-			}
+			$('#'+id).remove();
 		},
 		error : function(data) {
-            alert("댓글이 삭제되지 않았습니다.");
+            alert("친구 삭제 중 오류가 발생하였습니다.");
         }
 	})
 })
@@ -167,7 +165,6 @@ $(document).on("click","button.accept_friend",function(){
 		contentType : "application/json; charset=utf-8;",
 		dataType : 'json',
 		success : function(data){
-			let id = data.id2;
 		},
 		error: function(data) {
            alert("친구 수락 중 오류가 발생하였습니다.")

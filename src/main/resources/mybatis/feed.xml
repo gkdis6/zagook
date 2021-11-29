@@ -248,4 +248,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		and privacy=2
 	</select>
+	
+	<insert id="submit_friend" parameterType="Map">
+		insert into zagook_friend  
+		values(#{id}, #{id2}, 2,sysdate), 
+		(#{id2}, #{id}, 1, sysdate)
+	</insert>
 </mapper>
