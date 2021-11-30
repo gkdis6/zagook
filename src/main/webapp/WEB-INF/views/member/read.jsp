@@ -17,6 +17,7 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="/css/feed/searchbar.css" type="text/css">
 <link rel="stylesheet" href="/css/member/mypage.css" type="text/css">
+<link rel="stylesheet" href="/css/member/hl.css" type="text/css">
 
 <script type="text/javascript">
 	function updateM() {

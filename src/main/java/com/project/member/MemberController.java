@@ -71,8 +71,9 @@ public class MemberController {
       int cnt = service.loginCheck(map);
       MemberDTO dto = service.read(email);
       map.put("id", dto.getId());
+      System.out.println("@@@@@@@@@:::"+map);
       if(cnt>0) { //회원
-         
+    	  System.out.println("1111111111111111111");
          //grade>> String grade = service.getGrade(map.get("id"));
          session.setAttribute("id", map.get("id"));
          session.setAttribute("email",map.get("email"));
