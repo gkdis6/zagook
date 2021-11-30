@@ -194,6 +194,7 @@ public class MemberController {
          email = (String) session.getAttribute("email");
       }
       MemberDTO dto = service.read(email);
+      System.out.println("@@@@@@@");
       model.addAttribute("dto",dto);
       System.out.println(dto);
       return "/member/mypage";

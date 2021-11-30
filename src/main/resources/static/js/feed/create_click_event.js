@@ -6,6 +6,7 @@ $(document).on("click", "#reset", function () {
 
 $(document).ready(function () {
 	$("#create").hide();
+	$("#chat").hide();
 });
 
 $("#createBtn").on("click", function (e) {

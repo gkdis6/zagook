@@ -20,11 +20,17 @@
 <link rel="stylesheet" href="/css/feed/overlay.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/searchbar.css" type="text/css">
 <link rel="stylesheet" href="/css/create.css" type="text/css">
+<link rel="stylesheet" href="/css/chat/chat.css" type="text/css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+<!-- 챗봇 -->
+<script src="../js/sockjs.min.js"></script>
+<script src="../js/stomp.min.js"></script>
+<script type="text/JavaScript" src="../js/app.js"></script>
+<!-- 챗봇 -->
 <script>let session_id = '<%=(String)session.getAttribute("id")%>';</script>
 </head>
 <body>
@@ -88,7 +94,51 @@
 			<img src="">
 		</div>
 	</div>
-	
+	<!-- 챗봇  --------------------------------------------------------------------------- -->
+	<div id="chatBtn"
+		style="position: fixed; right:20px; bottom: 170px; z-index: 8"
+		onclick="if(chat.style.display=='none'){chat.style.display=''}else{chat.style.display='none'}">
+		<img src="./images/chat1.png" style="width:60px; height:60px; opacity:0.7;">
+	</div>
+	<div id="chat"> 
+		<div class="modal-content">
+			<div class="modal-header" id="chatheader">
+				<H4 style="padding-bottom:10px; font-weight:bold;">ZAGOOK 문의</H4>
+				
+				<form class="form-inline">
+					<div class="form-group" id="chatform">
+						<label for="connect" style="width:60%;text-align:center;font-size: 13px;">
+						문의 챗봇 연결하기
+						</label>
+						<input type="checkbox" id="chatcheckbox">
+						<label id="chatlabel" for="chatcheckbox"><span></span></label>
+					</div>
+				</form>
+			</div>
+			<div id="chatcontent">
+				<div class="modal-body" id="chatbody">
+					<div class="chat_main">
+						<div id="main-content" class="container" style="width: 100%;">
+							<div class="row">
+								<div>
+									<table id="conversation" class="table table-striped">
+										<tbody id="communicate" style="margin-left:0px;">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+					<div class="form-group" id="chatform" >
+						<input type="text" id="msg" class="form1-control"
+							placeholder="문의사항을 입력하세요." style="width: 80%;">
+						<button id="send" class="btn btn-default" disabled type="submit">전송</button>
+					</div>
+			</div>
+		</div>
+	</div>
+	<!-- 챗봇 --------------------------------------------------------------------------- -->
 	<div id="createBtn" style="position: fixed; right: 20px; bottom: 20px; z-index: 8"
 		onclick="if(create.style.display=='none'){create.style.display=''}else{create.style.display='none'}">
 		<img src="/images/261370-200.png" width="70" height="70">
@@ -107,7 +157,7 @@
 					<div class="modal-body">
 						<form action="/member/login" class="was-validated" method="post">
 							<div class="form-group">
-								<label for="id" align="left">아이디 </label> <input type="text" class="form-control"
+								<label for="id">아이디 </label> <input type="text" class="form-control"
 									style="width:250px;height:40px;" id="userId" placeholder="Enter ID" name="id"
 									required="required" value='${c_id_val}'>
 							</div>

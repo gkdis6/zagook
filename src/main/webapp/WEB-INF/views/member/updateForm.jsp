@@ -4,31 +4,31 @@
 <head>
   <title>회원수정</title>
   <meta charset="utf-8">
+ <link rel="stylesheet" href="/css/feed/searchbar.css" type="text/css">
   <style type="text/css">
   	#need,#emailcheck{
   		color:red;
   	}
-  	.container {
-	margin-left: 0px; 
-	padding: 50px 0px 0px;
-	}
-	.form-horizontal{
-	margin-left: -90px;
-	font-size:20px;
-	padding-top:90px;
-	}
+/*   	.container { */
+/* 	margin-left: 0px;  */
+/* 	padding: 50px 0px 0px; */
+/* 	} */
+/* 	.form-horizontal{ */
+/* 	margin-left: -90px; */
+/* 	font-size:20px; */
+/* 	padding-top:90px; */
+/* 	} */
 	#email{ 
 		font-size:20px;
 		font-weight:bold;
 		padding-top:4px;
-/* 		outline : solid 1px black; */
 		
  	}
   </style>
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script type="text/javascript">
+  
   function emailCheck(email){
-	  //alert(email);
 	  if(email==''){
 		  alert("email를 입력하세요");
 		  document.frm.email.focus();
@@ -59,20 +59,17 @@ function inCheck(f){
 </script>
 </head>
 <body>
-<div class="container">
+<div id="div-update-con">
 
-<h2 class="col-sm-offset-2 col-sm-10" style="margin-left:15px;font-weight:bold">회원수정</h2>
-<label class="col-sm-offset-2 col-sm-10"style="margin-left:15px">(<span id="need">*</span> 필수입력사항)</label>
- 
   <form class="form-horizontal" 
         action="update"
         method="post"
         name = 'frm'
         onsubmit="return inCheck(this)"
-        
+        id="update-form"
         >
-     
-<%--     <input type="hidden" name="social" value="${dto.social}"> --%>
+<h2 class="col-sm-offset-2 col-sm-10" style="margin-left:15px;font-weight:bold">회원수정</h2>
+<label class="col-sm-offset-2 col-sm-10"style="margin-left:15px">(<span id="need">*</span> 필수입력사항)</label>
     <input type="hidden" name="email" value="${dto.email}">
 	<hr width="50%" align="left">
 	<div class="form-group">
@@ -87,7 +84,7 @@ function inCheck(f){
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="mname"><span id="need">*</span>이름</label>
+      <label class="control-label col-sm-2" for="mname"><span id="need">*</span>성명</label>
       <div class="col-sm-3">          
         <input type="text" class="form-control" id="mname" 
          value="${dto.mname}"  name="mname">
@@ -154,5 +151,7 @@ $(document).ready(function() {
     });
 });
 </script>
+<!-- <script src="/js/feed/top_nav.js"></script> -->
+<script src="/js/feed/searchbar.js"></script>
 </body>
 </html>
