@@ -7,12 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.project.reply.ReplyMapper">
 
 	<!-- 댓글 쓰기 -->
-	<insert id="reply_write" parameterType="Map">
+	<insert id="write_reply" parameterType="Map">
 	    insert into zagook_reply(rnum, content, regdate, id, contentsno)
 	    values((select nvl(max(rnum),0)+1 from zagook_reply), #{content}, sysdate, #{id}, #{contentsno})
-	    <selectKey keyProperty="rnum" resultType="int" order="AFTER">
-	    select rnum.CURRVAL FROM DUAL
-	    </selectKey>
 	</insert>
 	
 	<select id="get_reply" parameterType="int" resultType="com.project.reply.ReplyDTO">

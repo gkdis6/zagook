@@ -31,6 +31,7 @@ public class FeedDTO {
 	private String range;
 	private String order_type;
 	private String selected_id;
+	private int reply;
 	
 	public FeedDTO() {
 		super();

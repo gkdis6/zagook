@@ -60,9 +60,11 @@ function process_feed_list(param) {
                 html_str += '</span>';
                 
                 //delete button area
-                html_str += '<span class="delete_btn_container">';
-                html_str += '<button class="delete_feed" name="'+list[i].contentsno+'"style="float:right;">삭제</button>';
-                html_str += '</span>';
+                if(session_id == list[i].id){
+	                html_str += '<span class="delete_btn_container">';
+	                html_str += '<button class="delete_feed" name="'+list[i].contentsno+'"style="float:right;">삭제</button>';
+	                html_str += '</span>';
+                }
                  
                 html_str += '</div>';
                 
@@ -105,16 +107,12 @@ function process_feed_list(param) {
 				
 				//reply area
 				html_str += '<span class="reply_container">';
-                html_str += '<img class="reply_icon" src="../images/feed/comment.png" alt="comments_img" loading="lazy" onclick="reply_click(event)" id="'+list[i].contentsno+'"> <span class="feed_widget_text">Comments</span>';
+                html_str += '<img class="reply_icon" src="../images/feed/comment.png" alt="comments_img" loading="lazy" onclick="reply_click(event)" id="reply_btn'+list[i].contentsno+'"> <span class="feed_widget_text">'+list[i].reply+'</span>';
                 html_str += '</span>';
-                html_str += '<div class="reply-list'+list[i].contentsno+'">';
-                html_str += '';
-                html_str += '';
-                html_str += '</div>';
-                
                 
                 html_str += '</div>';
-                
+                html_str += '<div class="reply_box_container" id="reply-list'+list[i].contentsno+'">';
+                html_str += '</div>';
                 html_str += '</div>';
             }
             

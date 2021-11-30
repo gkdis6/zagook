@@ -300,8 +300,9 @@ public class ContentsController {
 	}
 	// 댓글 작성
 	@ResponseBody
-	@RequestMapping(value = "/write_reply")
-	public ReplyDTO write_reply(HttpServletRequest request, HttpSession session) {
+	@GetMapping(value = "/write_reply")
+	public List<ReplyDTO> write_reply(HttpServletRequest request, HttpSession session) {
+		List<ReplyDTO> replyList = new ArrayList();
 		ReplyDTO rto = new ReplyDTO();
 		if(session.getAttribute("id") != null) {
 			Map map = new HashMap();
@@ -309,25 +310,25 @@ public class ContentsController {
 			map.put("contentsno", contentsno);
 			map.put("content", (String)request.getParameter("content"));
 			map.put("id", (String) session.getAttribute("id"));
-			int rnum = replyService.write_reply(map);
-			if(rnum>0) {
-				rto = replyService.get_reply(rnum);
+			if(replyService.write_reply(map)>0) {
+				replyList = replyService.call_replyList(map);
 				int reply = replyService.reply_count(map);
 				map.put("reply", reply);
 				replyService.replycnt_update(map);
 			}
 		}
 
-	    return rto;
+	    return replyList;
 	}
 
 	// 댓글 삭제
 	@ResponseBody
-	@RequestMapping(value = "/delete_reply")
+	@GetMapping(value = "/delete_reply")
 	public int delete_reply(HttpServletRequest request, HttpSession session) {
 		ReplyDTO rto = new ReplyDTO();
 		Map map = new HashMap();
-		int rnum = Integer.parseInt((String) request.getParameter("rnum"));
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		System.out.println(rnum);
 		int flag = 0;
 		if(session.getAttribute("id") != null)	{
 			map.put("id", (String)session.getAttribute("id"));
@@ -339,6 +340,7 @@ public class ContentsController {
 				int reply = replyService.reply_count(map);
 				map.put("reply", reply);
 				replyService.replycnt_update(map);
+				System.out.println("삭제 성공");
 			}
 		}
 				
@@ -350,17 +352,14 @@ public class ContentsController {
 		@GetMapping(value = "/call_replyList", produces = "application/json")
 		public List<ReplyDTO> reply_list(HttpServletRequest request, HttpSession session) {
 			List<ReplyDTO> replyList = new ArrayList();
-			if(session.getAttribute("id") != null) {
-				Map map = new HashMap();
-				System.out.println(request.getParameter("contentsno"));
-				int contentsno = Integer.parseInt((String)request.getParameter("contentsno"));
-				
-				map.put("contentsno", contentsno);
-
-			    replyList = replyService.call_replyList(map);
-			}
+			Map map = new HashMap();
+			System.out.println(request.getParameter("contentsno"));
+			int contentsno = Integer.parseInt((String)request.getParameter("contentsno"));
 			
+			map.put("contentsno", contentsno);
 
+		    replyList = replyService.call_replyList(map);
+			
 		    return replyList;
 		}
 }
