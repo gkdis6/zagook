@@ -32,9 +32,10 @@ function process_feed_list(param) {
 					//rdate: list[i].rdate,
 					//privacy: list[i].privacy,
 					//id: list[i].id,
-					contentsno: list[i].contentsno
+					contentsno: list[i].contentsno,
 					//tag_list: list[i].tag_list,
 					//like_clicked: list[i].like_clicked
+					title: list[i].contentsno
 				};
 				displayMarker(position);
 				console.log(position);
@@ -57,6 +58,11 @@ function process_feed_list(param) {
                 // user id area
                 html_str += '<span class="user_id_container">';
                 html_str += '<a href="javascript:void(0);" class="user_id" onclick="id_click(event);return false;">' + list[i].id + '</a>';
+                html_str += '</span>';
+                
+                //delete button area
+                html_str += '<span class="delete_btn_container">';
+                html_str += '<button class="delete_feed" name="'+list[i].contentsno+'"style="float:right;">삭제</button>';
                 html_str += '</span>';
                 
                 html_str += '</div>';

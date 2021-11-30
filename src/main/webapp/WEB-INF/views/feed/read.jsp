@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="/css/feed/time_button.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/overlay.css" type="text/css">
-<link rel="stylesheet" href="/css/feed/searchbar.css" type="text/css">
 <link rel="stylesheet" href="/css/create.css" type="text/css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
@@ -88,7 +87,25 @@
 			<img src="">
 		</div>
 	</div>
-	
+	<div class="modal_delete" style="display: none">
+	  <div class="modal-dialog" role="document" style=>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">게시물 삭제</h5>
+		<button type="button" class="close" id="closeModal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        게시물을 정말 삭제하시겠습니까?
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary" id="deleteBtn">삭제</button>
+       	<button type="button" class="btn btn-secondary" id="closeModal">취소</button>
+      </div>
+    </div>
+  </div>
+	</div>
 	<div id="createBtn" style="position: fixed; right: 20px; bottom: 20px; z-index: 8"
 		onclick="if(create.style.display=='none'){create.style.display=''}else{create.style.display='none'}">
 		<img src="/images/261370-200.png" width="70" height="70">
@@ -218,6 +235,7 @@
 <script src="/js/feed/loading_animation.js"></script>
 <script src="/js/feed/feed_ajax/feed_img_click.js"></script>
 <script src="/js/feed/create_click_event.js"></script>
+<script src="/js/crud/deletemodal.js"></script>
 <script>
 <c:if test="${!empty sessionScope.id }">
 $(document).on("click","button.friend_btn_1",function(){
@@ -245,6 +263,28 @@ $(document).on("click","button.friend_btn_1",function(){
 	})
 })
 </c:if>
+$(document).on("click","button.delete_feed",function(){
+	let name = $(this).attr("name");
+	console.log(name);
+	var ans = confirm("게시글을 삭제하시겠습니까?");
+    if(!ans) return false;
+    
+	$.ajax({
+		url : "/feed_delete",
+		type : "get",
+		data : {
+			contentsno : name
+		},
+		contentType : "application/json; charset=utf-8;",
+		dataType : 'json',
+		success : function(data){
+			$('#'+name).remove();
+		},
+		error : function(data) {
+            alert("게시글 삭제 중 오류가 발생하였습니다.");
+        }
+	})
+})
 	
 	
 	

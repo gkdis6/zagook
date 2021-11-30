@@ -11,7 +11,7 @@ public class Contents {
         String path = "";
         String os = System.getProperty("os.name").toLowerCase();
         if (File.separator.equals("\\")) {
-            path = "f:/AIstudy/deploy/zagook/contents/storage/";
+            path = "C:/AIstudy/deploy/zagook/contents/storage/";
             System.out.println("Windows 10: " + path);
             
         } else if(os.equals("linux")){

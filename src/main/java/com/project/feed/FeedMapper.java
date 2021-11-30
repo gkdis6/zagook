@@ -41,4 +41,5 @@ public interface FeedMapper {
 	int tagcnt(FeedDTO dto);
 	int submit_friend(Map map);
 	int submit_friend2(Map map);
+	int delete_feed(Map map);
 }

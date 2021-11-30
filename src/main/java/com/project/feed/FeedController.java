@@ -85,4 +85,20 @@ public class FeedController {
 		}
 		return map;
 	}
+	@GetMapping(value="/feed_delete", produces = "application/json")
+	@ResponseBody
+	public Map feed_delete(HttpServletRequest request, HttpSession session) {
+		Map map = new HashMap();
+		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
+		System.out.println(contentsno);
+		String id = (String) session.getAttribute("id");
+		if (session.getAttribute("id") != null) {
+			map.put("contentsno", contentsno);
+			map.put("id", id);
+			service.delete_feed(map);
+		}
+		return map;
+	}
+
+	
 }
