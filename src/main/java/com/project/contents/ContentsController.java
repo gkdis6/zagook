@@ -305,9 +305,9 @@ public class ContentsController {
 		ReplyDTO rto = new ReplyDTO();
 		if(session.getAttribute("id") != null) {
 			Map map = new HashMap();
-			int contentsno = Integer.parseInt((String) request.getAttribute("contentsno"));
+			int contentsno = Integer.parseInt((String) request.getParameter("contentsno"));
 			map.put("contentsno", contentsno);
-			map.put("content", (String)request.getAttribute("content"));
+			map.put("content", (String)request.getParameter("content"));
 			map.put("id", (String) session.getAttribute("id"));
 			int rnum = replyService.write_reply(map);
 			if(rnum>0) {
@@ -327,7 +327,7 @@ public class ContentsController {
 	public int delete_reply(HttpServletRequest request, HttpSession session) {
 		ReplyDTO rto = new ReplyDTO();
 		Map map = new HashMap();
-		int rnum = Integer.parseInt((String) request.getAttribute("rnum"));
+		int rnum = Integer.parseInt((String) request.getParameter("rnum"));
 		int flag = 0;
 		if(session.getAttribute("id") != null)	{
 			map.put("id", (String)session.getAttribute("id"));
@@ -352,8 +352,8 @@ public class ContentsController {
 			List<ReplyDTO> replyList = new ArrayList();
 			if(session.getAttribute("id") != null) {
 				Map map = new HashMap();
-				System.out.println(request.getAttribute("contentsno"));
-				int contentsno = Integer.parseInt((String) request.getAttribute("contentsno"));
+				System.out.println(request.getParameter("contentsno"));
+				int contentsno = Integer.parseInt((String)request.getParameter("contentsno"));
 				
 				map.put("contentsno", contentsno);
 

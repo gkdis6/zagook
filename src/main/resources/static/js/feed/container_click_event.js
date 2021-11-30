@@ -116,17 +116,17 @@ function container_click(event) {
                     listHtml += "		</div>";
                     // 책갈피
                     // 현재 로그인 상태이고..
-                    if("${nick}" != ""){
+                    //if("${nick}" != ""){
 
-                        if("${nick}" == id){
+                        //if("${nick}" == id){
                             listHtml += "		<div>";
                             listHtml += "			<a href='javascript:' rnum='"+ rnum  + "' contentsno='"+ contentsno +"' class='reply_delete'>삭제</a>";
                             listHtml += "		</div>";
-                        }
+                        //}
                     }
 
                     listHtml += "	</div>";
-                }
+                //}
 
                 listHtml += "</div>";
 			};
@@ -134,7 +134,9 @@ function container_click(event) {
             ///////////// $(document).ready(function(){}); 안에 써주면 안된다.
 
             // 댓글 리스트 부분에 받아온 댓글 리스트를 넣기
-            $(".reply-list"+rnum).html(listHtml);
+            let newElement = document.createElement('div');
+			newElement.innerHTML = listHtml;
+			document.getElementsByClassName("reply-list"+param).append(newElement);
 
             //답글을 작성한 후 답글달기 버튼을 눌렀을 때 그 click event를 아래처럼 jquery로 처리한다.
             $('button.btn.btn-success.mb-1.write_rereply').on( 'click', function() {
