@@ -32,9 +32,10 @@ function process_feed_list(param) {
 					//rdate: list[i].rdate,
 					//privacy: list[i].privacy,
 					//id: list[i].id,
-					contentsno: list[i].contentsno
+					contentsno: list[i].contentsno,
 					//tag_list: list[i].tag_list,
 					//like_clicked: list[i].like_clicked
+					title: list[i].contentsno
 				};
 				displayMarker(position);
 				console.log(position);

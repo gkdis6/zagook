@@ -278,7 +278,7 @@ $(document).on("click","button.delete_feed",function(){
 		contentType : "application/json; charset=utf-8;",
 		dataType : 'json',
 		success : function(data){
-			$('#'+id).remove();
+			$('#'+name).remove();
 		},
 		error : function(data) {
             alert("게시글 삭제 중 오류가 발생하였습니다.");

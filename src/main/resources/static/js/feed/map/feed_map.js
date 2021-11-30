@@ -11,7 +11,8 @@ function displayMarker(data) {
 	// 마커를 생성합니다
 	var marker = new kakao.maps.Marker({
 		map: map_main, // 마커를 표시할 지도
-		position: data.latlng // 마커의 위치
+		position: data.latlng, // 마커의 위치
+		title: data.title
 	});
 	overlays.push(marker);
 	// 마커에 표시할 인포윈도우를 생성합니다 
