@@ -65,103 +65,101 @@ function container_click(event) {
 		console.log(event.currentTarget);
 		let param = event.currentTarget.id;
 		
-		 $.ajax({
-        url : '/call_replyList',
-        type : 'get',
-        data : {
-            contentsno : param
-        },
-        contentType : "application/json; charset=utf-8;",
-        dataType : 'json',
-        success : function(data) {
-
-            console.log("댓글 리스트 가져오기 성공");
-			// 댓글 목록을 html로 담기
-            let listHtml = "";
-            for(const i in data){
-                let rnum = data[i].rnum;
-                let contentsno = data[i].contentsno;
-                let id = data[i].id;
-                let content = data[i].content;
-                let regdate = data[i].regdate;
-                let fname = data[i].fname;
-
-
-                listHtml += "<div class='row replyrow reply" + rnum + "'>";
-
-                if(content == ""){		// 삭제된 댓글일때
-                    listHtml += "	<div>";
-                    listHtml += "		(삭제된 댓글입니다)";
-                    listHtml += "	</div>";
-                }else{	// 모댓글일때
-                    listHtml += "	<div class='col-1'>";
-                    listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
-                    listHtml += "	</div>";
-                    listHtml += "	<div class='rereply-content col-8'>";
-                    listHtml += "		<div>";
-                    listHtml += "			<span>";
-                    listHtml += "				<b>"+ id +"</b>";
-                    listHtml += "			</span>";
-                    listHtml += "			<span>";
-                    listHtml += 				content;
-                    listHtml += "			</span>";
-                    listHtml += "		</div>";
-                    listHtml += "	</div>";
-
-                  	
-
-                    listHtml += "	<div class='col-3 reply-right'>";
-                    listHtml += "		<div>";
-                    listHtml += 			regdate;
-                    listHtml += "		</div>";
-                    // 책갈피
-                    // 현재 로그인 상태이고..
-                    //if("${nick}" != ""){
-
-                        //if("${nick}" == id){
-                            listHtml += "		<div>";
-                            listHtml += "			<a href='javascript:' rnum='"+ rnum  + "' contentsno='"+ contentsno +"' class='reply_delete'>삭제</a>";
-                            listHtml += "		</div>";
-                        //}
-                    }
-
-                    listHtml += "	</div>";
-                //}
-
-                listHtml += "</div>";
-			};
-			 ///////////// 동적으로 넣어준 html에 대한 이벤트 처리는 같은 함수내에서 다 해줘야한다.
-            ///////////// $(document).ready(function(){}); 안에 써주면 안된다.
-
-            // 댓글 리스트 부분에 받아온 댓글 리스트를 넣기
-            let newElement = document.createElement('div');
-			newElement.innerHTML = listHtml;
-			document.getElementsByClassName("reply-list"+param).append(newElement);
-
-            //답글을 작성한 후 답글달기 버튼을 눌렀을 때 그 click event를 아래처럼 jquery로 처리한다.
-            $('button.btn.btn-success.mb-1.write_rereply').on( 'click', function() {
-                console.log( 'rnum', $(this).attr('rnum') );
-                console.log( 'contentsno', $(this).attr('contentsno') );
-
-                // 답글을 DB에 저장하는 함수를 호출한다. bno와 no를 같이 넘겨주어야한다.
-                WriteReReply($(this).attr('rnum'), $(this).attr('rnum') );
-            });
-
-            // 삭제버튼을 클릭했을 때
-            $('.reply_delete').on('click', function(){
-                DeleteReply($(this).attr('rnum'), $(this).attr('contentsno'));
-
-            })
-
-
-        },
-        error : function() {
-            alert('서버 에러');
-        }
-    });
-}
+		$.ajax({
+	        url : '/call_replyList',
+	        type : 'get',
+	        data : {
+	            contentsno : param
+	        },
+	        contentType : "application/json; charset=utf-8;",
+	        dataType : 'json',
+	        success : function(data) {
 	
-		else if(event_flag == 0){
+	            console.log("댓글 리스트 가져오기 성공");
+				// 댓글 목록을 html로 담기
+	            let listHtml = "";
+	            for(const i in data){
+	                let rnum = data[i].rnum;
+	                let contentsno = data[i].contentsno;
+	                let id = data[i].id;
+	                let content = data[i].content;
+	                let regdate = data[i].regdate;
+	                let fname = data[i].fname;
+	
+	
+	                listHtml += "<div class='row replyrow reply" + rnum + "'>";
+	
+	                if(content == ""){		// 삭제된 댓글일때
+	                    listHtml += "	<div>";
+	                    listHtml += "		(삭제된 댓글입니다)";
+	                    listHtml += "	</div>";
+	                }else{	// 모댓글일때
+	                    listHtml += "	<div class='col-1'>";
+	                    listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
+	                    listHtml += "	</div>";
+	                    listHtml += "	<div class='rereply-content col-8'>";
+	                    listHtml += "		<div>";
+	                    listHtml += "			<span>";
+	                    listHtml += "				<b>"+ id +"</b>";
+	                    listHtml += "			</span>";
+	                    listHtml += "			<span>";
+	                    listHtml += 				content;
+	                    listHtml += "			</span>";
+	                    listHtml += "		</div>";
+	                    listHtml += "	</div>";
+	
+	                  	
+	
+	                    listHtml += "	<div class='col-3 reply-right'>";
+	                    listHtml += "		<div>";
+	                    listHtml += 			regdate;
+	                    listHtml += "		</div>";
+	                    // 책갈피
+	                    // 현재 로그인 상태이고..
+	                    //if("${nick}" != ""){
+	
+	                        //if("${nick}" == id){
+	                            listHtml += "		<div>";
+	                            listHtml += "			<a href='javascript:' rnum='"+ rnum  + "' contentsno='"+ contentsno +"' class='reply_delete'>삭제</a>";
+	                            listHtml += "		</div>";
+	                        //}
+	                    //}
+	
+	                    listHtml += "	</div>";
+	                //}
+	
+	                listHtml += "</div>";
+				};
+				 ///////////// 동적으로 넣어준 html에 대한 이벤트 처리는 같은 함수내에서 다 해줘야한다.
+	            ///////////// $(document).ready(function(){}); 안에 써주면 안된다.
+	
+	            // 댓글 리스트 부분에 받아온 댓글 리스트를 넣기
+	            let newElement = document.createElement('div');
+				newElement.innerHTML = listHtml;
+				document.getElementsByClassName("reply-list"+param).appendChild(newElement);
+	
+	            //답글을 작성한 후 답글달기 버튼을 눌렀을 때 그 click event를 아래처럼 jquery로 처리한다.
+	            $('button.btn.btn-success.mb-1.write_rereply').on( 'click', function() {
+	                console.log( 'rnum', $(this).attr('rnum') );
+	                console.log( 'contentsno', $(this).attr('contentsno') );
+	
+	                // 답글을 DB에 저장하는 함수를 호출한다. bno와 no를 같이 넘겨주어야한다.
+	                WriteReReply($(this).attr('rnum'), $(this).attr('rnum') );
+	            });
+	
+	            // 삭제버튼을 클릭했을 때
+	            $('.reply_delete').on('click', function(){
+	                DeleteReply($(this).attr('rnum'), $(this).attr('contentsno'));
+	
+	            });
+	
+	
+	        },
+	        error: function() {
+	            alert('서버 에러');
+	        }
+    	});
+	}else if(event_flag == 0){
 		let filename = event.currentTarget.getAttribute("filename");
 		let posi = new kakao.maps.LatLng(event.currentTarget.getAttribute("x_site"), event.currentTarget.getAttribute("y_site"));
 		overlay_pre.setMap(null);
