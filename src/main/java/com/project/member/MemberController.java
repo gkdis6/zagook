@@ -281,11 +281,12 @@ public class MemberController {
           }
           
           if (cnt != 1) {
-             return "./passwdError";
+             return "/msg/passwdError";
           }
           else if (dcnt == 1) {
-             session.invalidate();
-             return "redirect:/";
+              session.invalidate();
+             return "/msg/completeMsg";
+             
           }
           else {
              return "./error";

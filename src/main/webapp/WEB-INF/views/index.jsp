@@ -413,7 +413,8 @@ input[type=file] {
 	
 }
 </style>
-
+<link rel="stylesheet" href="/css/create.css" type="text/css">
+<link rel="stylesheet" href="/css/chat/chat.css" type="text/css">
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" />
@@ -733,32 +734,29 @@ input[type=file] {
 	</div>
 	<!-- 챗봇@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	<div id="chatBtn"
-		style="position: fixed; padding-bottom: 400px; right: 20px; bottom: 20px; z-index: 8"
+		style="position: fixed; right:20px; bottom: 153px; z-index: 8"
 		onclick="if(chat.style.display=='none'){chat.style.display=''}else{chat.style.display='none'}">
-		<img src="./images/chat1.png" width="70" height="70">
+		<img src="./images/chat2.png" style="width:70px; height:90px; opacity:0.8;">
 	</div>
-	<div
-		style="position: fixed; right: 20px; top: auto; 
-	bottom: 90px; z-index: 8; background: white; border: 1px solid #191a45" 
-		id="chat" class="chat">
+	<div id="chat" style="display:none"> 
 		<div class="modal-content">
-			<div class="modal-header" style="padding:0px; color:#191a45;">
-				<H4>ZAGOOK 문의</H4>
+			<div class="modal-header" id="chatheader">
+				<H4 style="padding-bottom:10px; font-weight:bold;">ZAGOOK 문의</H4>
+				
 				<form class="form-inline">
 					<div class="form-group" id="chatform">
-						<label for="connect" style="text-align:left;font-size: 14px;">무엇을 도와드릴까요?</label>
-
-						<button id="connect_btn" class="btn btn-default" type="submit">시작</button>
-						<button id="disconnect_btn" class="btn btn-default" type="submit" disabled="disabled">종료</button>
-
+						<label for="connect" style="width:60%;text-align:center;font-size: 13px;">
+						문의 챗봇 연결하기
+						</label>
+						<input type="checkbox" id="chatcheckbox">
+						<label id="chatlabel" for="chatcheckbox"><span></span></label>
 					</div>
 				</form>
 			</div>
 			<div id="chatcontent">
-				<div class="modal-body" style="background-color:#191a45; min-height:300px;">
+				<div class="modal-body" id="chatbody">
 					<div class="chat_main">
 						<div id="main-content" class="container" style="width: 100%;">
-
 							<div class="row">
 								<div>
 									<table id="conversation" class="table table-striped">
@@ -770,7 +768,7 @@ input[type=file] {
 						</div>
 					</div>
 				</div>
-					<div class="form-group" id="chatform" style="width: 100%;margin-bottom:2.3px;padding-left:10px;padding-top:3px;">
+					<div class="form-group" id="chatform" >
 						<input type="text" id="msg" class="form1-control"
 							placeholder="문의사항을 입력하세요." style="width: 80%;">
 						<button id="send" class="btn btn-default" disabled type="submit">전송</button>

@@ -29,7 +29,7 @@ $(document).ready(function(){
  function checkModal(){ //modal 생성함수 선언
      if(history.state) return; //코드2
      if('${pflag}'==false){
-         $(".modal-body").html('비밀번호 오류입니다.<br>다시 입력하세요');
+         $(".modal-body").html('비밀번호가 맞지 않습니다.<br><br>다시 입력하세요');
          $("#myModal").modal("show");
      }
    }
@@ -43,10 +43,10 @@ $(document).ready(function(){
 <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
-      <div class="modal-content">
+       <div class="modal-content" style="width:310px; border:2px solid #191a45; border-radius:10px">
         <div class="modal-header">
       
-          <h4 class="modal-title">오류 메세지!</h4>
+          <h3 class="modal-title">오류 메세지!</h3>
         </div>
         <div class="modal-body">
           <p>This is a small modal.</p>
