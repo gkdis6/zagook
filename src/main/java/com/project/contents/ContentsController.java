@@ -39,7 +39,7 @@ public class ContentsController {
 	@Qualifier("com.project.reply.ReplyServiceImpl")
 	private ReplyService replyService;
 
-//	@GetMapping("/")
+	@GetMapping("/searching")
 	public String home(HttpServletRequest request, HttpSession session) {
 		if (session.getAttribute("id") != null) {
 			Map map = new HashMap();
@@ -71,7 +71,7 @@ public class ContentsController {
 			}
 
 		}
-		return "/home";
+		return "/searching";
 	}
 
 	@GetMapping("/contents/create")
