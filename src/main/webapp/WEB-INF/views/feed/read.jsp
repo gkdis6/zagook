@@ -105,8 +105,8 @@
 	<div id="chatBtn"
 		style="position: fixed; right:20px; bottom: 153px; z-index: 8"
 		onclick="if(chat.style.display=='none'){chat.style.display=''}else{chat.style.display='none'}">
-		<img src="./images/chat2.png" id="chat-dis-img" style="width:64px; height:95px; opacity:0.8;">
-		<img src="./images/chat3.png" id="chat-act-img" style="width:70px; height:90px; opacity:0.8; display:none">
+		<img src="/images/chat2.png" id="chat-dis-img" style="width:64px; height:95px; opacity:0.8;">
+		<img src="/images/chat3.png" id="chat-act-img" style="width:66px; height:90px; opacity:0.8; display:none">
 	</div>
 	<div id="chat" style="display:none"> 
 		<div class="modal-content">
