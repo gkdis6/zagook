@@ -108,8 +108,6 @@ function process_feed_list(param) {
                 html_str += '<img class="reply_icon" src="../images/feed/comment.png" alt="comments_img" loading="lazy" onclick="reply_click(event)" id="'+list[i].contentsno+'"> <span class="feed_widget_text">Comments</span>';
                 html_str += '</span>';
                 html_str += '<div class="reply-list'+list[i].contentsno+'">';
-                html_str += '';
-                html_str += '';
                 html_str += '</div>';
                 
                 

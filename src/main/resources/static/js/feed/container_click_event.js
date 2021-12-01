@@ -33,6 +33,9 @@ function reply_click(event) {
 	event_flag = 5;
 	console.log(event_flag);
 }
+function reply_delete(event){
+	event_flag = 6;
+}
 
 function container_click(event) {
 	console.log(event_flag);
@@ -64,36 +67,48 @@ function container_click(event) {
 	} else if (event_flag == 5)	{
 		console.log(event.currentTarget);
 		let param = event.currentTarget.id;
-		
-		 $.ajax({
-        url : '/call_replyList',
-        type : 'get',
-        data : {
-            contentsno : param
-        },
-        contentType : "application/json; charset=utf-8;",
-        dataType : 'json',
-        success : function(data) {
-
-            console.log("댓글 리스트 가져오기 성공");
-			// 댓글 목록을 html로 담기
-            let listHtml = "";
-            for(const i in data){
-                let rnum = data[i].rnum;
-                let contentsno = data[i].contentsno;
-                let id = data[i].id;
-                let content = data[i].content;
-                let regdate = data[i].regdate;
-                let fname = data[i].fname;
-
-
-                listHtml += "<div class='row replyrow reply" + rnum + "'>";
-
-                if(content == ""){		// 삭제된 댓글일때
-                    listHtml += "	<div>";
-                    listHtml += "		(삭제된 댓글입니다)";
-                    listHtml += "	</div>";
-                }else{	// 모댓글일때
+		var target = document.getElementById("reply-list"+param);
+		$.ajax({
+	        url : '/call_replyList',
+	        type : 'get',
+	        data : {
+	            contentsno : param
+	        },
+	        contentType : "application/json; charset=utf-8;",
+	        dataType : 'json',
+	        success : function(data) {
+	
+	            console.log("댓글 리스트 가져오기 성공");
+	            if(session_id != 'null'){
+		            let write_html="";
+					write_html+='<div class="input_reply_div">';
+					write_html+='	<input class="w-100 form-control input_reply" id="input_reply'+param+'" type="text" placeholder="댓글입력...">';
+					write_html+='	<button type="button" class="btn btn-success mb-1 write_reply" name="'+param+'">댓글&nbsp;달기</button>';
+					write_html+='</div>';
+					let div_1 = document.createElement('div');
+					div_1.className = "row reply_wirte";
+					div_1.innerHTML = write_html;
+		            
+					target.appendChild(div_1);
+				}
+				// 댓글 목록을 html로 담기
+	            let listHtml = "";
+	            for(const i in data){
+	                let rnum = data[i].rnum;
+	                let contentsno = data[i].contentsno;
+	                let id = data[i].id;
+	                let content = data[i].content;
+	                let regdate = data[i].regdate;
+	                let fname = data[i].fname;
+					console.log(rnum);
+					console.log(contentsno);
+					console.log(id);
+					console.log(content);
+					console.log(regdate);
+					console.log(fname);
+	
+	                listHtml += "<div class='row replyrow reply" + rnum + "'>";
+	
                     listHtml += "	<div class='col-1'>";
                     listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
                     listHtml += "	</div>";
@@ -112,56 +127,38 @@ function container_click(event) {
 
                     listHtml += "	<div class='col-3 reply-right'>";
                     listHtml += "		<div>";
-                    listHtml += 			regdate;
+                    listHtml += 			regdate.substring(2,16);
                     listHtml += "		</div>";
                     // 책갈피
                     // 현재 로그인 상태이고..
-                    //if("${nick}" != ""){
+                    console.log(session_id);
+                    if(session_id != "null"){
 
-                        //if("${nick}" == id){
+                        if(session_id == id){
                             listHtml += "		<div>";
-                            listHtml += "			<a href='javascript:' rnum='"+ rnum  + "' contentsno='"+ contentsno +"' class='reply_delete'>삭제</a>";
+                            listHtml += "			<button href='javascript:' rnum='"+ rnum  + "' contentsno='"+ contentsno +"' class='reply_delete' onclick='reply_delete(event)'>삭제</button>";
                             listHtml += "		</div>";
-                        //}
+                        }
                     }
 
                     listHtml += "	</div>";
                 //}
 
-                listHtml += "</div>";
-			};
-			 ///////////// 동적으로 넣어준 html에 대한 이벤트 처리는 같은 함수내에서 다 해줘야한다.
-            ///////////// $(document).ready(function(){}); 안에 써주면 안된다.
-
-            // 댓글 리스트 부분에 받아온 댓글 리스트를 넣기
-            let newElement = document.createElement('div');
-			newElement.innerHTML = listHtml;
-			document.getElementsByClassName("reply-list"+param).append(newElement);
-
-            //답글을 작성한 후 답글달기 버튼을 눌렀을 때 그 click event를 아래처럼 jquery로 처리한다.
-            $('button.btn.btn-success.mb-1.write_rereply').on( 'click', function() {
-                console.log( 'rnum', $(this).attr('rnum') );
-                console.log( 'contentsno', $(this).attr('contentsno') );
-
-                // 답글을 DB에 저장하는 함수를 호출한다. bno와 no를 같이 넘겨주어야한다.
-                WriteReReply($(this).attr('rnum'), $(this).attr('rnum') );
-            });
-
-            // 삭제버튼을 클릭했을 때
-            $('.reply_delete').on('click', function(){
-                DeleteReply($(this).attr('rnum'), $(this).attr('contentsno'));
-
-            })
-
-
-        },
-        error : function() {
-            alert('서버 에러');
-        }
-    });
-}
-	
-		else if(event_flag == 0){
+                	listHtml += "</div>";
+                	}
+                	let newElement = document.createElement('div');
+                	newElement.className = "reply_down_container"+param;
+					newElement.innerHTML = listHtml;
+		            
+					target.appendChild(newElement);
+				
+	        },
+	        error: function() {
+	            alert('서버 에러');
+	        }
+    	})
+    	document.getElementById('reply_btn'+param).onclick = null;
+	}else if(event_flag == 0){
 		let filename = event.currentTarget.getAttribute("filename");
 		let posi = new kakao.maps.LatLng(event.currentTarget.getAttribute("x_site"), event.currentTarget.getAttribute("y_site"));
 		overlay_pre.setMap(null);
@@ -207,4 +204,110 @@ function time_container_click(event) {
 	time_order_event_flag = 0;
 }
 
-			
+
+$(document).on('click',"button.reply_delete", function(){
+	let name = $(this).attr("rnum");
+	console.log(name);
+	var ans = confirm("댓글을 삭제하시겠습니까?");
+    if(!ans) return false;
+    
+	$.ajax({
+		url : "/delete_reply",
+		type : "get",
+		data : {
+			rnum : name
+		},
+		contentType : "application/json; charset=utf-8;",
+		dataType : 'json',
+		success : function(data){
+			$(".reply"+name).remove();
+		},
+		error : function(data) {
+            alert("댓글 삭제 중 오류가 발생하였습니다.");
+        }
+	})
+});	
+
+$(document).on('click',"button.write_reply", function(){
+	let name = $(this).attr("name");
+	let content = $('#input_reply'+name).val();
+	if(name == ""){
+		alert("내용을 입력해주세요");
+		return false;
+	}
+	console.log(name);
+	var ans = confirm("댓글을 등록하시겠습니까?");
+    if(!ans) return false;
+    $('#input_reply'+name).val("");
+	$.ajax({
+		url : "/write_reply",
+		type : "get",
+		data : {
+			contentsno : name,
+			content: content
+		},
+		contentType : "application/json; charset=utf-8;",
+		dataType : 'json',
+		success : function(data){
+			$(".reply_down_container"+name).children().remove();
+			let listHtml = "";
+            for(const i in data){
+                let rnum = data[i].rnum;
+                let contentsno = data[i].contentsno;
+                let id = data[i].id;
+                let content = data[i].content;
+                let regdate = data[i].regdate;
+                let fname = data[i].fname;
+				console.log(rnum);
+				console.log(contentsno);
+				console.log(id);
+				console.log(content);
+				console.log(regdate);
+				console.log(fname);
+
+                listHtml += "<div class='row replyrow reply" + rnum + "'>";
+
+                listHtml += "	<div class='col-1'>";
+                listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
+                listHtml += "	</div>";
+                listHtml += "	<div class='rereply-content col-8'>";
+                listHtml += "		<div>";
+                listHtml += "			<span>";
+                listHtml += "				<b>"+ id +"</b>";
+                listHtml += "			</span>";
+                listHtml += "			<span>";
+                listHtml += 				content;
+                listHtml += "			</span>";
+                listHtml += "		</div>";
+                listHtml += "	</div>";
+
+              	
+
+                listHtml += "	<div class='col-3 reply-right'>";
+                listHtml += "		<div>";
+                listHtml += 			regdate.substring(2,16);
+                listHtml += "		</div>";
+                // 책갈피
+                // 현재 로그인 상태이고..
+                console.log(session_id);
+                if(session_id != "null"){
+
+                    if(session_id == id){
+                        listHtml += "		<div>";
+                        listHtml += "			<button href='javascript:' rnum='"+ rnum  + "' contentsno='"+ contentsno +"' class='reply_delete' onclick='reply_delete(event)'>삭제</button>";
+                        listHtml += "		</div>";
+                    }
+                }
+
+                listHtml += "	</div>";
+            //}
+
+            	listHtml += "</div>";
+        	}
+			$(".reply_down_container"+name).append(listHtml);
+		},
+		error : function(data) {
+            alert("댓글 등록 중 오류가 발생하였습니다.");
+        }
+	})
+});	
