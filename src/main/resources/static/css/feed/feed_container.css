@@ -143,3 +143,16 @@
   position: relative;
   right: -310px;
 }
+.dropdown-menu li{
+	width: 100px;
+}
+.dropdown{
+	width: 150px;
+}
+.dropdown ul{
+	width: 100px;
+}
+.dropdown-toggle{
+	position:relative;
+	right: -125px;
+}

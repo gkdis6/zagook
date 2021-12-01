@@ -51,7 +51,7 @@ function process_feed_list(param) {
                 
                 // profile image area
                 html_str += '<span class="profile_image_container">';
-                html_str += '<img src="../images/feed/profile/' + list[i].fname + '" class="profile_img" alt="profile_img" loading="lazy">';
+                html_str += '<img src="/member/storage/profile/' + list[i].fname + '" class="profile_img" alt="profile_img" loading="lazy">';
                 html_str += '</span>';
                 
                 // user id area
@@ -59,23 +59,24 @@ function process_feed_list(param) {
                 html_str += '<a href="javascript:void(0);" class="user_id" onclick="id_click(event);return false;">' + list[i].id + '</a>';
                 html_str += '</span>';
                 
-                //update, delete dropdown area
-                html_str += '<li class="dropdown" style="margin-left: auto; margin-right:20px; list-style:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>';
-                html_str += '<ul class="dropdown-menu"><li><a class="updatebtn">수정</a></li>';
-                html_str += '<li><a class="delete__feed" name="'+list[i].contentsno+'">삭제</a></li>';
-                html_str += '<input type="hidden" id="contentsno" value="'+list[i].contentsno+'">'; 
- 				html_str += '<input type="hidden" id="oldfile" value="'+list[i].filename+'">';      
- 				html_str += '<input type="hidden" id="contents" value="'+list[i].contents+'">';     
- 				html_str += '<input type="hidden" id="tag" value="'+list[i].tag_list+'">';               
- 				html_str += '<input type="hidden" id="privacy" value="'+list[i].privacy+'">';       
-          
-				html_str += '</ul></li>';
-                
+                if(session_id == list[i].id){
+	                //update, delete dropdown area
+	                html_str += '<li class="dropdown" style="margin-left: auto; margin-right:20px; list-style:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>';
+	                html_str += '<ul class="dropdown-menu"><li><a class="updatebtn">수정</a></li>';
+	                html_str += '<li><a class="delete__feed" name="'+list[i].contentsno+'">삭제</a></li>';
+	                html_str += '<input type="hidden" id="contentsno" value="'+list[i].contentsno+'">'; 
+	 				html_str += '<input type="hidden" id="oldfile" value="'+list[i].filename+'">';      
+	 				html_str += '<input type="hidden" id="contents" value="'+list[i].contents+'">';     
+	 				html_str += '<input type="hidden" id="tag" value="'+list[i].tag_list+'">';               
+	 				html_str += '<input type="hidden" id="privacy" value="'+list[i].privacy+'">';       
+	          
+					html_str += '</ul></li>';
+                }
                 html_str += '</div>';
                 
                 // image area
                 html_str += '<div class="img_box_container" onclick="img_click(event)">';
-                html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box">';
+                html_str += '<img src="/contents/storage/' + list[i].filename + '" class="img_box" alt="img_box">';
                 html_str += '</div>';
                 
                 // tag area
