@@ -154,11 +154,6 @@
 									<button type="submit" formmethod="post"><i class="fa fa-search"></i></button>
 								</form>
 							</li>
-							<li class="dropdown"><a class="dropdown-toggle"
-								data-toggle="dropdown" href="#">🙄 <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="${root}/friend">친구신청</a></li>
-								</ul></li>
 							<li><a href="${root}/member/mypage"><span
 									class="glyphicon glyphicon-edit"></span> 마이페이지 </a></li>
 							<li><a href="${root}/member/logout"><span
