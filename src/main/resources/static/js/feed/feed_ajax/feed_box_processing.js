@@ -61,14 +61,14 @@ function process_feed_list(param) {
                 
                 //update, delete dropdown area
                 html_str += '<li class="dropdown" style="margin-left: auto; margin-right:20px; list-style:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>';
-                html_str += '<ul class="dropdown-menu"><li><a class="delete_feed" name="'+list[i].contentsno+'">삭제';
+                html_str += '<ul class="dropdown-menu"><li><a class="updatebtn">수정</a></li>';
+                html_str += '<li><a class="delete__feed" name="'+list[i].contentsno+'">삭제</a></li>';
                 html_str += '<input type="hidden" id="contentsno" value="'+list[i].contentsno+'">'; 
  				html_str += '<input type="hidden" id="oldfile" value="'+list[i].filename+'">';      
  				html_str += '<input type="hidden" id="contents" value="'+list[i].contents+'">';     
  				html_str += '<input type="hidden" id="tag" value="'+list[i].tag_list+'">';               
  				html_str += '<input type="hidden" id="privacy" value="'+list[i].privacy+'">';       
-                html_str += '</a></li>';
-                html_str += '<li><a class="updatebtn">수정</a></li>';
+          
 				html_str += '</ul></li>';
                 
                 html_str += '</div>';

@@ -385,7 +385,7 @@ $(document).on("click","button.friend_btn_1",function(){
 	})
 })
 </c:if>
-$(document).on("click","a.delete_feed",function(){
+$(document).on("click","a.delete__feed",function(){
 	let name = $(this).attr("name");
 	console.log(name);
 	var ans = confirm("게시글을 삭제하시겠습니까?");
