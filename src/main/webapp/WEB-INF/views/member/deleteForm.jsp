@@ -16,7 +16,7 @@
  
 <h2 class="col-sm-offset-2 col-sm-10">탈퇴</h2>
 <form class="form-horizontal" 
-      action="/member/delete"
+      action="/member/update"
       method="post"
       >
   <input type="hidden" name="email" value="${param.email}">

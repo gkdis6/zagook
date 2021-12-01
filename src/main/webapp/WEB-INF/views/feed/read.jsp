@@ -99,7 +99,7 @@
 		onclick="if(chat.style.display=='none'){chat.style.display=''}else{chat.style.display='none'}">
 		<img src="./images/chat1.png" style="width:60px; height:60px; opacity:0.7;">
 	</div>
-	<div id="chat"> 
+	<div id="chat" style="display:none"> 
 		<div class="modal-content">
 			<div class="modal-header" id="chatheader">
 				<H4 style="padding-bottom:10px; font-weight:bold;">ZAGOOK 문의</H4>
@@ -250,6 +250,7 @@
 <script src="/js/utils/send_post_util.js"></script>
 <script src="/js/utils/login_modal_open.js"></script>
 <script src="/js/feed/url_pattern/url_regex.js"></script>
+<script src="/js/feed/create_click_event.js"></script>
 <script src="/js/feed/map/feed_map.js"></script>
 <script src="/js/feed/feed_ajax/feed_start_end_util.js"></script>
 <script src="/js/feed/feed_ajax/feed_ajax.js"></script>
@@ -266,7 +267,6 @@
 <script src="/js/data.js"></script>
 <script src="/js/feed/loading_animation.js"></script>
 <script src="/js/feed/feed_ajax/feed_img_click.js"></script>
-<script src="/js/feed/create_click_event.js"></script>
 <script src="/js/crud/deletemodal.js"></script>
 <script>
 <c:if test="${!empty sessionScope.id }">
