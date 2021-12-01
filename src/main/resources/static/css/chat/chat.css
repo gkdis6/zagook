@@ -1,8 +1,8 @@
-.modal-content {
+#chat>.modal-content {
 	border-radius: 30px;
 }
 
-.modal-header {
+#chat>.modal-header {
 	border: none;
 }
 
@@ -13,6 +13,7 @@
 #chatheader{
 	padding:0px;
 	color:#191a45;
+	border:none;
 	
 }
 #chat {

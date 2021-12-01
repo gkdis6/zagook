@@ -39,8 +39,8 @@
       value="/WEB-INF/views/member/updatepasscheck.jsp"/>
   </definition>
   
-  	<definition name="/chat" extends="main"> 
-      <put-attribute name="title" value="문의사항" ></put-attribute> 
-      <put-attribute name="body" value="/WEB-INF/views/chat/naver_chatting.jsp" /> 
-    </definition>
+<!--   	<definition name="/chat" extends="main">  -->
+<!--       <put-attribute name="title" value="문의사항" ></put-attribute>  -->
+<!--       <put-attribute name="body" value="/WEB-INF/views/chat/naver_chatting.jsp" />  -->
+<!--     </definition> -->
 </tiles-definitions>

@@ -7,6 +7,7 @@ $(document).on("click", "#reset", function () {
 $(document).ready(function () {
 	$("#chat").hide();
 	$("#create").hide();
+	$("#chat-act-img").hide();
 });
 
 $("#createBtn").on("click", function (e) {

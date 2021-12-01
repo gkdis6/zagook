@@ -12,8 +12,8 @@
 
 <div class="con-delete">
  	<div id="header-delete">
-	<span class="hl">회원 탈퇴</span><br><br>
-	<span id="span-delete">Zagook에 저장된 모든 데이터가 삭제됩니다.</span><br><br>
+	<span class="hl">Zagook 회원 탈퇴</span><br><br>
+	<span id="span-delete">저장된 모든 데이터가 삭제됩니다.</span><br><br>
 	<span id="span-delete">탈퇴를 원하시면 비밀번호를 입력해주세요.</span><br><br>
  	</div>
 	<form class="form-horizontal" 
@@ -29,7 +29,7 @@
   </div>
   
    <div class="form-group" style="margin-left:-210px;">
-  <p id="red" class="col-sm-offset-2 col-sm-6">탈퇴후 데이터를 복구할 수 없습니다.</p>
+  <p id="red" class="col-sm-offset-2 col-sm-6">탈퇴 시 데이터를 복구할 수 없습니다.</p>
    <div class="col-sm-offset-2 col-sm-5">
     <button class="btn">탈퇴</button>
     <button type="reset" class="btn" onclick="location.href='${root}/member/mypage'">취소</button>
