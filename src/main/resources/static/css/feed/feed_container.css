@@ -139,20 +139,16 @@
 .input_reply_div * {
   display: inline;
 }
-.delete_feed {
-  position: relative;
-  right: -310px;
-}
-.dropdown-menu li{
+.profile_container .dropdown .dropdown-menu_feed li{
 	width: 100px;
 }
-.dropdown{
+.profile_container .dropdown .dropdown_feed{
 	width: 150px;
 }
-.dropdown ul{
+.profile_container .dropdown .dropdown_feed ul{
 	width: 100px;
 }
-.dropdown-toggle{
+.profile_container .dropdown .dropdown-toggle_feed{
 	position:relative;
 	right: -125px;
 }

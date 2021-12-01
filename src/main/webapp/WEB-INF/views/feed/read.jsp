@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="/css/feed/constant.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/body.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/container.css" type="text/css">
-<link rel="stylesheet" href="/css/feed/feed_container.css"
-	type="text/css">
 <link rel="stylesheet" href="/css/feed/sidenav.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/nav_mouse_click.css"
 	type="text/css">
@@ -27,6 +25,8 @@
 
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+<link rel="stylesheet" href="/css/feed/feed_container.css"
+	type="text/css">
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>

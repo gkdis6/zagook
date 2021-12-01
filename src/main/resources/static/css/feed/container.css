@@ -12,7 +12,7 @@
 	flex-direction: column;
 	justify-content: center;
 	width: var(--center_container_size);
-	overflow: auto;
+	overflow: env();
 	align-items: center;
 	transition: margin-left .5s;
 	z-index: var(--center_container_zindex);
