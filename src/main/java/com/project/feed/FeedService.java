@@ -19,6 +19,9 @@ public interface FeedService {
 	List<FeedDTO> taglist(FeedDTO dto);
 	List<FeedDTO> taglistbyrecent(FeedDTO dto);
 	List<FeedDTO> taglistbyold(FeedDTO dto);
+	List<FeedDTO> taglist_friend(FeedDTO dto);
+	List<FeedDTO> taglistbyrecent_friend(FeedDTO dto);
+	List<FeedDTO> taglistbyold_friend(FeedDTO dto);
 	List<FeedDTO> friendlist(FeedDTO dto);
 	List<FeedDTO> friendlistbyrecent(FeedDTO dto);
 	List<FeedDTO> friendlistbyold(FeedDTO dto);
