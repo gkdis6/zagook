@@ -11,6 +11,10 @@ function create_banner(dto_member, tag, tagcnt, friend_status, base_distance) {
 		html_str += '<span>'+dto_member.id+'</span>';
 		html_str += '<button type="button" class="setting"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
 		html_str += '</div>';
+		html_str += '<div class="banner_inner_sec">';
+		html_str +=	'<span>친구'+dto_member.friend_cnt+'</span>';
+		html_str +=	'<span>게시글'+dto_member.feed_cnt+'</span>';
+		html_str += '</div>';
 		html_str += '<div class="banner_inner_second">';
 		if(dto_member.introduction !== null){
 			html_str += '<span>'+dto_member.introduction+'</span>';
@@ -45,6 +49,10 @@ function create_banner(dto_member, tag, tagcnt, friend_status, base_distance) {
 			html_str += '<button type="button" class="friend_btn_1" name="'+dto_member.id+'">친구신청</button>';
 		}
 //		html_str += '<button type="button" class="setting"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
+		html_str += '</div>';
+		html_str += '<div class="banner_inner_sec">';
+		html_str +=	'<span>친구 '+dto_member.friendcnt+'</span>';
+		html_str +=	'<span>게시물 '+dto_member.feedcnt+'</span>';
 		html_str += '</div>';
 		html_str += '<div class="banner_inner_second">';
 		if(dto_member.introduction !== null){
