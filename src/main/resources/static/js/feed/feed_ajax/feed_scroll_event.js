@@ -4,13 +4,6 @@ $(function () {
 	init_fetch_feed(null, order);
 });
 
-/*
- < init_fetch_feed 호출 위치 list >
-	1) feed_scroll_event.js : 페이지 접속 시 초기 호출
-	2) selection_menu.js > search_by_select() : 범위 탐색 selection menu를 선택했을 시 호출
-	3) feed_start_end_util.js > order_by_time() : 시간순 정렬 container를 클릭 시 호출
-	4) 
-*/
 function onload_draw_map() {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (pos) {
@@ -51,6 +44,7 @@ function init_fetch_feed(range, order) {
 			else if (ajax_url_check_friend(url))
 				param = is_set_feed_range(range, pos, "friend", order, hidden_selected_id);
 			process_feed_list(param);
+			onload_draw_map();
 		}, init_reject);
 	}
 }
@@ -75,6 +69,7 @@ function init_reject() {
 	else if (ajax_url_check_friend(url))
 		param = is_set_feed_range_reject(range, "friend", order, hidden_selected_id);
 	process_feed_list(param);
+	onload_draw_map();
 }
 
 function scrollEventHandler(event){
