@@ -37,6 +37,8 @@ public class FeedRestController {
 
 	@PostMapping(value = "/ajax/contents", produces = "application/json;charset=UTF-8")
 	public ResponseEntity<Map> postFeedList_ajax(@RequestBody FeedDTO dto, HttpSession session) {
+		session.setAttribute("x_site",dto.getX_site());
+		session.setAttribute("y_site",dto.getY_site());
 		List<FeedDTO> sub_list = null;
 		int end_flag = 0;
 		Map result_map = new HashMap<>();

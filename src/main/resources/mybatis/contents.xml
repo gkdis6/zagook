@@ -84,11 +84,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="list" parameterType="Map" resultType="com.project.contents.ContentsDTO">
-        select c.id, c.contentsno, c.filename, c.rdate, c.likecnt, c.privacy, c.x_site, c.y_site, c.contents, m.fname   
+        select c.id, c.contentsno, c.filename, c.rdate, c.likecnt, c.privacy, c.x_site, c.y_site, c.contents, m.fname, c.reply 
         from zagook_contents c join zagook_member m
         on c.id = m.id 
-        where c.id = #{id} 
-        order by rdate desc
+        where privacy = 2
+		and (x_site between #{x_site} - 0.3 and #{x_site} + 0.3)
+		and (y_site between #{y_site} - 0.3 and #{y_site} + 0.3)
     </select>
     
     <select id="likeCnt" parameterType="Map"
