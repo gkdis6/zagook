@@ -4,7 +4,7 @@ $(function start_autocomplete(){
 			if (request.term[0] == "#") {
  				$("#searchInput").css("color", "#337AB7");
  				$("#searchInput").css("text-decoration", "underline");
- 				$("input[name=search_type]").val("tag");
+ 				document.getElementsByName("search_type")[0].setAttribute("value", "tag");
  				$.ajax({
  					type: "get",
  					url: "/searchInput",
@@ -29,7 +29,7 @@ $(function start_autocomplete(){
  			} else {
  				$("#searchInput").css("color", "black");
  				$("#searchInput").css("text-decoration", "none");
- 				$("input[name=search_type]").val("friend");
+ 				document.getElementsByName("search_type")[0].setAttribute("value", "friend");
  				$.ajax({
  					type: "get",
  					url: "/searchInput_friend",
@@ -76,14 +76,19 @@ $(function start_autocomplete(){
          	return $( "<li class='searchbar_item' id='" + item.label + "'><div style='text-align:justify;'><img style='width:40px; height:40px; border-radius:50%;' src='"+item.img+"'><span style='right:10px;position:absolute;top:13px;'>"+item.label+"</span></div></li>" ).appendTo( ul );
     };
 });
-$("#searchInput").change(function () {
+
+$(function () {document.getElementById("searchInput").addEventListener("input", action_url_branch); });
+
+function action_url_branch() {
  	console.log("search_type : ", $("input[name=search_type]").val());
  	if ($("#searchInput").val() == session_id) {
 		$("#searchbar_form").attr("method", "post");
 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
-	} else
+	} else {
  		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
- });
+	}
+}
+ 
 function onsearchbar_login_valid() {
  	onclick_login_open();
  	$("#searchInput").val("");
