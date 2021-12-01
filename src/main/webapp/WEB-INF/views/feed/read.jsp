@@ -152,79 +152,6 @@
 		<img src="/images/261370-200.png" width="70" height="70">
 	</div>
 
-	<div class="modal_update" style="display: none">
-		<div class="modal-dialog" role="document">
-			<div class="modal_updateBox">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h3 class="modal-title" id="updateModalLabel">게시물 수정</h3>
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" action="/contents/update"
-							method="post" onsubmit="return checkIn(this)"
-							enctype="multipart/form-data">
-							<input type="hidden" name="oldfile" value=""> <input
-								type="hidden" id="contentsno" name="contentsno" value="">
-							<div class="form-group">
-								<div class="col-sm-6 col-sm-offset-2">
-									<img id="oldImg" src="/contents/storage/${param.oldfile}">
-								</div>
-								<div class="col-sm-6 col-sm-offset-2">
-									<input type="button" id="updatefilebtn" onclick="updatefile();"
-										value="사진수정">
-								</div>
-								<div class="col-sm-6 col-sm-offset-2" id="selectimg"
-									style="display: none">
-									<input type="file" class="form-control" id="filenameMF"
-										name="filenameMF" accept=".jpg,.png,.gif"
-										onchange="PreviewImage();">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-xs-6">
-									<textarea name="contents" id="contents" class="form-control"
-										style="height: 100px; resize: none;" placeholder="내용"></textarea>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-xs-6">
-									<input type="text" name="tag" id="tag" class="form-control"
-										value="${param.tag}" placeholder="#태그">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-xs-6">
-									<select class="form-control" name="privacy" id="privacy">
-										<option value=0
-											<c:if test= "${param.privacy==0}">selected</c:if>>나만
-											보기</option>
-										<option value=1
-											<c:if test= "${param.privacy==1}">selected</c:if>>친구
-											공개</option>
-										<option value=2
-											<c:if test= "${param.privacy==2}">selected</c:if>>모두
-											공개</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-5">
-									<button type="submit" class="btn btn-primary" id="updateBtn">수정</button>
-									<button type="reset" class="btn" id="closeModal">취소</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-		<div id="createBtn"
-			style="position: fixed; right: 20px; bottom: 20px; z-index: 8"
-			onclick="if(create.style.display=='none'){create.style.display=''}else{create.style.display='none'}">
-			<img src="/images/261370-200.png" width="70" height="70">
-		</div>
-
 		<!-- 게시글 등록 팝업 -->
 		<div
 			style="position: fixed; right: 20px; bottom: 100px; z-index: 8; background: white; display: none;"
@@ -330,6 +257,74 @@
 				<!-- //폼태그부분 END -->
 			</c:otherwise>
 		</c:choose>
+	</div>
+	<!-- update modal -->
+	<div class="modal_update" style="display: none">
+		<div class="modal-dialog" role="document">
+			<div class="modal_updateBox">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title" id="updateModalLabel">게시물 수정</h3>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" action="/contents/update"
+							method="post" onsubmit="return checkIn(this)"
+							enctype="multipart/form-data">
+							<input type="hidden" name="oldfile" value=""> <input
+								type="hidden" id="contentsno" name="contentsno" value="">
+							<div class="form-group">
+								<div class="col-sm-6 col-sm-offset-2">
+									<img id="oldImg" src="/contents/storage/${param.oldfile}">
+								</div>
+								<div class="col-sm-6 col-sm-offset-2">
+									<input type="button" id="updatefilebtn" onclick="updatefile();"
+										value="사진수정">
+								</div>
+								<div class="col-sm-6 col-sm-offset-2" id="selectimg"
+									style="display: none">
+									<input type="file" class="form-control" id="filenameMF"
+										name="filenameMF" accept=".jpg,.png,.gif"
+										onchange="PreviewImage();">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-xs-6">
+									<textarea name="contents" id="contents" class="form-control"
+										style="height: 100px; resize: none;" placeholder="내용"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-xs-6">
+									<input type="text" name="tag" id="tag" class="form-control"
+										value="${param.tag}" placeholder="#태그">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-xs-6">
+									<select class="form-control" name="privacy" id="privacy">
+										<option value=0
+											<c:if test= "${param.privacy==0}">selected</c:if>>나만
+											보기</option>
+										<option value=1
+											<c:if test= "${param.privacy==1}">selected</c:if>>친구
+											공개</option>
+										<option value=2
+											<c:if test= "${param.privacy==2}">selected</c:if>>모두
+											공개</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-5">
+									<button type="submit" class="btn btn-primary" id="updateBtn">수정</button>
+									<button type="reset" class="btn" id="closeModal">취소</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 <script src="/js/feed/top_nav.js"></script>
 <script src="/js/feed/selection_menu.js"></script>
