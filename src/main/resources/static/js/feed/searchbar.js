@@ -4,7 +4,7 @@ $(function start_autocomplete(){
 			if (request.term[0] == "#") {
  				$("#searchInput").css("color", "#337AB7");
  				$("#searchInput").css("text-decoration", "underline");
- 				document.getElementsByName("search_type")[0].setAttribute("value", "tag");
+ 				$("input[name=search_type]").val("tag");
  				$.ajax({
  					type: "get",
  					url: "/searchInput",
@@ -29,7 +29,7 @@ $(function start_autocomplete(){
  			} else {
  				$("#searchInput").css("color", "black");
  				$("#searchInput").css("text-decoration", "none");
- 				document.getElementsByName("search_type")[0].setAttribute("value", "friend");
+ 				$("input[name=search_type]").val("friend");
  				$.ajax({
  					type: "get",
  					url: "/searchInput_friend",
@@ -77,17 +77,14 @@ $(function start_autocomplete(){
     };
 });
 
-$(function () {document.getElementById("searchInput").addEventListener("input", action_url_branch); });
-
-function action_url_branch() {
+$("#searchInput").change(function () {
  	console.log("search_type : ", $("input[name=search_type]").val());
  	if ($("#searchInput").val() == session_id) {
 		$("#searchbar_form").attr("method", "post");
 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
-	} else {
+	} else
  		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
-	}
-}
+ });
  
 function onsearchbar_login_valid() {
  	onclick_login_open();
