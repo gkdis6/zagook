@@ -51,15 +51,14 @@
 				</div>
 				<c:choose>
 				<c:when test="${not empty sessionScope.id }">
-				  	<a href="/feed/myread">My Feed</a>
-				  	<a href="/feed/read">Friends Feed</a>
-				  	<a href="/friend">Friends List</a>
-				  	<a href="/searching">Searching Map</a>
+				  	<a href="/feed/myread" class="tip">My Feed<span>내 게시물 확인하기</span></a>
+				  	<a href="/feed/read" class="tip">Main Feed<span>나와 내 친구의 게시물을 확인하기</span></a>
+				  	<a href="/searching" class="tip">Searching Map<span>전국 지도 위에서 게시물 찾기</span></a>
 			  	</c:when>
 			  	<c:otherwise>
-				  	<a href="javascript:void(0)" onclick="onclick_login_open()">My Feed</a>
-				  	<a href="javascript:void(0)" onclick="onclick_login_open()">Friends Feed</a>
-				  	<a href="javascript:void(0)" onclick="onclick_login_open()">Friends List</a>
+				  	<a href="javascript:void(0)" onclick="onclick_login_open()" class="tip">My Feed<span>내 게시물을 확인할 수 있습니다</span></a>
+				  	<a href="javascript:void(0)" onclick="onclick_login_open()" class="tip">Main Feed<span>나와 내 친구의 게시물을 확인할 수 있습니다</span></a>
+				  	<a href="javascript:void(0)" onclick="onclick_login_open()" class="tip">Searching Map<span>지도 위에서 자유롭게 위치를 변경하며 게시물을 찾을 수 있습니다</span></a>
 			  	</c:otherwise>
 			  	</c:choose>
 			</div>
