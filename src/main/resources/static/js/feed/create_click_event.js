@@ -5,8 +5,8 @@ $(document).on("click", "#reset", function () {
 });
 
 $(document).ready(function () {
-	$("#create").hide();
 	$("#chat").hide();
+	$("#create").hide();
 });
 
 $("#createBtn").on("click", function (e) {

@@ -21,7 +21,8 @@
 
 <script type="text/javascript">
 	function updateM() {
-		var url = "update";
+// 		var url = "update";
+		var url = "passcheck";
 		url += "?email=${dto.email}";
 
 		location.href = url;
