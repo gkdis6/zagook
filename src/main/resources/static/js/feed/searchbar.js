@@ -52,27 +52,6 @@ $(function start_autocomplete(){
  		    		}
  				})
  			}
-			$.ajax({
-				type: "get",
-				url: "/searchInput",
-				data: { type: "json", searchInput: request.term },
-				contentType : "application/json; charset=utf-8;",
-				dataType: "json",
-	            success: function(data) {
-	                response(
-	                    $.map(data, function(item) {
-	                        return {
-	                            label: item.TAG,
-	                            value: item.TAG,
-	                            cnt: item.CNT
-	                        };
-	                    })
-	                );
-	            },
-	            error : function(request, status, error){
-	    			alert("code = "+request.status+" message = "+request.responseText+" error = "+error);
-	    		}
-			})
 		},
 		focus : function(event, ui) { // 방향키로 자동완성단어 선택 가능하게 만들어줌	
 			$(".searchbar_item").css("background-color", "#fff");
@@ -99,7 +78,11 @@ $(function start_autocomplete(){
 });
 $("#searchInput").change(function () {
  	console.log("search_type : ", $("input[name=search_type]").val());
- 	$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
+ 	if ($("#searchInput").val() == session_id) {
+		$("#searchbar_form").attr("method", "post");
+		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
+	} else
+ 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
  });
 function onsearchbar_login_valid() {
  	onclick_login_open();

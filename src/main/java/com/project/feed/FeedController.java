@@ -49,9 +49,8 @@ public class FeedController {
 		return "/feed/read";
 	}
 	
-	@GetMapping("/feed/myread")
+	@RequestMapping("/feed/myread")
 	public String myfeed() {
-
 		return "/feed/myread";
 	}
 	

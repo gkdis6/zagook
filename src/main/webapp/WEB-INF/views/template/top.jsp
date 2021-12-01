@@ -125,7 +125,7 @@
 								<form action="http://localhost:8005/" method="post" id="searchbar_form" onsubmit="return onsearchbar_login_valid();">
 									<input class="form ui-autocomplete-input" type="text" id="searchInput"
 									name="selected_id" autocomplete="off" placeholder="Search Tag or Friend: 태그 검색 시에는 '#'을 붙여주세요">
-									<button type="submit" formmethod="post"><i class="fa fa-search"></i></button>
+									<button type="submit"><i class="fa fa-search"></i></button>
 								</form>
 							</li>
 							<li>
@@ -151,7 +151,7 @@
 								<form action="http://localhost:8005/" method="post"  id="searchbar_form">
 									<input class="form ui-autocomplete-input" type="text" id="searchInput" 
 									name="selected_id" autocomplete="off" placeholder="Search Tag or Friend: 태그 검색 시에는 '#'을 붙여주세요">
-									<button type="submit" formmethod="post"><i class="fa fa-search"></i></button>
+									<button type="submit"><i class="fa fa-search"></i></button>
 								</form>
 							</li>
 							<li class="dropdown"><a class="dropdown-toggle"
