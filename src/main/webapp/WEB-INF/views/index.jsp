@@ -1164,6 +1164,7 @@ input[type=file] {
 		});	
 	</script>
 	<script src="/js/utils/number_format_util.js"></script>
+	<script src="/js/chat/chatimg.js"></script>
 </body>
 
 </html>
