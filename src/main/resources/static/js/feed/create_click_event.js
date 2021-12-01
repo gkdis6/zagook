@@ -5,6 +5,7 @@ $(document).on("click", "#reset", function () {
 });
 
 $(document).ready(function () {
+	$("#chat").hide();
 	$("#create").hide();
 });
 

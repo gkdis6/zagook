@@ -1,0 +1,173 @@
+#div-mypage{
+	padding-left:70px;
+	padding-top: 60px;
+}
+#mypage{
+	margin-left: 20px;
+	padding-top: 20px;
+	width:30%;
+	margin-right:0px;
+	float:left;
+}
+.update-image{
+	font-size:15px;
+}
+#mypagetable{
+	table-layout:fixed;
+}
+#td-img{
+	background-color:#eeeeee;
+}
+#mypage-profile-img{
+	width:250px;
+	height:250px;
+	border-radius: 130px;
+	padding-top:20px;
+	background-color:white;
+}
+table.mypage-type {
+	border-collapse: collapse;
+	text-align: left;
+	line-height: 1.5;
+	border-top: 1px solid #ccc;
+	border-left: 3px solid #191A45;
+	margin: 20px 10px;
+	background-color:white;
+}
+
+table.mypage-type th {
+	width: 147px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #0067a3;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+}
+
+table.mypage-type td {
+	width: 349px;
+	height:47px;
+	padding: 10px;
+	font-size:17px;
+	vertical-align: top;
+	border-right: 1px solid #ccc;
+	border-bottom: none;
+}
+#mypage-button #update-btn{
+	border-radius: 7px;
+	margin-left:10px;
+}
+#mypage-button #delete-btn{
+	border-radius: 7px;
+}
+#mypage-button button {
+	border: 2px solid #191A45;
+	background-color: white;
+	font-weight: bold;
+	color: #191A45;
+	height: 30px;
+}
+
+#mypage-button button:hover {
+	color: white;
+	background: #191A45;
+}
+
+#img-btn{
+	margin-left:110px;
+	margin-bottom:-15px;
+	}
+#fnameMF{
+	width:220px;
+	height:37px;
+	padding-left:8px;
+	margin-top:50px;
+	margin-left:-93px;
+}	
+#mypage-old-img{
+	float:left;
+	width:100px;
+	height:100px;
+	margin-top:27px;
+	margin-left:-10px;
+}
+#intro{
+	padding-top:88px;
+	float:right;
+	width:68%;
+}
+#div-intro{
+	padding-top:13px;
+}
+#intro-table{
+	padding-top:10px;
+	border:1px solid #ccc;
+}
+table#intro-table td{
+	text-align:center;
+	height:150px;
+	display:table-cell;
+	vertical-align:middle;
+	word-break:break-all;
+	color:black;
+	width:722px;
+	font-size:16px;
+	font-weight:bold;
+	line-height:2.4;
+	padding-left:15px;
+	border-left: 3px solid #191A45;
+	border-right: 2px solid #ccc;
+	border-top: 2px solid #ccc;
+}
+#div-add-info{
+	padding-top: 35px;
+	margin-left:6px;
+	float:left;
+	width:309px;
+	height:300px;
+	}
+
+	
+table#tel-info th,
+table#job-info th,
+table#date-info th{
+	width: 147px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #0067a3;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	
+}
+table#tel-info td,
+table#job-info td,
+table#date-info td{
+	width: 349px;
+	height:47px;
+	padding: 10px;
+	font-size:17px;
+	vertical-align: top;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+.div-tel-job{
+	width:720px;
+	float:left;	
+	padding-bottom:30px;
+	padding-top:13px;
+}
+table#job-info{
+/* 	width:40%; */
+	float: right;
+	border-left: 3px solid #191A45;
+}
+table#tel-info{
+	float:left;
+	width:308px;
+	border-left: 3px solid #191A45;
+}
+table#date-info{
+	border-left: 3px solid #191A45;
+}

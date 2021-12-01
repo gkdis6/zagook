@@ -1,0 +1,86 @@
+
+#need, #idcheck,#emailcheck{
+	color:red;
+}
+#create-header{
+	width:460px;
+	padding:0px 0px 30px 110px;
+}
+#div-create{
+	padding-left:50px;
+	margin-top:-17px;
+	width:30%;
+}
+#infozagook{
+	float:right;
+	width:55%;
+	padding-top:180px;
+}
+#info-header{
+	margin-top:-1px;
+	padding-bottom:30px;
+}
+#div-create-form{
+	margin-top:-10px;
+	margin-left:10px;
+}
+#div-create-form>.form-control{
+	color:red;
+}
+.create-btn{
+	float:left;
+	padding-left:332px;
+	padding-top:0px;
+}
+#create-btn{
+	border-radius: 7px;
+	margin-left:10px;
+}
+#back-btn{
+	border-radius: 7px;
+}
+.create-btn>button {
+	border: 2px solid #191A45;
+	background-color: white;
+	font-weight: bold;
+	color: #191A45;
+	height: 30px;
+}
+.create-btn>button:hover {
+	color: white;
+	background: #191A45;
+}
+.create-group{
+	float:left;
+	width:1000px;
+	padding-top:20px;
+	margin-right:0px;
+}
+input[class=form-control]:focus {
+	border:3px #191A45 solid
+}
+#emailcheck,
+#idcheck{
+	padding: 15px 0px 5px 190px;	
+}
+
+#zagookintro{
+/* 	padding-top:10px; */
+	border:1px solid #ccc;
+}
+table#zagookintro td{
+	text-align:center;
+	height:150px;
+	display:table-cell;
+	vertical-align:middle;
+	word-break:break-all;
+	color:black;
+	width:722px;
+	font-size:16px;
+	font-weight:bold;
+	line-height:2.4;
+/* 	padding-left:15px; */
+	border-left: 3px solid #191A45;
+	border-right: 2px solid #ccc;
+	border-top: 2px solid #ccc;
+}

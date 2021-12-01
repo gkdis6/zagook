@@ -4,85 +4,48 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="reply_1">
+<mapper namespace="com.project.reply.ReplyMapper">
 
-<!-- 댓글 쓰기 -->
-<insert id="picture_reply_write" parameterType="com.project.reply.ReplyTO">
-    insert into zagook_reply(rnum, content, regdate, id, contentsno)
-    values((select nvl(max(rnum),0)+1 from zagook_reply), #{content}, sysdate, #{id}, #{contentsno})
-</insert>
+	<!-- 댓글 쓰기 -->
+	<insert id="write_reply" parameterType="Map">
+	    insert into zagook_reply(rnum, content, regdate, id, contentsno)
+	    values((select nvl(max(rnum),0)+1 from zagook_reply), #{content}, sysdate, #{id}, #{contentsno})
+	</insert>
+	
+	<select id="get_reply" parameterType="int" resultType="com.project.reply.ReplyDTO">
+	    select * 
+	    from zagook_reply
+	    where rnum=#{rnum}
+	</select>	
+	
+	<!-- 댓글 삭제 - 답글 없음 -->
+	<delete id="delete_reply" parameterType="Map">
+	    delete from zagook_reply
+	    where rnum=#{rnum} and id=#{id}
+	</delete>
 
-<!-- 모댓글일경우 no, grp 일치하게 함 -->
-<update id="picture_reply_check" parameterType="com.project.reply.ReplyTO">
-    update zagook_reply set grp=#{grp}
-    where rnum != grp
-</update>
+	
+	<!-- 댓글 리스트 가져오기 -->
+	<select id="call_replyList" parameterType="com.project.reply.ReplyDTO" resultType="com.project.reply.ReplyDTO">
+	    select r.rnum, r.contentsno, r.id, r.content, r.regdate, m.fname
+	    from zagook_reply r left outer join zagook_member m
+	    on r.id = m.id
+	    where r.contentsno = #{contentsno}
+	    order by regdate desc
+	</select>
+		
+	<!-- 댓글 추가/삭제시 댓글 갯수 가져오기 -->
+	<select id="reply_count" parameterType="Map" resultType="int">
+	    select count(*)
+	    from zagook_reply
+	    where contentsno=#{contentsno}
+	</select>	
+			
+	<!-- p_board에 댓글수 업데이트 -->
+	<update id="replycnt_update" parameterType="Map">
+	    update zagook_contents set reply=#{reply}
+	    where contentsno=#{contentsno}
+	</update>
 
-<!-- 모댓글이 삭제된 댓글일때 그에 딸린 답글들이 모두삭제되면 테이블에서 완전히 삭제한다 -->
-<delete id="picture_reply_delete_after_rereply_delete" parameterType="com.project.reply.ReplyTO">
-    delete from zagook_reply
-    where content="" and grp=#{grp}
-</delete>
-
-<!-- 답글 쓰기 -->
-<insert id="picture_rereply_write" parameterType="com.project.reply.ReplyTO">
-    insert into zagook_reply
-    values(0, #{contentsno}, #{grp}, 0, #{grpl}, #{id}, #{content}, sysdate)
-</insert>
-
-<!-- p_board에 댓글수 증가 -->
-<update id="picture_reply_up" parameterType="com.project.contents.ContentsDTO">
-    update zagook_contents set reply=reply+1 
-    where rnum=#{rnum}
-</update>
-
-<!-- 댓글 리스트 가져오기 -->
-<select id="picutre_replyList" parameterType="com.project.reply.ReplyTO" resultType="com.project.reply.ReplyTO">
-    select r.rnum, r.contentsno, r.grp, r.grpl, r.id, r.content, date_format(regdate,'%Y-%m-%d') regdate, datediff(now(), regdate) wgap , u.profile
-    from zagook_reply r left outer join user u
-    on r.id = u.nick
-    where r.contentsno = #{contentsno}
-    order by grp asc, grps desc
-</select>
-
-
-<!-- 댓글 추가/삭제시 댓글 갯수 가져오기 -->
-<select id="picture_reply_count" parameterType="com.project.contents.ContentsDTO" resultType="com.project.contents.ContentsDTO">
-    select reply 
-    from zagook_contents
-    where rnum=#{rnum}
-</select>
-
-<!-- 모댓글의 답글수를 카운트 -->
-<select id="picture_count_rereply" parameterType="com.project.reply.ReplyTO" resultType="int">
-    select count(rnum)
-    from zagook_reply
-    where rnum != #{rnum} and grp = #{rnum}
-</select>
-
-<!-- 답글수를 카운트 -->
-<select id="picture_count_rereply_fromrereply" parameterType="com.project.reply.ReplyTO" resultType="int">
-    select count(rnum)
-    from zagook_reply
-    where rnum != #{grp} and grp = #{grp}
-</select>
-
-<!-- 모댓글 삭제 - 답글 없음 -->
-<delete id="picture_reply_delete" parameterType="com.project.reply.ReplyTO">
-    delete from zagook_reply
-    where rnum=#{rnum}
-</delete>
-
-<!-- 모댓글 삭제 - 답글 있음 -->
-<update id="picture_reply_not_delete" parameterType="com.project.reply.ReplyTO">
-    update zagook_reply set content=""
-    where rnum=#{rnum}
-</update>
-
-<!-- p_board에 댓글수 감소 -->
-<update id="picture_reply_down" parameterType="com.project.contents.ContentsDTO">
-    update zagook_contents set reply=reply-1
-    where rnum=#{rnum}
-</update>
 
 </mapper>

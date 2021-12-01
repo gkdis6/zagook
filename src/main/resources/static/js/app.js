@@ -53,8 +53,19 @@ $(function () {
         e.preventDefault();
     });
     disconnect();
-    $( "#connect_btn" ).click(function() { connect(); });
-    $( "#disconnect_btn" ).click(function() { disconnect(); });
+    $(document).ready(function(){
+    $("#chatcheckbox").change(function(){
+        if($("#chatcheckbox").is(":checked")){
+			console.log("체크박스 체크");
+			connect();
+        }else{
+			console.log("체크박스 해제");
+			disconnect();
+        }
+    	});
+	});
+//    $( "#connect_btn" ).click(function() { connect(); });
+//    $( "#disconnect_btn" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendMessage(); });
 });
 

@@ -71,8 +71,9 @@ public class MemberController {
       int cnt = service.loginCheck(map);
       MemberDTO dto = service.read(email);
       map.put("id", dto.getId());
+      System.out.println("@@@@@@@@@:::"+map);
       if(cnt>0) { //회원
-         
+    	  System.out.println("1111111111111111111");
          //grade>> String grade = service.getGrade(map.get("id"));
          session.setAttribute("id", map.get("id"));
          session.setAttribute("email",map.get("email"));
@@ -194,9 +195,28 @@ public class MemberController {
          email = (String) session.getAttribute("email");
       }
       MemberDTO dto = service.read(email);
+      System.out.println("@@@@@@@");
       model.addAttribute("dto",dto);
       System.out.println(dto);
       return "/member/mypage";
+   }
+   
+   @PostMapping("/member/uppass")
+   public String uppass(String email,String password, Model model) {
+	   Map map = new HashMap();
+       map.put("email", email);
+       map.put("password", password);
+       System.out.println("map::::"+map);
+       int cnt = service.passwordCheck(map);
+       
+       if(cnt>0) {
+    	   System.out.println("이걸 안타나?");
+    	   MemberDTO dto = service.read(email);
+    	   model.addAttribute("dto",dto);
+    	   return "/member/update";
+       } 
+       System.out.println("이걸 타나?");
+	   return "./passwdError";
    }
    
    @GetMapping("/member/update")
@@ -204,6 +224,7 @@ public class MemberController {
       if(email == null) {
          email = (String)session.getAttribute("email");
       }
+      System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@:::@@@@@");
       MemberDTO dto = service.read(email);
       model.addAttribute("dto",dto);
       return "/member/update";
@@ -225,6 +246,7 @@ public class MemberController {
        }
 
     }
+
    
    
    @PostMapping("/member/updateFile")
@@ -265,8 +287,6 @@ public class MemberController {
           map.put("email", email);
           map.put("password", password);
           int cnt = service.passwordCheck(map);
-          System.out.println(email+":::"+password);
-          System.out.println("cnt::::"+cnt);
           int dcnt = 0;
           if (cnt == 1) {
              dcnt = service.delete(email);
@@ -283,5 +303,12 @@ public class MemberController {
              return "./error";
           }
 
+       }
+       @GetMapping("/member/passcheck")
+       public String uppasscheck() {
+    	 //이거 소셜 거르는 코드 짜야함 
+    	   //소셜이 아니면 uppassch
+    	   //소셜이 이면 바로 업데이트폼 
+    	   return "/member/uppassch";
        }
 }

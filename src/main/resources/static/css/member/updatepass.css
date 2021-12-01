@@ -1,0 +1,17 @@
+#red{
+color:red;	
+}
+.con-uppass{
+	padding:100px 0px 0px 600px;
+	
+}
+#uppass{
+	padding:0px 0px 70px 0px;
+}
+#span-uppass{
+	color:#191A45;
+/* 	color:white; */
+/* 	background-color:#191A45; */
+	font-weight:bold;
+	font-size:20px;
+}

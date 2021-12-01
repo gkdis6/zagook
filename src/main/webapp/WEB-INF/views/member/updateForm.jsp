@@ -4,45 +4,26 @@
 <head>
   <title>회원수정</title>
   <meta charset="utf-8">
+ <link rel="stylesheet" href="/css/feed/searchbar.css" type="text/css">
+ <link rel="stylesheet" href="/css/member/hl.css" type="text/css">
+ <link rel="stylesheet" href="/css/member/update.css" type="text/css">
   <style type="text/css">
-  	#need,#emailcheck{
-  		color:red;
-  	}
-  	.container {
-	margin-left: 0px; 
-	padding: 50px 0px 0px;
-	}
-	.form-horizontal{
-	margin-left: -90px;
-	font-size:20px;
-	padding-top:90px;
-	}
-	#email{ 
-		font-size:20px;
-		font-weight:bold;
-		padding-top:4px;
-/* 		outline : solid 1px black; */
-		
- 	}
   </style>
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script type="text/javascript">
-  function emailCheck(email){
-	  //alert(email);
-	  if(email==''){
-		  alert("email를 입력하세요");
-		  document.frm.email.focus();
+  
+  function idCheck(id){
+	  if(id==''){
+		  alert("닉네임을 입력하세요");
+		  document.frm.id.focus();
 	  }else{
-		  var url = "emailcheck";
-		  url += "?email="+email;
-		  
-		  $.get(url, function(data, textStatus) {
-			  
-			  $("#emailcheck").text(data.str);
-		  	
+		  var url = "idcheck";
+		  var param = "id="+id;
+		  $.get(url, param, function(data, textStatus) {
+			  $("#idcheck").text(data.str);
 		  })
 	  }
-  }
+  } 
 function inCheck(f){
 	
 	if(f.id.value.length==0){
@@ -59,53 +40,57 @@ function inCheck(f){
 </script>
 </head>
 <body>
-<div class="container">
+<div id="div-update-con">
 
-<h2 class="col-sm-offset-2 col-sm-10" style="margin-left:15px;font-weight:bold">회원수정</h2>
-<label class="col-sm-offset-2 col-sm-10"style="margin-left:15px">(<span id="need">*</span> 필수입력사항)</label>
- 
   <form class="form-horizontal" 
         action="update"
         method="post"
         name = 'frm'
         onsubmit="return inCheck(this)"
-        
+        id="update-form"
         >
-     
-<%--     <input type="hidden" name="social" value="${dto.social}"> --%>
+<!-- <h2 class="col-sm-offset-2 col-sm-10" style="margin-left:15px;font-weight:bold">회원수정</h2> -->
+<div id="updateform-header">
+<span class="hl">회원정보 수정</span>
+<label style="margin-top:15px">(<span id="need">*</span> 필수입력사항)</label>
+	<hr class="update-part" align="left">
+</div>
+	<div id="update-group">
     <input type="hidden" name="email" value="${dto.email}">
-	<hr width="50%" align="left">
-	<div class="form-group">
+	<div class="update-group">
 		<label class="control-label col-sm-2" for="email">이메일</label>
 		<div class="col-sm-3" id="email">${dto.email}</div>
 	</div>
-	<div class="form-group">
+	<div class="update-group">
       <label class="control-label col-sm-2" for="id"><span id="need">*</span>닉네임</label>
       <div class="col-sm-3">          
-      <input type="text" class="form-control" id="id" 
+      <input type="text" class="update-input" id="id" 
          value="${dto.id}"  name="id">
       </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="mname"><span id="need">*</span>이름</label>
+    <div class="update-group">
+      <label class="control-label col-sm-2" for="mname"><span id="need">*</span>성명</label>
       <div class="col-sm-3">          
-        <input type="text" class="form-control" id="mname" 
+        <input type="text" class="update-input" id="mname" 
          value="${dto.mname}"  name="mname">
       </div>
     </div>
-    <h3 style="padding-left:120px; font-weight:bold;">추가 정보</h3>
-    <hr width="50%" align="left" style="padding-bottom:10px;">
-    <div class="form-group">
+    <div id="update-add-info">
+    <span class="hl">추가 정보 수정</span>
+<!--     <h3 style="padding-left:120px; font-weight:bold;">추가 정보</h3> -->
+    <hr class="update-part"align="left">
+    </div>
+    <div class="update-group">
       <label class="control-label col-sm-2" for="tel">전화번호</label>
       <div class="col-sm-4">          
-        <input type="text" class="form-control" id="tel" 
-         value="${dto.tel}"  name="tel">
+        <input type="text" class="update-input" id="tel" 
+         value="${dto.tel}"  name="tel" maxlength='13'>
       </div>
     </div>
-    <div class="form-group">
+    <div class="update-group">
     <label class="control-label col-sm-2" for="job">직업</label>
     <div class="col-sm-2">
-    	<select name="job" class="form-control">
+    	<select name="job" class="update-input">
     		<option value="0">선택하세요</option>
 			<option value="A01">회사원</option>
 			<option value="A02">전산관련직</option>
@@ -125,34 +110,29 @@ function inCheck(f){
     
     </div>
     </div>
-    <div class="form-group">
+    <div class="update-group">
       <label class="control-label col-sm-2" for="intro">소개말</label>
       <div class="col-sm-4">          
-        <textarea id="introduction" name="introduction" cols="50" rows="5" style="border-color:grey;">${dto.introduction}</textarea>
+        <textarea id="introduction" name="introduction" cols="50" rows="5">${dto.introduction}</textarea>
         <div id="intro_cnt" >(0 / 100)</div>
       </div>
     </div>   
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-5">
-        <button type="submit" class="btn btn-default">수정</button>
-        <button type="reset" class="btn btn-default" onclick="location.href='${root}/member/mypage'">취소</button>
+    <div class="update-group">        
+      <div class="update-btn">
+        <button id="update-btn" type="submit" class="btn btn-default">수정</button>
+        <button id="back-btn" type="reset" class="btn btn-default" onclick="location.href='${root}/member/mypage'">취소</button>
       </div>
     </div>
+	</div>
   </form>
 
 <br><br>
 </div>
 <script>
-$(document).ready(function() {
-    $('#introduction').on('keyup', function() {
-        $('#intro_cnt').html("("+$(this).val().length+" / 100)");
-
-        if($(this).val().length > 100) {
-            $(this).val($(this).val().substring(0, 100));
-            $('#intro_cnt').html("(100 / 100)");
-        }
-    });
-});
 </script>
+<!-- <script src="/js/feed/top_nav.js"></script> -->
+<script src="/js/feed/searchbar.js"></script>
+<script src="/js/member/update.js"></script>
+<script src="/js/member/intro.js"></script>
 </body>
 </html>

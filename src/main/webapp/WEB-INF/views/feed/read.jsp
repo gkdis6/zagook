@@ -19,11 +19,17 @@
 <link rel="stylesheet" href="/css/feed/loading_animation.css" type="text/css">
 <link rel="stylesheet" href="/css/feed/overlay.css" type="text/css">
 <link rel="stylesheet" href="/css/create.css" type="text/css">
+<link rel="stylesheet" href="/css/chat/chat.css" type="text/css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+<!-- 챗봇 -->
+<script src="../js/sockjs.min.js"></script>
+<script src="../js/stomp.min.js"></script>
+<script type="text/JavaScript" src="../js/app.js"></script>
+<!-- 챗봇 -->
 <script>let session_id = '<%=(String)session.getAttribute("id")%>';</script>
 </head>
 <body>
@@ -41,6 +47,7 @@
 				  	<a href="/feed/myread">My Feed</a>
 				  	<a href="/feed/read">Friends Feed</a>
 				  	<a href="/friend">Friends List</a>
+				  	<a href="/searching">Searching Map</a>
 			  	</c:when>
 			  	<c:otherwise>
 				  	<a href="javascript:void(0)" onclick="onclick_login_open()">My Feed</a>
@@ -87,25 +94,51 @@
 			<img src="">
 		</div>
 	</div>
-	<div class="modal_delete" style="display: none">
-	  <div class="modal-dialog" role="document" style=>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">게시물 삭제</h5>
-		<button type="button" class="close" id="closeModal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        게시물을 정말 삭제하시겠습니까?
-      </div>
-      <div class="modal-footer">
-      	<button type="button" class="btn btn-primary" id="deleteBtn">삭제</button>
-       	<button type="button" class="btn btn-secondary" id="closeModal">취소</button>
-      </div>
-    </div>
-  </div>
+	<!-- 챗봇  --------------------------------------------------------------------------- -->
+	<div id="chatBtn"
+		style="position: fixed; right:20px; bottom: 170px; z-index: 8"
+		onclick="if(chat.style.display=='none'){chat.style.display=''}else{chat.style.display='none'}">
+		<img src="./images/chat1.png" style="width:60px; height:60px; opacity:0.7;">
 	</div>
+	<div id="chat" style="display:none"> 
+		<div class="modal-content">
+			<div class="modal-header" id="chatheader">
+				<H4 style="padding-bottom:10px; font-weight:bold;">ZAGOOK 문의</H4>
+				
+				<form class="form-inline">
+					<div class="form-group" id="chatform">
+						<label for="connect" style="width:60%;text-align:center;font-size: 13px;">
+						문의 챗봇 연결하기
+						</label>
+						<input type="checkbox" id="chatcheckbox">
+						<label id="chatlabel" for="chatcheckbox"><span></span></label>
+					</div>
+				</form>
+			</div>
+			<div id="chatcontent">
+				<div class="modal-body" id="chatbody">
+					<div class="chat_main">
+						<div id="main-content" class="container" style="width: 100%;">
+							<div class="row">
+								<div>
+									<table id="conversation" class="table table-striped">
+										<tbody id="communicate" style="margin-left:0px;">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+					<div class="form-group" id="chatform" >
+						<input type="text" id="msg" class="form1-control"
+							placeholder="문의사항을 입력하세요." style="width: 80%;">
+						<button id="send" class="btn btn-default" disabled type="submit">전송</button>
+					</div>
+			</div>
+		</div>
+	</div>
+	<!-- 챗봇 --------------------------------------------------------------------------- -->
 	<div id="createBtn" style="position: fixed; right: 20px; bottom: 20px; z-index: 8"
 		onclick="if(create.style.display=='none'){create.style.display=''}else{create.style.display='none'}">
 		<img src="/images/261370-200.png" width="70" height="70">
@@ -124,7 +157,7 @@
 					<div class="modal-body">
 						<form action="/member/login" class="was-validated" method="post">
 							<div class="form-group">
-								<label for="id" align="left">아이디 </label> <input type="text" class="form-control"
+								<label for="id">아이디 </label> <input type="text" class="form-control"
 									style="width:250px;height:40px;" id="userId" placeholder="Enter ID" name="id"
 									required="required" value='${c_id_val}'>
 							</div>
@@ -218,6 +251,7 @@
 <script src="/js/utils/send_post_util.js"></script>
 <script src="/js/utils/login_modal_open.js"></script>
 <script src="/js/feed/url_pattern/url_regex.js"></script>
+<script src="/js/feed/create_click_event.js"></script>
 <script src="/js/feed/map/feed_map.js"></script>
 <script src="/js/feed/feed_ajax/feed_start_end_util.js"></script>
 <script src="/js/feed/feed_ajax/feed_ajax.js"></script>
@@ -234,7 +268,6 @@
 <script src="/js/data.js"></script>
 <script src="/js/feed/loading_animation.js"></script>
 <script src="/js/feed/feed_ajax/feed_img_click.js"></script>
-<script src="/js/feed/create_click_event.js"></script>
 <script src="/js/crud/deletemodal.js"></script>
 <script>
 <c:if test="${!empty sessionScope.id }">

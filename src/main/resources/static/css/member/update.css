@@ -1,0 +1,84 @@
+#email{
+	font-size:20px;
+	font-weight:bold;
+	padding-top:3px;
+}
+#need, #emailcheck{
+	color:red;
+}
+#div-update-con.form-horizontal{
+	width:700px;
+	height:600px;
+	
+}
+#div-update-con{
+	padding:20px 0px 0px 40px;
+}
+#updateform-header{
+/* 	float:left; */
+	margin-bottom:-45px;
+	padding: 26px 0px 0px 17px;
+}
+#update-formgroup.form-group{
+	padding-top : 200px;
+}
+.update-group{
+	width:765px;
+	padding-top:50px;
+	margin-right:0px;
+}
+.update-gropu input{
+	width: 220px;
+}
+#update-add-info{
+	padding: 90px 0px 0px 17px;
+	margin-bottom:-52px;
+}
+
+.update-input{
+	display:block;
+	width:220px;
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height:1.42;
+	color: #555;
+	background-color:white;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+#introduction{
+	border:1px solid #ccc;
+	font-size:15px;
+}
+.update-part{
+	width:35%;
+	border-top:3px solid #eee;
+}
+#update-group>update-input{
+	padding-top:30px;
+}
+.update-btn{
+	padding-top:100px;
+	margin-left:35px;
+	float:left;
+}
+#update-btn{
+	border-radius: 7px;
+	margin-left:10px;
+}
+#back-btn{
+	border-radius: 7px;
+}
+.update-btn>button {
+	border: 2px solid #191A45;
+	background-color: white;
+	font-weight: bold;
+	color: #191A45;
+	height: 30px;
+}
+
+.update-btn>button:hover {
+	color: white;
+	background: #191A45;
+}

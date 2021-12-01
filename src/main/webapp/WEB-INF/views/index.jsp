@@ -390,7 +390,7 @@ input[type=file] {
 						// 지도의 확대 레벨
 					};
 				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-				  
+				let overlays = [];
 				var positions = [
 					<c:choose>   
 					<c:when test="${empty list}">
@@ -420,22 +420,41 @@ input[type=file] {
 					
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function (position) {
-						alert(position.coords.latitude + ' ' + position.coords.longitude);
+						map.setCenter(new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude));
 						var marker = new kakao.maps.Marker({
 							map: map,
-							position: new kakao.maps.LatLng(position.coords.latitude, position.coords
-								.longitude)
+							position: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude)
 						});
 						var infowindow = new kakao.maps.InfoWindow({
 							content: '<div class="infowindow" id="myloca" style="text-align: center; width:150px;">내 위치</div>'
 						});
-						var markerImage = new kakao.maps.MarkerImage(
-							'./images/736653.png',
-							new kakao.maps.Size(50, 53));
+						var markerImage = new kakao.maps.MarkerImage('./images/736653.png', new kakao.maps.Size(50, 53));
 						marker.setImage(markerImage);
-						kakao.maps.event.addListener(marker, 'mouseover', makeOverListener2(map, marker,
-							infowindow));
+						kakao.maps.event.addListener(marker, 'mouseover', makeOverListener2(map, marker, infowindow));
 						kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+						kakao.maps.event.addListener(map, 'dragstart', function(){
+							var len = overlays.length, i = 0;
+
+						    for (; i < len; i++) {
+						        overlays[i].setMap(null);
+						    }
+
+						    overlays = [];
+						});
+						kakao.maps.event.addListener(map, 'dragend', function(){
+							var latlng = map.getCenter();
+							var center_marker = new kakao.maps.Marker({
+								map: map,
+								position: new kakao.maps.LatLng(latlng.getLat(), latlng.getLng())
+							});
+							var center_markerimg = new kakao.maps.MarkerImage('./images/black_marker.png', new kakao.maps.Size(25, 37));
+							center_marker.setImage(center_markerimg);
+							overlays.push(center_marker);
+							var x_site = latlng.getLat();
+							var y_site = latlng.getLng();
+							console.log("x_site : "+x_site);
+							console.log("y_site : "+y_site);
+						});
 					}, error);
 				}
 				function error(){

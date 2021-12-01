@@ -1,0 +1,135 @@
+.modal-content {
+	border-radius: 30px;
+}
+
+.modal-header {
+	border: none;
+}
+
+ #chatbody{
+	background-color: #191a45;
+	min-height: 100px;
+}
+#chatheader{
+	padding:0px;
+	color:#191a45;
+	
+}
+#chat {
+	position: fixed;
+	right: 20px;
+	bottom: 230px;
+	z-index: 8;
+	width: 300px;
+	height: auto;
+	opacity: 0.8;
+	color: white;
+}
+
+#msg {
+	border: 0; border-bottom : 1px solid grey;
+	color: black;
+	border-bottom: 1px solid grey;
+}
+
+#chatform {
+	border-bottom: none;
+	display: flex;
+	flex-direction: row;
+	height:40px;
+	width:100%;
+	margin-bottom:2.3px;
+	padding:3px 0px 0px 10px;
+}
+
+#send {
+	width: 40px;
+	height: 26px;
+	padding: 4px 0px 0px 3px;
+}
+
+.communicate {
+	width: 100%;
+}
+
+.conversation:ntn-child(odd) {
+	text-align: right;
+	color: black;
+}
+
+#chatform input[type="checkbox"] {
+	position: absolute;
+	visibility: hidden;
+}
+
+#chatcheckbox {
+	color: transparent;
+}
+
+#checkbox {
+	z-index: 9;
+}
+
+#chatlabel {
+	z-index: 9;
+	display: inline-block;
+	position: relative;
+	/*   position: absolute; */
+	width: 84px;
+	height: 34px;
+	border-radius: 17px;
+	background-color: #191a45;
+	/*   background-color: #ddd; */
+	transition-duration: 0.2s;
+}
+
+label#chatlabel span {
+	position: absolute;
+	left: 3px;
+	top: 3px;
+	z-index: 1;
+	width: 38px;
+	height: 28px;
+	border-radius: 14px;
+	background-color: #bfc0e8;
+	transition-duration: 0.2s;
+}
+
+label#chatlabel:before, label#chatlabel:after {
+	position: absolute;
+	top: 0;
+	width: 45px;
+	font-size: 14px;
+	line-height: 24px;
+	color: black;
+	text-align: center;
+}
+
+label#chatlabel:before {
+	left: 0;
+	top: 5px;
+	color: white;
+	content: 'ON';
+}
+
+label#chatlabel:after {
+	right: 0px;
+	top: 5px;
+	color: white;
+	content: 'OFF';
+}
+
+input:checked+#chatlabel {
+	background-color: #191a45;
+}
+
+input:checked+label#chatlabel span {
+	left: 29px;
+	transform: translateX(15px);
+	/*span 나가는 정도 */
+}
+img#chatBtn{
+	opacity: 0.8;
+	width:60;
+}
+	

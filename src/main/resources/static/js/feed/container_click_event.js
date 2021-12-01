@@ -29,6 +29,14 @@ function img_click(event) {
 	$(".modal_imgBox img").attr("src", imgSrc);
 }
 
+function reply_click(event) {
+	event_flag = 5;
+	console.log(event_flag);
+}
+function reply_delete(event){
+	event_flag = 6;
+}
+
 function container_click(event) {
 	console.log(event_flag);
 	if (event_flag == 1) {
@@ -56,7 +64,101 @@ function container_click(event) {
 		onclickTag(event);
 	} else if (event_flag == 3) {
 		onclickId(event);
-	} else if(event_flag == 0){
+	} else if (event_flag == 5)	{
+		console.log(event.currentTarget);
+		let param = event.currentTarget.id;
+		var target = document.getElementById("reply-list"+param);
+		$.ajax({
+	        url : '/call_replyList',
+	        type : 'get',
+	        data : {
+	            contentsno : param
+	        },
+	        contentType : "application/json; charset=utf-8;",
+	        dataType : 'json',
+	        success : function(data) {
+	
+	            console.log("댓글 리스트 가져오기 성공");
+	            if(session_id != 'null'){
+		            let write_html="";
+					write_html+='<div class="input_reply_div">';
+					write_html+='	<input class="w-100 form-control input_reply" id="input_reply'+param+'" type="text" placeholder="댓글입력...">';
+					write_html+='	<button type="button" class="btn btn-success mb-1 write_reply" name="'+param+'">댓글&nbsp;달기</button>';
+					write_html+='</div>';
+					let div_1 = document.createElement('div');
+					div_1.className = "row reply_wirte";
+					div_1.innerHTML = write_html;
+		            
+					target.appendChild(div_1);
+				}
+				// 댓글 목록을 html로 담기
+	            let listHtml = "";
+	            for(const i in data){
+	                let rnum = data[i].rnum;
+	                let contentsno = data[i].contentsno;
+	                let id = data[i].id;
+	                let content = data[i].content;
+	                let regdate = data[i].regdate;
+	                let fname = data[i].fname;
+					console.log(rnum);
+					console.log(contentsno);
+					console.log(id);
+					console.log(content);
+					console.log(regdate);
+					console.log(fname);
+	
+	                listHtml += "<div class='row replyrow reply" + rnum + "'>";
+	
+                    listHtml += "	<div class='col-1'>";
+                    listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
+                    listHtml += "	</div>";
+                    listHtml += "	<div class='rereply-content col-8'>";
+                    listHtml += "		<div>";
+                    listHtml += "			<span>";
+                    listHtml += "				<b>"+ id +"</b>";
+                    listHtml += "			</span>";
+                    listHtml += "			<span>";
+                    listHtml += 				content;
+                    listHtml += "			</span>";
+                    listHtml += "		</div>";
+                    listHtml += "	</div>";
+
+                  	
+
+                    listHtml += "	<div class='col-3 reply-right'>";
+                    listHtml += "		<div>";
+                    listHtml += 			regdate.substring(2,16);
+                    listHtml += "		</div>";
+                    // 책갈피
+                    // 현재 로그인 상태이고..
+                    console.log(session_id);
+                    if(session_id != "null"){
+
+                        if(session_id == id){
+                            listHtml += "		<div>";
+                            listHtml += "			<button href='javascript:' rnum='"+ rnum  + "' contentsno='"+ contentsno +"' class='reply_delete' onclick='reply_delete(event)'>삭제</button>";
+                            listHtml += "		</div>";
+                        }
+                    }
+
+                    listHtml += "	</div>";
+                //}
+
+                	listHtml += "</div>";
+                	}
+                	let newElement = document.createElement('div');
+                	newElement.className = "reply_down_container"+param;
+					newElement.innerHTML = listHtml;
+		            
+					target.appendChild(newElement);
+				
+	        },
+	        error: function() {
+	            alert('서버 에러');
+	        }
+    	})
+    	document.getElementById('reply_btn'+param).onclick = null;
+	}else if(event_flag == 0){
 		let filename = event.currentTarget.getAttribute("filename");
 		let posi = new kakao.maps.LatLng(event.currentTarget.getAttribute("x_site"), event.currentTarget.getAttribute("y_site"));
 		overlay_pre.setMap(null);
@@ -102,4 +204,110 @@ function time_container_click(event) {
 	time_order_event_flag = 0;
 }
 
-			
+
+$(document).on('click',"button.reply_delete", function(){
+	let name = $(this).attr("rnum");
+	console.log(name);
+	var ans = confirm("댓글을 삭제하시겠습니까?");
+    if(!ans) return false;
+    
+	$.ajax({
+		url : "/delete_reply",
+		type : "get",
+		data : {
+			rnum : name
+		},
+		contentType : "application/json; charset=utf-8;",
+		dataType : 'json',
+		success : function(data){
+			$(".reply"+name).remove();
+		},
+		error : function(data) {
+            alert("댓글 삭제 중 오류가 발생하였습니다.");
+        }
+	})
+});	
+
+$(document).on('click',"button.write_reply", function(){
+	let name = $(this).attr("name");
+	let content = $('#input_reply'+name).val();
+	if(name == ""){
+		alert("내용을 입력해주세요");
+		return false;
+	}
+	console.log(name);
+	var ans = confirm("댓글을 등록하시겠습니까?");
+    if(!ans) return false;
+    $('#input_reply'+name).val("");
+	$.ajax({
+		url : "/write_reply",
+		type : "get",
+		data : {
+			contentsno : name,
+			content: content
+		},
+		contentType : "application/json; charset=utf-8;",
+		dataType : 'json',
+		success : function(data){
+			$(".reply_down_container"+name).children().remove();
+			let listHtml = "";
+            for(const i in data){
+                let rnum = data[i].rnum;
+                let contentsno = data[i].contentsno;
+                let id = data[i].id;
+                let content = data[i].content;
+                let regdate = data[i].regdate;
+                let fname = data[i].fname;
+				console.log(rnum);
+				console.log(contentsno);
+				console.log(id);
+				console.log(content);
+				console.log(regdate);
+				console.log(fname);
+
+                listHtml += "<div class='row replyrow reply" + rnum + "'>";
+
+                listHtml += "	<div class='col-1'>";
+                listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
+                listHtml += "	</div>";
+                listHtml += "	<div class='rereply-content col-8'>";
+                listHtml += "		<div>";
+                listHtml += "			<span>";
+                listHtml += "				<b>"+ id +"</b>";
+                listHtml += "			</span>";
+                listHtml += "			<span>";
+                listHtml += 				content;
+                listHtml += "			</span>";
+                listHtml += "		</div>";
+                listHtml += "	</div>";
+
+              	
+
+                listHtml += "	<div class='col-3 reply-right'>";
+                listHtml += "		<div>";
+                listHtml += 			regdate.substring(2,16);
+                listHtml += "		</div>";
+                // 책갈피
+                // 현재 로그인 상태이고..
+                console.log(session_id);
+                if(session_id != "null"){
+
+                    if(session_id == id){
+                        listHtml += "		<div>";
+                        listHtml += "			<button href='javascript:' rnum='"+ rnum  + "' contentsno='"+ contentsno +"' class='reply_delete' onclick='reply_delete(event)'>삭제</button>";
+                        listHtml += "		</div>";
+                    }
+                }
+
+                listHtml += "	</div>";
+            //}
+
+            	listHtml += "</div>";
+        	}
+			$(".reply_down_container"+name).append(listHtml);
+		},
+		error : function(data) {
+            alert("댓글 등록 중 오류가 발생하였습니다.");
+        }
+	})
+});	
