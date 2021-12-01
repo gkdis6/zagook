@@ -148,7 +148,7 @@
 						</c:when>
 						<c:otherwise>
 							<li id="searchbar_container">
-								<form action="http://localhost:8005/" method="post"  id="searchbar_form">
+								<form action="http://localhost:8005/" method="post"  id="searchbar_form" onsubmit="return onsearchbar_focus_out();">
 									<input class="form ui-autocomplete-input" type="text" id="searchInput" 
 									name="selected_id" autocomplete="off" placeholder="Search Tag or Friend: 태그 검색 시에는 '#'을 붙여주세요">
 									<button type="submit"><i class="fa fa-search"></i></button>

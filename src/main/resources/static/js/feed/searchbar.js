@@ -121,3 +121,9 @@ function onsearchbar_login_valid() {
  	$("#searchInput").val("");
  	return false;
 }
+
+function onsearchbar_focus_out() {
+	alert("onsearchbar_focus_out");
+	$("#searchInput").blur();
+	return true;
+}
