@@ -1,32 +1,3 @@
-function update_click(event){
-	console.log(event.currentTarget);
-	console.log(event.currentTarget.find("oldfile"));
-	
-let param={
-		contentsno: event.currentTarget.id,
-		oldfile: event.currentTarget.oldfile,
-		contents: event.currentTarget.name,
-		tag: event.currentTarget.tag,
-		privacy: event.currentTarget.privacy
-		};
-	console.log(param);
-	let modal = $(".modal_update");
-	let mcontents=modal.find("textarea[name='contents']");
-	let moldfile=modal.find("input[name='oldfile']");
-	let mcontentsno=modal.find("input[name='contentsno']");
-	let mtag=modal.find("input[name='tag']");
-	let mprivacy=modal.find("select[name='privacy']");
-	let moldImg = modal.find("img[id='oldImg']");
-	mcontents.val(param.contents);
-	moldfile.val(param.oldfile);
-	mcontentsno.val(param.contentsno);
-	mtag.val(param.tag);
-	mprivacy.val(param.privacy);
-	moldImg.attr('src','/contents/storage/'+param.oldfile);
-	$(".modal_update").show();
-}
-
-
 $("#closeModal").click(function (e) {
 $(".modal_update").hide();
 });
