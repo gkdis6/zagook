@@ -439,8 +439,7 @@ input[type=file] {
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2">
 		</script>
-		<script type="text/javascript"
-			src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>
 
 		<script>
 			window.onload = function () {

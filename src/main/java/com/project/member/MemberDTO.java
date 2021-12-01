@@ -21,7 +21,8 @@ public class MemberDTO {
 	private String grade                         ;
 	private String social						 ;
 	private String introduction;
-	
+	private int friendcnt;
+	private int feedcnt;
 	
 }      
 

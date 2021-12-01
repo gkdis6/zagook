@@ -235,7 +235,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="read" parameterType="String" resultType="com.project.member.MemberDTO">
 		select id, email, mname, tel, job, 
-				to_char(mdate,'YYYY/MM/DD')as mdate, fname, grade, introduction
+				to_char(mdate,'YYYY/MM/DD')as mdate, fname, grade, introduction, (select count(*) from zagook_friend where id =#{selected_id}) friendcnt,(select count(*) from zagook_contents where id = #{selected_id}) feedcnt
 		from zagook_member
 		where id = #{selected_id}
 	</select>
