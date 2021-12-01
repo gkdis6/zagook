@@ -138,6 +138,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
 		order by rdate asc
 	</select>
+	<select id="taglist_friend" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.FeedDTO">
+		select * from zagook_contents where contentsno in (
+			select contentsno from zagook_posttag where tag_id=(
+				select tag_id from zagook_tag where tag=#{selected_id}
+			)
+		)
+		and privacy!=0
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
+	</select>
+	<select id="taglistbyrecent_friend" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.FeedDTO">
+		select * from zagook_contents where contentsno in (
+			select contentsno from zagook_posttag where tag_id=(
+				select tag_id from zagook_tag where tag=#{selected_id}
+			)
+		)
+		and privacy!=0
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
+		order by rdate desc
+	</select>
+	<select id="taglistbyold_friend" parameterType="com.project.feed.FeedDTO"
+		resultType="com.project.feed.FeedDTO">
+		select * from zagook_contents where contentsno in (
+			select contentsno from zagook_posttag where tag_id=(
+				select tag_id from zagook_tag where tag=#{selected_id}
+			)
+		)
+		and privacy!=0
+		and (x_site between #{x_site} - #{base_distance} and #{x_site} + #{base_distance})
+		and (y_site between #{y_site} - #{base_distance} and #{y_site} + #{base_distance})
+		order by rdate asc
+	</select>
 	<select id="friendlist" parameterType="com.project.feed.FeedDTO"
 		resultType="com.project.feed.FeedDTO">
 		select * from zagook_contents

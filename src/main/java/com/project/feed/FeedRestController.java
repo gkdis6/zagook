@@ -190,17 +190,30 @@ public class FeedRestController {
 			}
 //-------------------------------------------------------------- < tag > ---------------------------------------------------------------------
 			else if (dto.getUrl_id().equals("tag")) {
+				Map friend_check_map = new HashMap<>();
+				friend_check_map.put("session_id", (String) session.getAttribute("id"));
+				friend_check_map.put("selected_id", (String) dto.getSelected_id());
 				if (dto.getRange().equals("null")) {
 					for (int base_idx = 0; base_idx < base_distance.length; base_idx++) {
 						dto.setBase_distance(base_distance[base_idx]);
 						result_base_idx = base_idx;
 						String order_type = dto.getOrder_type();
-						if (order_type.equals("distance")) {
-							feed_list = service.taglist(dto);
-						} else if (order_type.equals("recent")) {
-							feed_list = service.taglistbyrecent(dto);
-						} else if (order_type.equals("old")) {
-							feed_list = service.taglistbyold(dto);
+						if (service.friendcheck(friend_check_map) > 0) {
+							if (order_type.equals("distance")) {
+								feed_list = service.taglist(dto);
+							} else if (order_type.equals("recent")) {
+								feed_list = service.taglistbyrecent(dto);
+							} else if (order_type.equals("old")) {
+								feed_list = service.taglistbyold(dto);
+							}
+						} else {
+							if (order_type.equals("distance")) {
+								feed_list = service.taglist_friend(dto);
+							} else if (order_type.equals("recent")) {
+								feed_list = service.taglistbyrecent_friend(dto);
+							} else if (order_type.equals("old")) {
+								feed_list = service.taglistbyold_friend(dto);
+							}
 						}
 						url_flag = 3;
 						if (feed_list.size() > minimum_feed_cnt) {
@@ -216,12 +229,22 @@ public class FeedRestController {
 					}
 					dto.setBase_distance(selected_range);
 					String order_type = dto.getOrder_type();
-					if (order_type.equals("distance")) {
-						feed_list = service.taglist(dto);
-					} else if (order_type.equals("recent")) {
-						feed_list = service.taglistbyrecent(dto);
-					} else if (order_type.equals("old")) {
-						feed_list = service.taglistbyold(dto);
+					if (service.friendcheck(friend_check_map) > 0) {
+						if (order_type.equals("distance")) {
+							feed_list = service.taglist(dto);
+						} else if (order_type.equals("recent")) {
+							feed_list = service.taglistbyrecent(dto);
+						} else if (order_type.equals("old")) {
+							feed_list = service.taglistbyold(dto);
+						}
+					} else {
+						if (order_type.equals("distance")) {
+							feed_list = service.taglist_friend(dto);
+						} else if (order_type.equals("recent")) {
+							feed_list = service.taglistbyrecent_friend(dto);
+						} else if (order_type.equals("old")) {
+							feed_list = service.taglistbyold_friend(dto);
+						}
 					}
 					url_flag = 3;
 				}
