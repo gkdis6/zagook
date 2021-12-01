@@ -77,14 +77,34 @@ $(function start_autocomplete(){
     };
 });
 
-$(function() {$("#searchInput").change(function () {
+/*function() {$("#searchInput").change(function () {
  	console.log("search_type : ", $("input[name=search_type]").val());
  	if ($("#searchInput").val() == session_id) {
 		$("#searchbar_form").attr("method", "post");
 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
 	} else
  		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
-})});
+})}*/
+
+$(function() {
+	document.getElementById("searchInput").addEventListener('change', (function () {
+ 	console.log("search_type : ", $("input[name=search_type]").val());
+ 	if ($("#searchInput").val() == session_id) {
+		$("#searchbar_form").attr("method", "post");
+		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
+	} else
+ 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
+	}));
+});
+
+/*$(function() {$("#searchInput").change(function () {
+ 	console.log("search_type : ", $("input[name=search_type]").val());
+ 	if ($("#searchInput").val() == session_id) {
+		$("#searchbar_form").attr("method", "post");
+		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
+	} else
+ 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
+})});*/
 
 /*
 $("#searchInput").change(function () {
