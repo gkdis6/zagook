@@ -139,7 +139,21 @@
 .input_reply_div * {
   display: inline;
 }
-.delete_feed {
-  position: relative;
-  right: -310px;
+.oldImg_box_container {
+  text-align: center;
+  max-width: var(--modal_update_size);
+  height: auto;
+}
+.oldImg_box {
+  width: 100%;
+  height: 100%;
+}
+.selectImgBtn{
+  margin-top: 10px;
+}
+.updatebtn{
+  cursor: pointer;
+}
+.delete__feed{
+  cursor: pointer;
 }

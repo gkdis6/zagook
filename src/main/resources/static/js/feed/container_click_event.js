@@ -39,6 +39,7 @@ function reply_delete(event){
 
 function container_click(event) {
 	console.log(event_flag);
+	console.log(event.currentTarget);
 	if (event_flag == 1) {
 		console.log(event.currentTarget.id);
 		let param = {"contentsno": event.currentTarget.id};

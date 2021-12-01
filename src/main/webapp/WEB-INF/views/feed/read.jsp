@@ -273,34 +273,36 @@
 							<input type="hidden" name="oldfile" value=""> <input
 								type="hidden" id="contentsno" name="contentsno" value="">
 							<div class="form-group">
-								<div class="col-sm-6 col-sm-offset-2">
-									<img id="oldImg" src="/contents/storage/${param.oldfile}">
+								<div class="col-xs-6 col-xs-offset-2 oldImg_box_container">
+									<img id="oldImg" src="" class="oldImg_box">
 								</div>
-								<div class="col-sm-6 col-sm-offset-2">
-									<input type="button" id="updatefilebtn" onclick="updatefile();"
+								<div class="selectImgBtn">
+								<div class="col-xs-6 col-xs-offset-2">
+									<input type="button" class="btn" id="updatefilebtn" onclick="updatefile();"
 										value="사진수정">
 								</div>
-								<div class="col-sm-6 col-sm-offset-2" id="selectimg"
+								<div class="col-xs-6 col-xs-offset-2" id="selectimg"
 									style="display: none">
 									<input type="file" class="form-control" id="filenameMF"
 										name="filenameMF" accept=".jpg,.png,.gif"
 										onchange="PreviewImage();">
 								</div>
+								</div>
 							</div>
 							<div class="form-group">
-								<div class="col-sm-offset-2 col-xs-6">
+								<div class="col-xs-offset-2 col-xs-6">
 									<textarea name="contents" id="contents" class="form-control"
 										style="height: 100px; resize: none;" placeholder="내용"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="col-sm-offset-2 col-xs-6">
+								<div class="col-xs-offset-2 col-xs-6">
 									<input type="text" name="tag" id="tag" class="form-control"
 										value="${param.tag}" placeholder="#태그">
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="col-sm-offset-2 col-xs-6">
+								<div class="col-xs-offset-2 col-xs-6">
 									<select class="form-control" name="privacy" id="privacy">
 										<option value=0
 											<c:if test= "${param.privacy==0}">selected</c:if>>나만
@@ -315,7 +317,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-5">
+								<div class="col-xs-offset-2 col-xs-5">
 									<button type="submit" class="btn btn-primary" id="updateBtn">수정</button>
 									<button type="reset" class="btn" id="closeModal">취소</button>
 								</div>

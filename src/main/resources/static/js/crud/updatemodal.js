@@ -15,13 +15,13 @@ let param={
 	let mcontentsno=modal.find("input[name='contentsno']");
 	let mtag=modal.find("input[name='tag']");
 	let mprivacy=modal.find("select[name='privacy']");
+	let moldImg = modal.find("img[id='oldImg']");
 	mcontents.val(param.contents);
 	moldfile.val(param.oldfile);
 	mcontentsno.val(param.contentsno);
 	mtag.val(param.tag);
 	mprivacy.val(param.privacy);
-	var srcname = modal.find("img[id='oldImg']").attr('src');
-	console.log(srcname);
+	moldImg.attr('src','/contents/storage/'+param.oldfile);
 	$(".modal_update").show();
 })
 
