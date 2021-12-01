@@ -148,7 +148,7 @@ public class ContentsController {
 		int cnt2 = service.update(dto);
 		int cnt5 = service.delete(contentsno);
 		if (tag.trim().length() != 0) {
-			String t[] = tag.split("#");
+			String t[] = tag.split(",");
 			for (int i = 0; i < t.length; i++) {
 				if (t[i].trim().length() != 0) {
 					dto.setTag(t[i].trim().replace(" ", "_"));
