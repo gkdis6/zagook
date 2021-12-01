@@ -141,7 +141,7 @@ function inCheck(f){
       <label class="control-label col-sm-2" for="tel"><span id="need"></span>전화번호</label>
       <div class="col-sm-4">          
         <input type="text" class="form-control" id="tel" 
-        placeholder="Enter 전화번호"  name="tel">
+        placeholder="Enter 전화번호"  name="tel" maxlength='13'>
       </div>
     </div>
     
@@ -185,5 +185,6 @@ function inCheck(f){
 	</tr>
 </table>
 </div>
+<script src="/js/member/update.js"></script>
 </body>
 </html>
