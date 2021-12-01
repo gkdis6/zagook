@@ -63,9 +63,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int kakaoCheck(Map<String, String> map) {
+	public int socialCheck(Map<String, String> map) {
 		// TODO Auto-generated method stub
-		return mapper.kakaoCheck(map);
+		return mapper.socialCheck(map);
 	}
 	
 	//네이버 소셜
@@ -93,5 +93,6 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return mapper.delete(email);
 	}
+
 
 }

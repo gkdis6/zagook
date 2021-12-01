@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="read" parameterType="String" resultType="com.project.member.MemberDTO">
 	select id, email, mname, tel, job, 
-			to_char(mdate,'YYYY/MM/DD')as mdate, fname, grade,introduction
+			to_char(mdate,'YYYY/MM/DD')as mdate, fname, grade,introduction, social
 	from zagook_member
 	where email = #{email}
 </select>
@@ -29,12 +29,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      and password = #{password}
 </select>
 
-<select id="kakaoCheck" parameterType="Map" resultType="int">
+<select id="socialCheck" parameterType="Map" resultType="int">
 	select
     count(*) from zagook_member
      where email = #{email}
-     and password = #{password}
+     and   social='-'
 </select>
+
 
 <select id="duplicatedId" parameterType="String" resultType="int">
 	SELECT COUNT(id)

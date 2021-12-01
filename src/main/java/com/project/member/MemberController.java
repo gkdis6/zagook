@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.Utility.Utility;
 
 import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+import ch.qos.logback.core.util.SystemInfo;
 
 @Controller
 public class MemberController {
@@ -71,9 +72,7 @@ public class MemberController {
       int cnt = service.loginCheck(map);
       MemberDTO dto = service.read(email);
       map.put("id", dto.getId());
-      System.out.println("@@@@@@@@@:::"+map);
       if(cnt>0) { //회원
-    	  System.out.println("1111111111111111111");
          //grade>> String grade = service.getGrade(map.get("id"));
          session.setAttribute("id", map.get("id"));
          session.setAttribute("email",map.get("email"));
@@ -108,7 +107,6 @@ public class MemberController {
       
       if(cnt>0) {
          System.out.println("email:::"+session.getAttribute("email"));
-         System.out.println("id:::"+session.getAttribute("id"));
             return "redirect:/";
          
       }else {
@@ -136,7 +134,6 @@ public class MemberController {
    
    @PostMapping(value="/member/create",produces="application/json;charset=utf-8")
    public String crate(MemberDTO dto,Model model) throws IOException{
-      //String upDir = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
       String upDir = Member.getUploadDir();
       String fname = Utility.saveFileSpring(dto.getFnameMF(), upDir);
       int size = (int)dto.getFnameMF().getSize();
@@ -195,9 +192,7 @@ public class MemberController {
          email = (String) session.getAttribute("email");
       }
       MemberDTO dto = service.read(email);
-      System.out.println("@@@@@@@");
       model.addAttribute("dto",dto);
-      System.out.println(dto);
       return "/member/mypage";
    }
    
@@ -206,16 +201,14 @@ public class MemberController {
 	   Map map = new HashMap();
        map.put("email", email);
        map.put("password", password);
-       System.out.println("map::::"+map);
        int cnt = service.passwordCheck(map);
        
        if(cnt>0) {
-    	   System.out.println("이걸 안타나?");
     	   MemberDTO dto = service.read(email);
     	   model.addAttribute("dto",dto);
     	   return "/member/update";
        } 
-       System.out.println("이걸 타나?");
+       System.out.println("비밀번호 오류");
 	   return "./passwdError";
    }
    
@@ -224,7 +217,6 @@ public class MemberController {
       if(email == null) {
          email = (String)session.getAttribute("email");
       }
-      System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@:::@@@@@");
       MemberDTO dto = service.read(email);
       model.addAttribute("dto",dto);
       return "/member/update";
@@ -232,9 +224,8 @@ public class MemberController {
    
    @PostMapping("/member/update")
     public String update(MemberDTO dto,String id, Model model,HttpSession session) {
-     System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+dto);
       int cnt = service.update(dto);
-       System.out.println("@@@@@@@@@@:::"+dto);
+       System.out.println("@@@dto:::"+dto);
        System.out.println("@@@cnt"+cnt);
        if(cnt==1) {
                model.addAttribute("id", dto.getId());
@@ -254,17 +245,16 @@ public class MemberController {
                    String oldfile,
                    HttpSession session,
                    HttpServletRequest request) throws IOException{
-//           String basePath = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
              String basePath = Member.getUploadDir();
            if(oldfile !=null  && !oldfile.equals("member.jpg")) { //원본파일 삭제
                    Utility.deleteFile(basePath, oldfile);
            }
            
-         //storage에 변경 파일 저장
+         //storage
            Map map = new HashMap();
            map.put("email", session.getAttribute("email"));
            map.put("fname", Utility.saveFileSpring(fnameMF, basePath));
-           //디비에 파일명 변경
+           //디비
            int cnt = service.updateFile(map);
            if(cnt==1) {
                    return "redirect:./mypage";
@@ -278,11 +268,9 @@ public class MemberController {
           return "/member/delete";
        }
 
-//       @PostMapping("/admin/delete")
        @PostMapping("/member/delete")
        public String delete(HttpServletRequest request,HttpSession session,
              String email, String password) {
-          System.out.println("post----------");
           Map map = new HashMap();
           map.put("email", email);
           map.put("password", password);
@@ -305,10 +293,22 @@ public class MemberController {
 
        }
        @GetMapping("/member/passcheck")
-       public String uppasscheck() {
-    	 //이거 소셜 거르는 코드 짜야함 
-    	   //소셜이 아니면 uppassch
-    	   //소셜이 이면 바로 업데이트폼 
-    	   return "/member/uppassch";
+       public String uppasscheck(HttpServletRequest request,
+		   						 Model model,String email, String social) {
+    	  MemberDTO dto = service.read(email);
+    	  Map map = new HashMap();
+    	  map.put("email", dto.getEmail());
+    	  map.put("social", dto.getSocial());
+    	  int cnt = service.socialCheck(map); //cnt >0 이면 일반회원 
+    	  if(cnt > 0) {
+    		  System.out.println("일반 사용자:::");
+    		  return "/member/uppassch";
+    	  }
+    	  else {
+    		  System.out.println("소셜 사용자입니다:::");
+    	      MemberDTO dto1 = service.read(email);
+    	      model.addAttribute("dto",dto1);
+    		  return "/member/update";
+    	  }
        }
 }
