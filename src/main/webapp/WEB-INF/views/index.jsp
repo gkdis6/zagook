@@ -20,6 +20,7 @@ body {
 	line-height: 1.5;
 	white-space: normal;
 	height: auto;
+	z-index: 9999;
 }
 
 .wrap * {
@@ -86,6 +87,7 @@ body {
 	position: relative;
 	height: auto;
 	overflow: auto;
+	width: 500px;
 }
 
 .desc>.ellipsis {
@@ -352,6 +354,64 @@ input[type=file] {
   	color:black;  
   }  
 /*chat-end*/
+
+.reply_container {
+	margin-left: 20px;
+}
+.reply_icon {
+	cursor: pointer;
+	width: 28px;
+	height: 27px;
+}
+
+.img_box_container img:hover{
+	cursor: -webkit-zoom-in;
+}
+.delete_btn_container {
+	width:80px;
+	float: right;
+	margin-right: 10px;
+}
+.reply_list_profileImage{
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	float:left;
+	margin-right: 8px;
+}
+.reply_box_container{
+	width: 490px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+}
+.row{
+	padding-top:5px;
+}
+.replyrow{
+	height:auto;
+	padding-bottom:15px;
+}
+.reply-right{
+	position:absolute;
+	right:10px;
+}
+.reply-right *{
+	display:inline;
+}
+.rereply-content{
+	height:auto;
+}
+.input_reply{
+	width:415px;
+}
+.input_reply_div *{
+	display: inline;
+}
+.delete_feed{
+	position: relative;
+	right: -310px;
+	
+}
 </style>
 
 <meta charset="UTF-8">
@@ -361,6 +421,7 @@ input[type=file] {
 <script src="../js/sockjs.min.js"></script>
 <script src="../js/stomp.min.js"></script>
 <script type="text/JavaScript" src="../js/app.js"></script>
+<script>let session_id = '<%=(String)session.getAttribute("id")%>';</script>
 <!-- <script src="../js/login/modal.js"></script> -->
 <!-- <script src="../js/utils/login_modal.js"></script> -->
 
@@ -391,32 +452,6 @@ input[type=file] {
 					};
 				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 				let overlays = [];
-				var positions = [
-					<c:choose>   
-					<c:when test="${empty list}">
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="dto" items="${list}" varStatus="i"> 
-							{
-								iwcontent: '<div class="infowindow" style="width: 140px; height: auto; padding: 5px;" class="img"><img src="/contents/storage/${dto.filename}" width="138px" height="auto"></div>',
-								latlng: new kakao.maps.LatLng('${dto.x_site}', '${dto.y_site}'),
-								content: "${dto.contents}",
-								likecnt: "${dto.likecnt}",
-								rdate: "${dto.rdate}",
-								filename: "${dto.filename}",
-								privacy: "${dto.privacy}",
-								id: "${dto.id}",
-								contentsno: "${dto.contentsno}",
-								fname: "${dto.fname}",
-								tag_list: "${dto.tag_list}",
-								like_clicked: "${dto.like_clicked}"
-								
-							}
-							<c:if test="${!i.last}">,</c:if>
-						</c:forEach>
-					</c:otherwise>
-					</c:choose>
-				];
 					
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function (position) {
@@ -443,6 +478,7 @@ input[type=file] {
 						});
 						kakao.maps.event.addListener(map, 'dragend', function(){
 							var latlng = map.getCenter();
+							console.log(latlng);
 							var center_marker = new kakao.maps.Marker({
 								map: map,
 								position: new kakao.maps.LatLng(latlng.getLat(), latlng.getLng())
@@ -452,11 +488,68 @@ input[type=file] {
 							overlays.push(center_marker);
 							var x_site = latlng.getLat();
 							var y_site = latlng.getLng();
-							console.log("x_site : "+x_site);
-							console.log("y_site : "+y_site);
+
+							$.ajax({
+								url: "/get_center",
+								type: "get",
+								data: {
+									x_site: x_site,
+									y_site: y_site
+								},
+								contentType: "application/json; charset=utf-8;",
+								dataType : 'json',
+								success : function(data){
+									for(const i in data){
+										positions[i].iwcontent = '<div class="infowindow" style="width: 140px; height: auto; padding: 5px;" class="img"><img src="/contents/storage/'+data[i].filename+'" width="138px" height="auto"></div>';
+										positions[i].latlng = new kakao.maps.LatLng(data[i].x_site,data[i].y_site);
+										positions[i].content = data[i].contents;
+										positions[i].likecnt = data[i].likecnt;
+										positions[i].rdate = data[i].rdate;
+										positions[i].filename = data[i].filename;
+										positions[i].privacy = data[i].privacy;
+										positions[i].id = data[i].id;
+										positions[i].contentsno = data[i].contentsno;
+										positions[i].fname = data[i].fname;
+										positions[i].tag_list = data[i].tag_list+"";
+										positions[i].like_clicked = data[i].like_clicked;
+										positions[i].reply = data[i].reply;
+										displayMarker(positions[i]);
+									}
+								},
+								error: function(data){
+									alert("위치를 가져올 수 없습니다.")
+								}
+							})
 						});
 					}, error);
 				}
+				var positions = [
+					<c:choose>   
+					<c:when test="${empty list}">
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="dto" items="${list}" varStatus="i"> 
+							{
+								iwcontent: '<div class="infowindow" style="width: 140px; height: auto; padding: 5px;" class="img"><img src="/contents/storage/${dto.filename}" width="138px" height="auto"></div>',
+								latlng: new kakao.maps.LatLng('${dto.x_site}', '${dto.y_site}'),
+								content: "${dto.contents}",
+								likecnt: "${dto.likecnt}",
+								rdate: "${dto.rdate}",
+								filename: "${dto.filename}",
+								privacy: "${dto.privacy}",
+								id: "${dto.id}",
+								contentsno: "${dto.contentsno}",
+								fname: "${dto.fname}",
+								tag_list: "${dto.tag_list}",
+								like_clicked: "${dto.like_clicked}",
+								reply: "${dto.reply}"
+								
+							}
+							<c:if test="${!i.last}">,</c:if>
+						</c:forEach>
+					</c:otherwise>
+					</c:choose>
+				];
 				function error(){
 					console.warn('param = {"x_site": "37.5535462", "y_site": "126.964296"};	');
 				}
@@ -480,7 +573,8 @@ input[type=file] {
 						clickable: true,
 						position: marker.getPosition(),
 						xAnchor: 1,
-						yAnchor: 30
+						yAnchor: 30,
+						zIndex: 999
 					});
 					var div1 = document.createElement('div');
 					div1.className = 'wrap';
@@ -503,8 +597,6 @@ input[type=file] {
 					
 					var div4 = document.createElement('div');
 					div4.className = 'body';
-					var tag_list = data.tag_list.substring(1,data.tag_list.length-1);
-					var list = tag_list.split(", ");
 					
 					var div5 = document.createElement('div');
 					div5.className = 'img';
@@ -513,6 +605,10 @@ input[type=file] {
 					var div6 = document.createElement('div');
 					div6.className = 'desc';
 					div6.innerHTML = `<div class="ellipsis">`+data.rdate.substring(0,16)+`</div>`;
+
+					console.log(data.tag_list);
+					var tag_list = data.tag_list.substring(1,data.tag_list.length-1);
+					var list = tag_list.split(", ");
 					
 					for(var item of list){
 						if(item){
@@ -527,56 +623,18 @@ input[type=file] {
 					}else{
 						div6.innerHTML += '<a href="javascript:" class="like" style="width:28px;height:28px;" idx="'+data.contentsno+'" ><img src="./images/feed/like_outline.png" style="width:28px;" id="unlike"></a>';
 					}
-					div6.innerHTML += ` <span class="feed_widget_text" id="like_cnt`+data.contentsno+`">`+numberFormatting(data.likecnt)+`</span>
+					div6.innerHTML += ` <span class="feed_widget_text" id="like_cnt`+data.contentsno+`">`+numberFormatting(data.likecnt)+`</span>`;
 					
-					<%-- 댓글 수 --%>
-					<span> 
-						<a idx="${tmp.rnum}" class="open_reply_list" data-toggle="collapse" href="#reply_card${tmp.rnum }" aria-expanded="false" aria-controls="collapseExample"> 
-							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
-								<path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-								<path d="M2.165 15.803l.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z" />
-							</svg>
-						</a>
-					</span> 
-					<span id="m_reply${tmp.rnum }">${tmp.reply }</span>
-					<!-- 댓글  -->
-					<div class="collapse" id="reply_card${tmp.rnum }">
-						<section class="modal-section">
-							<div class="card card-body">
-								<!-- 댓글 목록 -->
-								<div class="reply-list reply-list${tmp.rnum }">
-									<!-- 댓글이 목록이 들어가는 곳 -->
-								</div>
-								<!-- 댓글 작성 => 로그인한 상태여야만 댓글작성 칸이 나온다. -->
-								<c:if test="${not empty sessionScope.id }">
-									<div class="row reply_write">
-										<div class="col-1">
-												<a href="other_profile.do?other_nick=${tmp.id }"> <img
-													id="write_reply_profileImage"
-													src="../images/feed/profile/${sessionScope.profile }" />
-												</a>
-										</div>
-								<div class="col-8" class="input_reply_div">
-									<input class="w-100 form-control" id="input_reply${tmp.rnum}"
-										type="text" placeholder="댓글입력...">
-								</div>
-								<div class="col-3 ">
-									<button type="button" idx="${tmp.rnum }"
-										class="btn btn-success mb-1 write_reply">댓글&nbsp;달기</button>
-								</div>
+							
+					div6.innerHTML += '<span class="reply_container">';
+					div6.innerHTML += '<img class="reply_icon" src="../images/feed/comment.png" alt="comments_img" loading="lazy" onclick="reply_click(event)" name="'+data.contentsno+'"id="reply_btn'+data.contentsno+'"> <span class="feed_widget_text">'+data.reply+'</span>';
+					div6.innerHTML += '</span>';
+	                
+					div6.innerHTML += '</div>';
+					div6.innerHTML += '<div class="reply_box_container" id="reply-list'+data.contentsno+'">';
+					div6.innerHTML += '</div>';
+					div6.innerHTML += '</div>';
 					
-					</c:if>
-					</div>		
-					
-	                <c:if test="${not empty sessionScope.id}">
-		            <div class="btn_box1">
-						<button type="button" class="btn" onclick="location.href='/contents/update/`+data.contentsno+`'">수정</button>
-						<button type="button" class="btn" onclick="location.href='/contents/delete/`+data.contentsno+`'">삭제</button>
-					</div>
-					</c:if>					
-					
-					
-	            	</div>`;
 					div4.appendChild(div5);
 					div4.appendChild(div6);
 					div2.appendChild(div4);
@@ -905,6 +963,207 @@ input[type=file] {
 		      $(".modal_img").hide();
 		    }
 		});
+		function reply_click(event){
+			console.log(event.currentTarget);
+			let param = event.currentTarget.name;
+			var target = document.getElementById("reply-list"+param);
+			$.ajax({
+		        url : '/call_replyList',
+		        type : 'get',
+		        data : {
+		            contentsno : param
+		        },
+		        contentType : "application/json; charset=utf-8;",
+		        dataType : 'json',
+		        success : function(data) {
+		
+		            console.log("댓글 리스트 가져오기 성공");
+		            if(session_id != 'null'){
+			            let write_html="";
+						write_html+='<div class="input_reply_div">';
+						write_html+='	<input class="w-100 form-control input_reply" id="input_reply'+param+'" type="text" placeholder="댓글입력...">';
+						write_html+='	<button type="button" class="btn btn-success mb-1 write_reply" name="'+param+'">댓글&nbsp;달기</button>';
+						write_html+='</div>';
+						let div_1 = document.createElement('div');
+						div_1.className = "row reply_wirte";
+						div_1.innerHTML = write_html;
+			            
+						target.appendChild(div_1);
+					}
+					// 댓글 목록을 html로 담기
+		            let listHtml = "";
+		            for(const i in data){
+		                let rnum = data[i].rnum;
+		                let contentsno = data[i].contentsno;
+		                let id = data[i].id;
+		                let content = data[i].content;
+		                let regdate = data[i].regdate;
+		                let fname = data[i].fname;
+						console.log(rnum);
+						console.log(contentsno);
+						console.log(id);
+						console.log(content);
+						console.log(regdate);
+						console.log(fname);
+		
+		                listHtml += "<div class='row replyrow reply" + rnum + "'>";
+		
+	                    listHtml += "	<div class='col-1'>";
+	                    listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
+	                    listHtml += "	</div>";
+	                    listHtml += "	<div class='rereply-content col-8'>";
+	                    listHtml += "		<div>";
+	                    listHtml += "			<span>";
+	                    listHtml += "				<b>"+ id +"</b>";
+	                    listHtml += "			</span>";
+	                    listHtml += "			<span>";
+	                    listHtml += 				content;
+	                    listHtml += "			</span>";
+	                    listHtml += "		</div>";
+	                    listHtml += "	</div>";
+
+	                  	
+
+	                    listHtml += "	<div class='col-3 reply-right'>";
+	                    listHtml += "		<div>";
+	                    listHtml += 			regdate.substring(2,16);
+	                    listHtml += "		</div>";
+	                    // 책갈피
+	                    // 현재 로그인 상태이고..
+	                    console.log(session_id);
+	                    if(session_id != "null"){
+
+	                        if(session_id == id){
+	                            listHtml += "		<div>";
+	                            listHtml += "			<button href='javascript:' rnum='"+ rnum  + "' contentsno='"+ contentsno +"' class='reply_delete' onclick='reply_delete(event)'>삭제</button>";
+	                            listHtml += "		</div>";
+	                        }
+	                    }
+
+	                    listHtml += "	</div>";
+	                //}
+
+	                	listHtml += "</div>";
+	                	}
+	                	let newElement = document.createElement('div');
+	                	newElement.className = "reply_down_container"+param;
+						newElement.innerHTML = listHtml;
+			            
+						target.appendChild(newElement);
+					
+		        },
+		        error: function() {
+		            alert('서버 에러');
+		        }
+	    	})
+	    	document.getElementById('reply_btn'+param).onclick = null;
+		}
+		$(document).on('click',"button.reply_delete", function(){
+			let name = $(this).attr("rnum");
+			console.log(name);
+			var ans = confirm("댓글을 삭제하시겠습니까?");
+		    if(!ans) return false;
+		    
+			$.ajax({
+				url : "/delete_reply",
+				type : "get",
+				data : {
+					rnum : name
+				},
+				contentType : "application/json; charset=utf-8;",
+				dataType : 'json',
+				success : function(data){
+					$(".reply"+name).remove();
+				},
+				error : function(data) {
+		            alert("댓글 삭제 중 오류가 발생하였습니다.");
+		        }
+			})
+		});	
+
+		$(document).on('click',"button.write_reply", function(){
+			let name = $(this).attr("name");
+			let content = $('#input_reply'+name).val();
+			if(name == ""){
+				alert("내용을 입력해주세요");
+				return false;
+			}
+			console.log(name);
+			var ans = confirm("댓글을 등록하시겠습니까?");
+		    if(!ans) return false;
+		    $('#input_reply'+name).val("");
+			$.ajax({
+				url : "/write_reply",
+				type : "get",
+				data : {
+					contentsno : name,
+					content: content
+				},
+				contentType : "application/json; charset=utf-8;",
+				dataType : 'json',
+				success : function(data){
+					$(".reply_down_container"+name).children().remove();
+					let listHtml = "";
+		            for(const i in data){
+		                let rnum = data[i].rnum;
+		                let contentsno = data[i].contentsno;
+		                let id = data[i].id;
+		                let content = data[i].content;
+		                let regdate = data[i].regdate;
+		                let fname = data[i].fname;
+						console.log(rnum);
+						console.log(contentsno);
+						console.log(id);
+						console.log(content);
+						console.log(regdate);
+						console.log(fname);
+
+		                listHtml += "<div class='row replyrow reply" + rnum + "'>";
+
+		                listHtml += "	<div class='col-1'>";
+		                listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
+		                listHtml += "	</div>";
+		                listHtml += "	<div class='rereply-content col-8'>";
+		                listHtml += "		<div>";
+		                listHtml += "			<span>";
+		                listHtml += "				<b>"+ id +"</b>";
+		                listHtml += "			</span>";
+		                listHtml += "			<span>";
+		                listHtml += 				content;
+		                listHtml += "			</span>";
+		                listHtml += "		</div>";
+		                listHtml += "	</div>";
+
+		              	
+
+		                listHtml += "	<div class='col-3 reply-right'>";
+		                listHtml += "		<div>";
+		                listHtml += 			regdate.substring(2,16);
+		                listHtml += "		</div>";
+		                // 책갈피
+		                // 현재 로그인 상태이고..
+		                console.log(session_id);
+		                if(session_id != "null"){
+
+		                    if(session_id == id){
+		                        listHtml += "		<div>";
+		                        listHtml += "			<button href='javascript:' rnum='"+ rnum  + "' contentsno='"+ contentsno +"' class='reply_delete' onclick='reply_delete(event)'>삭제</button>";
+		                        listHtml += "		</div>";
+		                    }
+		                }
+
+		                listHtml += "	</div>";
+		            //}
+
+		            	listHtml += "</div>";
+		        	}
+					$(".reply_down_container"+name).append(listHtml);
+				},
+				error : function(data) {
+		            alert("댓글 등록 중 오류가 발생하였습니다.");
+		        }
+			})
+		});	
 	</script>
 	<script src="/js/utils/number_format_util.js"></script>
 </body>

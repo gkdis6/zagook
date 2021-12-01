@@ -44,7 +44,10 @@ public class ContentsController {
 		if (session.getAttribute("id") != null) {
 			Map map = new HashMap();
 			String id = (String) session.getAttribute("id");
-
+			Double x_site = (Double) session.getAttribute("x_site");
+			Double y_site = (Double) session.getAttribute("y_site");
+			map.put("x_site", x_site);
+			map.put("y_site", y_site);
 			map.put("id", id);
 
 			List<ContentsDTO> list = service.list(map);
@@ -72,6 +75,39 @@ public class ContentsController {
 
 		}
 		return "/searching";
+	}
+	
+	@GetMapping(value = "/get_center", produces = "application/json")
+	@ResponseBody
+	public List<ContentsDTO> get_center(HttpServletRequest request, HttpSession session) throws IOException {
+		Double x_site = Double.parseDouble(request.getParameter("x_site"));
+		Double y_site = Double.parseDouble(request.getParameter("y_site"));
+		String id = (String) session.getAttribute("id");
+		Map map = new HashMap();
+		map.put("x_site", x_site);
+		map.put("y_site", y_site);
+		map.put("id", id);
+		List<ContentsDTO> searchlist = service.list(map);
+		List<String> tag_list = new ArrayList();
+		int k = 0;
+		while (k < searchlist.size()) {
+			int cnt = 0;
+			int check = 0;
+			ContentsDTO dto = searchlist.get(k);
+			map.put("contentsno", dto.getContentsno());
+
+			
+			check = service.likeCheck(map); 
+			if(check > 0) {
+				dto.setLike_clicked(check);
+			}
+
+			tag_list = service.getTag(dto.getContentsno());
+			System.out.println(tag_list);
+			dto.setTag_list(tag_list);
+			k++;
+		}
+		return searchlist;
 	}
 
 	@GetMapping("/contents/create")
