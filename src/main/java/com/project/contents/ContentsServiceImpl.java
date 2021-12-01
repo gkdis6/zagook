@@ -106,6 +106,12 @@ public class ContentsServiceImpl implements ContentsService {
 		// TODO Auto-generated method stub
 		return mapper.searchInput(searchInput);
 	}
+	
+	@Override
+	public List<Map> searchInput_privacy_not_zero(String searchInput) {
+		// TODO Auto-generated method stub
+		return mapper.searchInput_privacy_not_zero(searchInput);
+	}
 
 	@Override
 	public List<Map> searchInput_friend(String searchInput) {

@@ -114,10 +114,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where privacy=2
 		group by r.tag
 	</select>
+	<select id="searchInput_privacy_not_zero" parameterType="String" resultType="Map">
+		select r.tag, count(r.tag) as cnt from zagook_contents c join
+		(
+		    select t.tag, p.contentsno from zagook_tag t join zagook_posttag p
+		    on t.tag_id = p.tag_id
+		    where t.tag like '%'||#{searchInput}||'%'
+		) r
+		on c.contentsno = r.contentsno
+		where privacy!=0
+		group by r.tag
+	</select>
 	<select id="searchInput_friend" parameterType="String" resultType="Map">
 		select id,fname from zagook_member
 		where id like '%'||#{searchInput}||'%'
 	</select>
+	
 	<update id="updateLike" parameterType="Map">
 		update zagook_contents
 		set likecnt=(select count(*) from zagook_like where contentsno=#{contentsno})

@@ -280,9 +280,15 @@ public class ContentsController {
 
 	@GetMapping(value = "/searchInput", produces = "application/json")
 	@ResponseBody
-	public List<Map> searchInput(HttpServletRequest request) throws IOException {
+	public List<Map> searchInput(HttpServletRequest request, HttpSession session) throws IOException {
+		String id = (String) session.getAttribute("id");
 		String searchInput = Utility.checkNull(request.getParameter("searchInput"));
 		List<Map> searchlist = service.searchInput(searchInput);
+		if (id == null) {
+			searchlist = service.searchInput(searchInput);
+		} else {
+			searchlist = service.searchInput_privacy_not_zero(searchInput);
+		}
 		System.out.println(searchInput);
 		System.out.println(searchlist);
 		return searchlist;
