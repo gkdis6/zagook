@@ -198,7 +198,6 @@ function container_click(event) {
 		var tag = document.getElementById("tag_container"+param).getAttribute("name");
 		var contents = document.getElementById("contents"+param).innerText;
 		var privacy = document.getElementById("privacy"+param).getAttribute("value");
-		console.log(oldfile);
 		let modal = $(".modal_update");
 		let mcontents=modal.find("textarea[name='contents']");
 		let moldfile=modal.find("input[name='oldfile']");
