@@ -77,15 +77,6 @@ $(function start_autocomplete(){
     };
 });
 
-/*function() {$("#searchInput").change(function () {
- 	console.log("search_type : ", $("input[name=search_type]").val());
- 	if ($("#searchInput").val() == session_id) {
-		$("#searchbar_form").attr("method", "post");
-		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
-	} else
- 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
-})}*/
-
 $("#searchInput").on("propertychange change keyup paste input", function () {
  	console.log("search_type : ", $("input[name=search_type]").val());
  	if ($("#searchInput").val() == session_id) {
@@ -95,44 +86,9 @@ $("#searchInput").on("propertychange change keyup paste input", function () {
  		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
 });
 
-/*$(function() {
-	document.getElementById("searchInput").addEventListener('change', (function () {
- 	console.log("search_type : ", $("input[name=search_type]").val());
- 	if ($("#searchInput").val() == session_id) {
-		$("#searchbar_form").attr("method", "post");
-		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
-	} else
- 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
-	}));
-});*/
 
-/*$(function() {$("#searchInput").change(function () {
- 	console.log("search_type : ", $("input[name=search_type]").val());
- 	if ($("#searchInput").val() == session_id) {
-		$("#searchbar_form").attr("method", "post");
-		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
-	} else
- 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
-})});*/
-
-/*
-$("#searchInput").change(function () {
- 	console.log("search_type : ", $("input[name=search_type]").val());
- 	if ($("#searchInput").val() == session_id) {
-		$("#searchbar_form").attr("method", "post");
-		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
-	} else
- 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
-});
- */
 function onsearchbar_login_valid() {
  	onclick_login_open();
  	$("#searchInput").val("");
  	return false;
 }
-/*
-function onsearchbar_focus_out() {
-	alert("onsearchbar_focus_out");
-	$("#searchInput").blur();
-	return true;
-}*/
