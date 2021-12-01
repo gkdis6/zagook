@@ -44,4 +44,9 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/contents/search_friend.jsp" />
 	</definition>
+	<definition name="/searching" extends="main">
+		<put-attribute name="title" value="맵 탐색" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/index.jsp" />
+	</definition>
 </tiles-definitions>

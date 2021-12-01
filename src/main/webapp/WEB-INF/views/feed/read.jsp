@@ -47,6 +47,7 @@
 				  	<a href="/feed/myread">My Feed</a>
 				  	<a href="/feed/read">Friends Feed</a>
 				  	<a href="/friend">Friends List</a>
+				  	<a href="/searching">Searching Map</a>
 			  	</c:when>
 			  	<c:otherwise>
 				  	<a href="javascript:void(0)" onclick="onclick_login_open()">My Feed</a>
