@@ -20,23 +20,9 @@ let param={
 	mcontentsno.val(param.contentsno);
 	mtag.val(param.tag);
 	mprivacy.val(param.privacy);
+	var srcname = modal.find("img[id='oldImg']").attr('src');
+	console.log(srcname);
 	$(".modal_update").show();
-//	$("#updateBtn").click(function(e) {
-//    e.preventDefault();
-//    $.ajax({
-//        type: "GET",
-//        url: "/contents/update",
-//        data: JSON.stringify(param),
-//        dataType: 'json',
-//        success: function(data) {
-//            alert('ok');
-//        },
-//        error: function(result) {
-//            alert('error');
-//        }
-//    });
-    
-//});
 })
 
 

@@ -111,11 +111,11 @@
 						<form class="form-horizontal" action="/contents/update"
 							method="post" onsubmit="return checkIn(this)"
 							enctype="multipart/form-data">
-							<input type="hidden" name="oldfile" value="${param.oldfile}"> <input
+							<input type="hidden" name="oldfile" value=""> <input
 								type="hidden" id="contentsno" name="contentsno" value="">
 							<div class="form-group">
 								<div class="col-sm-6 col-sm-offset-2">
-									<img id="img" src="/images/${param.oldfile}" style="width: 500px">
+									<img id="oldImg" src="/contents/storage/${param.oldfile}">
 								</div>
 								<div class="col-sm-6 col-sm-offset-2">
 									<input type="button" id="updatefilebtn" onclick="updatefile();"
