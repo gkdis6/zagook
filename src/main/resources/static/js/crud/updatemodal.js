@@ -1,12 +1,13 @@
-$(document).on("click","a.updatebtn",function(){
-//	console.log(event.currentTarget.id);
-	//let param = {"contentsno": event.currentTarget.id};
+function update_click(event){
+	console.log(event.currentTarget);
+	console.log(event.currentTarget.find("oldfile"));
+	
 let param={
-		contentsno: document.getElementById("contentsno").value,
-		oldfile: document.getElementById("oldfile").value,
-		contents: document.getElementById("contents").value,
-		tag: document.getElementById("tag").value,
-		privacy: document.getElementById("privacy").value
+		contentsno: event.currentTarget.id,
+		oldfile: event.currentTarget.oldfile,
+		contents: event.currentTarget.name,
+		tag: event.currentTarget.tag,
+		privacy: event.currentTarget.privacy
 		};
 	console.log(param);
 	let modal = $(".modal_update");
@@ -23,7 +24,7 @@ let param={
 	mprivacy.val(param.privacy);
 	moldImg.attr('src','/contents/storage/'+param.oldfile);
 	$(".modal_update").show();
-})
+}
 
 
 $("#closeModal").click(function (e) {
