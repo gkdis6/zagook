@@ -37,6 +37,8 @@ public interface ContentsMapper {
 
 		List<Map> searchInput(String searchInput);
 
+		List<Map> searchInput_privacy_not_zero(String searchInput);
+
 		List<Map> searchInput_friend(String searchInput);
 
 		int updateLike(Map map);
