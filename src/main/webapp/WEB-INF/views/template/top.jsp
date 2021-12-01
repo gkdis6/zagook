@@ -135,16 +135,7 @@
 							<li><a href="${root}/member/agree"><span
 									class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a></li>
 						</c:when>
-						<c:when
-							test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
-							<li><a href="${root}/admin/create"><span
-									class="glyphicon glyphicon-plus-sign"></span> 상품등록</a></li>
-							<li><a href="${root}/contents/list"><span
-									class="glyphicon glyphicon-list"></span> 상품목록</a></li>
-							<li><a href="${root}/admin/list"><span
-									class="glyphicon glyphicon-list"></span> 회원목록</a></li>
-							<li><a href="${root}/member/logout"><span
-									class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+						<c:when test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
 						</c:when>
 						<c:otherwise>
 							<li id="searchbar_container">
