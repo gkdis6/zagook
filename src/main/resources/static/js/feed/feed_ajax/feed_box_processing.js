@@ -59,15 +59,15 @@ function process_feed_list(param) {
                 html_str += '<a href="javascript:void(0);" class="user_id" onclick="id_click(event);return false;">' + list[i].id + '</a>';
                 html_str += '</span>';
                 
-                //update, delete dropdown area
-                html_str += '<li class="dropdown" style="margin-left: auto; margin-right:20px; list-style:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>';
-                html_str += '<ul class="dropdown-menu"><li><a onclick="update_click(event)" id="' + list[i].contentsno + '" class="drop_update">수정';     
- 				html_str += '<input type="hidden" id="privacy'+list[i].contentsno+'" value="'+list[i].privacy+'"></a></li>';  
-                html_str += '<li><a class="delete__feed" name="'+list[i].contentsno+'">삭제</a></li>';
-     
-          
-				html_str += '</ul></li>';
-                
+                if(session_id == list[i].id){
+	                //update, delete dropdown area
+	                html_str += '<li class="dropdown" style="margin-left: auto; margin-right:20px; list-style:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>';
+					html_str += '<ul class="dropdown-menu"><li><a onclick="update_click(event)" id="' + list[i].contentsno + '" class="drop_update">수정';     
+					html_str += '<input type="hidden" id="privacy'+list[i].contentsno+'" value="'+list[i].privacy+'"></a></li>';  
+				   html_str += '<li><a class="delete__feed" name="'+list[i].contentsno+'">삭제</a></li>';    
+	          
+					html_str += '</ul></li>';
+                }
                 html_str += '</div>';
                 
                 // image area

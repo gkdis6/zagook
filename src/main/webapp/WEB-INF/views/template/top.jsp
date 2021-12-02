@@ -101,8 +101,12 @@
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">community <span class="caret"></span></a>
 						<ul class="dropdown-menu">
+							<c:choose>
+								<c:when test="${not empty sessionScope.id }">
 							<li><a href="${root}/member/mypage">Mypage</a></li>
-							<li><a href="${root}/review/list">Review</a></li>
+							<li><a href="${root}/friend">친구관리</a></li>
+								</c:when>
+							</c:choose>
 							<li><a href="${root}/notice/list">Notice</a></li>
 							<li><a href="${root}/chat">문의하기</a></li>
 						</ul></li>
