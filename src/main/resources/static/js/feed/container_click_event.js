@@ -36,9 +36,13 @@ function reply_click(event) {
 function reply_delete(event){
 	event_flag = 6;
 }
+function update_click(event){
+	event_flag = 7;
+}
 
 function container_click(event) {
 	console.log(event_flag);
+	console.log(event.currentTarget);
 	if (event_flag == 1) {
 		console.log(event.currentTarget.id);
 		let param = {"contentsno": event.currentTarget.id};
@@ -187,7 +191,29 @@ function container_click(event) {
 		overlay_pre.setPosition(posi);
 		overlay_pre.setMap(map_main);
 		overlays.push(overlay_pre);
+	}else if(event_flag==7){
+		console.log(event.currentTarget);
+		let param = event.currentTarget.id;
+		var oldfile = document.getElementById("imgsrc"+param).getAttribute("name");
+		var tag = document.getElementById("tag_container"+param).getAttribute("name");
+		var contents = document.getElementById("contents"+param).innerText;
+		var privacy = document.getElementById("privacy"+param).getAttribute("value");
+		let modal = $(".modal_update");
+		let mcontents=modal.find("textarea[name='contents']");
+		let moldfile=modal.find("input[name='oldfile']");
+		let mcontentsno=modal.find("input[name='contentsno']");
+		let mtag=modal.find("input[name='tag']");
+		let mprivacy=modal.find("select[name='privacy']");
+		let moldImg = modal.find("img[id='oldImg']");
+		mcontents.val(contents);
+		moldfile.val(oldfile);
+		mcontentsno.val(param);
+		mtag.val(tag);
+		mprivacy.val(privacy);
+		moldImg.attr('src','/contents/storage/'+oldfile);
+		$(".modal_update").show();
 	}
+	
 	// after processing, should be change flag to default(0)
 	event_flag = 0;
 }
