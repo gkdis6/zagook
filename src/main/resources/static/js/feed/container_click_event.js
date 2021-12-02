@@ -194,6 +194,8 @@ function container_click(event) {
 	}else if(event_flag==7){
 		console.log(event.currentTarget);
 		let param = event.currentTarget.id;
+		let m_param_x_site = event.currentTarget.getAttribute("x_site");
+		let m_param_y_site = event.currentTarget.getAttribute("y_site");
 		var oldfile = document.getElementById("imgsrc"+param).getAttribute("name");
 		var tag = document.getElementById("tag_container"+param).getAttribute("name");
 		var contents = document.getElementById("contents"+param).innerText;
@@ -205,6 +207,10 @@ function container_click(event) {
 		let mtag=modal.find("input[name='tag']");
 		let mprivacy=modal.find("select[name='privacy']");
 		let moldImg = modal.find("img[id='oldImg']");
+		let mx_site=modal.find("input[name='x_site']");
+		let my_site=modal.find("input[name='y_site']");
+		mx_site.val(m_param_x_site);
+		my_site.val(m_param_y_site);
 		mcontents.val(contents);
 		moldfile.val(oldfile);
 		mcontentsno.val(param);
