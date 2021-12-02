@@ -53,8 +53,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 INSERT INTO zagook_member(id, password,
      mname, tel, email, job, mdate, fname,
      grade)
-     VALUES(#{id}, #{password},#{mname}, #{tel}, 
-     #{email}, #{job}, sysdate, #{fname},'H')
+     VALUES(#{id}, #{password},#{mname}, #{tel,jdbcType=VARCHAR}, 
+     #{email}, #{job,jdbcType=VARCHAR}, sysdate, #{fname,},'H')
 </insert>
 
 
@@ -74,9 +74,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	update zagook_member
       set id = #{id},
       mname = #{mname},
-      tel = #{tel},
-      job = #{job},
-      introduction =#{introduction}
+      tel = #{tel,jdbcType=VARCHAR},
+      job = #{job, jdbcType=VARCHAR},
+      introduction = #{introduction, jdbcType=VARCHAR}
       where email = #{email}
 </update>
 
