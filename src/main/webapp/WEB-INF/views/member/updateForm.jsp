@@ -64,8 +64,11 @@
 						<input type="text" class="update-input" id="id" value="${dto.id}"
 							name="id">
 					</div>
+					<button type="button" class="btn btn-default" id="check-btn"
+				      onclick="idCheck(document.frm.id.value)">중복확인</button>
+				      <div id="idcheck"></div>
 				</div>
-				<div class="update-group">
+				<div class="update-group" style="margin-top:-30px;">
 					<label class="control-label col-sm-2" for="mname"><span
 						id="need">*</span>성명</label>
 					<div class="col-sm-3">
