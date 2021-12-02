@@ -3,7 +3,12 @@ package com.project.member;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
+import javax.mail.Message.RecipientType;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,18 +16,21 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.project.Utility.Utility;
-
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
-import ch.qos.logback.core.util.SystemInfo;
+import com.sun.mail.util.logging.MailHandler;
 
 @Controller
 public class MemberController {
@@ -30,6 +38,11 @@ public class MemberController {
    @Autowired
    @Qualifier("com.project.member.MemberServiceImpl")
    private MemberService service;
+   
+   @Autowired
+   private JavaMailSender mailSender;
+   
+  
    
    @GetMapping("/modallogin")
    public String loginmodal() {
@@ -224,8 +237,8 @@ public class MemberController {
    
    @PostMapping("/member/update")
     public String update(MemberDTO dto,String id, Model model,HttpSession session) {
+	   System.out.println("@@@dto:::"+dto);
       int cnt = service.update(dto);
-       System.out.println("@@@dto:::"+dto);
        System.out.println("@@@cnt"+cnt);
        if(cnt==1) {
                model.addAttribute("id", dto.getId());
@@ -241,8 +254,11 @@ public class MemberController {
    
    
    @PostMapping("/member/updateFile")
-   public String updateFile(MultipartFile fnameMF, String oldfile, HttpSession session, HttpServletRequest request) throws IOException{
-           String basePath = Member.getUploadDir();
+   public String updateFile(MultipartFile fnameMF,
+                   String oldfile,
+                   HttpSession session,
+                   HttpServletRequest request) throws IOException{
+             String basePath = Member.getUploadDir();
            if(oldfile !=null  && !oldfile.equals("member.jpg")) { //원본파일 삭제
                    Utility.deleteFile(basePath, oldfile);
            }
@@ -251,8 +267,8 @@ public class MemberController {
            Map map = new HashMap();
            map.put("email", session.getAttribute("email"));
            map.put("fname", Utility.saveFileSpring(fnameMF, basePath));
+           System.out.println("@@@@@img:::"+map);
            //디비
-           System.out.println(map);
            int cnt = service.updateFile(map);
            if(cnt==1) {
                    return "redirect:./mypage";
@@ -310,4 +326,43 @@ public class MemberController {
     		  return "/member/update";
     	  }
        }
+       
+       
+
+       @RequestMapping("/CheckMail")
+       @ResponseBody// AJAX와 URL을 매핑시켜줌 
+       public String SendMail(String email, HttpServletRequest request) throws MessagingException{
+   		Random random = new Random();
+   		String key = "";
+   		Gson gson = new Gson();
+   		MimeMessage mimemsg = mailSender.createMimeMessage();
+//   	SimpleMailMessage message = new SimpleMailMessage();
+//   	message.setTo(email);
+   		mimemsg.addRecipient(RecipientType.TO, new InternetAddress(email));
+   		//스크립트에서 보낸 메일을 받을 사용자 이메일 주소 
+   		//입력 키를 위한 코드
+   		for(int i =0; i<3;i++) {
+   			int index=random.nextInt(25)+65; //A~Z까지 랜덤 알파벳 생성
+   			key+=(char)index;
+   		}
+   		int numIndex=random.nextInt(8999)+1000; //4자리 랜덤 정수를 생성
+   		key+=numIndex;
+//   		message.setSubject("Zagook 회원가입 인증번호 메일 전송");
+   		mimemsg.setSubject("Zagook 회원가입 인증메일 전송");
+   		
+   		String fileName = "zagook_logo";
+   		String path = request.getSession().getServletContext().getRealPath("/")+"resources/static/saveCheck"+fileName;  
+   		System.out.println("이미지경로:::"+path);
+	   	 String msg="";
+//	     msg += "<img width=\"120\" height=\"36\" style=\"margin-top: 0; margin-right: 0; margin-bottom: 32px; margin-left: 0px; padding-right: 30px; padding-left: 30px;\" src=\"../statlc/images/zagook_logo.jpg\" alt=\"\" loading=\"lazy\">";
+	   	 msg += "<h1 style=\"font-size: 30px; padding-right: 30px; padding-left: 30px;\">안녕하세요 Zagook을 찾아주셔서 감사합니다.</h1>";
+	     msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px;\"><br>아래 확인 코드를 Zagook 가입 창이 있는 브라우저 창에 입력하세요.</p>";
+	     msg += "<div style=\"padding-right: 30px; padding-left: 30px; margin: 32px 0 40px;\"><table style=\"border-collapse: collapse; border: 0; background-color: #F4F4F4; height: 70px; table-layout: fixed; word-wrap: break-word; border-radius: 6px;\"><tbody><tr><td style=\"text-align: center; vertical-align: middle; font-size: 30px;\">";
+	     msg += key;
+	     msg += "</td></tr></tbody></table></div>";
+   		mimemsg.setText(msg,"utf-8","html");
+	    mailSender.send(mimemsg);
+   		System.out.println(gson.toJson(key));
+        return gson.toJson(key);
+       	}
 }

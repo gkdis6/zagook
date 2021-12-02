@@ -8,8 +8,8 @@
 <meta charset="utf-8" />
 </head>
 <body>
-	<div class="container">
-		<h2><b>공지 사항</b></h2>
+	<div class="container" style="margin-left:150px;padding-right:150px;">
+		<h2 style="margin-top:50px;"><b>공지 사항</b></h2>
 		<hr>
 		<div style="font-size:18px">
 		<b>${dto.title }</b>

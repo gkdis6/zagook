@@ -28,6 +28,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script src="../js/login/modal.js"></script>
 	<script src="../js/utils/login_modal.js"></script>
+	<script>let session_id = '<%=(String)session.getAttribute("id")%>';</script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="/js/feed/searchbar.js"></script>
 	<script>
 		$(function(){
@@ -91,6 +94,7 @@
 </head>
 
 <body>
+	<input type="hidden" name="search_type" value="">
 	<!--상단메뉴-->
 	<div class="container-fluid" style="height: 52px; padding: 0;">
 		<nav class="navbar navbar-inverse" style="border-radius: 0;">

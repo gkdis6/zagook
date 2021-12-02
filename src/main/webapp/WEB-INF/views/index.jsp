@@ -434,7 +434,7 @@ input[type=file] {
 </head>
 
 <body>
-
+	<input type="hidden" name="search_type" value="">
 	<div class="container" id="map" style="width: 100vw; height: 100vh;">
 
 		<script type="text/javascript"

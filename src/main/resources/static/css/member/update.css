@@ -70,6 +70,9 @@
 	border-radius: 7px;
 	margin-left:10px;
 }
+#check-btn{
+	margin-left:13px;
+}
 #back-btn{
 	border-radius: 7px;
 }
@@ -130,3 +133,10 @@
   [id$="-toggle"] {
     margin-right: 15px;
   }
+#id,
+#mname{
+	width:178px;
+}
+#idcheck{
+	color:red;	
+}

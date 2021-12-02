@@ -82,7 +82,7 @@
 .body:after {
 	content: '';
 	position: absolute;
-	margin-leÏft: -11px;
+	margin-left: -11px;
 	left: 50%;
 	bottom: -12;
 	width: 24px;

@@ -67,7 +67,6 @@
 			style="margin-left: 0px;">
 			<input type="hidden" name="order_type" value="distance"> <input
 				type="hidden" name="page_flag" value="0"> <input
-				type="hidden" name="search_type" value=""> <input
 				type="hidden" id="hidden_selected_id" name="selected_id"
 				value="${param.selected_id}">
 		</div>
@@ -352,8 +351,6 @@
 <script src="/js/feed/side_nav.js"></script>
 <script src="/js/feed/onclick_processing.js"></script>
 <script src="/js/feed/searchbar.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/data.js"></script>
 <script src="/js/feed/loading_animation.js"></script>
 <script src="/js/feed/feed_ajax/feed_img_click.js"></script>
