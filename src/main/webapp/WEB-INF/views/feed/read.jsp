@@ -300,7 +300,7 @@
 							<input type="button" class="btn" id="updatefilebtn" value="사진수정">
 							<div id="selectimg" style="display: none">
 								<input type="file" class="form-control" id="filenameMF_modal"
-									name="filenameMF" accept=".jpg,.png,.gif">
+									name="filenameMF" accept=".jpg,.jpeg">
 							</div>
 						</div>
 						<div class="form-group">

@@ -208,7 +208,12 @@ function container_click(event) {
 		mcontents.val(contents);
 		moldfile.val(oldfile);
 		mcontentsno.val(param);
-		mtag.val(tag);
+		var tag_list = tag.split(",");
+		var tag_str = "";
+		for(var i in tag_list){
+			tag_str += '#'+tag_list[i]+' ';
+		}
+		mtag.val(tag_str);
 		mprivacy.val(privacy);
 		moldImg.attr('src','/contents/storage/'+oldfile);
 		$(".modal_update").show();
