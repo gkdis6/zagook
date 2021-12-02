@@ -422,7 +422,6 @@ input[type=file] {
 <script src="../js/sockjs.min.js"></script>
 <script src="../js/stomp.min.js"></script>
 <script type="text/JavaScript" src="../js/app.js"></script>
-<script>let session_id = '<%=(String)session.getAttribute("id")%>';</script>
 <!-- <script src="../js/login/modal.js"></script> -->
 <!-- <script src="../js/utils/login_modal.js"></script> -->
 

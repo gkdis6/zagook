@@ -54,7 +54,7 @@ public class SocialController {
 	MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
 	params.add("grant_type","authorization_code");
 	params.add("client_id","8b0badea65f50a87408b62085e369711");
-	params.add("redirect_uri","http://localhost:8005/kakaologin");
+	params.add("redirect_uri","https://localhost:8005/kakaologin");
 	params.add("code",code);
 	
 	HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest=

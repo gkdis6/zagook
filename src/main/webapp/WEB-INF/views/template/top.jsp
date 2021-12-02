@@ -38,7 +38,6 @@
 		});
 	</script>
 	
-	<script>let session_id = '<%=(String) session.getAttribute("id")%>';</script>
 	<style type="text/css">
 		#grade {
 			color: white;
@@ -113,7 +112,6 @@
 								</c:when>
 							</c:choose>
 							<li><a href="${root}/notice/list">Notice</a></li>
-							<li><a href="${root}/chat">문의하기</a></li>
 						</ul></li>
 					<c:choose>
 						<c:when test="${not empty sessionScope.id }">
@@ -145,6 +143,13 @@
 									class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a></li>
 						</c:when>
 						<c:when test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
+						<li id="searchbar_container">
+							<form action="/" method="post" id="searchbar_form" onsubmit="return onsearchbar_login_valid();">
+								<input class="form ui-autocomplete-input" type="text" id="searchInput"
+								name="selected_id" autocomplete="off" placeholder="Search Tag or Friend: 태그 검색 시에는 '#'을 붙여주세요">
+								<button type="submit"><i class="fa fa-search"></i></button>
+							</form>
+						</li>
 						<li><a href="/member/logout"><span
 									class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 						</c:when>
