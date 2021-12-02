@@ -38,8 +38,8 @@ inputImage_modal.addEventListener("change", e => {
 		}
 		latitude = latitude[0] + latitude[1] / 60 + latitude[2] / 3600;
 		longitude = longitude[0] + longitude[1] / 60 + longitude[2] / 3600;
-		$(".modal_update").find("input[name='x_site']").value = latitude;
-		$(".modal_update").find("input[name='y_site']").value = longitude;
+		document.getElementById("x_site_update").value = latitude;
+		document.getElementById("y_site_update").value = longitude;
 		console.log(latitude);
 		console.log(longitude);
 

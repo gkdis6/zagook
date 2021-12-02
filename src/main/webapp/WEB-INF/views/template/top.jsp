@@ -140,6 +140,8 @@
 									class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a></li>
 						</c:when>
 						<c:when test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
+						<li><a href="${root}/member/logout"><span
+									class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 						</c:when>
 						<c:otherwise>
 							<li id="searchbar_container">
