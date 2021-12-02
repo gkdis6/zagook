@@ -29,11 +29,11 @@
 							로 그 인</button>
 						<div class="hr-sect">O R</div>
 						<a
-							href="https://kauth.kakao.com/oauth/authorize?client_id=8b0badea65f50a87408b62085e369711&redirect_uri=http://localhost:8005/kakaologin&response_type=code">
+							href="https://kauth.kakao.com/oauth/authorize?client_id=8b0badea65f50a87408b62085e369711&redirect_uri=${root}/kakaologin&response_type=code">
 							<img src="../images/kakao_login.png"
 							style="width: 250px; height: 47px; padding-top: 5px; margin-left: 7px">
 						</a> <a
-							href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ixM36J7baPEJLD3Q1N43&state=STATE_STRING&redirect_uri=http://localhost:8005/naverlogin">
+							href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ixM36J7baPEJLD3Q1N43&state=STATE_STRING&redirect_uri=${root}/naverlogin">
 							<img src="../images/naver_login.png"
 							style="width: 250px; height: 53px; padding-top: 10px; margin-left: 7px">
 						</a>

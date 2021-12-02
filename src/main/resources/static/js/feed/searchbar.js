@@ -81,9 +81,9 @@ $("#searchInput").on("propertychange change keyup paste input", function () {
  	console.log("search_type : ", $("input[name=search_type]").val());
  	if ($("#searchInput").val() == session_id) {
 		$("#searchbar_form").attr("method", "post");
-		$("#searchbar_form").attr("action", "http://localhost:8005/feed/myread");
+		$("#searchbar_form").attr("action", "/feed/myread");
 	} else
- 		$("#searchbar_form").attr("action", "http://localhost:8005/feed/" + $("input[name=search_type]").val());
+ 		$("#searchbar_form").attr("action", "/feed/" + $("input[name=search_type]").val());
 });
 
 

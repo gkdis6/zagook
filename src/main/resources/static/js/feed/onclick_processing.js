@@ -3,7 +3,7 @@ function onclickTag(event) {
 	let tag_name = event.target.innerText;
 	let params = {'selected_id' : tag_name.substr(1, tag_name.length)};
 	// 2) /feed/friend url로 이동
-	url = "http://localhost:8005/feed/tag";
+	url = "/feed/tag";
 	send_post(url, params);
 }
 
@@ -13,10 +13,10 @@ function onclickId(event) {
 	// 2) /feed/friend url로 이동
 	
 	if(params.selected_id == session_id){
-		url = "http://localhost:8005/feed/myread";
+		url = "/feed/myread";
 		location.href = url;
 	}else{
-		url = "http://localhost:8005/feed/friend";
+		url = "/feed/friend";
 		send_post(url, params);
 	}
 }

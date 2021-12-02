@@ -59,7 +59,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 type="button"
                 class="btn btn-default"
                 data-dismiss="modal"
-                onclick="location.href = 'http://localhost:8005/';"
+                onclick="location.href = '${root}/';"
               >
                 Close
               </button>

@@ -36,7 +36,7 @@ function is_set_feed_range_scroll_reject(range, url_id) {
 }
 
 function is_tag_or_friend_url (url) {
-	if (url == "http://localhost:8005/feed/tag" || url == "http://localhost:8005/feed/friend")
+	if (url == "/feed/tag" || url == "/feed/friend")
 		return true;
 	return false;
 }

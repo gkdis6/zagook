@@ -28,13 +28,14 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script src="../js/login/modal.js"></script>
 	<script src="../js/utils/login_modal.js"></script>
-		
+	<script src="/js/feed/searchbar.js"></script>
 	<script>
 		$(function(){
 			$('.btn-modal-open').bind('click', load_login_modal);
 		});
 	</script>
 	
+	<script>let session_id = '<%=(String) session.getAttribute("id")%>';</script>
 	<style type="text/css">
 		#grade {
 			color: white;
@@ -126,7 +127,7 @@
 						<c:when test="${empty sessionScope.id }">
 						<!-- 모달 시작-->
 							<li id="searchbar_container">
-								<form action="http://localhost:8005/" method="post" id="searchbar_form" onsubmit="return onsearchbar_login_valid();">
+								<form action="/" method="post" id="searchbar_form" onsubmit="return onsearchbar_login_valid();">
 									<input class="form ui-autocomplete-input" type="text" id="searchInput"
 									name="selected_id" autocomplete="off" placeholder="Search Tag or Friend: 태그 검색 시에는 '#'을 붙여주세요">
 									<button type="submit"><i class="fa fa-search"></i></button>
@@ -140,20 +141,20 @@
 									class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a></li>
 						</c:when>
 						<c:when test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
-						<li><a href="${root}/member/logout"><span
+						<li><a href="/member/logout"><span
 									class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 						</c:when>
 						<c:otherwise>
 							<li id="searchbar_container">
-								<form action="http://localhost:8005/" method="post"  id="searchbar_form">
+								<form action="/" method="post"  id="searchbar_form">
 									<input class="form ui-autocomplete-input" type="text" id="searchInput" 
 									name="selected_id" autocomplete="off" placeholder="Search Tag or Friend: 태그 검색 시에는 '#'을 붙여주세요">
 									<button type="submit"><i class="fa fa-search"></i></button>
 								</form>
 							</li>
-							<li><a href="${root}/member/mypage"><span
+							<li><a href="/member/mypage"><span
 									class="glyphicon glyphicon-edit"></span> 마이페이지 </a></li>
-							<li><a href="${root}/member/logout"><span
+							<li><a href="/member/logout"><span
 									class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 						</c:otherwise>
 					</c:choose>
