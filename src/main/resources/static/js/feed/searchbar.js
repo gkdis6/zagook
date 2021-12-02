@@ -1,4 +1,5 @@
 $(function start_autocomplete(){
+	$(".ui-helper-hidden-accessible").css("display", "none");
 	$("#searchInput").autocomplete({  //오토 컴플릿트 시작
 		source: function(request,response){
 			if (request.term[0] == "#") {
@@ -54,9 +55,11 @@ $(function start_autocomplete(){
  			}
 		},
 		focus : function(event, ui) { // 방향키로 자동완성단어 선택 가능하게 만들어줌	
-			$(".searchbar_item").css("background-color", "#fff");
+			$(".searchbar_item").css("background-color", "#191A45");
+			$(".searchbar_item").css("color", "white");
 			$("#searchInput").val(ui.item.label);
-			$("#" + ui.item.label).css("background-color", "#F5F2B8");
+			$("#ui-id-1").children("#" + ui.item.label).css("background-color", "#F5F2B8");
+			$("#ui-id-1").children("#" + ui.item.label).css("color", "black");
             return false;
 		},
 		minLength: 1,// 최소 글자수
