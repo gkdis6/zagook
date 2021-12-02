@@ -42,7 +42,7 @@ $(function start_autocomplete(){
  		                        return {
  		                            label: item.ID,
  		                            value: item.ID,
- 		                            img: "/member/storage/profile/"+item.FNAME
+ 		                            img: "/member/storage/"+item.FNAME
  		                        };
  		                    })
  		                );

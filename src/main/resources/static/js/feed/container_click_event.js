@@ -118,8 +118,8 @@ function container_click(event) {
                     listHtml += "	</div>";
                     listHtml += "	<div class='rereply-content col-8'>";
                     listHtml += "		<div>";
-                    listHtml += "			<span>";
-                    listHtml += "				<b>"+ id +"</b>";
+                    listHtml += "			<span onclick='id_click(event);return false;'>";
+                    listHtml += "				<b href='javascript:void(0);'>"+ id +"</b>";
                     listHtml += "			</span>";
                     listHtml += "			<span>";
                     listHtml += 				content;

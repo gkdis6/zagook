@@ -183,3 +183,6 @@
 .delete__feed {
   cursor: pointer;
 }
+b:hover{
+	cursor: pointer;
+}

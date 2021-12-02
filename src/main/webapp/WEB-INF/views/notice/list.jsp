@@ -18,7 +18,11 @@
        location.href=url;
      }  
   </script>
- 
+  <style>
+    b:hover{
+      cursor:default;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
