@@ -248,7 +248,7 @@
 
 					<div>
 						<div>
-							<input type="text" id="tag" class="form-control" placeholder="태그"
+							<input name="tag" type="text" id="tag" class="form-control" placeholder="태그"
 								style="margin-bottom: 5px;">
 						</div>
 					</div>
