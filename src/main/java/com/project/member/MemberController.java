@@ -241,11 +241,8 @@ public class MemberController {
    
    
    @PostMapping("/member/updateFile")
-   public String updateFile(MultipartFile fnameMF,
-                   String oldfile,
-                   HttpSession session,
-                   HttpServletRequest request) throws IOException{
-             String basePath = Member.getUploadDir();
+   public String updateFile(MultipartFile fnameMF, String oldfile, HttpSession session, HttpServletRequest request) throws IOException{
+           String basePath = Member.getUploadDir();
            if(oldfile !=null  && !oldfile.equals("member.jpg")) { //원본파일 삭제
                    Utility.deleteFile(basePath, oldfile);
            }
@@ -255,6 +252,7 @@ public class MemberController {
            map.put("email", session.getAttribute("email"));
            map.put("fname", Utility.saveFileSpring(fnameMF, basePath));
            //디비
+           System.out.println(map);
            int cnt = service.updateFile(map);
            if(cnt==1) {
                    return "redirect:./mypage";

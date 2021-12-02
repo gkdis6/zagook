@@ -105,7 +105,7 @@ body{
 			<c:forEach var="dto" items="${list}">
 			<div class="friend_container" id="${dto.id2 }">
 				<div class="friend_img_container">
-					<img src="/member/storage/profile/${dto.fname }"></img>
+					<img src="/member/storage/${dto.fname }"></img>
 				</div>
 				<span>${dto.id2}</span><br>
 				<c:if test="${dto.status == 3 }"> 

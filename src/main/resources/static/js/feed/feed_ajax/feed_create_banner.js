@@ -5,7 +5,7 @@ function create_banner(dto_member, tag, tagcnt, friend_status, base_distance) {
 	} else if(window.location.pathname == '/feed/myread'||(dto_member && session_id == dto_member.id)){
 		html_str += '<div class="banner">';
 		html_str += '<div class="banner_area">';
-		html_str += '<div class="banner_profile_img"><img src="/member/storage/profile/'+dto_member.fname+'" alt="profile_img"></div>';
+		html_str += '<div class="banner_profile_img"><img src="/member/storage/'+dto_member.fname+'" alt="profile_img"></div>';
 		html_str += '<div class="banner_inner">';
 		html_str += '<div class="banner_inner_first">';
 		html_str += '<span>'+dto_member.id+'</span>';
@@ -35,7 +35,7 @@ function create_banner(dto_member, tag, tagcnt, friend_status, base_distance) {
 	}else if(window.location.pathname == '/feed/friend'){
 		html_str += '<div class="banner">';
 		html_str += '<div class="banner_area">';
-		html_str += '<div class="banner_profile_img"><img src="/member/storage/profile/'+dto_member.fname+'" alt="profile_img"></div>';
+		html_str += '<div class="banner_profile_img"><img src="/member/storage/'+dto_member.fname+'" alt="profile_img"></div>';
 		html_str += '<div class="banner_inner">';
 		html_str += '<div class="banner_inner_first">';
 		html_str += '<span>'+dto_member.id+'</span>';

@@ -51,7 +51,7 @@ function process_feed_list(param) {
                 
                 // profile image area
                 html_str += '<span class="profile_image_container">';
-                html_str += '<img src="/member/storage/profile/' + list[i].fname + '" class="profile_img" alt="profile_img" loading="lazy">';
+                html_str += '<img src="/member/storage/' + list[i].fname + '" class="profile_img" alt="profile_img" loading="lazy">';
                 html_str += '</span>';
                 
                 // user id area
@@ -72,7 +72,7 @@ function process_feed_list(param) {
                 
                 // image area
                 html_str += '<div class="img_box_container" onclick="img_click(event)">';
-                html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box" id="imgsrc'+list[i].contentsno+'" name="'+list[i].filename+'">';
+                html_str += '<img src="/contents/storage/' + list[i].filename + '" class="img_box" alt="img_box" id="imgsrc'+list[i].contentsno+'" name="'+list[i].filename+'">';
                 html_str += '</div>';
                 
                 // tag area

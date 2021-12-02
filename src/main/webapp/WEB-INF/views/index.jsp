@@ -584,7 +584,7 @@ input[type=file] {
 					div3.className = 'title';
 					var div_profile = document.createElement('div');
 					div_profile.className = 'profile';
-					div_profile.innerHTML = `<img src="/member/storage/profile/`+data.fname+`" class="profile_img" alt="profile_img">
+					div_profile.innerHTML = `<img src="/member/storage/`+data.fname+`" class="profile_img" alt="profile_img">
 		            <a class="name feed_padding">`+data.id+`</a>`;
 					div3.appendChild(div_profile);
 					var closeBtn = document.createElement('button');
@@ -1006,7 +1006,7 @@ input[type=file] {
 		                listHtml += "<div class='row replyrow reply" + rnum + "'>";
 		
 	                    listHtml += "	<div class='col-1'>";
-	                    listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
+	                    listHtml += "			<img class='reply_list_profileImage' src='/member/storage/"+ fname +"'/>";
 	                    listHtml += "	</div>";
 	                    listHtml += "	<div class='rereply-content col-8'>";
 	                    listHtml += "		<div>";
@@ -1118,7 +1118,7 @@ input[type=file] {
 		                listHtml += "<div class='row replyrow reply" + rnum + "'>";
 
 		                listHtml += "	<div class='col-1'>";
-		                listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
+		                listHtml += "			<img class='reply_list_profileImage' src='/member/storage/"+ fname +"'/>";
 		                listHtml += "	</div>";
 		                listHtml += "	<div class='rereply-content col-8'>";
 		                listHtml += "		<div>";

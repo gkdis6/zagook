@@ -114,7 +114,7 @@ function container_click(event) {
 	                listHtml += "<div class='row replyrow reply" + rnum + "'>";
 	
                     listHtml += "	<div class='col-1'>";
-                    listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
+                    listHtml += "			<img class='reply_list_profileImage' src='/member/storage/"+ fname +"'/>";
                     listHtml += "	</div>";
                     listHtml += "	<div class='rereply-content col-8'>";
                     listHtml += "		<div>";
@@ -294,7 +294,7 @@ $(document).on('click',"button.write_reply", function(){
                 listHtml += "<div class='row replyrow reply" + rnum + "'>";
 
                 listHtml += "	<div class='col-1'>";
-                listHtml += "			<img class='reply_list_profileImage' src='/member/storage/profile/"+ fname +"'/>";
+                listHtml += "			<img class='reply_list_profileImage' src='/member/storage/"+ fname +"'/>";
                 listHtml += "	</div>";
                 listHtml += "	<div class='rereply-content col-8'>";
                 listHtml += "		<div>";
