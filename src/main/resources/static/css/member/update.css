@@ -12,10 +12,13 @@
 	
 }
 #div-update-con{
-	padding:20px 0px 0px 40px;
+/* 	float:left; */
+	width:50%;
+	padding:50px 0px 0px 55px;
 }
 #updateform-header{
 /* 	float:left; */
+	width:480px;
 	margin-bottom:-45px;
 	padding: 26px 0px 0px 17px;
 }
@@ -82,3 +85,48 @@
 	color: white;
 	background: #191A45;
 }
+#infozagook{
+	float:right;
+	width:68%;
+	padding-left:200px;
+	margin-top:-615px;
+}
+#div-info-zagook{
+	width:70%;
+	border:2px solid #ccc;
+	border-left:4px solid #191A45;
+	border-radius: 7px;
+	
+}
+
+#info-header{
+	margin-top:-1px;
+	padding-bottom:30px;
+}
+ .answer {
+    display: none;
+    font-size:16px;
+    padding-bottom: 30px;
+  }
+  #faq-title {
+    font-size: 25px;
+  }
+  .faq-content {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .question {
+    font-size: 19px;
+    padding: 30px 0;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+  .question:hover {
+    color: #2962ff;
+  }
+  [id$="-toggle"] {
+    margin-right: 15px;
+  }
