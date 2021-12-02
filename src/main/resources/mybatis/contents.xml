@@ -33,7 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="com.project.contents.ContentsDTO">
 		update zagook_contents
 		set contents=#{contents},
-		privacy=#{privacy}
+		privacy=#{privacy},
+		x_site=#{x_site},
+		y_site=#{y_site}		
 		where contentsno = #{contentsno}
 	</update>
 	<update id="update2"

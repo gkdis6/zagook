@@ -248,7 +248,7 @@
 
 					<div>
 						<div>
-							<input type="text" id="tag" class="form-control" placeholder="태그"
+							<input type="text" id="tag" name="tag" class="form-control" placeholder="태그"
 								style="margin-bottom: 5px;">
 						</div>
 					</div>
@@ -307,8 +307,8 @@
 							<textarea name="contents" id="contents" class="form-control"
 								style="height: 100px; resize: none;" placeholder="내용"></textarea>
 						</div>
-						<input type="hidden" name="x_site" id="x_site"> <input
-							type="hidden" name="y_site" id="y_site">
+						<input type="hidden" name="x_site" id="x_site_update"> <input
+							type="hidden" name="y_site" id="y_site_update">
 						<div class="form-group">
 							<input type="text" name="tag" id="tag" class="form-control"
 								value="" placeholder="#태그">
