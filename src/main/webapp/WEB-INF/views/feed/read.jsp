@@ -163,7 +163,7 @@
 					<div class="modal-header">
 						<img src="../images/zagook_logo.jpg"
 							style="width: 60px; height: 60px; padding-bottom: 10px">
-						<h4 class="modal-title">발자국 로그인</h4>
+						<h4 class="modal-title" style="font-weight:bold">Zagook 로그인</h4>
 					</div>
 					<div class="modal-body">
 						<form action="/member/login" class="was-validated" method="post">
@@ -201,10 +201,6 @@
 								</div>
 							</div>
 						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" id="modalclose" class="btn btn-secondary"
-							data-dismiss="modal" onclick="close_modal();">취소</button>
 					</div>
 				</div>
 

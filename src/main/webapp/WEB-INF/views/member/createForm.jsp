@@ -31,62 +31,26 @@
 			  
 			  $("#emailcheck").text(data.str);
 		  })
+		  $(".sendMail").show();
+		  $(".compare").show();
 	  }
   }
   </script>
-  <script type="text/javascript">
-function inCheck(f){
-	if(f.id.value.length==0){
-		alert("닉네임을 입력하세요");
-		f.id.focus();
-		return false;
-	}
-	if(f.password.value.length==0){
-		alert("비밀번호를 입력하세요");
-		f.password.focus();
-		return false;
-	}
-	if(f.repassword.value.length==0){
-		alert("비밀번호를 확인하세요");
-		f.repassword.focus();
-		return false;
-	}
-	if(f.password.value != f.repassword.value){
-		alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-		f.password.value="";
-		f.repassword.value="";
-		f.password.focus();
-		return false;
-	}
-	if(f.mname.value.length==0){
-		alert("이름을 입력하세요");
-		f.mname.focus();
-		return false;
-	}
-	if(f.email.value.length==0){
-		alert("이메일을 입력하세요");
-		f.email.focus();
-		return false;
-	}
-}
-</script>
 </head>
 <body>
 <div id="div-create" style="float:left; padding-top:70px">
 <div id="create-header">
-<span class="hl">발자국 회원가입</span><br>
-<h5>발자국의 회원이 되어, 주변사람들과 추억을 공유하세요.</h5>
+<span class="hl">Zagook 회원가입</span><br>
+<h5>Zagook의 회원이 되어, 주변사람들과 추억을 공유하세요.</h5>
 <label>(<span id="need">*</span> 필수입력사항)</label>
 </div>
-<!-- <h2 class="col-sm-offset-2 col-sm-10">발자국 회원가입</h2> -->
-<!-- <h5 class="col-sm-offset-2 col-sm-10">발자국의 회원이 되어,<br><br>주변사람들과 추억을 공유하세요.</h5> -->
   <div id="div-create-form">
   <form class="form-horizontal" 
         action="create"
         method="post"
         name = 'frm'
         enctype="multipart/form-data"
-        onsubmit="return inCheck(this)"
+        onsubmit="return (inCheck(this) && submitCheck());"
         >
     <div class="create-group">
       <label class="control-label col-sm-2" for="fnameMF">프로필 사진</label>
@@ -102,20 +66,28 @@ function inCheck(f){
         placeholder="Email은 로그인에 사용됩니다."  name="email">
       </div>
       
-      <button type="button" class="btn btn-default"
+      <button type="button" class="btn btn-default" id="check-btn"
       onclick="emailCheck(document.frm.email.value)">중복확인</button>
       <div id="emailcheck"></div>
     </div>
+<!--  	 <div class="create-group"> -->
+<!--      </div> -->
+     <div class="create-group" style="padding-left:182px">
+    	<input type="text" class="compare" placeholder=" 인증번호를 입력하세요"> 
+    	<input type="button" id="sendMail" class="sendMail" value="인증코드 전송"><br>
+    	<span class="compare-text" style="display: none">불일치</span>
+     </div>
     <div class="create-group" style="margin-bottom:-15px;">
       <label class="control-label col-sm-2" for="id"><span id="need">*</span>닉네임</label>
       <div class="col-sm-3">          
         <input type="text" class="form-control" id="id" placeholder="Enter nickname" 
         name="id">
       </div>
-      <button type="button" class="btn btn-default"
+      <button type="button" class="btn btn-default" id="check-btn"
       onclick="idCheck(document.frm.id.value)">중복확인</button>
       <div id="idcheck"></div>
     </div>
+ 
     <div class="create-group">
       <label class="control-label col-sm-2" for="password"><span id="need">*</span>비밀번호</label>
       <div class="col-sm-4">          
@@ -168,7 +140,7 @@ function inCheck(f){
        
     <div class="create-group">        
       <div class="create-btn">
-        <button id="create-btn" type="submit" class="btn">가입하기</button>
+        <button  id="create-btn" type="submit" class="btn">가입하기</button>
         <button id="back-btn" type="reset" class="btn" onclick="history.back()">취소</button>
       </div>
     </div>
@@ -177,14 +149,29 @@ function inCheck(f){
 </div>
 <div id="infozagook">
 <div id="info-header">
-<span class="hl">자국을 소개합니다.</span>
+<span class="hl">Zagook을 소개합니다.</span><br><br>
+<span style="font-size:17px;color:#191A45;">
+위치기반 SNS Zagook으로 추억을 공유하세요.</span>
 </div>
-<table id="zagookintro">
-	<tr>
-		<td>자국을 소개합니다.</td>
-	</tr>
-</table>
+<div id="div-info-zagook">
+<div style="padding: 10px 0px 10px 30px;">
+<div class="faq-content">
+  <button class="question" id="que-1"><span id="que-1-toggle">∧</span><span class="nr">지도에 추억을 표시하세요.</span></button>
+  <div class="answer" id="ans-1"><span class="gl">위치정보를 포함한 이미지</span>를 업로드하여 추억을 간직하고 <br><br> 주변사람들과 공유할 수 있습니다.</div>
+</div>
+<div class="faq-content">
+  <button class="question" id="que-2"><span id="que-2-toggle">∧</span><span class="nr">추억을 활용하세요.</span></button>
+  <div class="answer" id="ans-2"><span class="gl">피드 이미지를 클릭</span>하면 해당하는 위치를 알 수 있습니다.<br><br>
+  <span class="gl">지도 마커를 클릭</span>하면 해당하는 피드 내용을 알 수 있습니다.</div>
+</div>
+<div class="faq-content">
+  <button class="question" id="que-3"><span id="que-3-toggle">∧</span><span class="nr">주변사람과 추억을 공유하세요.</span></button>
+  <div class="answer" id="ans-3">추억의 <span class="gl">공유 범위를 설정</span>하여 주변사람과 공유하고 싶은 추억을 작성하세요. </div>
+</div>
+</div>
+</div>
 </div>
 <script src="/js/member/update.js"></script>
+<script src="/js/member/create.js"></script>
 </body>
 </html>

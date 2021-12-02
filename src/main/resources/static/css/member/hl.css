@@ -2,8 +2,23 @@
 	border-bottom: 3px solid #f5f2b8;
 	box-shadow: inset 0 -8px 0 #f5f2b8;
 	color:#191A45;
-/* 	color:white; */
-/* 	background-color:#191A45; */
 	font-weight:bold;
 	font-size:20px;
+}
+
+.gl{
+	border-bottom: 3px solid #ebebed;
+	box-shadow: inset 0 -6px 0 #ebebed;
+	color:#191A45;
+	font-weight:bold;
+	font-size:17px;
+}
+.nr{
+	color:#191A45;
+	font-weight:bold;
+	font-size:20px;
+}
+#plain{
+	padding-top:10px;
+	padding-bottom:10px;
 }
