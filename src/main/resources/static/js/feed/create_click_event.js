@@ -35,6 +35,7 @@ function readImage(input) {
 const inputImage = document.getElementById("filenameMF")
 inputImage.addEventListener("change", e => {
 	readImage(e.target)
+	console.log(inputImage.files[0]);
 	inputImage.files[0].exifdata = null;
 	EXIF.getData(inputImage.files[0], function () {
 		var latitude = EXIF.getTag(this, "GPSLatitude");

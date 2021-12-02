@@ -165,9 +165,9 @@
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
 }
-.modal_updateBox {
+.modal_update .modal-content {
     max-height: 80vh;
-    max-width: 80vw;
+    max-width: 450px;
     position: fixed;
 	top: 50%;
 	left: 50%;

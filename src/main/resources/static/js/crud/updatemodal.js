@@ -1,33 +1,5 @@
-$(document).on("click","a.updatebtn",function(){
-//	console.log(event.currentTarget.id);
-	//let param = {"contentsno": event.currentTarget.id};
-let param={
-		contentsno: document.getElementById("contentsno").value,
-		oldfile: document.getElementById("oldfile").value,
-		contents: document.getElementById("contents").value,
-		tag: document.getElementById("tag").value,
-		privacy: document.getElementById("privacy").value
-		};
-	console.log(param);
-	let modal = $(".modal_update");
-	let mcontents=modal.find("textarea[name='contents']");
-	let moldfile=modal.find("input[name='oldfile']");
-	let mcontentsno=modal.find("input[name='contentsno']");
-	let mtag=modal.find("input[name='tag']");
-	let mprivacy=modal.find("select[name='privacy']");
-	mcontents.val(param.contents);
-	moldfile.val(param.oldfile);
-	mcontentsno.val(param.contentsno);
-	mtag.val(param.tag);
-	mprivacy.val(param.privacy);
-	var srcname = modal.find("img[id='oldImg']").attr('src');
-	console.log(srcname);
-	$(".modal_update").show();
-})
-
-
-$("#closeModal").click(function (e) {
-$(".modal_update").hide();
+$("#closeModal").click(function(e) {
+	$(".modal_update").hide();
 });
 
 function checkIn(f) {
@@ -37,18 +9,41 @@ function checkIn(f) {
 		return false;
 	}
 }
-function updatefile() {
-	$('#updatefilebtn').hide();
-	$('#selectimg').show();
-	return false;
-}
  function PreviewImage() {
 	 // 파일리더 생성
         var preview = new FileReader();
         preview.onload = function (e) {
         // img id 값 
-        document.getElementById("img").src = e.target.result;
+        document.getElementById("oldImg").src = e.target.result;
     };
     // input id 값 
-    preview.readAsDataURL(document.getElementById("filenameMF").files[0]);
+    preview.readAsDataURL(document.getElementById("filenameMF_modal").files[0]);
  };
+$("#updatefilebtn").click(function(){
+	$('#updatefilebtn').hide();
+	$('#selectimg').show();
+	// input file에 change 이벤트 부여
+const inputImage_modal = document.getElementById("filenameMF_modal");
+inputImage_modal.addEventListener("change", e => {
+	PreviewImage(e.target)
+	console.log(inputImage_modal.files[0]);
+	inputImage_modal.files[0].exifdata = null;
+	EXIF.getData(inputImage_modal.files[0], function () {
+		var latitude = EXIF.getTag(this, "GPSLatitude");
+		var longitude = EXIF.getTag(this, "GPSLongitude");
+		if (longitude === undefined || latitude === undefined) {
+			document.getElementById("updateBtn_modal").disabled = true;
+		} else {
+			document.getElementById("updateBtn_modal").disabled = false;
+		}
+		latitude = latitude[0] + latitude[1] / 60 + latitude[2] / 3600;
+		longitude = longitude[0] + longitude[1] / 60 + longitude[2] / 3600;
+		$(".modal_update").find("input[name='x_site']").value = latitude;
+		$(".modal_update").find("input[name='y_site']").value = longitude;
+		console.log(latitude);
+		console.log(longitude);
+
+
+	});
+})
+})

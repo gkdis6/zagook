@@ -59,6 +59,7 @@ function process_feed_list(param) {
                 html_str += '<a href="javascript:void(0);" class="user_id" onclick="id_click(event);return false;">' + list[i].id + '</a>';
                 html_str += '</span>';
                 
+<<<<<<< HEAD
                 if(session_id == list[i].id){
 	                //update, delete dropdown area
 	                html_str += '<li class="dropdown" style="margin-left: auto; margin-right:20px; list-style:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>';
@@ -72,15 +73,30 @@ function process_feed_list(param) {
 	          
 					html_str += '</ul></li>';
                 }
+=======
+                //update, delete dropdown area
+                html_str += '<li class="dropdown" style="margin-left: auto; margin-right:20px; list-style:none;"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>';
+                html_str += '<ul class="dropdown-menu"><li><a onclick="update_click(event)" id="' + list[i].contentsno + '" class="drop_update">수정';     
+ 				html_str += '<input type="hidden" id="privacy'+list[i].contentsno+'" value="'+list[i].privacy+'"></a></li>';  
+                html_str += '<li><a class="delete__feed" name="'+list[i].contentsno+'">삭제</a></li>';
+     
+          
+				html_str += '</ul></li>';
+                
+>>>>>>> crud_modal
                 html_str += '</div>';
                 
                 // image area
                 html_str += '<div class="img_box_container" onclick="img_click(event)">';
+<<<<<<< HEAD
                 html_str += '<img src="/contents/storage/' + list[i].filename + '" class="img_box" alt="img_box">';
+=======
+                html_str += '<img src="../images/feed/img_box/' + list[i].filename + '" class="img_box" alt="img_box" id="imgsrc'+list[i].contentsno+'" name="'+list[i].filename+'">';
+>>>>>>> crud_modal
                 html_str += '</div>';
                 
                 // tag area
-                html_str += '<div id="tag_container" class="tag_container">';
+                html_str += '<div id="tag_container'+list[i].contentsno+'" class="tag_container" name="'+list[i].tag_list+'">';
                 if (list[i].tag_list != null) {
                     for (let j = 0; j < list[i].tag_list.length; j++) {
                         html_str += '<a href="javascript:void(0);" onclick="tag_click();return false;">';
@@ -91,7 +107,7 @@ function process_feed_list(param) {
                 html_str += '</div>';
                 
                 // contents area
-                html_str += '<p class="content feed_padding">' + list[i].contents + '</p>';
+                html_str += '<p class="content feed_padding" id="contents'+list[i].contentsno+'">' + list[i].contents + '</p>';
                 
                 // date area
                 html_str += '<div class="date feed_padding">' + String(list[i].rdate).slice(0, -3) +'</div>';
