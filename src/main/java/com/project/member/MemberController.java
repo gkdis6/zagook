@@ -173,7 +173,7 @@ public class MemberController {
       Map<String,String> map = new HashMap<String,String>();
       if(cnt>0) {
          //map에 들어갈 data
-         map.put("str", email+" 로 가입한 내역이 존재합니다. 로그인 해주세요.");
+         map.put("str", email+" 로 가입한 내역이 존재합니다.");
       }else {
          map.put("str", email+"는 중복아님, 사용가능 합니다.");
       }
