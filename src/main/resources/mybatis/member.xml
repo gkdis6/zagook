@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      mname, tel, email, job, mdate, fname,
      grade)
      VALUES(#{id}, #{password},#{mname}, #{tel,jdbcType=VARCHAR}, 
-     #{email}, #{job,jdbcType=VARCHAR}, sysdate, #{fname,},'H')
+     #{email}, #{job,jdbcType=VARCHAR}, sysdate, #{fname},'H')
 </insert>
 
 
