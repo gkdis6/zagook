@@ -842,7 +842,7 @@ input[type=file] {
 					<div class="form-group">
 						<div>
 							<input style="display: block; cursor: pointer;" type="file"
-								id="filenameMF" name="filenameMF" class="form-control">
+								id="filenameMF" name="filenameMF" class="form-control" accept=".jpg, .jpeg">
 						</div>
 					</div>
 

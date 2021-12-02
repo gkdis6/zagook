@@ -75,7 +75,7 @@
 											<label class="control-label col-sm-4" for="fnameMF" style="font-size:17px;">변경파일</label>
 											<div class="col-sm-6">
 												<input type="file" class="form-control" id="fnameMF"
-													name="fnameMF" accept=".jpg,.png,.gif" required="required">
+													name="fnameMF" accept=".jpg,.png,.gif, .jpeg" required="required">
 											</div>
 										</div>
 										<div class="modal-footer">
