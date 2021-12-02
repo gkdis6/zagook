@@ -22,13 +22,19 @@
     b:hover{
       cursor:default;
     }
+    #notice_container{
+		margin-top:50px;
+		margin-left:150px;
+		padding-right:150px;
+		
+	}
   </style>
 </head>
 <body>
-<div class="container">
-<h2><b>공지 사항</b></h2>
-  <form class="form-inline" action="./list">
-    <div class="form-group">
+<div class="container" id= "notice_container">
+<h2 style="font-weight:bold;display:inline"><b>공지 사항</b></h2>
+  <form class="form-inline" action="./list" style="float:right;padding-bottom:30px;">
+    <span class="form-group">
       <select class="form-control" name="col">
         <option value="title"
         <c:if test= "${col=='title'}"> selected </c:if>
@@ -43,7 +49,7 @@
         <c:if test= "${col=='total'}"> selected </c:if>
         >전체출력</option>       
      </select>
-    </div>
+    </span>
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Enter 검색어" 
       name="word" value="${word}">
