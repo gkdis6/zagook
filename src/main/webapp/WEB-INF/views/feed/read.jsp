@@ -52,7 +52,6 @@
 						alt="mouse_click" style="width: 30px;">
 				</div>
 				<c:choose>
-<<<<<<< HEAD
 				<c:when test="${not empty sessionScope.id }">
 				  	<a href="/feed/myread" class="tip">My Feed<span>내 게시물 확인하기</span></a>
 				  	<a href="/feed/read" class="tip">Main Feed<span>나와 내 친구의 게시물을 확인하기</span></a>
@@ -64,23 +63,6 @@
 				  	<a href="javascript:void(0)" onclick="onclick_login_open()" class="tip">Searching Map<span>지도 위에서 자유롭게 위치를 변경하며 게시물을 찾을 수 있습니다</span></a>
 			  	</c:otherwise>
 			  	</c:choose>
-=======
-					<c:when test="${not empty sessionScope.id }">
-						<a href="/feed/myread">My Feed</a>
-						<a href="/feed/read">Friends Feed</a>
-						<a href="/friend">Friends List</a>
-						<a href="/searching">Searching Map</a>
-					</c:when>
-					<c:otherwise>
-						<a href="javascript:void(0)" onclick="onclick_login_open()">My
-							Feed</a>
-						<a href="javascript:void(0)" onclick="onclick_login_open()">Friends
-							Feed</a>
-						<a href="javascript:void(0)" onclick="onclick_login_open()">Friends
-							List</a>
-					</c:otherwise>
-				</c:choose>
->>>>>>> crud_modal
 			</div>
 		</div>
 		<div class="center_container" id="center_container"
@@ -123,17 +105,10 @@
 	</div>
 	<!-- 챗봇  --------------------------------------------------------------------------- -->
 	<div id="chatBtn"
-<<<<<<< HEAD
 		style="position: fixed; right:20px; bottom: 153px; z-index: 8"
 		onclick="if(chat.style.display=='none'){chat.style.display=''}else{chat.style.display='none'}">
 		<img src="/images/chat2.png" id="chat-dis-img" style="width:64px; height:95px; opacity:0.8;">
 		<img src="/images/chat3.png" id="chat-act-img" style="width:66px; height:90px; opacity:0.8; display:none">
-=======
-		style="position: fixed; right: 20px; bottom: 170px; z-index: 8"
-		onclick="if(chat.style.display=='none'){chat.style.display=''}else{chat.style.display='none'}">
-		<img src="./images/chat1.png"
-			style="width: 60px; height: 60px; opacity: 0.7;">
->>>>>>> crud_modal
 	</div>
 	<div id="chat" style="display: none">
 		<div class="modal-content">
@@ -184,13 +159,8 @@
 		style="position: fixed; right: 20px; bottom: 100px; z-index: 8; background: white; display: none;"
 		id="create" class="create">
 
-<<<<<<< HEAD
 			<c:choose>
 				<c:when test="${empty sessionScope.id }">
-=======
-		<c:choose>
-			<c:when test="${empty sessionScope.id }">
->>>>>>> crud_modal
 				<div class="modal-content">
 					<div class="modal-header">
 						<img src="../images/zagook_logo.jpg"
@@ -199,20 +169,12 @@
 					</div>
 					<div class="modal-body">
 						<form action="/member/login" class="was-validated" method="post">
-<<<<<<< HEAD
 							<div id="feedmodal" style="margin-left:-15px">
 							<div class="form-group">
 								<label for="email" align="left">이메일 </label> <input type="text"
 									class="form-control" style="width: 250px; height: 40px;"
 									id="userEmail" placeholder="Enter Email" name="email"
 									required="required" value='${c_email_val}'>
-=======
-							<div class="form-group">
-								<label for="id">아이디 </label> <input type="text"
-									class="form-control" style="width: 250px; height: 40px;"
-									id="userId" placeholder="Enter ID" name="id"
-									required="required" value='${c_id_val}'>
->>>>>>> crud_modal
 							</div>
 							<div class="form-group">
 								<label for="userPw">비밀번호 </label> <input type="password"
@@ -220,7 +182,6 @@
 									id="userPw" placeholder="Enter Password" name="password"
 									required="required">
 							</div>
-<<<<<<< HEAD
 							</div>
 							<div class="form=group">
 								<button type="submit"
@@ -246,18 +207,6 @@
 					<div class="modal-footer">
 						<button type="button" id="modalclose" class="btn btn-secondary"
 							data-dismiss="modal" onclick="close_modal();">취소</button>
-=======
-							<div class="form=group">
-								<button type="submit"
-									style="width: 250px; background-color: black; color: white; padding-top: 10px">
-									로 그 인</button>
-								<div class="join">
-									회원이 아니신가요? <a href="${root}/member/agree">회원가입</a>
-									<!-- 													<button type="button" class="btn btn-secondary">회원가입</button> -->
-								</div>
-							</div>
-						</form>
->>>>>>> crud_modal
 					</div>
 				</div>
 
@@ -384,7 +333,6 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 <script src="/js/feed/top_nav.js"></script>
 <script src="/js/feed/selection_menu.js"></script>
 <script src="/js/utils/date_format_util.js"></script>
@@ -415,36 +363,6 @@
 <script src="/js/chat/chatimg.js"></script>
 
 <script>
-=======
-	<script src="/js/feed/top_nav.js"></script>
-	<script src="/js/feed/selection_menu.js"></script>
-	<script src="/js/utils/date_format_util.js"></script>
-	<script src="/js/utils/number_format_util.js"></script>
-	<script src="/js/utils/remove_display_util.js"></script>
-	<script src="/js/utils/scroll_util.js"></script>
-	<script src="/js/utils/send_post_util.js"></script>
-	<script src="/js/utils/login_modal_open.js"></script>
-	<script src="/js/feed/url_pattern/url_regex.js"></script>
-	<script src="/js/feed/create_click_event.js"></script>
-	<script src="/js/feed/map/feed_map.js"></script>
-	<script src="/js/feed/feed_ajax/feed_start_end_util.js"></script>
-	<script src="/js/feed/feed_ajax/feed_ajax.js"></script>
-	<script src="/js/feed/feed_ajax/feed_fetch_util.js"></script>
-	<script src="/js/feed/feed_ajax/feed_create_banner.js"></script>
-	<script src="/js/feed/feed_ajax/feed_box_processing.js"></script>
-	<script src="/js/feed/feed_ajax/feed_scroll_event.js"></script>
-	<script src="/js/feed/container_click_event.js"></script>
-	<script src="/js/feed/side_nav.js"></script>
-	<script src="/js/feed/onclick_processing.js"></script>
-	<script src="/js/feed/searchbar.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="/js/data.js"></script>
-	<script src="/js/feed/loading_animation.js"></script>
-	<script src="/js/feed/feed_ajax/feed_img_click.js"></script>
-	<script src="/js/crud/updatemodal.js"></script>
-	<script>
->>>>>>> crud_modal
 <c:if test="${!empty sessionScope.id }">
 $(document).on("click","button.friend_btn_1",function(){
 	let name = $(this).attr("name");
