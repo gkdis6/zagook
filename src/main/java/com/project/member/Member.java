@@ -11,12 +11,12 @@ public class Member {
         String path = "";
         String os = System.getProperty("os.name").toLowerCase();
         if (File.separator.equals("\\")) {
-            path = "C:/AIstudy/deploy/zagook/member/storage/profile/";
+            path = "C:/AIstudy/deploy/zagook/member/storage/";
             System.out.println("Windows 10: " + path); 
             
         }else if(os.equals("linux")){
         	// System.out.println("Linux");
-            path = "/home/ubuntu/deploy/zagook/member/storage/profile/";
+            path = "/home/ubuntu/deploy/zagook/member/storage/";
         }else {
             System.out.println("mac");
             path = "/Users/sangyongpark/deploy/zagook/member/storage/";
