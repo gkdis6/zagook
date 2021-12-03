@@ -116,7 +116,7 @@
 						</ul></li>
 					<c:choose>
 						<c:when test="${not empty sessionScope.id }">
-							<li><a id="feed" href="${root}/feed/read">내 주변</a></li>
+							<li><a id="feed" href="/">내 주변</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a id="feed" href="javascript:void(0);" onclick="onclick_login_open()">내 주변</a></li>
