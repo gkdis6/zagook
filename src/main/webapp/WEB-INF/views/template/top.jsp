@@ -28,6 +28,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script src="../js/login/modal.js"></script>
 	<script src="../js/utils/login_modal.js"></script>
+	<script src="/js/utils/login_modal_open.js"></script>
 	<script>let session_id = '<%=(String)session.getAttribute("id")%>';</script>
 	<script>
 		$(function(){
