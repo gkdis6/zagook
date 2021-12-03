@@ -67,7 +67,7 @@ public class FeedRestController {
 //	#1 초기 list 생성 부분 - sublist를 활용한 paging 적용
 		if (sublist_idx == 0) {
 			end_flag = -1;
-			if (dto.getUrl_id().equals("myread") || dto.getUrl_id().equals("read")) {
+			if (dto.getUrl_id().equals("myread") || dto.getUrl_id().equals("read") || dto.getUrl_id().equals("home")) {
 				dto.setId((String) session.getAttribute("id"));
 			} else if (dto.getUrl_id().equals("tag") || dto.getUrl_id().equals("friend")) {
 				dto.setId(dto.getSelected_id());
@@ -369,7 +369,7 @@ public class FeedRestController {
 			}
 	
 	//		while문으로 list 내의 contentsno를 받아 DB에서 좋아요 여부 counting
-			if (!dto.getUrl_id().equals("home")) {
+			if (session.getAttribute("id") != null) {
 				k = 0;
 				while (k < feed_list.size()) {
 					int cnt = 0;

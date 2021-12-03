@@ -337,7 +337,6 @@
 <script src="/js/utils/remove_display_util.js"></script>
 <script src="/js/utils/scroll_util.js"></script>
 <script src="/js/utils/send_post_util.js"></script>
-<script src="/js/utils/login_modal_open.js"></script>
 <script src="/js/feed/url_pattern/url_regex.js"></script>
 <script src="/js/feed/create_click_event.js"></script>
 <script src="/js/feed/map/feed_map.js"></script>
