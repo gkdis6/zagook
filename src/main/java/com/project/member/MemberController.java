@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.mail.Message.RecipientType;
-import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
@@ -16,9 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +29,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.project.Utility.Utility;
-import com.sun.mail.util.logging.MailHandler;
 
 @Controller
 public class MemberController {
@@ -331,7 +329,7 @@ public class MemberController {
 
        @RequestMapping("/CheckMail")
        @ResponseBody// AJAX와 URL을 매핑시켜줌 
-       public String SendMail(String email, HttpServletRequest request) throws MessagingException{
+       public String SendMail(String email, HttpServletRequest request) throws MessagingException, AddressException, javax.mail.MessagingException{
    		Random random = new Random();
    		String key = "";
    		Gson gson = new Gson();
