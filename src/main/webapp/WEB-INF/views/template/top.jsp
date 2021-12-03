@@ -89,6 +89,9 @@
 			line-height: 0px;
 			margin: 0px 16px;
 		}
+		.ui-helper-hidden-accessible{
+			display: none;
+		}
 	</style>
 </head>
 
