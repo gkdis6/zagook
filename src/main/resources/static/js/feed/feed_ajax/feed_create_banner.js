@@ -9,7 +9,7 @@ function create_banner(dto_member, tag, tagcnt, friend_status, base_distance) {
 		html_str += '<div class="banner_inner">';
 		html_str += '<div class="banner_inner_first">';
 		html_str += '<span>'+dto_member.id+'</span>';
-		html_str += '<button type="button" class="setting"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
+		html_str += '<button type="button" class="setting" onclick="location.href=\'/member/mypage\'"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
 		html_str += '</div>';
 		html_str += '<div class="banner_inner_sec">';
 		html_str +=	'<span>친구'+dto_member.friendcnt+'</span>';
