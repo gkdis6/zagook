@@ -44,8 +44,18 @@ public class MemberController {
    
    @GetMapping("/modallogin")
    public String loginmodal() {
-      System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@");
       return "/loginmodal";
+   }
+   
+   public static String encrypt(String plainText) {
+	    byte[] bytes = plainText.getBytes();
+	    byte[] pszDigest = new byte[32];
+	    KISA_SHA256.SHA256_Encrpyt(bytes, bytes.length, pszDigest);
+	    StringBuffer encrypted = new StringBuffer();
+	    for (int i = 0; i < 32; i++) {
+	      encrypted.append(String.format("%02x", pszDigest[i]));
+	    }
+	    return encrypted.toString();
    }
    
    @GetMapping("/member/login")
@@ -80,6 +90,7 @@ public class MemberController {
          HttpSession session,
          HttpServletResponse response,
          Model model, String id,String email) {
+	  map.put("password", encrypt(map.get("password")));
       int cnt = service.loginCheck(map);
       MemberDTO dto = service.read(email);
       map.put("id", dto.getId());
@@ -147,6 +158,7 @@ public class MemberController {
    public String crate(MemberDTO dto,Model model) throws IOException{
       String upDir = Member.getUploadDir();
       String fname = Utility.saveFileSpring(dto.getFnameMF(), upDir);
+      dto.setPassword(encrypt(dto.getPassword()));
       int size = (int)dto.getFnameMF().getSize();
       if(size>0) {
          dto.setFname(fname);

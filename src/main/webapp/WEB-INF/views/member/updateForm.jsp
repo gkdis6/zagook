@@ -151,7 +151,7 @@
 					</button>
 					<div class="answer" id="ans-2">
 						<span class="gl">이메일</span><br><br> 이메일은 수정이 어렵습니다. 탈퇴 후 재가입 부탁드립니다.<br><br>
-						<span class="gl">닉네임, 성명</span><br><br>닉네임, 성명은 중복이 불가하니 이점 참고하시기 바랍니다.
+						<span class="gl">닉네임</span><br><br>닉네임은 중복이 불가하니 이점 참고하시기 바랍니다.
 					</div>
 				</div>
 				<div class="faq-content">
