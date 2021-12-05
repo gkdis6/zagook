@@ -26,7 +26,7 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="stylesheet" href="/css/feed/feed_container.css"
 	type="text/css">
-
+<script src="https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDGFVPXDy12uvjK1wJFD23N3lFi5UfWPzM"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=801160086c0950000271359e983c8bf2"></script>
 <script type="text/javascript"

@@ -5,8 +5,8 @@ $(function () {
 });
 
 function onload_draw_map() {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function (pos) {
+	if (window.navigator.geolocation) {
+		window.navigator.geolocation.getCurrentPosition(function (pos) {
 			map_main.setCenter(new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
 			var marker = new kakao.maps.Marker({
 				map: map_main,
@@ -30,8 +30,8 @@ function init_fetch_feed(range, order) {
 	let hidden_selected_id = $("#hidden_selected_id").val();
 	if (hidden_selected_id[0] == "#")
 		hidden_selected_id = hidden_selected_id.substr(1, hidden_selected_id.length - 1);
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function (pos) {
+	if (window.navigator.geolocation) {
+		window.navigator.geolocation.getCurrentPosition(function (pos) {
 			let url = window.location.href;
 			if (ajax_url_check_home(url))
 				param = is_set_feed_range(range, pos, "home", order, null);
@@ -75,8 +75,8 @@ function init_reject() {
 function scrollEventHandler(event){
 	let param = null;
 	let flow_control_flag = false;
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function (pos) {
+	if (window.navigator.geolocation) {
+		window.navigator.geolocation.getCurrentPosition(function (pos) {
 			let url = window.location.href;
 			let range = $("input[name=distance_type]").val();
 			if (ajax_url_check_home(url))
