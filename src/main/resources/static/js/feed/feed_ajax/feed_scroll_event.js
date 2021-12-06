@@ -79,9 +79,8 @@ function scrollEventHandler(event){
 		window.navigator.geolocation.getCurrentPosition(function (pos) {
 			let url = window.location.href;
 			let range = $("input[name=distance_type]").val();
-			if (ajax_url_check_home(url))
-				flow_control_flag = true;
-			else if (ajax_url_check_myread(url))
+			if (ajax_url_check_home(url)){
+			}else if (ajax_url_check_myread(url))
 				param = is_set_feed_range_scroll(range, pos, "myread");	
 			else if (ajax_url_check_read(url))
 				param = is_set_feed_range_scroll(range, pos, "read");		
@@ -92,12 +91,13 @@ function scrollEventHandler(event){
 			let doc_height = this.document.scrollingElement.scrollHeight;
 			let top_height = this.document.scrollingElement.scrollTop;
 			if (((doc_height / 2) <= top_height) && $("input[name=page_flag]").val() == "0") {
-				if (flow_control_flag) {
+				if (!session_id || session_id == 'null') {
+					console.log('null입니다.');
 					window.removeEventListener("scroll", scrollEventHandler);
 					onclick_login_open();
 					return false;
 				}
-				$("input[name=page_flag]").val("1");
+				$("input[name=page_flag]").val("1"); 
 				process_feed_list(param);
 			}
 		}, scroll_reject);
@@ -107,9 +107,8 @@ function scrollEventHandler(event){
 function scroll_reject() {
 	let url = window.location.href;
 	let range = $("input[name=distance_type]").val();
-	let flow_control_flag = false;
 	if (ajax_url_check_home(url))
-		flow_control_flag = true;
+		param = is_set_feed_range_scroll_reject(range, "myread");
 	else if (ajax_url_check_myread(url))
 		param = is_set_feed_range_scroll_reject(range, "myread");	
 	else if (ajax_url_check_read(url))
@@ -121,7 +120,7 @@ function scroll_reject() {
 	let doc_height = this.document.scrollingElement.scrollHeight;
 	let top_height = this.document.scrollingElement.scrollTop;
 	if (((doc_height / 2) <= top_height) && $("input[name=page_flag]").val() == "0") {
-		if (flow_control_flag) {
+		if (!session_id || session_id == 'null') {
 			window.removeEventListener("scroll", scrollEventHandler);
 			onclick_login_open();
 			return false;

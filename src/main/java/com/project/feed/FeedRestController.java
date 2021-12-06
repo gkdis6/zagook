@@ -404,7 +404,10 @@ public class FeedRestController {
 				end_flag = 1;
 			sublist_idx = 0;
 		}
-		
+		System.out.println(sub_list);
+		for(int i = 0; i<sub_list.size(); i++) {
+			System.out.println(sub_list.get(i));
+		}
 		result_map.put("sub_list", sub_list);
 		result_map.put("base_distance", base_distance[result_base_idx]);			
 		result_map.put("end_flag", end_flag);
