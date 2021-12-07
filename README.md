@@ -36,8 +36,10 @@ sts4, spring boot, mybatis, oracle, geolocation, exif, autocomplete
 >
 >    feed_scroll_event - 82 line
 >
-> 2. sublist.size()가10 이후에 20보다 작을경우 다음 리스트를 가져오지 못하고 있음. -> 10개씩만 불러옴 
+> 2. ~~sublist.size()가10 이후에 20보다 작을경우 다음 리스트를 가져오지 못하고 있음. -> 10개씩만 불러옴~~
 >
->    FeedRestController - 388 line
+>    ~~FeedRestController - 388 line~~
+>
+>    다른 페이지의 경우 정상적으로 작동하는 것 확인. home일 경우에만 10개 이후의 데이터를 가져오지 못함. 위의 문제와 연관 있는 것으로 보임
 >
 > 3. 모바일 페이지를 구현하지 않음

@@ -387,6 +387,8 @@ public class FeedRestController {
 //		sublist 생성
 		int feed_idx = sublist_idx * sublist_max_size;
 		sub_list = new ArrayList<>();
+		System.out.println(feed_idx);
+		System.out.println(feed_list.size());
 		while (feed_idx < feed_list.size()) {
 			if (sub_list.size() >= sublist_max_size)
 				break;
