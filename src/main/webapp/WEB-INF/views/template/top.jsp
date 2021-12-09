@@ -162,7 +162,7 @@
 									<button type="submit"><i class="fa fa-search"></i></button>
 								</form>
 							</li>
-							<li><a href="/messenger"><span
+							<li><a href="/messenger_list"><span
 									class="glyphicon glyphicon-edit"></span> 메신저 </a></li>
 							<li><a href="/member/mypage"><span
 									class="glyphicon glyphicon-edit"></span> 마이페이지 </a></li>

@@ -22,7 +22,7 @@
     <put-attribute name="body"
       value="/WEB-INF/views/feed/read.jsp" />
   </definition>
-  <definition name="/messenger" extends="main">
+  <definition name="/messenger_list" extends="main">
     <put-attribute name="title" value="메신저"></put-attribute>
     <put-attribute name="body"
       value="/WEB-INF/views/messenger/messenger_list.jsp" />
