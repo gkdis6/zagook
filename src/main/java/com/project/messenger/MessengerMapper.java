@@ -10,4 +10,16 @@ public interface MessengerMapper {
 
 	ArrayList<MessengerDTO> roomContentList(MessengerDTO dto);
 
+	int countUnread(MessengerDTO mto);
+
+	String getOtherProfile(MessengerDTO mto);
+
+	int messageReadChk(MessengerDTO dto);
+
+	int existChat(MessengerDTO dto);
+
+	int maxRoom(MessengerDTO dto);
+
+	String selectRoom(MessengerDTO dto);
+
 }

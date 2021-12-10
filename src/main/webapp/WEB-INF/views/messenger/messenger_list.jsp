@@ -10,7 +10,7 @@
 
 
 <!-- CSS File -->
-<link href="./resources/static/css/messenger/message_list.css" rel="stylesheet">
+<link href="/css/messenger/message_list.css" rel="stylesheet">
 
 <!-- 메세지 전송 아이콘(종이비행기) 때문에 필요 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet"/>
@@ -34,16 +34,7 @@
 	        <div class="inbox_people">
 	          <div class="headind_srch">
 	            <div class="recent_heading">
-	              <h4>Recent</h4>
-	            </div>
-	            <!-- 메세지 검색 -->
-	            <div class="srch_bar">
-	              <div class="stylish-input-group">
-	                <input type="text" class="search-bar"  placeholder="Search" >
-	                <span class="input-group-addon">
-	                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-	                </span> 
-	              </div>
+	              <h4>메신저</h4>
 	            </div>
 	          </div>
 	          

@@ -35,7 +35,22 @@ public class MessengerController {
 
 		// 메세지 리스트
 		ArrayList<MessengerDTO> list = service.messageList(dto);
-
+		for(MessengerDTO mto : list) {
+			System.out.println(id);
+			mto.setId(id);
+			int unread = service.countUnread(mto);
+			String fname = service.getOtherProfile(mto);
+			mto.setUnread(unread);
+			mto.setFname(fname);
+			
+			if(id.equals(mto.getSend_id())) {
+				mto.setOther_id(mto.getRecv_id());
+			}else {
+				mto.setOther_id(mto.getSend_id());
+			}
+			System.out.println(mto);
+		}
+		
 		request.setAttribute("list", list);
 
 		return "/messenger_list";
@@ -53,6 +68,21 @@ public class MessengerController {
 
 		// 메세지 리스트
 		ArrayList<MessengerDTO> list = service.messageList(dto);
+		for(MessengerDTO mto : list) {
+			System.out.println(id);
+			mto.setId(id);
+			int unread = service.countUnread(mto);
+			String fname = service.getOtherProfile(mto);
+			mto.setUnread(unread);
+			mto.setFname(fname);
+			
+			if(id.equals(mto.getSend_id())) {
+				mto.setOther_id(mto.getRecv_id());
+			}else {
+				mto.setOther_id(mto.getSend_id());
+			}
+			System.out.println(mto);
+		}
 
 		request.setAttribute("list", list);
 
@@ -70,6 +100,7 @@ public class MessengerController {
 
 		// 메세지 내용을 가져온다.
 		ArrayList<MessengerDTO> clist = service.roomContentList(dto);
+		service.messageReadChk(dto);
 
 		request.setAttribute("clist", clist);
 
@@ -87,7 +118,17 @@ public class MessengerController {
 		dto.setSend_id((String) session.getAttribute("id"));
 		dto.setRecv_id(other_id);
 		dto.setContent(content);
-
+		
+		if(dto.getRoom() == 0) {
+			int exist_chat = service.existChat(dto);
+			if(exist_chat == 0) {
+				int max_room = service.maxRoom(dto);
+				dto.setRoom(max_room+1);
+			}
+		}else {
+			int room2 = Integer.parseInt(service.selectRoom(dto));
+			dto.setRoom(room2);
+		}
 		int flag = service.messageSendInlist(dto);
 
 		return flag;

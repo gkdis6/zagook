@@ -28,11 +28,12 @@
       value="/WEB-INF/views/messenger/messenger_list.jsp" />
   </definition>
   <definition name="/messenger_ajax_list" extends="main">
+    <put-attribute name="header" value=""/> 
     <put-attribute name="title" value="메신저"></put-attribute>
-    <put-attribute name="body"
-      value="/WEB-INF/views/messenger/messenger_ajax_list.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/messenger/messenger_ajax_list.jsp" />
   </definition>
   <definition name="/messenger_content_list" extends="main">
+  	<put-attribute name="header" value=""/> 
     <put-attribute name="title" value="메신저"></put-attribute>
     <put-attribute name="body"
       value="/WEB-INF/views/messenger/messenger_content_list.jsp" />

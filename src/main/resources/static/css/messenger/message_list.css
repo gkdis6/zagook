@@ -39,28 +39,14 @@ img{ max-width:100%;}
 
 
 .recent_heading {float: left; width:40%;}
-.srch_bar {
-  display: inline-block;
-  text-align: right;
-  width: 60%;
-}
 .headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #f7f7f7;}
 
 .recent_heading h4 {
-  color: #5fcf80;
+  color: #191a45;
   font-size: 30px;
   margin: auto;
   font-family: 'Nanum Pen Script', cursive;
 }
-.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none; font-family: 'Nanum Pen Script', cursive; font-size:25px;}
-.srch_bar .input-group-addon button {
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-  border: medium none;
-  padding: 0;
-  color: #707070;
-  font-size: 18px;
-}
-.srch_bar .input-group-addon { margin: 0 0 0 -27px;}
 
 .chat_ib h5{ font-size:20px; color:#464646; margin:0 0 8px 0; font-family: 'Nanum Pen Script', cursive;}
 .chat_ib h5 span{ font-size:17px; float:right;}
@@ -171,4 +157,7 @@ img{ max-width:100%;}
 .msg_history {
   height: 516px;
   overflow-y: auto;
+}
+.col-10 p{
+	padding-left:15px;
 }

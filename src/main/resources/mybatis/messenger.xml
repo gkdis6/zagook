@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 메세지 list에서 상대방 profile 가져오기 -->
-	<select id="get_other_profile" parameterType="com.project.messenger.MessengerDTO" resultType="String">
+	<select id="getOtherProfile" parameterType="com.project.messenger.MessengerDTO" resultType="String">
 	    select fname from zagook_member
 	    <choose>
 	        <when test="send_id == id">
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 안읽은 메세지 갯수 가져오기 -->
-	<select id="count_unread" parameterType="com.project.messenger.MessengerDTO" resultType="Int">
+	<select id="countUnread" parameterType="com.project.messenger.MessengerDTO" resultType="Int">
 	    select count(no) from zagook_message 
 	    where recv_id=#{id} and read_chk=0 and room=#{room}
 	</select>
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 메세지 읽음 처리 -->
-	<update id="message_read_chk" parameterType="com.project.messenger.MessengerDTO">
+	<update id="messageReadChk" parameterType="com.project.messenger.MessengerDTO">
 	    update zagook_message set read_chk=1
 	    <choose>
 	        <when test="room != 0">
@@ -66,29 +66,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="messageSendInlist" parameterType="com.project.messenger.MessengerDTO">
 	    <choose>
 	        <when test="room != 0">
-	            insert into message values(0, #{room}, #{send_id}, #{recv_id}, now(), now(), #{content}, 0)
+	            insert into zagook_message values((select nvl(max(no),0)+1 from zagook_message), #{room}, #{send_id}, #{recv_id}, sysdate, sysdate, #{content}, 0)
 	        </when>
 	        <otherwise>
-	            insert into message values(0, #{room}, #{send_id}, #{recv_id}, now(), now(), #{content}, 0)
+	            insert into zagook_message values((select nvl(max(no),0)+1 from zagook_message), #{room}, #{send_id}, #{recv_id}, sysdate, sysdate, #{content}, 0)
 	        </otherwise>
 	    </choose>
 	</insert>
 	
 	<!-- room 번호 최댓값 구하기 -->
-	<select id="max_room"  parameterType="com.project.messenger.MessengerDTO" resultType="Int">
+	<select id="maxRoom"  parameterType="com.project.messenger.MessengerDTO" resultType="Int">
 	    select max(room) from zagook_message
 	</select>
 	
 	<!-- 메세지 이력이 있는지 검색 -->
-	<select id="exist_chat" parameterType="com.project.messenger.MessengerDTO" resultType="Int">
+	<select id="existChat" parameterType="com.project.messenger.MessengerDTO" resultType="Int">
 	    select count(no) from zagook_message 
 	    where (recv_id = #{recv_id} and send_id=#{send_id}) or (send_id = #{recv_id} and recv_id=#{send_id})
 	</select>
 	
 	<!-- 기존 메세지 내역의 room 번호를 가져옴 -->
-	<select id="select_room"  parameterType="com.project.messenger.MessengerDTO" resultType="String">
-	    select room from zagook_message 
-	    where (recv_id = #{recv_id} and send_id=#{send_id}) or (send_id = #{recv_id} and recv_id=#{send_id})
-	    limit 0,1
+	<select id="selectRoom"  parameterType="com.project.messenger.MessengerDTO" resultType="String">
+		select *
+		from(
+		    select room from zagook_message 
+		    where (recv_id = #{recv_id} and send_id=#{send_id}) or (send_id = #{recv_id} and recv_id=#{send_id})
+		   	)
+		where rownum = 1
 	</select>
 </mapper>
