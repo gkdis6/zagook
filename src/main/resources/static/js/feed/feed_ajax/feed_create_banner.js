@@ -49,6 +49,55 @@ function create_banner(dto_member, tag, tagcnt, friend_status, base_distance) {
 			html_str += '<button type="button" class="friend_btn_1" name="'+dto_member.id+'">친구신청</button>';
 		}
 //		html_str += '<button type="button" class="setting"><!-- <span class="glyphicon glyphicon-cog"></span> -->프로필 편집</button>';
+		html_str += '<div class="messagesend-btn">';
+							//메세지 보내기 버튼 
+		html_str += '<button type="button" class="msg_send_btn_profile" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick=\'javascript:MessageContentList("'+dto_member.id+'")\'>';
+		html_str += '<i class="fa fa-paper-plane-o"></i>&nbsp;메세지 보내기';
+		html_str += '</button>';
+		html_str += '</div>';
+						//<!-- 메세지 보내기 모달창 -->
+						//<!-- Modal -->
+		html_str += '<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+		html_str += '<div class="modal-dialog modal-dialog-scrollable">';
+		html_str += '<div class="modal-content">';
+		html_str += '<div class="modal-header">';
+		html_str += '<span id="m_writer_profile">';
+		html_str += '<div class="message-box">';
+		html_str += '<img id="messageProfileImage" src="/member/storage/'+dto_member.fname+'" />';
+		html_str += '</div>';
+		html_str += '</span>';
+		html_str += '<h5 class="modal-title" id="exampleModalLabel">'+dto_member.id+'</h5>';
+		html_str += '<button type="button" class="btn-close_modal" data-bs-dismiss="modal" onclick="$(\'#exampleModal\').hide()" aria-label="Close">X</button>';
+		html_str += '</div>';
+		html_str += '<div class="modal-body">';
+										//<!-- 메세지 내용 영역 -->
+		html_str += '<div class="mesgs">';
+											//<!-- 메세지 내용 목록 -->
+		html_str += '<div class="msg_history" name="contentList">';
+												//<!-- 메세지 내용이 올 자리 -->
+		html_str += '</div>';
+		html_str += '<div class="send_message"></div>';
+											//<!-- 메세지 입력란이 올자리 -->
+		html_str += '<div class="type_msg">';
+		html_str += '<div class="input_msg_write row">';
+		html_str += '<div class="col-11">';
+		html_str += '<input type="text" class="write_msg form-control" placeholder="메세지를 입력..." />';
+		html_str += '</div>';
+		html_str += '<div class="col-1">';
+		html_str += '<button class="msg_send_btn" type="button" onclick="javascript:SendMessage(\''+dto_member.id+'\')">';
+		html_str += '<i class="fa fa-paper-plane-o" aria-hidden="true">전송</i>';
+		html_str += '</button>';
+		html_str += '</div>';
+		html_str += '</div>';
+		html_str += '</div>';
+
+		html_str += '</div>';
+		html_str += '</div>';
+		html_str += '</div>';
+		html_str += '</div>';
+		html_str += '</div>';
+		
+		
 		html_str += '</div>';
 		html_str += '<div class="banner_inner_sec">';
 		html_str +=	'<span>친구 '+dto_member.friendcnt+'</span>';
@@ -97,3 +146,4 @@ function create_banner(dto_member, tag, tagcnt, friend_status, base_distance) {
 	}
 	return html_str;
 }
+

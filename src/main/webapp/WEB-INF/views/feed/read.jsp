@@ -405,9 +405,64 @@ $(document).on("click","a.delete__feed",function(){
         }
 	})
 })
-	
-	
-	
+	// 메세지 내역을 가져온다.
+const MessageContentList = function(other_id) {
+	$("#exampleModal").show();
+	console.log(other_id);
+	$.ajax({
+		url : "/messenger_content_list_in_profile",
+		method : "GET",
+		data : {
+			other_id : other_id,
+		},
+		success : function(data) {
+			console.log("메세지 내용 가져오기 성공");
+			console.log(data);
+			// 메세지 내용을 html에 넣는다
+			$('.msg_history').html(data);
+			// 이 함수로 메세지 내용을 가져올때마다 스크롤를 맨아래로 가게 한다.
+			$(".msg_history").scrollTop($(".msg_history")[0].scrollHeight);
+		},
+		error : function() {
+			alert('서버 에러');
+		}
+	})
+};
+
+//메세지를 전송하는 함수
+const SendMessage = function(other_id) {
+
+	let content = $('.write_msg').val();
+	console.log(content);
+
+	content = content.trim();
+
+	if (content == "") {
+		alert("메세지를 입력하세요!");
+	} else {
+		$.ajax({
+			url : "/messenger_send_in_profile",
+			method : "GET",
+			data : {
+				other_id : other_id,
+                content : content
+			},
+			success : function(data) {
+				console.log("메세지 전송 성공");
+
+				// 메세지 입력칸 비우기
+                $('.write_msg').val("");
+
+                // 메세지 내용  리로드
+                MessageContentList(other_id);
+
+			},
+			error : function() {
+				alert('서버 에러');
+			}
+		});
+	}
+};
 </script>
 </body>
 </html>

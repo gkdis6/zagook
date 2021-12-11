@@ -38,14 +38,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    from zagook_message m left outer join zagook_member u
 	    on m.send_id = u.id
 	    <choose>
-	        <when test="room != 0">
+	        <when test="room != null and room != 0">
 	            where room=#{room}
 	        </when>
 	        <otherwise>
 	            where (recv_id = #{recv_id} and send_id = #{id}) or (send_id = #{recv_id} and recv_id = #{id})
 	        </otherwise>
 	    </choose>
-	
+		order by send_time
 	</select>
 	
 	<!-- 메세지 읽음 처리 -->

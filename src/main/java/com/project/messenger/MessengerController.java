@@ -133,5 +133,45 @@ public class MessengerController {
 
 		return flag;
 	}
+	
+	// 메세지 목록 가져오기
+	@RequestMapping(value = "/messenger_content_list_in_profile")
+	public String message_content_list_inprofile(HttpServletRequest request, HttpSession session) {
 
+		System.out.println("other profile 메세지 리스트 가져오기");
+		
+		//int room = Integer.parseInt(request.getParameter("room"));
+		String other_id = request.getParameter("other_id");
+
+		MessengerDTO dto = new MessengerDTO();
+		dto.setRecv_id(other_id);
+		dto.setId((String) session.getAttribute("id"));
+		System.out.println(dto);
+		// 메세지 내용을 가져온다.
+		ArrayList<MessengerDTO> clist = service.roomContentList(dto);
+		
+		request.setAttribute("clist", clist);
+		
+		System.out.println(clist);
+
+		return "/messenger_content_list";
+	}
+
+	// 메세지 리스트에서 메세지 보내기
+	@ResponseBody
+	@RequestMapping(value = "/messenger_send_in_profile")
+	public int message_send_inlist_inprofile(@RequestParam String other_id, @RequestParam String content, HttpSession session) {
+		System.out.println("컨트롤러 들어옴");
+		System.out.println("other_id: " + other_id);
+		System.out.println("content: " + content);
+		
+		MessengerDTO dto = new MessengerDTO();
+		dto.setSend_id((String) session.getAttribute("id"));
+		dto.setRecv_id(other_id);
+		dto.setContent(content);
+
+		int flag = service.messageSendInlist(dto);
+
+		return flag;
+	}
 }

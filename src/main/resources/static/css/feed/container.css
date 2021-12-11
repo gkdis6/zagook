@@ -216,3 +216,39 @@
 .banner_inner_sec span{
 	padding-right: 10px;
 }
+
+.modal-content .modal-header *{
+	display:inline-block;
+}
+#messageProfileImage{
+	width:50px;
+}
+#exampleModal{
+	padding-top: 100px;
+}
+.col-11 input{
+	width: 530px;
+}
+.input_msg_write{
+	display:inline-block;
+	width: 600px;
+}
+.input_msg_write *{
+	display:inline-block;
+}
+.btn-close_modal{
+	position:absolute;
+	right: 10px;
+	top: 10px
+}
+.modal-dialog-scrollable .modal-content{
+	max-height:650px;
+	overflow: hidden;
+}
+.modal-dialog-scrollable .modal-body{
+	max-height:569px;
+}
+.modal-dialog-scrollable .msg_history{
+	max-height:490px;
+	overflow: auto;
+}
