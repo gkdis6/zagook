@@ -3,8 +3,9 @@
 
 img{
 	/*글쓴이의 프로필 사진을 둥글게*/
-	width: 40px;
-	height: 40px;
+	width:45px;
+	height:45px;
+	object-fit: cover;
 	border: 0px;
 	/*border: 1px solid #cecece;*/
 	border-radius: 50%;
@@ -22,7 +23,7 @@ p {
 
 
 .msg-container{max-width:1170px; margin:auto;}
-img{ max-width:100%;}
+/* img{ max-width:100%;} */
 .inbox_people {
   background: #f8f8f8 none repeat scroll 0 0;
   float: left;

@@ -169,7 +169,16 @@ public class MessengerController {
 		dto.setSend_id((String) session.getAttribute("id"));
 		dto.setRecv_id(other_id);
 		dto.setContent(content);
-
+		System.out.println(dto.getRoom());
+		int exist_chat = service.existChat(dto);
+		if(exist_chat == 0) {
+			int max_room = service.maxRoom(dto);
+			dto.setRoom(max_room+1);
+		}else {
+			int room2 = Integer.parseInt(service.selectRoom(dto));
+			dto.setRoom(room2);
+		}
+		System.out.println(dto.getRoom());
 		int flag = service.messageSendInlist(dto);
 
 		return flag;

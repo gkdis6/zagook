@@ -8,9 +8,7 @@
 			<!-- active-chat -->
 			<div class="chat_people">
 				<div class="chat_img" >
-					<a href="other_profile.do?other_id=${tmp.other_id }">
-						<img src="./member/storage/${tmp.fname}" alt="sunil" >
-					</a>
+					<img src="/member/storage/${tmp.fname}" alt="sunil" >
 				</div>
 				<div class="chat_ib">
 					<h5>${tmp.other_id }<span class="chat_date">${tmp.send_time }</span>

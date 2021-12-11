@@ -76,7 +76,7 @@ $(function start_autocomplete(){
  		if (item.img == "undefined" || item.img == null || item.img == "")
          	return $( "<li class='searchbar_item' id='" + item.label + "'><div><span>"+item.label+"</span><span style='right:10px;position:absolute;'>"+item.cnt+"</span></div></li>" ).appendTo( ul );
          else
-         	return $( "<li class='searchbar_item' id='" + item.label + "'><div style='text-align:justify;'><img style='width:40px; height:40px; border-radius:50%;' src='"+item.img+"'><span style='right:10px;position:absolute;top:13px;'>"+item.label+"</span></div></li>" ).appendTo( ul );
+         	return $( "<li class='searchbar_item' id='" + item.label + "'><div style='text-align:justify;'><img style='width:40px; height:40px; border-radius:50%; object-fit: cover;' src='"+item.img+"'><span style='right:10px;position:absolute;top:13px;'>"+item.label+"</span></div></li>" ).appendTo( ul );
     };
 });
 
