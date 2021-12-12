@@ -91,14 +91,16 @@ function scrollEventHandler(event){
 				param = is_set_feed_range_scroll(range, pos, "friend");		
 			let doc_height = this.document.scrollingElement.scrollHeight;
 			let top_height = this.document.scrollingElement.scrollTop;
+			if(!session_id || session_id=='null'){
+				flow_control_flag = true;
+			}
 			if (((doc_height / 2) <= top_height) && $("input[name=page_flag]").val() == "0") {
-				if (!session_id || session_id == 'null') {
-					console.log('null입니다.');
+				if (flow_control_flag) {
 					window.removeEventListener("scroll", scrollEventHandler);
 					onclick_login_open();
 					return false;
 				}
-				$("input[name=page_flag]").val("1"); 
+				$("input[name=page_flag]").val("1");
 				process_feed_list(param);
 			}
 		}, scroll_reject);
@@ -109,7 +111,7 @@ function scroll_reject() {
 	let url = window.location.href;
 	let range = $("input[name=distance_type]").val();
 	if (ajax_url_check_home(url))
-		param = is_set_feed_range_scroll_reject(range, "myread");
+		param = is_set_feed_range_scroll_reject(range, "home");
 	else if (ajax_url_check_myread(url))
 		param = is_set_feed_range_scroll_reject(range, "myread");	
 	else if (ajax_url_check_read(url))
