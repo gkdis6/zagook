@@ -79,8 +79,9 @@ function scrollEventHandler(event){
 		window.navigator.geolocation.getCurrentPosition(function (pos) {
 			let url = window.location.href;
 			let range = $("input[name=distance_type]").val();
-			if (ajax_url_check_home(url)){
-			}else if (ajax_url_check_myread(url))
+			if (ajax_url_check_home(url))
+				param = is_set_feed_range_scroll(range, pos, "home");	
+			else if (ajax_url_check_myread(url))
 				param = is_set_feed_range_scroll(range, pos, "myread");	
 			else if (ajax_url_check_read(url))
 				param = is_set_feed_range_scroll(range, pos, "read");		

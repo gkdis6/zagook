@@ -398,8 +398,7 @@ public class FeedRestController {
 		sublist_idx++;
 		
 		if ((sub_list.size() < sublist_max_size) || 
-				((sub_list.size() == sublist_max_size) && ((feed_list.size() / sublist_max_size) + 1 == sublist_idx)) || 
-				dto.getUrl_id().equals("home")) {
+				((sub_list.size() == sublist_max_size) && ((feed_list.size() / sublist_max_size) + 1 == sublist_idx)) || session.getAttribute("id") == null || session.getAttribute("id")=="") {
 			if (end_flag == -1)
 				end_flag = -2;
 			else
