@@ -47,4 +47,6 @@ sts4, spring boot, mybatis, oracle, geolocation, exif, autocomplete
 >
 > 4. 신고 기능(신고가 3~5개 이상이면 일시적으로 비공개 처리가 되고 관리자가 이후 처리하게)
 >
-> 3. 로그인 안되어 있을 때 스크롤 내렸을 때 로그인 모달창 안뜨는 문제 발생
+> 5. 로그인 안되어 있을 때 스크롤 내렸을 때 로그인 모달창 안뜨는 문제 발생
+>
+>    scrollEventHandler가 제대로 작동하지 않음
