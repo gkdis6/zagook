@@ -27,7 +27,7 @@
 
 ## 환경 및 스택
 
-sts4, spring boot, mybatis, oracle, geolocation, exif, autocomplete
+sts4, spring boot, mybatis, oracle, geolocation, exif, autocomplete, aws
 
 ---
 
